@@ -45,6 +45,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('reports/{id}/sharing', [PortalController::class, 'updateReportSharing']);
 
         Route::get('indicators', [PortalController::class, 'indicators']);
+        Route::get('indicators/metadata', [PortalController::class, 'indicatorMetadata']);
+        Route::post('indicators/validate', [PortalController::class, 'validateIndicators']);
+        Route::post('indicators/submit', [PortalController::class, 'submitIndicators']);
         Route::post('indicators', [PortalController::class, 'storeIndicator']);
     });
 

@@ -12,6 +12,11 @@ export const metadata: Metadata = {
   title: "SADC PF SRHR Portal",
   description:
     "Tracking parliamentary action, evidence, budgets, legislation, oversight, and stories of change across the SADC region.",
+  icons: {
+    icon: "/portal-favicon.svg",
+    shortcut: "/portal-favicon.svg",
+    apple: "/portal-favicon.svg",
+  },
 };
 
 // Load Material Symbols icons

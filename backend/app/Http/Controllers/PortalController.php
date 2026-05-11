@@ -377,23 +377,53 @@ class PortalController extends Controller
         $user = $request->user();
 
         $items = Evidence::query()
-            ->with(['country', 'period'])
+            ->with(['country', 'period', 'user'])
             ->when($user->country_id, fn ($q) => $q->where('country_id', $user->country_id))
             ->latest()
             ->get()
-            ->map(fn ($e) => [
-                'id'            => $e->id,
-                'title'         => $e->title,
-                'evidence_type' => $e->evidence_type,
-                'status'        => $e->status,
-                'country'       => $e->country?->name,
-                'period'        => $e->period?->label,
-                'tags'          => $e->tags,
-                'files_count'   => count($e->files ?? []),
-                'created_at'    => $e->created_at?->format('M j, Y'),
-            ]);
+            ->map(function (Evidence $e) {
+                $files = collect($e->files ?? [])->map(fn (array $file) => [
+                    'name' => $file['name'] ?? 'File',
+                    'size' => isset($file['size']) ? $this->formatBytes((int) $file['size']) : null,
+                    'bytes' => isset($file['size']) ? (int) $file['size'] : null,
+                    'url' => $file['url'] ?? null,
+                ])->values()->all();
+
+                $fileBytes = collect($e->files ?? [])->sum(fn (array $file) => (int) ($file['size'] ?? 0));
+
+                return [
+                    'id' => $e->id,
+                    'title' => $e->title,
+                    'description' => $e->description,
+                    'evidence_type' => $e->evidence_type,
+                    'status' => $e->status,
+                    'country' => $e->country?->name,
+                    'period' => $e->period?->label,
+                    'tags' => $e->tags,
+                    'linked_indicators' => $e->linked_indicators,
+                    'files_count' => count($e->files ?? []),
+                    'files' => $files,
+                    'file_size' => $fileBytes > 0 ? $this->formatBytes($fileBytes) : null,
+                    'owner' => $e->user?->name ?? 'System',
+                    'created_at' => $e->created_at?->toIso8601String(),
+                    'created_label' => $e->created_at?->format('M j, Y'),
+                ];
+            });
 
         return response()->json($items);
+    }
+
+    private function formatBytes(int $bytes): string
+    {
+        if ($bytes >= 1024 * 1024) {
+            return number_format($bytes / (1024 * 1024), 1) . ' MB';
+        }
+
+        if ($bytes >= 1024) {
+            return number_format($bytes / 1024, 1) . ' KB';
+        }
+
+        return $bytes . ' B';
     }
 
     private function formatReport(Report $report): array

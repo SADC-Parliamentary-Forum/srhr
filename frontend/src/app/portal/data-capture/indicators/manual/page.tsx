@@ -105,9 +105,9 @@ export default function IndicatorsManualPage() {
               </tbody>
             </table>
             <div className="px-md py-sm border-t border-outline-variant/20">
-              <button className="text-sm text-primary font-semibold flex items-center gap-xs hover:underline">
-                <span className="material-symbols-outlined text-[16px]">add</span>
-                Add Indicator Row
+              <button className="text-sm text-primary font-semibold flex items-center gap-xs group">
+                <span className="material-symbols-outlined text-[16px] no-underline">add</span>
+                <span className="group-hover:underline">Add Indicator Row</span>
               </button>
             </div>
           </div>
