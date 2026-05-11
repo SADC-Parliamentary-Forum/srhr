@@ -55,6 +55,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('admin')->group(function () {
         Route::get('users', [AdminController::class, 'users']);
+        Route::get('roles', [AdminController::class, 'roles']);
         Route::post('users', [AdminController::class, 'createUser']);
         Route::put('users/{user}', [AdminController::class, 'updateUser']);
         Route::patch('users/{user}/status', [AdminController::class, 'toggleUserStatus']);

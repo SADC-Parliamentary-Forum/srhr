@@ -15,14 +15,58 @@ use Spatie\Permission\Models\Role;
 
 class AdminController extends Controller
 {
+    private const DEFAULT_PERMISSIONS = [
+        'view_public_data',
+        'view_dashboard',
+        'create_report',
+        'submit_report',
+        'review_report',
+        'approve_report',
+        'upload_indicators',
+        'upload_budget',
+        'upload_evidence',
+        'publish_public_content',
+        'manage_users',
+        'manage_configuration',
+        'export_reports',
+        'use_ai_assistant',
+    ];
+
+    private const DEFAULT_ROLES = [
+        'super_admin'         => self::DEFAULT_PERMISSIONS,
+        'secretariat'         => ['view_dashboard', 'review_report', 'approve_report', 'publish_public_content', 'manage_users', 'export_reports', 'use_ai_assistant'],
+        'programme_manager'   => ['view_dashboard', 'create_report', 'submit_report', 'upload_indicators', 'upload_evidence', 'export_reports', 'use_ai_assistant'],
+        'me_officer'          => ['view_dashboard', 'upload_indicators', 'upload_evidence', 'export_reports', 'use_ai_assistant'],
+        'finance_officer'     => ['view_dashboard', 'upload_budget', 'export_reports'],
+        'country_reviewer'    => ['view_dashboard', 'review_report', 'export_reports'],
+        'srhr_researcher'     => ['view_dashboard', 'create_report', 'submit_report', 'upload_indicators', 'upload_evidence', 'use_ai_assistant'],
+        'communications_user' => ['view_dashboard', 'publish_public_content', 'export_reports'],
+        'partner_viewer'      => ['view_dashboard', 'view_public_data'],
+    ];
+
     private function ensureCanManageUsers(Request $request): void
     {
         abort_unless($request->user()?->can('manage_users'), 403);
     }
 
+    private function ensureDefaultRolesAndPermissions(): void
+    {
+        if (Permission::query()->doesntExist()) {
+            foreach (self::DEFAULT_PERMISSIONS as $permission) {
+                Permission::firstOrCreate(['name' => $permission]);
+            }
+        }
+
+        foreach (self::DEFAULT_ROLES as $roleName => $rolePermissions) {
+            $role = Role::firstOrCreate(['name' => $roleName], ['guard_name' => 'web']);
+            $role->syncPermissions($rolePermissions);
+        }
+    }
+
     public function users(Request $request): JsonResponse
     {
         $this->ensureCanManageUsers($request);
+        $this->ensureDefaultRolesAndPermissions();
 
         $users = User::query()
             ->with(['country', 'roles'])
@@ -73,9 +117,27 @@ class AdminController extends Controller
         ]);
     }
 
+    public function roles(Request $request): JsonResponse
+    {
+        $this->ensureCanManageUsers($request);
+        $this->ensureDefaultRolesAndPermissions();
+
+        return response()->json([
+            'roles' => Role::query()
+                ->with('permissions')
+                ->orderBy('name')
+                ->get()
+                ->map(fn (Role $role) => [
+                    'name' => $role->name,
+                    'permissions' => $role->permissions->pluck('name')->values(),
+                ]),
+        ]);
+    }
+
     public function createUser(Request $request): JsonResponse
     {
         $this->ensureCanManageUsers($request);
+        $this->ensureDefaultRolesAndPermissions();
 
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -132,6 +194,7 @@ class AdminController extends Controller
     public function createRole(Request $request): JsonResponse
     {
         $this->ensureCanManageUsers($request);
+        $this->ensureDefaultRolesAndPermissions();
 
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -185,6 +248,7 @@ class AdminController extends Controller
     public function approveAccessRequest(Request $request, AccessRequest $accessRequest): JsonResponse
     {
         $this->ensureCanManageUsers($request);
+        $this->ensureDefaultRolesAndPermissions();
         abort_if($accessRequest->status !== 'pending', 422, 'This access request has already been processed.');
 
         $validated = $request->validate([

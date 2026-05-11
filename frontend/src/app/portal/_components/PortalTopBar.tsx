@@ -49,10 +49,13 @@ export default function PortalTopBar({
       if (notificationsRef.current && !notificationsRef.current.contains(e.target as Node)) {
         setNotificationsOpen(false)
       }
+      if (calendarRef.current && !calendarRef.current.contains(e.target as Node)) {
+        setCalendarOpen(false)
+      }
     }
-    if (profileOpen || notificationsOpen) document.addEventListener('mousedown', handleClickOutside)
+    if (profileOpen || notificationsOpen || calendarOpen) document.addEventListener('mousedown', handleClickOutside)
     return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [profileOpen, notificationsOpen])
+  }, [profileOpen, notificationsOpen, calendarOpen])
 
   useEffect(() => {
     if (!canViewNotifications) {
@@ -81,6 +84,14 @@ export default function PortalTopBar({
     clearToken()
     router.replace('/login')
   }
+
+  useEffect(() => {
+    setDeadlines([
+      { report: 'April 2026 Monthly Report', due: 'Due 15 May 2026', status: 'Open' },
+      { report: 'Q2 2026 Review Pack', due: 'Due 30 Jun 2026', status: 'Upcoming' },
+      { report: 'Year 3 Annual Report', due: 'Due 31 Jul 2026', status: 'Upcoming' },
+    ])
+  }, [])
 
   return (
     <header className="bg-surface shadow-sm flex items-center px-gutter h-14 w-full sticky top-0 z-50 border-b border-outline-variant gap-md">
@@ -164,12 +175,55 @@ export default function PortalTopBar({
             )}
           </div>
           )}
-          <button
-            aria-label="Calendar"
-            className="hidden sm:block text-on-surface-variant hover:text-primary transition-colors p-xs rounded-full hover:bg-surface-container"
-          >
-            <span className="material-symbols-outlined text-[20px]">calendar_today</span>
-          </button>
+          <div className="relative hidden sm:block" ref={calendarRef}>
+            <button
+              aria-label="Calendar"
+              aria-expanded={calendarOpen}
+              onClick={() => setCalendarOpen((value) => !value)}
+              className="text-on-surface-variant hover:text-primary transition-colors p-xs rounded-full hover:bg-surface-container"
+            >
+              <span className="material-symbols-outlined text-[20px]">calendar_today</span>
+            </button>
+
+            {calendarOpen && (
+              <div className="absolute right-0 top-10 w-80 bg-white rounded-xl shadow-lg border border-[#c1c8c2] z-50 overflow-hidden">
+                <div className="px-md py-sm border-b border-[#c1c8c2] bg-[#f5f3f3] flex items-center justify-between gap-sm">
+                  <p className="text-sm font-bold text-[#00170d]">Reporting Calendar</p>
+                  <span className="text-xs font-semibold text-[#745c00]">Quick access</span>
+                </div>
+                <div className="p-md space-y-md">
+                  <div className="rounded-lg border border-[#c1c8c2] bg-[#f9f8f5] p-sm">
+                    <p className="text-xs font-bold uppercase tracking-wide text-[#414844]">Current period</p>
+                    <p className="mt-1 text-sm font-semibold text-[#00170d]">April 2026</p>
+                    <p className="text-xs text-[#414844]">Use the selector in the header to switch reporting periods.</p>
+                  </div>
+                  <div className="space-y-xs">
+                    {deadlines.map((item) => (
+                      <div key={item.report} className="rounded-lg border border-[#c1c8c2] px-sm py-sm">
+                        <div className="flex items-start justify-between gap-sm">
+                          <div className="min-w-0">
+                            <p className="text-sm font-semibold text-[#1b1c1c]">{item.report}</p>
+                            <p className="text-xs text-[#414844]">{item.due}</p>
+                          </div>
+                          <span className="rounded-full bg-[#fed65b] px-xs py-[2px] text-[10px] font-bold text-[#745c00]">
+                            {item.status}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex flex-col gap-xs">
+                    <Link href="/portal/reports" className="rounded-lg border border-[#c1c8c2] px-sm py-sm text-sm font-semibold text-[#00170d] hover:bg-[#f5f3f3] transition-colors">
+                      Open Reports Workspace
+                    </Link>
+                    <Link href="/portal/data-capture" className="rounded-lg border border-[#c1c8c2] px-sm py-sm text-sm font-semibold text-[#00170d] hover:bg-[#f5f3f3] transition-colors">
+                      Open Data Capture
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="hidden sm:flex items-center gap-sm border-l border-outline-variant pl-sm">

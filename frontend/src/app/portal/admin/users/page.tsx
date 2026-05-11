@@ -78,6 +78,9 @@ interface EditState {
   userId: number
   name: string
   role: string
+  email: string
+  country: string
+  status: 'Active' | 'Inactive' | 'Pending'
 }
 
 function asArray<T>(value: T[] | undefined | null): T[] {
@@ -115,18 +118,21 @@ export default function UserManagementPage() {
   async function loadUsers() {
     const token = getToken()
     if (!token) return
-    const data = await api.get<{
-      users: UserRow[]
-      access_requests: AccessRequest[]
-      roles: RoleOption[]
-      permissions: string[]
-      countries: CountryOption[]
-    }>('/admin/users', token)
-    const loadedUsers = asArray(data.users)
-    const loadedRequests = asArray(data.access_requests)
-    const loadedRoles = asArray(data.roles)
-    const loadedPermissions = asArray(data.permissions)
-    const loadedCountries = asArray(data.countries)
+    const [usersData, rolesData] = await Promise.all([
+      api.get<{
+        users: UserRow[]
+        access_requests: AccessRequest[]
+        roles: RoleOption[]
+        permissions: string[]
+        countries: CountryOption[]
+      }>('/admin/users', token),
+      api.get<{ roles: RoleOption[] }>('/admin/roles', token).catch(() => ({ roles: [] })),
+    ])
+    const loadedUsers = asArray(usersData.users)
+    const loadedRequests = asArray(usersData.access_requests)
+    const loadedRoles = asArray(usersData.roles.length > 0 ? usersData.roles : rolesData.roles)
+    const loadedPermissions = asArray(usersData.permissions)
+    const loadedCountries = asArray(usersData.countries)
 
     setUsers(loadedUsers.map((u) => ({ ...u, status: normalizeStatus(u.status as string) })))
     setAccessRequests(loadedRequests)
@@ -483,7 +489,14 @@ export default function UserManagementPage() {
                   <td className="px-md py-sm">
                     <div className="flex items-center gap-xs">
                       <button
-                        onClick={() => setEditState({ userId: user.id, name: user.name, role: user.role })}
+                        onClick={() => setEditState({
+                          userId: user.id,
+                          name: user.name,
+                          role: user.role,
+                          email: user.email,
+                          country: user.country,
+                          status: user.status,
+                        })}
                         title="Edit user"
                         className="p-xs rounded-full hover:bg-[#c6ebd7] text-[#414844] hover:text-[#00170d] transition-colors"
                       >
@@ -514,58 +527,109 @@ export default function UserManagementPage() {
 
       {/* Edit modal */}
       {editState && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-          <div className="bg-white rounded-2xl shadow-xl border border-[#c1c8c2] w-full max-w-md mx-4">
-            <div className="flex items-center justify-between px-lg py-md border-b border-[#c1c8c2]">
-              <h3 className="text-base font-bold text-[#00170d]">Edit User</h3>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm px-md py-lg">
+          <div className="w-full max-w-2xl overflow-hidden rounded-3xl border border-[#c1c8c2] bg-[#f9f8f5] shadow-2xl">
+            <div className="flex items-start justify-between gap-md border-b border-[#c1c8c2] bg-white px-lg py-md">
+              <div className="min-w-0">
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#745c00]">Edit User</p>
+                <h3 className="mt-1 truncate text-xl font-bold text-[#00170d]">{editState.name}</h3>
+                <p className="mt-xs truncate text-sm text-[#414844]">{editState.email} · {editState.country}</p>
+              </div>
               <button onClick={() => setEditState(null)} className="text-[#414844] hover:text-[#00170d] transition-colors">
                 <span className="material-symbols-outlined text-[22px]">close</span>
               </button>
             </div>
-            <div className="px-lg py-md flex flex-col gap-md">
-              <div>
-                <label className="text-xs font-bold text-[#414844] mb-xs block uppercase tracking-wide">Display Name</label>
-                <input
-                  className="w-full border border-[#c1c8c2] rounded-lg px-md py-sm text-sm outline-none focus:border-[#00170d]"
-                  value={editState.name}
-                  onChange={(e) => setEditState((s) => s ? { ...s, name: e.target.value } : s)}
-                />
+            <div className="grid gap-lg px-lg py-lg md:grid-cols-[1.1fr_0.9fr]">
+              <div className="flex flex-col gap-md">
+                <div>
+                  <label className="mb-xs block text-xs font-bold uppercase tracking-wide text-[#414844]">Display Name</label>
+                  <input
+                    className="w-full rounded-xl border border-[#c1c8c2] bg-white px-md py-sm text-sm outline-none transition-colors focus:border-[#00170d] focus:ring-2 focus:ring-[#c6ebd7]"
+                    value={editState.name}
+                    onChange={(e) => setEditState((s) => s ? { ...s, name: e.target.value } : s)}
+                  />
+                  <p className="mt-xs text-xs text-[#414844]">This is the name shown in tables, assignments, and notifications.</p>
+                </div>
+                <div>
+                  <label className="mb-xs block text-xs font-bold uppercase tracking-wide text-[#414844]">Role</label>
+                  <select
+                    className="w-full rounded-xl border border-[#c1c8c2] bg-white px-md py-sm text-sm outline-none transition-colors focus:border-[#00170d] focus:ring-2 focus:ring-[#c6ebd7]"
+                    value={editState.role}
+                    onChange={(e) => setEditState((s) => s ? { ...s, role: e.target.value } : s)}
+                  >
+                    {normalizedRoles.length === 0 ? (
+                      <option value="">No roles available</option>
+                    ) : (
+                      normalizedRoles.map((role) => (
+                        <option key={role.name} value={role.name}>{roleLabel(role.name)}</option>
+                      ))
+                    )}
+                  </select>
+                  <p className="mt-xs text-xs text-[#414844]">Changing the role updates what this user can access in the portal.</p>
+                </div>
+                <div className="rounded-2xl border border-[#c1c8c2] bg-white px-md py-md">
+                  <div className="flex flex-wrap gap-sm">
+                    <div className="rounded-xl bg-[#f5f3f3] px-sm py-xs">
+                      <div className="text-[10px] font-bold uppercase tracking-wide text-[#414844]">Email</div>
+                      <div className="mt-1 break-all text-sm font-semibold text-[#00170d]">{editState.email}</div>
+                    </div>
+                    <div className="rounded-xl bg-[#f5f3f3] px-sm py-xs">
+                      <div className="text-[10px] font-bold uppercase tracking-wide text-[#414844]">Country</div>
+                      <div className="mt-1 text-sm font-semibold text-[#00170d]">{editState.country}</div>
+                    </div>
+                    <div className="rounded-xl bg-[#f5f3f3] px-sm py-xs">
+                      <div className="text-[10px] font-bold uppercase tracking-wide text-[#414844]">Status</div>
+                      <div className="mt-1 text-sm font-semibold text-[#00170d]">{editState.status}</div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div>
-                <label className="text-xs font-bold text-[#414844] mb-xs block uppercase tracking-wide">Role</label>
-                <select
-                  className="w-full border border-[#c1c8c2] rounded-lg px-md py-sm text-sm outline-none focus:border-[#00170d] bg-white"
-                  value={editState.role}
-                  onChange={(e) => setEditState((s) => s ? { ...s, role: e.target.value } : s)}
-                >
-                  {normalizedRoles.length === 0 ? (
-                    <option value="">No roles available</option>
+              <div className="flex flex-col gap-md rounded-2xl border border-[#c1c8c2] bg-white p-md">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wide text-[#414844]">Current Access</p>
+                  {editState.role ? (
+                    <span className={`mt-sm inline-flex rounded-full px-sm py-xs text-xs font-semibold ${ROLE_BADGE[editState.role] ?? 'bg-[#e4e2e2] text-[#414844]'}`}>
+                      {roleLabel(editState.role)}
+                    </span>
                   ) : (
-                    normalizedRoles.map((role) => (
-                      <option key={role.name} value={role.name}>{roleLabel(role.name)}</option>
-                    ))
+                    <span className="mt-sm inline-flex rounded-full bg-[#e4e2e2] px-sm py-xs text-xs font-semibold text-[#414844]">
+                      No role selected
+                    </span>
                   )}
-                </select>
-                {editState.role && (
-                  <span className={`mt-sm inline-flex text-xs font-semibold px-sm py-xs rounded-full ${ROLE_BADGE[editState.role] ?? 'bg-[#e4e2e2] text-[#414844]'}`}>
-                    {roleLabel(editState.role)}
-                  </span>
-                )}
+                </div>
+                <div className="rounded-2xl bg-[#f5f3f3] p-md">
+                  <p className="text-sm font-semibold text-[#00170d]">What this edit changes</p>
+                  <p className="mt-xs text-sm text-[#414844]">
+                    Update the display name and role only. Country access and account status remain unchanged from this screen.
+                  </p>
+                </div>
+                <div className="rounded-2xl border border-[#c1c8c2] bg-[#f9f8f5] p-md">
+                  <p className="text-sm font-semibold text-[#00170d]">Preview</p>
+                  <div className="mt-sm flex items-center gap-sm">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#00170d] text-xs font-bold text-white">
+                      {initials(editState.name || editState.email)}
+                    </div>
+                    <div className="min-w-0">
+                      <p className="truncate text-sm font-semibold text-[#1b1c1c]">{editState.name || 'Unnamed user'}</p>
+                      <p className="truncate text-xs text-[#414844]">{editState.email}</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="px-lg py-md border-t border-[#c1c8c2] flex justify-end gap-sm">
+            <div className="flex flex-col-reverse gap-sm border-t border-[#c1c8c2] bg-white px-lg py-md sm:flex-row sm:justify-end">
               <button
                 onClick={() => setEditState(null)}
-                className="px-md py-sm rounded-full border border-[#c1c8c2] text-sm font-semibold text-[#414844] hover:border-[#00170d] transition-colors"
+                className="rounded-full border border-[#c1c8c2] px-md py-sm text-sm font-semibold text-[#414844] transition-colors hover:border-[#00170d] hover:text-[#00170d]"
               >
                 Cancel
               </button>
               <button
                 onClick={saveEdit}
                 disabled={saving}
-                className="px-md py-sm rounded-full bg-[#00170d] text-white text-sm font-semibold hover:opacity-90 disabled:opacity-60 transition-opacity"
+                className="rounded-full bg-[#00170d] px-md py-sm text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
               >
-                {saving ? 'Saving…' : 'Save Changes'}
+                {saving ? 'Saving...' : 'Save Changes'}
               </button>
             </div>
           </div>
