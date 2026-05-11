@@ -28,7 +28,7 @@ export default function NoSpendPage() {
   const pathname = usePathname()
 
   return (
-    <div className="p-lg flex flex-col gap-lg">
+    <div className="p-lg flex flex-col gap-lg min-w-0">
       {/* Page header */}
       <div className="flex flex-col gap-sm sm:flex-row sm:items-start sm:justify-between">
         <div className="flex flex-col gap-xs">
@@ -43,7 +43,7 @@ export default function NoSpendPage() {
       </div>
 
       {/* Sub-tabs */}
-      <div className="border-b border-outline-variant flex gap-xs overflow-x-auto">
+      <div className="border-b border-outline-variant flex gap-xs flex-wrap">
         {subTabs.map((tab) => {
           const active = tab.href === '/portal/budget' ? pathname === tab.href : pathname.startsWith(tab.href)
           return (
@@ -93,7 +93,7 @@ export default function NoSpendPage() {
             <h3 className="text-title-md font-semibold text-on-surface">Dormant Allocations</h3>
             <p className="text-label-sm text-on-surface-variant">Countries with zero expenditure recorded</p>
           </div>
-          <div className="overflow-x-auto">
+          <div className="overflow-hidden">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-outline-variant bg-surface-container-lowest">

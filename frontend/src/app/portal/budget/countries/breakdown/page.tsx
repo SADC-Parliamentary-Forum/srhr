@@ -29,7 +29,7 @@ export default function CountryBreakdownPage() {
   })
 
   return (
-    <div className="p-lg flex flex-col gap-lg">
+    <div className="p-lg flex flex-col gap-lg min-w-0">
       {/* Page header */}
       <div className="flex flex-col gap-xs">
         <h1 className="text-display-sm font-bold text-on-surface">Budget Breakdown: Country &amp; Activities</h1>
@@ -41,7 +41,7 @@ export default function CountryBreakdownPage() {
       {/* Filter bar */}
       <div className="bg-surface-container-lowest rounded-xl p-md border border-outline-variant">
         <div className="flex flex-wrap gap-md items-end">
-          <div className="flex flex-col gap-xs flex-1 min-w-[160px]">
+          <div className="flex flex-col gap-xs flex-1 min-w-0 sm:min-w-[160px]">
             <label className="text-label-sm text-on-surface-variant font-medium">Country</label>
             <select
               value={selectedCountry}
@@ -60,7 +60,7 @@ export default function CountryBreakdownPage() {
               <option value="South Africa">South Africa</option>
             </select>
           </div>
-          <div className="flex flex-col gap-xs flex-1 min-w-[160px]">
+          <div className="flex flex-col gap-xs flex-1 min-w-0 sm:min-w-[160px]">
             <label className="text-label-sm text-on-surface-variant font-medium">Period</label>
             <select
               value={selectedPeriod}
@@ -73,7 +73,7 @@ export default function CountryBreakdownPage() {
               <option value="FY 2022">FY 2022</option>
             </select>
           </div>
-          <div className="flex flex-col gap-xs flex-1 min-w-[160px]">
+          <div className="flex flex-col gap-xs flex-1 min-w-0 sm:min-w-[160px]">
             <label className="text-label-sm text-on-surface-variant font-medium">Activity Code</label>
             <input
               type="text"
@@ -90,7 +90,7 @@ export default function CountryBreakdownPage() {
       </div>
 
       {/* Data table */}
-      <div className="overflow-x-auto rounded-xl border border-outline-variant bg-surface-container-low">
+      <div className="overflow-hidden rounded-xl border border-outline-variant bg-surface-container-low">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-outline-variant bg-surface-container">

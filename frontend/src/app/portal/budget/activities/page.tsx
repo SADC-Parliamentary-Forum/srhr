@@ -72,7 +72,7 @@ export default function ActivitiesPage() {
   const pathname = usePathname()
 
   return (
-    <div className="p-lg flex flex-col gap-lg">
+    <div className="p-lg flex flex-col gap-lg min-w-0">
       {/* Page header */}
       <div className="flex flex-col gap-xs">
         <h2 className="text-display-sm font-bold text-on-surface">Activities Analysis</h2>
@@ -80,7 +80,7 @@ export default function ActivitiesPage() {
       </div>
 
       {/* Sub-tab pills */}
-      <div className="flex gap-xs overflow-x-auto flex-wrap">
+      <div className="flex gap-xs flex-wrap">
         {subTabs.map((tab) => {
           const active = tab.href === '/portal/budget' ? pathname === tab.href : pathname.startsWith(tab.href)
           return (
@@ -158,7 +158,7 @@ export default function ActivitiesPage() {
       </div>
 
       {/* Activities table */}
-      <div className="overflow-x-auto rounded-xl border border-outline-variant bg-surface-container-low">
+      <div className="overflow-hidden rounded-xl border border-outline-variant bg-surface-container-low">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-outline-variant bg-surface-container">
@@ -174,7 +174,7 @@ export default function ActivitiesPage() {
             {activities.map((row, i) => (
               <tr key={row.code} className={`border-b border-outline-variant last:border-0 hover:bg-surface-container transition-colors ${i % 2 === 0 ? '' : 'bg-surface-container-lowest'}`}>
                 <td className="px-md py-sm font-mono text-on-surface font-semibold">{row.code}</td>
-                <td className="px-md py-sm text-on-surface max-w-xs truncate">{row.description}</td>
+                <td className="px-md py-sm text-on-surface">{row.description}</td>
                 <td className="px-md py-sm text-right text-on-surface">{fmt(row.allocated)}</td>
                 <td className="px-md py-sm text-right text-on-surface font-medium">{fmt(row.utilised)}</td>
                 <td className="px-md py-sm text-right text-secondary font-medium">{fmt(row.balance)}</td>

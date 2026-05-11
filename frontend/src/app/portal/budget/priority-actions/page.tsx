@@ -73,7 +73,7 @@ const actionCards: ActionCard[] = [
 
 export default function PriorityActionsPage() {
   return (
-    <div className="space-y-md">
+    <div className="space-y-md min-w-0">
       <div className="space-y-sm">
         <h1 className="text-h1 font-h1 text-on-surface">Priority Actions</h1>
         <p className="text-body-lg font-body-lg text-on-surface-variant">
@@ -81,7 +81,7 @@ export default function PriorityActionsPage() {
         </p>
 
         {/* Sub-nav tabs */}
-        <div className="flex overflow-x-auto pb-sm gap-sm border-b border-surface-variant mt-md">
+        <div className="flex flex-wrap pb-sm gap-sm border-b border-surface-variant mt-md">
           {subTabs.map((tab) => (
             <Link
               key={tab.href}

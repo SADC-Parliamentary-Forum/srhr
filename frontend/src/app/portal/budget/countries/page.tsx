@@ -40,9 +40,9 @@ export default function CountriesPage() {
   const avgRate = ((totalUtil / totalAlloc) * 100).toFixed(1)
 
   return (
-    <div className="p-lg flex flex-col gap-lg">
+    <div className="p-lg flex flex-col gap-lg min-w-0">
       {/* Sub-nav tabs */}
-      <div className="border-b border-outline-variant flex gap-xs overflow-x-auto">
+      <div className="border-b border-outline-variant flex gap-xs flex-wrap">
         {subTabs.map((tab) => {
           const active = tab.href === '/portal/budget' ? pathname === tab.href : pathname.startsWith(tab.href)
           return (
@@ -101,7 +101,7 @@ export default function CountriesPage() {
       </div>
 
       {/* Countries table */}
-      <div className="overflow-x-auto rounded-xl border border-outline-variant bg-surface-container-low">
+      <div className="overflow-hidden rounded-xl border border-outline-variant bg-surface-container-low">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-outline-variant bg-surface-container">

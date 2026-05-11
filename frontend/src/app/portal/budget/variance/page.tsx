@@ -57,7 +57,7 @@ export default function VariancePage() {
   const [varianceFilter, setVarianceFilter] = useState('Variance > 10%')
 
   return (
-    <div className="p-lg flex flex-col gap-lg">
+    <div className="p-lg flex flex-col gap-lg min-w-0">
       {/* Header */}
       <div className="flex flex-col gap-sm sm:flex-row sm:items-start sm:justify-between">
         <div className="flex flex-col gap-xs">
@@ -73,7 +73,7 @@ export default function VariancePage() {
       </div>
 
       {/* Sub-nav tabs */}
-      <div className="border-b border-outline-variant flex gap-xs overflow-x-auto">
+      <div className="border-b border-outline-variant flex gap-xs flex-wrap">
         {subTabs.map((tab) => {
           const active = tab.href === '/portal/budget' ? pathname === tab.href : pathname.startsWith(tab.href)
           return (
@@ -180,7 +180,7 @@ export default function VariancePage() {
           </div>
         </div>
 
-        <div className="overflow-x-auto">
+        <div className="overflow-hidden">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-outline-variant bg-surface-container">
@@ -223,7 +223,7 @@ export default function VariancePage() {
                         <span className="inline-block px-sm py-xs rounded-full text-xs font-semibold bg-primary-container/20 text-on-primary-container">On Target</span>
                       )}
                     </td>
-                    <td className="px-md py-md min-w-[200px]">
+                    <td className="px-md py-md">
                       <input
                         type="text"
                         value={explanations[row.code] ?? ''}

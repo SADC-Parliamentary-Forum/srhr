@@ -31,13 +31,13 @@ const rows: ReconciliationRow[] = [
 
 export default function ReconciliationPage() {
   return (
-    <div className="space-y-md">
+    <div className="space-y-md min-w-0">
       <div className="space-y-sm">
         <h1 className="text-h1 font-h1 text-primary">Reconciliation</h1>
         <p className="text-body-md font-body-md text-on-surface-variant">
           Analyze discrepancies between reported source documents and financial spreadsheets.
         </p>
-        <div className="flex overflow-x-auto gap-sm pb-xs border-b border-outline-variant mt-md">
+        <div className="flex flex-wrap gap-sm pb-xs border-b border-outline-variant mt-md">
           {subTabs.map((tab) => (
             <Link
               key={tab.href}
@@ -53,7 +53,7 @@ export default function ReconciliationPage() {
           ))}
           <Link
             href="/portal/budget/ai-insights"
-            className="px-sm py-xs text-label-lg font-label-lg text-secondary border border-secondary rounded-full ml-auto whitespace-nowrap flex items-center gap-xs hover:bg-surface-container-low transition-colors"
+            className="px-sm py-xs text-label-lg font-label-lg text-secondary border border-secondary rounded-full whitespace-nowrap flex items-center gap-xs hover:bg-surface-container-low transition-colors sm:ml-auto"
           >
             <span className="material-symbols-outlined text-sm">auto_awesome</span>
             AI Insights
@@ -104,9 +104,9 @@ export default function ReconciliationPage() {
 
       {/* Reconciliation Table */}
       <div className="bg-surface rounded-xl border border-outline-variant/30 shadow-[0_4px_24px_rgba(0,23,13,0.04)] overflow-hidden">
-        <div className="p-md border-b border-outline-variant/50 flex justify-between items-center bg-surface-container-lowest">
+        <div className="p-md border-b border-outline-variant/50 flex justify-between items-center flex-wrap gap-sm bg-surface-container-lowest">
           <h3 className="text-h3 font-h3 text-primary">Country Activity Reconciliation</h3>
-          <div className="flex gap-sm">
+          <div className="flex gap-sm flex-wrap justify-end">
             <button className="p-sm rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors flex items-center gap-xs text-label-md font-label-md">
               <span className="material-symbols-outlined text-[18px]">filter_list</span> Filter
             </button>
@@ -116,7 +116,7 @@ export default function ReconciliationPage() {
           </div>
         </div>
 
-        <div className="overflow-x-auto">
+        <div className="overflow-hidden">
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="bg-surface-container-low text-label-md font-label-md text-on-surface-variant uppercase tracking-wider">
