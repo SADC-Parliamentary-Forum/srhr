@@ -11,6 +11,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
   const [ready, setReady] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [focusMode, setFocusMode] = useState(false)
+  const [userRoles, setUserRoles] = useState<string[]>([])
   const router = useRouter()
   const pathname = usePathname()
 
@@ -26,8 +27,9 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
       }
 
       try {
-        await api.get('/auth/me', token)
+        const me = await api.get<{ roles?: string[] }>('/auth/me', token)
         if (!cancelled) {
+          setUserRoles(Array.isArray(me.roles) ? me.roles : [])
           setReady(true)
         }
       } catch (error) {
@@ -110,7 +112,11 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
             <span className="material-symbols-outlined text-[24px]">menu</span>
           </button>
           <div className="flex-1 min-w-0">
-            <PortalTopBar focusMode={focusMode} onToggleFocusMode={toggleFocusMode} />
+            <PortalTopBar
+              focusMode={focusMode}
+              onToggleFocusMode={toggleFocusMode}
+              canViewNotifications={userRoles.some((role) => ['super_admin', 'secretariat'].includes(role))}
+            />
           </div>
         </div>
 

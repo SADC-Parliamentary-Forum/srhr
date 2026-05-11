@@ -22,9 +22,11 @@ const profileMenuItems = [
 export default function PortalTopBar({
   focusMode = false,
   onToggleFocusMode,
+  canViewNotifications = false,
 }: {
   focusMode?: boolean
   onToggleFocusMode?: () => void
+  canViewNotifications?: boolean
 }) {
   const pathname = usePathname()
   const router = useRouter()
@@ -53,6 +55,12 @@ export default function PortalTopBar({
   }, [profileOpen, notificationsOpen])
 
   useEffect(() => {
+    if (!canViewNotifications) {
+      setNotificationCount(0)
+      setNotifications([])
+      return
+    }
+
     const token = getToken()
     if (!token) return
 
@@ -62,12 +70,12 @@ export default function PortalTopBar({
         setNotifications(data.items)
       })
       .catch((error) => {
-        if (error instanceof ApiError && error.status === 403) {
+        if (error instanceof ApiError && (error.status === 403 || error.status === 404)) {
           setNotificationCount(0)
           setNotifications([])
         }
       })
-  }, [])
+  }, [canViewNotifications])
 
   function handleLogout() {
     clearToken()
@@ -113,6 +121,7 @@ export default function PortalTopBar({
         </div>
 
         <div className="flex items-center gap-xs">
+          {canViewNotifications && (
           <div className="relative" ref={notificationsRef}>
             <button
               aria-label="Notifications"
@@ -154,6 +163,7 @@ export default function PortalTopBar({
               </div>
             )}
           </div>
+          )}
           <button
             aria-label="Calendar"
             className="hidden sm:block text-on-surface-variant hover:text-primary transition-colors p-xs rounded-full hover:bg-surface-container"
