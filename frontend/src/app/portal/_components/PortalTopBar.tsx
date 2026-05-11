@@ -19,7 +19,13 @@ const profileMenuItems = [
   { label: 'Help & Support', icon: 'help', href: '#' },
 ]
 
-export default function PortalTopBar() {
+export default function PortalTopBar({
+  focusMode = false,
+  onToggleFocusMode,
+}: {
+  focusMode?: boolean
+  onToggleFocusMode?: () => void
+}) {
   const pathname = usePathname()
   const router = useRouter()
   const [search, setSearch] = useState('')
@@ -157,6 +163,14 @@ export default function PortalTopBar() {
         </div>
 
         <div className="hidden sm:flex items-center gap-sm border-l border-outline-variant pl-sm">
+          {focusMode && onToggleFocusMode ? (
+            <button
+              onClick={onToggleFocusMode}
+              className="text-xs font-semibold text-primary border border-primary rounded-full px-sm py-xs hover:bg-primary-fixed transition-colors whitespace-nowrap"
+            >
+              Exit Focus Mode
+            </button>
+          ) : null}
           <Link
             href="/portal/analysis/ai-insights"
             className="text-xs font-semibold text-primary border border-primary rounded-full px-sm py-xs hover:bg-primary-fixed transition-colors whitespace-nowrap"

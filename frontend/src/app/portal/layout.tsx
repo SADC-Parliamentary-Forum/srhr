@@ -110,7 +110,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
             <span className="material-symbols-outlined text-[24px]">menu</span>
           </button>
           <div className="flex-1 min-w-0">
-            <PortalTopBar />
+            <PortalTopBar focusMode={focusMode} onToggleFocusMode={toggleFocusMode} />
           </div>
         </div>
 
