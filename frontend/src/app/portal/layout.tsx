@@ -115,7 +115,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
             <PortalTopBar
               focusMode={focusMode}
               onToggleFocusMode={toggleFocusMode}
-              canViewNotifications={userRoles.some((role) => ['super_admin', 'secretariat'].includes(role))}
+              canViewNotifications={false}
             />
           </div>
         </div>

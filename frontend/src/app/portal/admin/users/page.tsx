@@ -118,19 +118,16 @@ export default function UserManagementPage() {
   async function loadUsers() {
     const token = getToken()
     if (!token) return
-    const [usersData, rolesData] = await Promise.all([
-      api.get<{
-        users: UserRow[]
-        access_requests: AccessRequest[]
-        roles: RoleOption[]
-        permissions: string[]
-        countries: CountryOption[]
-      }>('/admin/users', token),
-      api.get<{ roles: RoleOption[] }>('/admin/roles', token).catch(() => ({ roles: [] })),
-    ])
+    const usersData = await api.get<{
+      users: UserRow[]
+      access_requests: AccessRequest[]
+      roles: RoleOption[]
+      permissions: string[]
+      countries: CountryOption[]
+    }>('/admin/users', token)
     const loadedUsers = asArray(usersData.users)
     const loadedRequests = asArray(usersData.access_requests)
-    const loadedRoles = asArray(usersData.roles.length > 0 ? usersData.roles : rolesData.roles)
+    const loadedRoles = asArray(usersData.roles)
     const loadedPermissions = asArray(usersData.permissions)
     const loadedCountries = asArray(usersData.countries)
 
