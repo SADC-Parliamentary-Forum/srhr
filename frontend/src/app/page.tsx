@@ -35,7 +35,7 @@ export default function RootPage() {
               <h1 className="text-[40px] font-extrabold text-[#fed65b] leading-tight">
                 SADC PF SRHR, HIV and AIDS Governance Dashboard
               </h1>
-              <p className="text-[18px] text-[#e4e2e2] max-w-xl leading-relaxed">
+              <p className="text-[18px] text-[#e4e2e2]">
                 Tracking parliamentary action, evidence, budgets, legislation, oversight, and stories of change across
                 the SADC region.
               </p>
