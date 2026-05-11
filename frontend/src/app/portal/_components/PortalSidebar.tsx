@@ -26,15 +26,13 @@ export default function PortalSidebar() {
     <aside className="bg-surface h-screen w-64 border-r border-outline-variant flex flex-col sticky top-0 shrink-0">
       {/* Logo */}
       <div className="px-md py-sm flex items-center gap-sm border-b border-outline-variant/40">
-        <div className="bg-primary rounded-lg p-1 flex items-center justify-center shrink-0" style={{ width: 40, height: 40 }}>
-          <Image
-            src="/sadc-pf-logo.jpg"
-            alt="SADC PF Logo"
-            width={32}
-            height={32}
-            className="object-contain brightness-0 invert"
-          />
-        </div>
+        <Image
+          src="/sadc-pf-logo.jpg"
+          alt="SADC PF Logo"
+          width={40}
+          height={40}
+          className="object-contain rounded-lg shrink-0"
+        />
         <div className="min-w-0">
           <p className="text-[13px] font-extrabold text-primary tracking-wide leading-tight">SADC PF</p>
           <p className="text-[10px] font-semibold text-on-surface-variant tracking-wide leading-tight">SRHR Portal</p>

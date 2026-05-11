@@ -23,16 +23,14 @@ export function PublicHeader() {
       <div className="flex justify-between items-center w-full px-5 py-2 max-w-[1440px] mx-auto">
         {/* Logo */}
         <Link href="/" onClick={() => setMobileOpen(false)} className="flex items-center gap-3 shrink-0">
-          <div className="bg-white rounded-lg p-1 flex items-center justify-center shrink-0" style={{ width: 44, height: 44 }}>
-            <Image
-              src="/sadc-pf-logo.jpg"
-              alt="SADC PF Logo"
-              width={36}
-              height={36}
-              className="object-contain"
-              priority
-            />
-          </div>
+          <Image
+            src="/sadc-pf-logo.jpg"
+            alt="SADC PF Logo"
+            width={44}
+            height={44}
+            className="object-contain shrink-0 rounded-lg"
+            priority
+          />
           <div className="flex flex-col leading-tight">
             <span className="text-[13px] font-extrabold text-[#fed65b] tracking-wide">SADC PF</span>
             <span className="text-[11px] font-semibold text-[#abcfbb] tracking-wide hidden sm:block">SRHR Portal</span>

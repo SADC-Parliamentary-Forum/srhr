@@ -323,9 +323,7 @@ function LoginPageInner() {
 
           {/* Top logo */}
           <div className="relative z-10 flex items-center gap-3">
-            <div className="bg-white rounded-xl p-1.5 flex items-center justify-center shrink-0">
-              <Image src="/sadc-pf-logo.jpg" alt="SADC PF Logo" width={48} height={48} className="object-contain" priority />
-            </div>
+            <Image src="/sadc-pf-logo.jpg" alt="SADC PF Logo" width={48} height={48} className="object-contain rounded-xl shrink-0" priority />
             <div>
               <div className="text-[16px] font-extrabold text-[#fed65b] tracking-wide">SADC PF</div>
               <div className="text-[12px] font-semibold text-[#abcfbb] tracking-wide">SRHR Portal</div>
@@ -364,18 +362,7 @@ function LoginPageInner() {
 
         {/* Right Form Panel */}
         <div className="flex-1 flex items-start justify-center p-5 sm:p-8 lg:p-10 overflow-y-auto">
-          <div className="w-full max-w-lg py-4">
-
-            {/* Mobile logo (only on small screens) */}
-            <div className="flex lg:hidden items-center gap-3 mb-8">
-              <div className="bg-[#00170d] rounded-xl p-1.5 flex items-center justify-center shrink-0">
-                <Image src="/sadc-pf-logo.jpg" alt="SADC PF Logo" width={36} height={36} className="object-contain brightness-0 invert" />
-              </div>
-              <div>
-                <div className="text-[15px] font-extrabold text-[#00170d] tracking-wide">SADC PF</div>
-                <div className="text-[11px] font-semibold text-[#414844]">SRHR Portal</div>
-              </div>
-            </div>
+          <div>
 
             {/* Card */}
             <div className="bg-white rounded-2xl shadow-[0_8px_40px_rgba(0,23,13,0.08)] border border-[#c1c8c2]/30 overflow-hidden">
