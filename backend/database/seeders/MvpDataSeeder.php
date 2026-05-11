@@ -61,6 +61,9 @@ class MvpDataSeeder extends Seeder
             'fatima@parliament.ao'   => ['Fatima Rodrigues', 'Parliament of Angola',        'AO', 'programme_manager'],
         ];
 
+        // Sync PostgreSQL sequence so inserts don't collide with existing rows
+        DB::statement("SELECT setval(pg_get_serial_sequence('users', 'id'), COALESCE((SELECT MAX(id) FROM users), 0))");
+
         $userIds = [];
         foreach ($userDefs as $email => [$name, $org, $cc, $role]) {
             $existing = DB::table('users')->where('email', $email)->first();
