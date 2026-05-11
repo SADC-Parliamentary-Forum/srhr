@@ -1,50 +1,74 @@
 'use client'
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { useState } from 'react'
+import BudgetSubnav from './_components/BudgetSubnav'
 
-const subTabs = [
-  { label: 'Overview', href: '/portal/budget' },
-  { label: 'Activities', href: '/portal/budget/activities' },
-  { label: 'Countries', href: '/portal/budget/countries' },
-  { label: 'No-Spend', href: '/portal/budget/no-spend' },
-  { label: 'Variance', href: '/portal/budget/variance' },
-  { label: 'Reconciliation', href: '/portal/budget/reconciliation' },
-  { label: 'Priority Actions', href: '/portal/budget/priority-actions' },
+const overviewExportRows = [
+  ['Key Finding', 'National Activities remain under-utilised', 'US$ 268,239.52 available out of US$ 308,652.00 allocated'],
+  ['Metric', 'Total Budget Allocated', 'US$ 308,652.00'],
+  ['Metric', 'Current Utilisation', 'US$ 40,412.48'],
+  ['Metric', 'Available Balance', 'US$ 268,239.52'],
+  ['Metric', 'Overall Spending Rate', '13.1%'],
+  ['Gauge', 'Utilised', '13.1%'],
+  ['Gauge', 'Available', '86.9%'],
 ]
 
+function downloadCsv(filename: string, rows: string[][]) {
+  const csv = rows
+    .map((row) => row.map((cell) => `"${cell.replace(/"/g, '""')}"`).join(','))
+    .join('\n')
+
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
+  const url = URL.createObjectURL(blob)
+  const link = document.createElement('a')
+  link.href = url
+  link.download = filename
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+  URL.revokeObjectURL(url)
+}
+
 export default function BudgetOverviewPage() {
-  const pathname = usePathname()
+  const [exportMessage, setExportMessage] = useState<string | null>(null)
+
+  function exportOverviewData() {
+    downloadCsv('budget-overview.csv', [
+      ['Section', 'Label', 'Value'],
+      ...overviewExportRows,
+    ])
+
+    setExportMessage('Budget overview exported.')
+    window.setTimeout(() => setExportMessage(null), 2500)
+  }
 
   return (
     <div className="flex flex-col gap-lg">
       {/* Page header */}
-      <div className="flex flex-col gap-xs">
-        <h1 className="text-display-sm font-bold text-on-surface">Budget Analysis</h1>
-        <p className="text-body-md text-on-surface-variant max-w-2xl">
-          Comprehensive overview of budget allocation, utilisation rates, and financial performance across all SRHR programme activities and member countries.
-        </p>
+      <div className="flex flex-col gap-sm sm:flex-row sm:items-start sm:justify-between">
+        <div className="flex flex-col gap-xs">
+          <h1 className="text-display-sm font-bold text-on-surface">Budget Analysis</h1>
+          <p className="text-body-md text-on-surface-variant max-w-2xl">
+            Comprehensive overview of budget allocation, utilisation rates, and financial performance across all SRHR programme activities and member countries.
+          </p>
+        </div>
+        <button
+          onClick={exportOverviewData}
+          className="flex items-center gap-sm rounded-full border border-outline-variant px-lg py-sm text-sm font-semibold text-on-surface hover:bg-surface-container transition-colors shrink-0"
+        >
+          <span className="material-symbols-outlined text-[18px]">download</span>
+          Export Overview Data
+        </button>
       </div>
 
+      {exportMessage ? (
+        <div className="rounded-xl border border-primary/15 bg-primary-fixed/10 px-md py-sm text-sm text-[#00170d]">
+          {exportMessage}
+        </div>
+      ) : null}
+
       {/* Sub-navigation tabs */}
-      <div className="border-b border-outline-variant flex gap-xs flex-wrap">
-        {subTabs.map((tab) => {
-          const active = tab.href === '/portal/budget' ? pathname === tab.href : pathname.startsWith(tab.href)
-          return (
-            <Link
-              key={tab.href}
-              href={tab.href}
-              className={`px-md py-sm text-sm font-medium whitespace-nowrap transition-colors shrink-0 ${
-                active
-                  ? 'border-b-2 border-primary text-primary'
-                  : 'text-on-surface-variant hover:text-on-surface'
-              }`}
-            >
-              {tab.label}
-            </Link>
-          )
-        })}
-      </div>
+      <BudgetSubnav />
 
       {/* Key Finding banner */}
       <div className="flex items-start gap-sm bg-secondary-container text-on-secondary-container rounded-xl p-md">

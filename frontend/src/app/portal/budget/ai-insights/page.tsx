@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import BudgetSubnav from '../_components/BudgetSubnav'
 
 interface Prompt {
   icon: string
@@ -53,6 +54,10 @@ export default function AiInsightsPage() {
         <p className="text-body-lg font-body-lg text-on-surface-variant">
           Intelligent analysis and actionable recommendations based on current budget data.
         </p>
+      </div>
+
+      <div className="mb-lg">
+        <BudgetSubnav />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-md">

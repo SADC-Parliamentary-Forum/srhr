@@ -4,7 +4,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState, useRef, useEffect } from 'react'
-import { clearToken } from '@/lib/auth'
+import { api, ApiError } from '@/lib/api'
+import { clearToken, getToken } from '@/lib/auth'
 
 const centerLinks = [
   { label: 'Reports', href: '/portal/reports' },
@@ -23,17 +24,44 @@ export default function PortalTopBar() {
   const router = useRouter()
   const [search, setSearch] = useState('')
   const [profileOpen, setProfileOpen] = useState(false)
+  const [notificationsOpen, setNotificationsOpen] = useState(false)
+  const [calendarOpen, setCalendarOpen] = useState(false)
+  const [notificationCount, setNotificationCount] = useState(0)
+  const [notifications, setNotifications] = useState<Array<{ id: number; title: string; time: string; icon: string; metadata: Record<string, string> }>>([])
+  const [deadlines, setDeadlines] = useState<Array<{ report: string; due: string; status: string }>>([])
   const profileRef = useRef<HTMLDivElement>(null)
+  const notificationsRef = useRef<HTMLDivElement>(null)
+  const calendarRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (profileRef.current && !profileRef.current.contains(e.target as Node)) {
         setProfileOpen(false)
       }
+      if (notificationsRef.current && !notificationsRef.current.contains(e.target as Node)) {
+        setNotificationsOpen(false)
+      }
     }
-    if (profileOpen) document.addEventListener('mousedown', handleClickOutside)
+    if (profileOpen || notificationsOpen) document.addEventListener('mousedown', handleClickOutside)
     return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [profileOpen])
+  }, [profileOpen, notificationsOpen])
+
+  useEffect(() => {
+    const token = getToken()
+    if (!token) return
+
+    api.get<{ count: number; items: Array<{ id: number; title: string; time: string; icon: string; metadata: Record<string, string> }> }>('/admin/notifications', token)
+      .then((data) => {
+        setNotificationCount(data.count)
+        setNotifications(data.items)
+      })
+      .catch((error) => {
+        if (error instanceof ApiError && error.status === 403) {
+          setNotificationCount(0)
+          setNotifications([])
+        }
+      })
+  }, [])
 
   function handleLogout() {
     clearToken()
@@ -79,12 +107,47 @@ export default function PortalTopBar() {
         </div>
 
         <div className="flex items-center gap-xs">
-          <button
-            aria-label="Notifications"
-            className="text-on-surface-variant hover:text-primary transition-colors p-xs rounded-full hover:bg-surface-container"
-          >
-            <span className="material-symbols-outlined text-[20px]">notifications</span>
-          </button>
+          <div className="relative" ref={notificationsRef}>
+            <button
+              aria-label="Notifications"
+              onClick={() => setNotificationsOpen((value) => !value)}
+              className="relative text-on-surface-variant hover:text-primary transition-colors p-xs rounded-full hover:bg-surface-container"
+            >
+              <span className="material-symbols-outlined text-[20px]">notifications</span>
+              {notificationCount > 0 && (
+                <span className="absolute -right-0.5 -top-0.5 min-w-[16px] h-4 px-[3px] rounded-full bg-[#ba1a1a] text-white text-[10px] font-bold flex items-center justify-center">
+                  {notificationCount > 9 ? '9+' : notificationCount}
+                </span>
+              )}
+            </button>
+
+            {notificationsOpen && (
+              <div className="absolute right-0 top-10 w-80 bg-white rounded-xl shadow-lg border border-[#c1c8c2] z-50 overflow-hidden">
+                <div className="px-md py-sm border-b border-[#c1c8c2] bg-[#f5f3f3] flex items-center justify-between gap-sm">
+                  <p className="text-sm font-bold text-[#00170d]">Notifications</p>
+                  <span className="text-xs font-semibold text-[#745c00]">{notificationCount} pending</span>
+                </div>
+                <div className="max-h-80 overflow-y-auto">
+                  {notifications.length > 0 ? notifications.map((item) => (
+                    <div key={item.id} className="px-md py-sm border-b border-[#f0eeec] last:border-b-0">
+                      <div className="flex items-start gap-sm">
+                        <span className="material-symbols-outlined text-[18px] text-[#745c00] mt-[2px]">{item.icon}</span>
+                        <div className="min-w-0 flex-1">
+                          <p className="text-sm font-semibold text-[#1b1c1c]">{item.title}</p>
+                          <p className="text-xs text-[#414844] truncate">
+                            {item.metadata.organization ?? 'Registration request'} · {item.metadata.role_requested ?? 'Role requested'}
+                          </p>
+                          <p className="text-xs text-[#727974] mt-[2px]">{item.time}</p>
+                        </div>
+                      </div>
+                    </div>
+                  )) : (
+                    <div className="px-md py-md text-sm text-[#414844]">No new notifications.</div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
           <button
             aria-label="Calendar"
             className="hidden sm:block text-on-surface-variant hover:text-primary transition-colors p-xs rounded-full hover:bg-surface-container"

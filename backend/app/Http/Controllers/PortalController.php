@@ -10,11 +10,15 @@ use App\Models\Report;
 use App\Models\ReportingPeriod;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PortalController extends Controller
 {
+    private const INDICATOR_STATUSES = ['achieved', 'on-track', 'at-risk', 'off-track'];
+    private const INDICATOR_TRENDS = ['up', 'down', 'stable'];
+
     public function dashboard(Request $request): JsonResponse
     {
         $user = $request->user();
@@ -105,6 +109,64 @@ class PortalController extends Controller
             'indicators' => Indicator::query()->select('code', 'name')->distinct()->orderBy('code')->get(),
             'evidence_types' => ['Story', 'Photo', 'Video', 'Document', 'Research'],
         ]);
+    }
+
+    public function activityLogs(Request $request): JsonResponse
+    {
+        $user = $request->user();
+
+        $items = ActivityLog::query()
+            ->when($user->country_id, fn ($q) => $q->where('country_id', $user->country_id))
+            ->latest('created_at')
+            ->take(25)
+            ->get()
+            ->map(fn (ActivityLog $log) => [
+                'id' => $log->id,
+                'title' => $log->action,
+                'subject_type' => $log->subject_type,
+                'icon' => $log->icon ?? 'update',
+                'country' => $log->country?->name,
+                'description' => $log->metadata['description'] ?? $log->metadata['detail'] ?? null,
+                'created_at' => $log->created_at?->toIso8601String(),
+            ]);
+
+        return response()->json($items);
+    }
+
+    public function storeActivityLog(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['nullable', 'string', 'max:2000'],
+            'country_id' => ['nullable', 'exists:countries,id'],
+        ]);
+
+        $log = ActivityLog::create([
+            'user_id' => $request->user()->id,
+            'country_id' => $validated['country_id'] ?? $request->user()->country_id,
+            'action' => $validated['title'],
+            'subject_type' => 'activity',
+            'subject_id' => null,
+            'icon' => 'event_note',
+            'metadata' => [
+                'description' => $validated['description'] ?? null,
+                'user' => $request->user()->name,
+            ],
+            'created_at' => now(),
+        ]);
+
+        return response()->json([
+            'message' => 'Activity logged successfully.',
+            'activity' => [
+                'id' => $log->id,
+                'title' => $log->action,
+                'subject_type' => $log->subject_type,
+                'icon' => $log->icon,
+                'country' => $log->country?->name,
+                'description' => $log->metadata['description'] ?? null,
+                'created_at' => $log->created_at?->toIso8601String(),
+            ],
+        ], 201);
     }
 
     public function storeEvidence(Request $request): JsonResponse
@@ -347,6 +409,108 @@ class PortalController extends Controller
         return response()->json($indicators);
     }
 
+    public function indicatorMetadata(): JsonResponse
+    {
+        $definitions = Indicator::query()
+            ->select('code', 'outcome_code', 'name')
+            ->distinct()
+            ->orderBy('outcome_code')
+            ->orderBy('code')
+            ->get();
+
+        $outcomes = $definitions
+            ->groupBy('outcome_code')
+            ->map(fn ($rows, $outcomeCode) => [
+                'code' => $outcomeCode,
+                'label' => match ($outcomeCode) {
+                    'O2' => 'Legal Frameworks',
+                    'O3' => 'Budget Allocation',
+                    'O4' => 'Youth Access',
+                    'O5' => 'Gender Violence',
+                    default => 'Outcome ' . $outcomeCode,
+                },
+                'indicators' => $rows->map(fn ($row) => [
+                    'code' => $row->code,
+                    'name' => $row->name,
+                    'unit' => $this->unitForIndicator($row->code),
+                ])->values(),
+            ])
+            ->values();
+
+        return response()->json([
+            'countries' => Country::query()->where('is_active', true)->orderBy('name')->get(['id', 'name']),
+            'periods' => ReportingPeriod::query()->where('is_active', true)->orderByDesc('year')->orderByDesc('quarter')->get(['id', 'label']),
+            'outcomes' => $outcomes,
+            'accepted_columns' => ['code', 'name', 'value', 'unit', 'notes'],
+            'trend_options' => self::INDICATOR_TRENDS,
+            'status_options' => self::INDICATOR_STATUSES,
+        ]);
+    }
+
+    public function validateIndicators(Request $request): JsonResponse
+    {
+        $validated = $this->validateIndicatorSubmission($request);
+
+        return response()->json($validated);
+    }
+
+    public function submitIndicators(Request $request): JsonResponse
+    {
+        $validated = $this->validateIndicatorSubmission($request);
+        $blockingErrors = collect($validated['results'])->where('severity', 'error')->count();
+        abort_if($blockingErrors > 0, 422, 'Resolve validation errors before submitting.');
+
+        $user = $request->user();
+
+        $createdIds = DB::transaction(function () use ($validated, $user) {
+            $ids = [];
+
+            foreach ($validated['rows'] as $row) {
+                $indicator = Indicator::create([
+                    'country_id' => $validated['country_id'],
+                    'reporting_period_id' => $validated['reporting_period_id'],
+                    'code' => $row['code'],
+                    'outcome_code' => $row['outcome_code'],
+                    'name' => $row['name'],
+                    'value' => (int) round($row['value']),
+                    'trend' => $row['trend'],
+                    'status' => $row['status'],
+                    'notes' => $row['notes'],
+                    'is_public' => false,
+                ]);
+
+                $ids[] = $indicator->id;
+            }
+
+            ActivityLog::create([
+                'user_id' => $user->id,
+                'country_id' => $validated['country_id'],
+                'action' => 'Indicator submission completed',
+                'subject_type' => 'indicator_submission',
+                'subject_id' => null,
+                'icon' => 'upload_file',
+                'metadata' => [
+                    'description' => sprintf(
+                        '%s submission for %s with %d indicator rows.',
+                        strtoupper($validated['submission_type']),
+                        $validated['reporting_period_label'],
+                        count($validated['rows'])
+                    ),
+                    'rows' => count($validated['rows']),
+                ],
+                'created_at' => now(),
+            ]);
+
+            return $ids;
+        });
+
+        return response()->json([
+            'message' => 'Indicators submitted successfully.',
+            'created_count' => count($createdIds),
+            'ids' => $createdIds,
+        ], 201);
+    }
+
     public function storeIndicator(Request $request): JsonResponse
     {
         abort_unless($request->user()->can('upload_indicators'), 403);
@@ -447,5 +611,100 @@ class PortalController extends Controller
             'owner'                => $report->user?->name ?? 'System',
             'owner_id'             => $report->user_id,
         ];
+    }
+
+    private function validateIndicatorSubmission(Request $request): array
+    {
+        $validated = $request->validate([
+            'submission_type' => ['required', 'in:csv,manual'],
+            'country_id' => ['required', 'exists:countries,id'],
+            'reporting_period_id' => ['required', 'exists:reporting_periods,id'],
+            'rows' => ['required', 'array', 'min:1'],
+            'rows.*.code' => ['required', 'string', 'max:50'],
+            'rows.*.name' => ['nullable', 'string', 'max:255'],
+            'rows.*.value' => ['required'],
+            'rows.*.notes' => ['nullable', 'string'],
+        ]);
+
+        $country = Country::findOrFail($validated['country_id']);
+        $period = ReportingPeriod::findOrFail($validated['reporting_period_id']);
+        $definitionMap = Indicator::query()->select('code', 'outcome_code', 'name')->distinct()->get()->keyBy('code');
+        $seenCodes = [];
+        $results = [];
+        $rows = [];
+
+        foreach ($validated['rows'] as $index => $row) {
+            $severity = 'valid';
+            $message = '';
+            $code = trim($row['code']);
+            $value = is_numeric($row['value']) ? (float) $row['value'] : null;
+            $definition = $definitionMap->get($code);
+
+            if ($value === null) {
+                $severity = 'error';
+                $message = 'Value must be numeric.';
+            } elseif (isset($seenCodes[$code])) {
+                $severity = 'error';
+                $message = 'Duplicate indicator code in this submission.';
+            } elseif (! $definition && empty($row['name'])) {
+                $severity = 'error';
+                $message = 'Unknown indicator code. Provide a name for a custom indicator.';
+            } elseif (Indicator::query()
+                ->where('country_id', $validated['country_id'])
+                ->where('reporting_period_id', $validated['reporting_period_id'])
+                ->where('code', $code)
+                ->exists()) {
+                $severity = 'error';
+                $message = 'An indicator for this code already exists in the selected period.';
+            } elseif ($value !== null && $value === 0.0) {
+                $severity = 'warning';
+                $message = 'Zero value submitted. Confirm this is expected.';
+            }
+
+            $seenCodes[$code] = true;
+
+            $rows[] = [
+                'code' => $code,
+                'name' => $definition?->name ?? ($row['name'] ?: $code),
+                'outcome_code' => $definition?->outcome_code ?? 'O4',
+                'value' => $value ?? 0,
+                'notes' => $row['notes'] ?? null,
+                'status' => $value !== null && $value >= 75 ? 'achieved' : ($value !== null && $value >= 50 ? 'on-track' : 'at-risk'),
+                'trend' => 'stable',
+            ];
+
+            $results[] = [
+                'row' => $index + 1,
+                'code' => $code,
+                'value' => (string) ($row['value'] ?? ''),
+                'severity' => $severity,
+                'message' => $message,
+            ];
+        }
+
+        return [
+            'country_id' => $country->id,
+            'country_name' => $country->name,
+            'reporting_period_id' => $period->id,
+            'reporting_period_label' => $period->label,
+            'submission_type' => $validated['submission_type'],
+            'rows' => $rows,
+            'results' => $results,
+            'summary' => [
+                'valid' => collect($results)->where('severity', 'valid')->count(),
+                'warning' => collect($results)->where('severity', 'warning')->count(),
+                'error' => collect($results)->where('severity', 'error')->count(),
+            ],
+        ];
+    }
+
+    private function unitForIndicator(string $code): string
+    {
+        return match (true) {
+            str_contains($code, 'I1') => 'count',
+            str_contains($code, 'I2') => '%',
+            str_contains($code, 'I3') => 'score',
+            default => 'value',
+        };
     }
 }

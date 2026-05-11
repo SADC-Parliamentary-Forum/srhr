@@ -21,7 +21,13 @@ function isActive(pathname: string, href: string): boolean {
   return pathname.startsWith(href)
 }
 
-export default function PortalSidebar() {
+export default function PortalSidebar({
+  focusMode,
+  onToggleFocusMode,
+}: {
+  focusMode: boolean
+  onToggleFocusMode: () => void
+}) {
   const pathname = usePathname()
 
   return (
@@ -49,10 +55,10 @@ export default function PortalSidebar() {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex items-center gap-sm px-md py-sm rounded-lg transition-all duration-200 ${
+              className={`flex items-center gap-sm border-l-2 px-md py-sm transition-colors duration-200 ${
                 active
-                  ? 'bg-surface-container-low text-primary font-bold border-r-4 border-secondary'
-                  : 'text-on-surface-variant hover:bg-surface-container-high'
+                  ? 'border-l-secondary text-primary font-bold'
+                  : 'border-l-transparent text-on-surface-variant hover:border-l-outline-variant hover:bg-surface-container-high'
               }`}
             >
               <span className="material-symbols-outlined text-[20px] shrink-0">{item.icon}</span>
@@ -63,9 +69,12 @@ export default function PortalSidebar() {
       </nav>
 
       <div className="p-md border-t border-outline-variant/40">
-        <button className="w-full py-sm px-md rounded-full bg-secondary-container text-on-secondary-container text-sm font-semibold flex items-center justify-center gap-sm hover:opacity-90 transition-opacity">
+        <button
+          onClick={onToggleFocusMode}
+          className="w-full py-sm px-md rounded-full bg-secondary-container text-on-secondary-container text-sm font-semibold flex items-center justify-center gap-sm hover:opacity-90 transition-opacity"
+        >
           <span className="material-symbols-outlined text-[18px]">center_focus_strong</span>
-          Focus Mode
+          {focusMode ? 'Exit Focus Mode' : 'Focus Mode'}
         </button>
       </div>
     </aside>

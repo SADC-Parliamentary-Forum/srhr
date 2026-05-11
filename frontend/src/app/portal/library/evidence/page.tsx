@@ -76,6 +76,19 @@ function formatDate(raw: string): string {
   return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
 }
 
+function normalizeEvidenceItem(item: EvidenceItem): EvidenceItem {
+  return {
+    ...item,
+    tags: Array.isArray(item.tags) ? item.tags : [],
+    linked_indicators: Array.isArray(item.linked_indicators) ? item.linked_indicators : [],
+    files: Array.isArray(item.files) ? item.files : [],
+    files_count: typeof item.files_count === 'number' ? item.files_count : 0,
+    file_size: item.file_size ?? null,
+    owner: item.owner ?? 'System',
+    created_label: item.created_label ?? formatDate(item.created_at),
+  }
+}
+
 function buildSearchText(item: EvidenceItem): string {
   return [
     item.title,
@@ -84,8 +97,8 @@ function buildSearchText(item: EvidenceItem): string {
     item.period ?? '',
     item.owner,
     item.evidence_type,
-    item.tags.join(' '),
-    item.linked_indicators.join(' '),
+    (Array.isArray(item.tags) ? item.tags : []).join(' '),
+    (Array.isArray(item.linked_indicators) ? item.linked_indicators : []).join(' '),
   ].join(' ').toLowerCase()
 }
 
@@ -109,8 +122,9 @@ export default function EvidenceLibraryPage() {
 
     api.get<EvidenceItem[]>('/portal/evidence', token)
       .then((items) => {
-        setEvidenceItems(items)
-        setSelectedEvidence(items[0] ?? null)
+        const normalizedItems = (Array.isArray(items) ? items : []).map(normalizeEvidenceItem)
+        setEvidenceItems(normalizedItems)
+        setSelectedEvidence(normalizedItems[0] ?? null)
       })
       .catch(() => setError('Unable to load evidence.'))
       .finally(() => setLoading(false))

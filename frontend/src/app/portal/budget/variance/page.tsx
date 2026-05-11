@@ -1,18 +1,7 @@
 'use client'
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { useState } from 'react'
-
-const subTabs = [
-  { label: 'Overview', href: '/portal/budget' },
-  { label: 'Activities', href: '/portal/budget/activities' },
-  { label: 'Countries', href: '/portal/budget/countries' },
-  { label: 'No-Spend', href: '/portal/budget/no-spend' },
-  { label: 'Variance', href: '/portal/budget/variance' },
-  { label: 'Reconciliation', href: '/portal/budget/reconciliation' },
-  { label: 'Priority Actions', href: '/portal/budget/priority-actions' },
-]
+import BudgetSubnav from '../_components/BudgetSubnav'
 
 const variances = [
   {
@@ -49,7 +38,6 @@ function fmt(n: number) {
 }
 
 export default function VariancePage() {
-  const pathname = usePathname()
   const [explanations, setExplanations] = useState<Record<string, string>>(
     Object.fromEntries(variances.map((v) => [v.code, v.explanation]))
   )
@@ -73,24 +61,7 @@ export default function VariancePage() {
       </div>
 
       {/* Sub-nav tabs */}
-      <div className="border-b border-outline-variant flex gap-xs flex-wrap">
-        {subTabs.map((tab) => {
-          const active = tab.href === '/portal/budget' ? pathname === tab.href : pathname.startsWith(tab.href)
-          return (
-            <Link
-              key={tab.href}
-              href={tab.href}
-              className={`px-md py-sm text-sm font-medium whitespace-nowrap transition-colors shrink-0 ${
-                active
-                  ? 'border-b-2 border-primary text-primary'
-                  : 'text-on-surface-variant hover:text-on-surface'
-              }`}
-            >
-              {tab.label}
-            </Link>
-          )
-        })}
-      </div>
+      <BudgetSubnav />
 
       {/* 3 metric cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-md">

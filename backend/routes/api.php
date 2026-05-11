@@ -53,9 +53,12 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('admin')->group(function () {
         Route::get('users', [AdminController::class, 'users']);
+        Route::post('users', [AdminController::class, 'createUser']);
         Route::put('users/{user}', [AdminController::class, 'updateUser']);
         Route::patch('users/{user}/status', [AdminController::class, 'toggleUserStatus']);
+        Route::post('roles', [AdminController::class, 'createRole']);
         Route::post('access-requests/{accessRequest}/approve', [AdminController::class, 'approveAccessRequest']);
+        Route::get('notifications', [AdminController::class, 'notifications']);
         Route::get('audit-logs', [AdminController::class, 'auditLogs']);
         Route::get('configuration', [AdminController::class, 'getConfiguration']);
         Route::put('configuration', [AdminController::class, 'updateConfiguration']);

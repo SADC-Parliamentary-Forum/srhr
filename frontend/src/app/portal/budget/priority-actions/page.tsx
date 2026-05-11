@@ -1,16 +1,6 @@
 'use client'
 
-import Link from 'next/link'
-
-const subTabs = [
-  { label: 'Overview', href: '/portal/budget' },
-  { label: 'Activities', href: '/portal/budget/activities' },
-  { label: 'Countries', href: '/portal/budget/countries' },
-  { label: 'No-Spend', href: '/portal/budget/no-spend' },
-  { label: 'Variance', href: '/portal/budget/variance' },
-  { label: 'Reconciliation', href: '/portal/budget/reconciliation' },
-  { label: 'Priority Actions', href: '/portal/budget/priority-actions' },
-]
+import BudgetSubnav from '../_components/BudgetSubnav'
 
 interface ActionCard {
   statusLabel: string
@@ -81,28 +71,7 @@ export default function PriorityActionsPage() {
         </p>
 
         {/* Sub-nav tabs */}
-        <div className="flex flex-wrap pb-sm gap-sm border-b border-surface-variant mt-md">
-          {subTabs.map((tab) => (
-            <Link
-              key={tab.href}
-              href={tab.href}
-              className={`whitespace-nowrap px-sm py-xs text-label-lg font-label-lg rounded-t-lg transition-colors border-b-2 ${
-                tab.label === 'Priority Actions'
-                  ? 'text-primary border-primary bg-surface-container-lowest'
-                  : 'text-on-surface-variant hover:bg-surface-container-high border-transparent'
-              }`}
-            >
-              {tab.label}
-            </Link>
-          ))}
-          <Link
-            href="/portal/budget/ai-insights"
-            className="whitespace-nowrap px-sm py-xs text-label-lg font-label-lg text-on-surface-variant hover:bg-surface-container-high rounded-t-lg transition-colors border-b-2 border-transparent flex items-center gap-xs"
-          >
-            <span className="material-symbols-outlined text-[16px]">auto_awesome</span>
-            AI Insights
-          </Link>
-        </div>
+        <BudgetSubnav />
       </div>
 
       {/* Action Cards Grid */}

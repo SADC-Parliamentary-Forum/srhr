@@ -4,6 +4,7 @@ namespace App\Modules\Auth\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\AccessRequest;
+use App\Models\ActivityLog;
 use App\Models\Country;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -63,7 +64,7 @@ class AuthController extends Controller
 
         $country = Country::query()->where('name', $validated['country'])->orWhere('code', $validated['country'])->first();
 
-        AccessRequest::create([
+        $accessRequest = AccessRequest::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'organization' => $validated['organization'],
@@ -72,6 +73,22 @@ class AuthController extends Controller
             'reason' => $validated['reason'] ?? null,
             'password' => $validated['password'],
             'ip_address' => $request->ip(),
+        ]);
+
+        ActivityLog::create([
+            'user_id' => null,
+            'country_id' => $country?->id,
+            'action' => "Registration request submitted: {$accessRequest->email}",
+            'subject_type' => 'access_request',
+            'subject_id' => $accessRequest->id,
+            'icon' => 'person_add',
+            'metadata' => [
+                'email' => $accessRequest->email,
+                'organization' => $accessRequest->organization,
+                'role_requested' => $accessRequest->role_requested,
+                'country' => $country?->name,
+            ],
+            'created_at' => now(),
         ]);
 
         return response()->json(['message' => 'Registration request submitted successfully.'], 201);

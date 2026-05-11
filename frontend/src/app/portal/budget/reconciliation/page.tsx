@@ -1,18 +1,7 @@
 'use client'
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { useMemo, useState } from 'react'
-
-const subTabs = [
-  { label: 'Overview', href: '/portal/budget' },
-  { label: 'Activities', href: '/portal/budget/activities' },
-  { label: 'Countries', href: '/portal/budget/countries' },
-  { label: 'No-Spend', href: '/portal/budget/no-spend' },
-  { label: 'Variance', href: '/portal/budget/variance' },
-  { label: 'Reconciliation', href: '/portal/budget/reconciliation' },
-  { label: 'Priority Actions', href: '/portal/budget/priority-actions' },
-]
+import BudgetSubnav from '../_components/BudgetSubnav'
 
 type ReconciliationStatus = 'Matched' | 'Mismatch'
 
@@ -44,7 +33,6 @@ function varianceValue(row: ReconciliationRow) {
 }
 
 export default function ReconciliationPage() {
-  const pathname = usePathname()
   const [filtersOpen, setFiltersOpen] = useState(false)
   const [search, setSearch] = useState('')
   const [selectedCountry, setSelectedCountry] = useState('All Countries')
@@ -77,28 +65,7 @@ export default function ReconciliationPage() {
           Analyze discrepancies between reported source documents and financial spreadsheets.
         </p>
 
-        <div className="flex flex-wrap gap-sm pb-xs border-b border-outline-variant mt-md">
-          {subTabs.map((tab) => (
-            <Link
-              key={tab.href}
-              href={tab.href}
-              className={`px-sm py-xs font-label-lg text-label-lg whitespace-nowrap ${
-                pathname === tab.href
-                  ? 'text-primary border-b-2 border-primary'
-                  : 'text-on-surface-variant hover:text-primary'
-              }`}
-            >
-              {tab.label}
-            </Link>
-          ))}
-          <Link
-            href="/portal/budget/ai-insights"
-            className="px-sm py-xs font-label-lg text-label-lg text-secondary border border-secondary rounded-full whitespace-nowrap flex items-center gap-xs sm:ml-auto"
-          >
-            <span className="material-symbols-outlined text-sm">auto_awesome</span>
-            AI Insights
-          </Link>
-        </div>
+        <BudgetSubnav />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-md">

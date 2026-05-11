@@ -4,19 +4,6 @@ import { useEffect, useState } from 'react'
 import { api } from '@/lib/api'
 import { getToken } from '@/lib/auth'
 
-const ALL_ROLES = [
-  { value: 'All',                label: 'All' },
-  { value: 'super_admin',        label: 'Super Admin' },
-  { value: 'secretariat',        label: 'Secretariat' },
-  { value: 'programme_manager',  label: 'Programme Manager' },
-  { value: 'me_officer',         label: 'M&E Officer' },
-  { value: 'finance_officer',    label: 'Finance Officer' },
-  { value: 'country_reviewer',   label: 'Country Reviewer' },
-  { value: 'srhr_researcher',    label: 'SRHR Researcher' },
-  { value: 'communications_user',label: 'Communications' },
-  { value: 'partner_viewer',     label: 'Partner Viewer' },
-]
-
 const ROLE_BADGE: Record<string, string> = {
   super_admin:         'bg-[#00170d] text-white',
   secretariat:         'bg-[#fed65b] text-[#745c00]',
@@ -40,6 +27,10 @@ const ROLE_LABEL: Record<string, string> = {
   communications_user: 'Communications',
   partner_viewer:      'Partner Viewer',
   unassigned:          'Unassigned',
+}
+
+function roleLabel(role: string) {
+  return ROLE_LABEL[role] ?? role.split('_').map((part) => part[0]?.toUpperCase() + part.slice(1)).join(' ')
 }
 
 function normalizeStatus(raw: string): 'Active' | 'Inactive' | 'Pending' {
@@ -73,6 +64,16 @@ interface AccessRequest {
   created_at: string
 }
 
+interface RoleOption {
+  name: string
+  permissions: string[]
+}
+
+interface CountryOption {
+  id: number
+  name: string
+}
+
 interface EditState {
   userId: number
   name: string
@@ -82,6 +83,9 @@ interface EditState {
 export default function UserManagementPage() {
   const [users, setUsers] = useState<UserRow[]>([])
   const [accessRequests, setAccessRequests] = useState<AccessRequest[]>([])
+  const [roles, setRoles] = useState<RoleOption[]>([])
+  const [permissions, setPermissions] = useState<string[]>([])
+  const [countries, setCountries] = useState<CountryOption[]>([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
   const [roleFilter, setRoleFilter] = useState('All')
@@ -90,13 +94,39 @@ export default function UserManagementPage() {
   const [togglingId, setTogglingId] = useState<number | null>(null)
   const [editState, setEditState] = useState<EditState | null>(null)
   const [saving, setSaving] = useState(false)
+  const [creatingUser, setCreatingUser] = useState(false)
+  const [creatingRole, setCreatingRole] = useState(false)
+  const [newUser, setNewUser] = useState({
+    name: '',
+    email: '',
+    password: '',
+    organization: '',
+    country_id: '',
+    role: '',
+    status: 'active',
+  })
+  const [newRoleName, setNewRoleName] = useState('')
+  const [newRolePermissions, setNewRolePermissions] = useState<string[]>([])
 
   async function loadUsers() {
     const token = getToken()
     if (!token) return
-    const data = await api.get<{ users: UserRow[]; access_requests: AccessRequest[] }>('/admin/users', token)
+    const data = await api.get<{
+      users: UserRow[]
+      access_requests: AccessRequest[]
+      roles: RoleOption[]
+      permissions: string[]
+      countries: CountryOption[]
+    }>('/admin/users', token)
     setUsers(data.users.map((u) => ({ ...u, status: normalizeStatus(u.status as string) })))
     setAccessRequests(data.access_requests)
+    setRoles(data.roles)
+    setPermissions(data.permissions)
+    setCountries(data.countries)
+    setNewUser((prev) => ({
+      ...prev,
+      role: prev.role || data.roles[0]?.name || '',
+    }))
   }
 
   useEffect(() => {
@@ -118,6 +148,7 @@ export default function UserManagementPage() {
   const activeCount = users.filter((u) => u.status === 'Active').length
   const inactiveCount = users.filter((u) => u.status === 'Inactive').length
   const pendingCount = accessRequests.length
+  const roleFilterOptions = [{ value: 'All', label: 'All' }, ...roles.map((role) => ({ value: role.name, label: roleLabel(role.name) }))]
 
   async function approveRequest(id: number, role: string) {
     const token = getToken()
@@ -166,6 +197,52 @@ export default function UserManagementPage() {
     }
   }
 
+  async function createUser() {
+    const token = getToken()
+    if (!token) return
+    setCreatingUser(true)
+    try {
+      const payload = {
+        ...newUser,
+        country_id: newUser.country_id ? Number(newUser.country_id) : null,
+      }
+      const res = await api.post<{ message: string; user: UserRow }>('/admin/users', payload, token)
+      setUsers((prev) => [{ ...res.user, status: normalizeStatus(res.user.status as string) }, ...prev])
+      setNewUser({ name: '', email: '', password: '', organization: '', country_id: '', role: roles[0]?.name ?? '', status: 'active' })
+      showMessage('User created.')
+    } catch {
+      showMessage('Failed to create user.', false)
+    } finally {
+      setCreatingUser(false)
+    }
+  }
+
+  async function createRole() {
+    const token = getToken()
+    if (!token) return
+    setCreatingRole(true)
+    try {
+      const res = await api.post<{ message: string; role: RoleOption }>('/admin/roles', {
+        name: newRoleName,
+        permissions: newRolePermissions,
+      }, token)
+      setRoles((prev) => [...prev, res.role].sort((a, b) => a.name.localeCompare(b.name)))
+      setNewRoleName('')
+      setNewRolePermissions([])
+      showMessage('Role created.')
+    } catch {
+      showMessage('Failed to create role.', false)
+    } finally {
+      setCreatingRole(false)
+    }
+  }
+
+  function togglePermission(permission: string) {
+    setNewRolePermissions((prev) =>
+      prev.includes(permission) ? prev.filter((item) => item !== permission) : [...prev, permission]
+    )
+  }
+
   if (loading) return (
     <div className="flex items-center justify-center py-xl">
       <span className="material-symbols-outlined text-[#00170d] text-5xl animate-spin">progress_activity</span>
@@ -206,6 +283,63 @@ export default function UserManagementPage() {
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-md">
+        <div className="bg-white rounded-xl border border-[#c1c8c2] shadow-sm p-md flex flex-col gap-md">
+          <div>
+            <h3 className="text-base font-bold text-[#00170d]">Create User</h3>
+            <p className="text-sm text-[#414844] mt-xs">Add a user directly without waiting for a registration request.</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-sm">
+            <input className="border border-[#c1c8c2] rounded-lg px-md py-sm text-sm outline-none focus:border-[#00170d]" placeholder="Full name" value={newUser.name} onChange={(e) => setNewUser((prev) => ({ ...prev, name: e.target.value }))} />
+            <input className="border border-[#c1c8c2] rounded-lg px-md py-sm text-sm outline-none focus:border-[#00170d]" placeholder="Email address" type="email" value={newUser.email} onChange={(e) => setNewUser((prev) => ({ ...prev, email: e.target.value }))} />
+            <input className="border border-[#c1c8c2] rounded-lg px-md py-sm text-sm outline-none focus:border-[#00170d]" placeholder="Temporary password" type="password" value={newUser.password} onChange={(e) => setNewUser((prev) => ({ ...prev, password: e.target.value }))} />
+            <input className="border border-[#c1c8c2] rounded-lg px-md py-sm text-sm outline-none focus:border-[#00170d]" placeholder="Organization" value={newUser.organization} onChange={(e) => setNewUser((prev) => ({ ...prev, organization: e.target.value }))} />
+            <select className="border border-[#c1c8c2] rounded-lg px-md py-sm text-sm outline-none focus:border-[#00170d] bg-white" value={newUser.country_id} onChange={(e) => setNewUser((prev) => ({ ...prev, country_id: e.target.value }))}>
+              <option value="">Regional / Unassigned</option>
+              {countries.map((country) => <option key={country.id} value={country.id}>{country.name}</option>)}
+            </select>
+            <select className="border border-[#c1c8c2] rounded-lg px-md py-sm text-sm outline-none focus:border-[#00170d] bg-white" value={newUser.role} onChange={(e) => setNewUser((prev) => ({ ...prev, role: e.target.value }))}>
+              {roles.map((role) => <option key={role.name} value={role.name}>{roleLabel(role.name)}</option>)}
+            </select>
+          </div>
+          <div className="flex items-center justify-between gap-sm">
+            <select className="border border-[#c1c8c2] rounded-lg px-md py-sm text-sm outline-none focus:border-[#00170d] bg-white" value={newUser.status} onChange={(e) => setNewUser((prev) => ({ ...prev, status: e.target.value }))}>
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
+            <button onClick={createUser} disabled={creatingUser} className="px-md py-sm rounded-full bg-[#00170d] text-white text-sm font-semibold hover:opacity-90 disabled:opacity-60 transition-opacity">
+              {creatingUser ? 'Creating...' : 'Create User'}
+            </button>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-xl border border-[#c1c8c2] shadow-sm p-md flex flex-col gap-md">
+          <div>
+            <h3 className="text-base font-bold text-[#00170d]">Create Role</h3>
+            <p className="text-sm text-[#414844] mt-xs">Define a new role and assign permissions for it immediately.</p>
+          </div>
+          <input className="border border-[#c1c8c2] rounded-lg px-md py-sm text-sm outline-none focus:border-[#00170d]" placeholder="Role name, e.g. data_editor" value={newRoleName} onChange={(e) => setNewRoleName(e.target.value)} />
+          <div className="flex flex-wrap gap-xs">
+            {permissions.map((permission) => (
+              <button
+                key={permission}
+                type="button"
+                onClick={() => togglePermission(permission)}
+                className={`px-sm py-xs rounded-full text-xs font-semibold transition-colors ${newRolePermissions.includes(permission) ? 'bg-[#00170d] text-white' : 'bg-[#f5f3f3] border border-[#c1c8c2] text-[#414844]'}`}
+              >
+                {permission}
+              </button>
+            ))}
+          </div>
+          <div className="flex items-center justify-between gap-sm">
+            <p className="text-xs text-[#414844]">{newRolePermissions.length} permission{newRolePermissions.length !== 1 ? 's' : ''} selected</p>
+            <button onClick={createRole} disabled={creatingRole} className="px-md py-sm rounded-full bg-[#fed65b] text-[#745c00] text-sm font-semibold hover:opacity-90 disabled:opacity-60 transition-opacity">
+              {creatingRole ? 'Creating...' : 'Create Role'}
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Access requests */}
@@ -264,8 +398,8 @@ export default function UserManagementPage() {
             ))}
           </div>
         </div>
-        <div className="flex gap-xs flex-wrap">
-          {ALL_ROLES.map((r) => (
+          <div className="flex gap-xs flex-wrap">
+          {roleFilterOptions.map((r) => (
             <button
               key={r.value}
               onClick={() => setRoleFilter(r.value)}
@@ -312,7 +446,7 @@ export default function UserManagementPage() {
                   </td>
                   <td className="px-md py-sm">
                     <span className={`text-xs font-semibold px-sm py-xs rounded-full whitespace-nowrap ${ROLE_BADGE[user.role] ?? 'bg-[#e4e2e2] text-[#414844]'}`}>
-                      {ROLE_LABEL[user.role] ?? user.role}
+                      {roleLabel(user.role)}
                     </span>
                   </td>
                   <td className="px-md py-sm text-sm text-[#414844] whitespace-nowrap">{user.country}</td>
@@ -382,13 +516,13 @@ export default function UserManagementPage() {
                   value={editState.role}
                   onChange={(e) => setEditState((s) => s ? { ...s, role: e.target.value } : s)}
                 >
-                  {ALL_ROLES.filter((r) => r.value !== 'All').map((r) => (
-                    <option key={r.value} value={r.value}>{r.label}</option>
+                  {roles.map((role) => (
+                    <option key={role.name} value={role.name}>{roleLabel(role.name)}</option>
                   ))}
                 </select>
                 {editState.role && (
                   <span className={`mt-sm inline-flex text-xs font-semibold px-sm py-xs rounded-full ${ROLE_BADGE[editState.role] ?? 'bg-[#e4e2e2] text-[#414844]'}`}>
-                    {ROLE_LABEL[editState.role]}
+                    {roleLabel(editState.role)}
                   </span>
                 )}
               </div>

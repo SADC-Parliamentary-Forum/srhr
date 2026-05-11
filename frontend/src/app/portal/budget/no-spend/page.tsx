@@ -1,17 +1,7 @@
 'use client'
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-
-const subTabs = [
-  { label: 'Overview', href: '/portal/budget' },
-  { label: 'Activities', href: '/portal/budget/activities' },
-  { label: 'Countries', href: '/portal/budget/countries' },
-  { label: 'No-Spend', href: '/portal/budget/no-spend' },
-  { label: 'Variance', href: '/portal/budget/variance' },
-  { label: 'Reconciliation', href: '/portal/budget/reconciliation' },
-  { label: 'Priority Actions', href: '/portal/budget/priority-actions' },
-]
+import { useState } from 'react'
+import BudgetSubnav from '../_components/BudgetSubnav'
 
 const dormantCountries = [
   { country: 'Angola', allocated: 45000, spend: 0 },
@@ -24,8 +14,36 @@ function fmt(n: number) {
   return 'US$ ' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 }
 
+function downloadCsv(filename: string, rows: string[][]) {
+  const csv = rows
+    .map((row) => row.map((cell) => `"${cell.replace(/"/g, '""')}"`).join(','))
+    .join('\n')
+
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
+  const url = URL.createObjectURL(blob)
+  const link = document.createElement('a')
+  link.href = url
+  link.download = filename
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+  URL.revokeObjectURL(url)
+}
+
 export default function NoSpendPage() {
-  const pathname = usePathname()
+  const [exportMessage, setExportMessage] = useState<string | null>(null)
+  const dormantAllocation = dormantCountries.reduce((sum, row) => sum + row.allocated, 0)
+
+  function exportNoSpendData() {
+    downloadCsv('budget-no-spend.csv', [
+      ['Country', 'Allocated Budget', 'Recorded Spend', 'Status'],
+      ...dormantCountries.map((row) => [row.country, fmt(row.allocated), fmt(row.spend), 'No Activity']),
+      ['Total', fmt(dormantAllocation), fmt(0), 'Dormant allocation'],
+    ])
+
+    setExportMessage('No-spend data exported.')
+    window.setTimeout(() => setExportMessage(null), 2500)
+  }
 
   return (
     <div className="p-lg flex flex-col gap-lg min-w-0">
@@ -37,30 +55,28 @@ export default function NoSpendPage() {
             Countries with recorded zero expenditure during the current financial period. Immediate follow-up is required to unlock dormant allocations.
           </p>
         </div>
-        <button className="flex items-center gap-sm bg-primary text-secondary-fixed rounded-full px-lg py-sm text-sm font-semibold hover:opacity-90 transition-opacity shrink-0 self-start">
-          Request Country Update
-        </button>
+        <div className="flex gap-sm flex-wrap shrink-0 self-start">
+          <button className="flex items-center gap-sm bg-primary text-secondary-fixed rounded-full px-lg py-sm text-sm font-semibold hover:opacity-90 transition-opacity">
+            Request Country Update
+          </button>
+          <button
+            onClick={exportNoSpendData}
+            className="flex items-center gap-sm rounded-full border border-outline-variant px-lg py-sm text-sm font-semibold text-on-surface hover:bg-surface-container transition-colors"
+          >
+            <span className="material-symbols-outlined text-[18px]">download</span>
+            Export No-Spend Data
+          </button>
+        </div>
       </div>
 
+      {exportMessage ? (
+        <div className="rounded-xl border border-primary/15 bg-primary-fixed/10 px-md py-sm text-sm text-[#00170d]">
+          {exportMessage}
+        </div>
+      ) : null}
+
       {/* Sub-tabs */}
-      <div className="border-b border-outline-variant flex gap-xs flex-wrap">
-        {subTabs.map((tab) => {
-          const active = tab.href === '/portal/budget' ? pathname === tab.href : pathname.startsWith(tab.href)
-          return (
-            <Link
-              key={tab.href}
-              href={tab.href}
-              className={`px-md py-sm text-sm font-medium whitespace-nowrap transition-colors shrink-0 ${
-                active
-                  ? 'border-b-2 border-primary text-primary'
-                  : 'text-on-surface-variant hover:text-on-surface'
-              }`}
-            >
-              {tab.label}
-            </Link>
-          )
-        })}
-      </div>
+      <BudgetSubnav />
 
       {/* Bento grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-md">
@@ -82,7 +98,7 @@ export default function NoSpendPage() {
           </div>
           <div className="bg-error-container/20 rounded-lg p-md text-body-sm text-on-surface-variant">
             Combined dormant allocation of{' '}
-            <span className="font-semibold text-on-surface">US$ 123,000.00</span>{' '}
+            <span className="font-semibold text-on-surface">{fmt(dormantAllocation)}</span>{' '}
             remains untouched. Immediate intervention recommended.
           </div>
         </div>
@@ -126,7 +142,7 @@ export default function NoSpendPage() {
               <tfoot>
                 <tr className="border-t border-outline-variant bg-surface-container">
                   <td className="px-md py-sm font-bold text-on-surface">Total</td>
-                  <td className="px-md py-sm text-right font-bold text-on-surface">US$ 123,000.00</td>
+                  <td className="px-md py-sm text-right font-bold text-on-surface">{fmt(dormantAllocation)}</td>
                   <td className="px-md py-sm text-right font-bold text-error">US$ 0.00</td>
                   <td />
                 </tr>

@@ -1,17 +1,6 @@
 'use client'
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-
-const subTabs = [
-  { label: 'Overview', href: '/portal/budget' },
-  { label: 'Activities', href: '/portal/budget/activities' },
-  { label: 'Countries', href: '/portal/budget/countries' },
-  { label: 'No-Spend', href: '/portal/budget/no-spend' },
-  { label: 'Variance', href: '/portal/budget/variance' },
-  { label: 'Reconciliation', href: '/portal/budget/reconciliation' },
-  { label: 'Priority Actions', href: '/portal/budget/priority-actions' },
-]
+import BudgetSubnav from '../_components/BudgetSubnav'
 
 const countries = [
   { name: 'Malawi', allocated: 52000, utilised: 15516.64, rate: 29.8, status: 'Active' },
@@ -31,8 +20,6 @@ function fmt(n: number) {
 }
 
 export default function CountriesPage() {
-  const pathname = usePathname()
-
   const noSpendCount = countries.filter((c) => c.status === 'No Spend').length
   const totalUtil = countries.reduce((sum, c) => sum + c.utilised, 0)
   const totalAlloc = countries.reduce((sum, c) => sum + c.allocated, 0)
@@ -41,24 +28,7 @@ export default function CountriesPage() {
   return (
     <div className="p-lg flex flex-col gap-lg min-w-0">
       {/* Sub-nav tabs */}
-      <div className="border-b border-outline-variant flex gap-xs flex-wrap">
-        {subTabs.map((tab) => {
-          const active = tab.href === '/portal/budget' ? pathname === tab.href : pathname.startsWith(tab.href)
-          return (
-            <Link
-              key={tab.href}
-              href={tab.href}
-              className={`px-md py-sm text-sm font-medium whitespace-nowrap transition-colors shrink-0 ${
-                active
-                  ? 'border-b-2 border-primary text-primary'
-                  : 'text-on-surface-variant hover:text-on-surface'
-              }`}
-            >
-              {tab.label}
-            </Link>
-          )
-        })}
-      </div>
+      <BudgetSubnav />
 
       {/* Summary cards */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-md">

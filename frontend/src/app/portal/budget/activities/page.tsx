@@ -1,17 +1,6 @@
 'use client'
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-
-const subTabs = [
-  { label: 'Overview', href: '/portal/budget' },
-  { label: 'Activities', href: '/portal/budget/activities' },
-  { label: 'Countries', href: '/portal/budget/countries' },
-  { label: 'No-Spend', href: '/portal/budget/no-spend' },
-  { label: 'Variance', href: '/portal/budget/variance' },
-  { label: 'Reconciliation', href: '/portal/budget/reconciliation' },
-  { label: 'Priority Actions', href: '/portal/budget/priority-actions' },
-]
+import BudgetSubnav from '../_components/BudgetSubnav'
 
 const activities = [
   {
@@ -69,8 +58,6 @@ function fmt(n: number) {
 }
 
 export default function ActivitiesPage() {
-  const pathname = usePathname()
-
   return (
     <div className="p-lg flex flex-col gap-lg min-w-0">
       {/* Page header */}
@@ -80,24 +67,7 @@ export default function ActivitiesPage() {
       </div>
 
       {/* Sub-tab pills */}
-      <div className="flex gap-xs flex-wrap">
-        {subTabs.map((tab) => {
-          const active = tab.href === '/portal/budget' ? pathname === tab.href : pathname.startsWith(tab.href)
-          return (
-            <Link
-              key={tab.href}
-              href={tab.href}
-              className={`px-md py-xs rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
-                active
-                  ? 'bg-surface-tint text-on-primary'
-                  : 'bg-surface-container text-on-surface-variant hover:bg-surface-container-high'
-              }`}
-            >
-              {tab.label}
-            </Link>
-          )
-        })}
-      </div>
+      <BudgetSubnav />
 
       {/* KPI stat cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md">

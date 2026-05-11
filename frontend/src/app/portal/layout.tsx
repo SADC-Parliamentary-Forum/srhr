@@ -10,6 +10,7 @@ import PortalTopBar from './_components/PortalTopBar'
 export default function PortalLayout({ children }: { children: React.ReactNode }) {
   const [ready, setReady] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [focusMode, setFocusMode] = useState(false)
   const router = useRouter()
   const pathname = usePathname()
 
@@ -52,6 +53,22 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
     setSidebarOpen(false)
   }, [pathname])
 
+  useEffect(() => {
+    const stored = window.localStorage.getItem('srhr_focus_mode')
+    setFocusMode(stored === 'true')
+  }, [])
+
+  function toggleFocusMode() {
+    setFocusMode((current) => {
+      const next = !current
+      window.localStorage.setItem('srhr_focus_mode', String(next))
+      if (next) {
+        setSidebarOpen(false)
+      }
+      return next
+    })
+  }
+
   if (!ready) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
@@ -73,11 +90,13 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
       )}
 
       {/* Sidebar — fixed on mobile (slide in), sticky on md+ */}
-      <div className={`fixed md:sticky top-0 h-screen z-50 md:z-auto shrink-0 transition-transform duration-300 ease-in-out ${
-        sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
-      }`}>
-        <PortalSidebar />
-      </div>
+      {(!focusMode || sidebarOpen) && (
+        <div className={`fixed md:sticky top-0 h-screen z-50 md:z-auto shrink-0 transition-transform duration-300 ease-in-out ${
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+        }`}>
+          <PortalSidebar focusMode={focusMode} onToggleFocusMode={toggleFocusMode} />
+        </div>
+      )}
 
       {/* Right column */}
       <div className="flex flex-col flex-1 min-w-0">
