@@ -80,6 +80,10 @@ interface EditState {
   role: string
 }
 
+function asArray<T>(value: T[] | undefined | null): T[] {
+  return Array.isArray(value) ? value : []
+}
+
 export default function UserManagementPage() {
   const [users, setUsers] = useState<UserRow[]>([])
   const [accessRequests, setAccessRequests] = useState<AccessRequest[]>([])
@@ -118,14 +122,20 @@ export default function UserManagementPage() {
       permissions: string[]
       countries: CountryOption[]
     }>('/admin/users', token)
-    setUsers(data.users.map((u) => ({ ...u, status: normalizeStatus(u.status as string) })))
-    setAccessRequests(data.access_requests)
-    setRoles(data.roles)
-    setPermissions(data.permissions)
-    setCountries(data.countries)
+    const loadedUsers = asArray(data.users)
+    const loadedRequests = asArray(data.access_requests)
+    const loadedRoles = asArray(data.roles)
+    const loadedPermissions = asArray(data.permissions)
+    const loadedCountries = asArray(data.countries)
+
+    setUsers(loadedUsers.map((u) => ({ ...u, status: normalizeStatus(u.status as string) })))
+    setAccessRequests(loadedRequests)
+    setRoles(loadedRoles)
+    setPermissions(loadedPermissions)
+    setCountries(loadedCountries)
     setNewUser((prev) => ({
       ...prev,
-      role: prev.role || data.roles[0]?.name || '',
+      role: prev.role || loadedRoles[0]?.name || '',
     }))
   }
 
@@ -148,7 +158,10 @@ export default function UserManagementPage() {
   const activeCount = users.filter((u) => u.status === 'Active').length
   const inactiveCount = users.filter((u) => u.status === 'Inactive').length
   const pendingCount = accessRequests.length
-  const roleFilterOptions = [{ value: 'All', label: 'All' }, ...roles.map((role) => ({ value: role.name, label: roleLabel(role.name) }))]
+  const normalizedRoles = asArray(roles)
+  const normalizedPermissions = asArray(permissions)
+  const normalizedCountries = asArray(countries)
+  const roleFilterOptions = [{ value: 'All', label: 'All' }, ...normalizedRoles.map((role) => ({ value: role.name, label: roleLabel(role.name) }))]
 
   async function approveRequest(id: number, role: string) {
     const token = getToken()
@@ -208,7 +221,7 @@ export default function UserManagementPage() {
       }
       const res = await api.post<{ message: string; user: UserRow }>('/admin/users', payload, token)
       setUsers((prev) => [{ ...res.user, status: normalizeStatus(res.user.status as string) }, ...prev])
-      setNewUser({ name: '', email: '', password: '', organization: '', country_id: '', role: roles[0]?.name ?? '', status: 'active' })
+      setNewUser({ name: '', email: '', password: '', organization: '', country_id: '', role: normalizedRoles[0]?.name ?? '', status: 'active' })
       showMessage('User created.')
     } catch {
       showMessage('Failed to create user.', false)
@@ -298,10 +311,19 @@ export default function UserManagementPage() {
             <input className="border border-[#c1c8c2] rounded-lg px-md py-sm text-sm outline-none focus:border-[#00170d]" placeholder="Organization" value={newUser.organization} onChange={(e) => setNewUser((prev) => ({ ...prev, organization: e.target.value }))} />
             <select className="border border-[#c1c8c2] rounded-lg px-md py-sm text-sm outline-none focus:border-[#00170d] bg-white" value={newUser.country_id} onChange={(e) => setNewUser((prev) => ({ ...prev, country_id: e.target.value }))}>
               <option value="">Regional / Unassigned</option>
-              {countries.map((country) => <option key={country.id} value={country.id}>{country.name}</option>)}
+              {normalizedCountries.map((country) => <option key={country.id} value={country.id}>{country.name}</option>)}
             </select>
-            <select className="border border-[#c1c8c2] rounded-lg px-md py-sm text-sm outline-none focus:border-[#00170d] bg-white" value={newUser.role} onChange={(e) => setNewUser((prev) => ({ ...prev, role: e.target.value }))}>
-              {roles.map((role) => <option key={role.name} value={role.name}>{roleLabel(role.name)}</option>)}
+            <select
+              className="border border-[#c1c8c2] rounded-lg px-md py-sm text-sm outline-none focus:border-[#00170d] bg-white disabled:bg-[#f5f3f3]"
+              value={newUser.role}
+              onChange={(e) => setNewUser((prev) => ({ ...prev, role: e.target.value }))}
+              disabled={normalizedRoles.length === 0}
+            >
+              {normalizedRoles.length === 0 ? (
+                <option value="">No roles available</option>
+              ) : (
+                normalizedRoles.map((role) => <option key={role.name} value={role.name}>{roleLabel(role.name)}</option>)
+              )}
             </select>
           </div>
           <div className="flex items-center justify-between gap-sm">
@@ -322,7 +344,7 @@ export default function UserManagementPage() {
           </div>
           <input className="border border-[#c1c8c2] rounded-lg px-md py-sm text-sm outline-none focus:border-[#00170d]" placeholder="Role name, e.g. data_editor" value={newRoleName} onChange={(e) => setNewRoleName(e.target.value)} />
           <div className="flex flex-wrap gap-xs">
-            {permissions.map((permission) => (
+            {normalizedPermissions.map((permission) => (
               <button
                 key={permission}
                 type="button"
@@ -516,9 +538,13 @@ export default function UserManagementPage() {
                   value={editState.role}
                   onChange={(e) => setEditState((s) => s ? { ...s, role: e.target.value } : s)}
                 >
-                  {roles.map((role) => (
-                    <option key={role.name} value={role.name}>{roleLabel(role.name)}</option>
-                  ))}
+                  {normalizedRoles.length === 0 ? (
+                    <option value="">No roles available</option>
+                  ) : (
+                    normalizedRoles.map((role) => (
+                      <option key={role.name} value={role.name}>{roleLabel(role.name)}</option>
+                    ))
+                  )}
                 </select>
                 {editState.role && (
                   <span className={`mt-sm inline-flex text-xs font-semibold px-sm py-xs rounded-full ${ROLE_BADGE[editState.role] ?? 'bg-[#e4e2e2] text-[#414844]'}`}>
