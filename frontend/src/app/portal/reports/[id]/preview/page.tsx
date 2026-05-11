@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, use } from 'react'
 import { api } from '@/lib/api'
 import { getToken } from '@/lib/auth'
 
@@ -38,7 +38,8 @@ const statusColors: Record<string, string> = {
   'Off Track': 'bg-[#ffdad6] text-[#93000a]',
 }
 
-export default function ReportPreviewPage({ params }: { params: { id: string } }) {
+export default function ReportPreviewPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params)
   const [report, setReport] = useState<Report | null>(null)
   const [submitting, setSubmitting] = useState(false)
   const [message, setMessage] = useState<string | null>(null)
@@ -46,17 +47,17 @@ export default function ReportPreviewPage({ params }: { params: { id: string } }
   useEffect(() => {
     const token = getToken()
     if (!token) return
-    api.get<Report>(`/portal/reports/${params.id}`, token)
+    api.get<Report>(`/portal/reports/${id}`, token)
       .then(setReport)
       .catch(() => {})
-  }, [params.id])
+  }, [id])
 
   async function handleStatusChange(status: string) {
     const token = getToken()
     if (!token || !report) return
     setSubmitting(true)
     try {
-      await api.patch(`/portal/reports/${params.id}/status`, { status }, token)
+      await api.patch(`/portal/reports/${id}/status`, { status }, token)
       setReport((prev) => prev ? { ...prev, status } : prev)
       setMessage(`Report ${status === 'submitted' ? 'submitted for review' : status}.`)
     } catch {
@@ -78,7 +79,7 @@ export default function ReportPreviewPage({ params }: { params: { id: string } }
             {report ? `Report Preview: ${report.title}` : 'Report Preview'}
           </h2>
           <p className="text-on-surface-variant mt-xs">
-            ID: {params.id} · {report ? `${report.country} · ${report.period}` : 'Loading…'}
+            ID: {id} · {report ? `${report.country} · ${report.period}` : 'Loading…'}
           </p>
           {report && (
             <span className={`inline-flex items-center mt-xs px-sm py-xs rounded-full text-xs font-bold uppercase tracking-wide ${
@@ -95,7 +96,7 @@ export default function ReportPreviewPage({ params }: { params: { id: string } }
             Download PDF
           </button>
           <Link
-            href={`/portal/reports/${params.id}/sharing`}
+            href={`/portal/reports/${id}/sharing`}
             className="flex items-center gap-xs px-md py-sm rounded-full border border-outline-variant text-on-surface-variant text-sm font-semibold hover:border-primary hover:text-primary transition-colors"
           >
             <span className="material-symbols-outlined text-[18px]">share</span>
