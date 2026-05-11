@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AccessRequest;
+use App\Models\ActivityLog;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -89,5 +90,94 @@ class AdminController extends Controller
             'message' => 'Access request approved.',
             'user_id' => $user->id,
         ]);
+    }
+
+    public function updateUser(Request $request, User $user): JsonResponse
+    {
+        $this->ensureCanManageUsers($request);
+
+        $validated = $request->validate([
+            'name'         => ['sometimes', 'string', 'max:255'],
+            'organization' => ['nullable', 'string', 'max:255'],
+            'country_id'   => ['nullable', 'exists:countries,id'],
+            'role'         => ['sometimes', 'string', 'exists:roles,name'],
+        ]);
+
+        if (isset($validated['role'])) {
+            $user->syncRoles([$validated['role']]);
+            unset($validated['role']);
+        }
+
+        $user->update($validated);
+
+        return response()->json(['message' => 'User updated.']);
+    }
+
+    public function toggleUserStatus(Request $request, User $user): JsonResponse
+    {
+        $this->ensureCanManageUsers($request);
+
+        $newStatus = $user->status === 'active' ? 'inactive' : 'active';
+        $user->update(['status' => $newStatus]);
+
+        ActivityLog::create([
+            'user_id'      => $request->user()->id,
+            'country_id'   => null,
+            'action'       => "User {$newStatus}: {$user->email}",
+            'subject_type' => 'user',
+            'subject_id'   => $user->id,
+            'icon'         => $newStatus === 'active' ? 'person_check' : 'person_off',
+            'metadata'     => ['email' => $user->email],
+            'created_at'   => now(),
+        ]);
+
+        return response()->json(['status' => $newStatus]);
+    }
+
+    public function auditLogs(Request $request): JsonResponse
+    {
+        $this->ensureCanManageUsers($request);
+
+        $logs = ActivityLog::query()
+            ->with(['user', 'country'])
+            ->latest('created_at')
+            ->take(100)
+            ->get()
+            ->map(fn ($log) => [
+                'id'           => $log->id,
+                'action'       => $log->action,
+                'subject_type' => $log->subject_type,
+                'subject_id'   => $log->subject_id,
+                'icon'         => $log->icon ?? 'update',
+                'user'         => $log->user?->name ?? 'System',
+                'country'      => $log->country?->name,
+                'metadata'     => $log->metadata,
+                'created_at'   => $log->created_at?->format('M j, Y H:i'),
+            ]);
+
+        return response()->json($logs);
+    }
+
+    public function getConfiguration(Request $request): JsonResponse
+    {
+        abort_unless($request->user()->can('manage_configuration'), 403);
+
+        return response()->json([
+            'organization_name' => 'SADC Parliamentary Forum',
+            'default_language'  => 'en',
+            'date_format'       => 'M j, Y',
+            'timezone'          => 'Africa/Harare',
+            'maintenance_mode'  => false,
+            'open_registration' => false,
+            'require_2fa'       => false,
+        ]);
+    }
+
+    public function updateConfiguration(Request $request): JsonResponse
+    {
+        abort_unless($request->user()->can('manage_configuration'), 403);
+
+        // Config changes are not persisted in this MVP (no config table yet)
+        return response()->json(['message' => 'Configuration saved.']);
     }
 }

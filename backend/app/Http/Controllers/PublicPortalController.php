@@ -217,4 +217,38 @@ class PublicPortalController extends Controller
             'years' => Report::query()->where('is_public', true)->whereNotNull('published_at')->get()->map(fn (Report $report) => $report->published_at->format('Y'))->unique()->values(),
         ]);
     }
+
+    public function report(int $id): JsonResponse
+    {
+        $report = Report::query()
+            ->with(['country', 'period'])
+            ->where('is_public', true)
+            ->findOrFail($id);
+
+        return response()->json([
+            'id'           => $report->id,
+            'title'        => $report->title,
+            'type'         => $report->type,
+            'summary'      => $report->summary,
+            'country'      => $report->country?->name,
+            'period'       => $report->period?->label,
+            'published_at' => $report->published_at?->format('M j, Y'),
+            'download_url' => $report->download_url,
+        ]);
+    }
+
+    public function news(): JsonResponse
+    {
+        return response()->json(['data' => []]);
+    }
+
+    public function stories(): JsonResponse
+    {
+        return response()->json(['data' => []]);
+    }
+
+    public function resources(): JsonResponse
+    {
+        return response()->json(['data' => []]);
+    }
 }

@@ -164,4 +164,258 @@ class PortalController extends Controller
             'message' => $evidence->status === 'submitted' ? 'Evidence submitted successfully.' : 'Evidence draft saved successfully.',
         ], 201);
     }
+
+    public function showReport(Request $request, int $id): JsonResponse
+    {
+        $user = $request->user();
+        $report = Report::query()
+            ->with(['country', 'period', 'user'])
+            ->when($user->country_id && !$user->hasRole('super_admin') && !$user->hasRole('secretariat'),
+                fn ($q) => $q->where('country_id', $user->country_id))
+            ->findOrFail($id);
+
+        return response()->json($this->formatReport($report));
+    }
+
+    public function createReport(Request $request): JsonResponse
+    {
+        abort_unless($request->user()->can('create_report'), 403);
+
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'type' => ['required', 'in:Annual,Quarterly,Brief,Research'],
+            'country_id' => ['nullable', 'exists:countries,id'],
+            'reporting_period_id' => ['nullable', 'exists:reporting_periods,id'],
+            'summary' => ['nullable', 'string'],
+            'due_at' => ['nullable', 'date'],
+        ]);
+
+        $report = Report::create([
+            'user_id' => $request->user()->id,
+            'country_id' => $validated['country_id'] ?? $request->user()->country_id,
+            'reporting_period_id' => $validated['reporting_period_id'] ?? null,
+            'title' => $validated['title'],
+            'slug' => Str::slug($validated['title']) . '-' . time(),
+            'type' => $validated['type'],
+            'status' => 'draft',
+            'summary' => $validated['summary'] ?? null,
+            'completion' => 0,
+            'due_at' => $validated['due_at'] ?? null,
+            'is_public' => false,
+        ]);
+
+        ActivityLog::create([
+            'user_id' => $request->user()->id,
+            'country_id' => $report->country_id,
+            'action' => 'Report created',
+            'subject_type' => 'report',
+            'subject_id' => $report->id,
+            'icon' => 'description',
+            'metadata' => ['title' => $report->title],
+            'created_at' => now(),
+        ]);
+
+        return response()->json($this->formatReport($report->load(['country', 'period', 'user'])), 201);
+    }
+
+    public function updateReport(Request $request, int $id): JsonResponse
+    {
+        $user = $request->user();
+        $report = Report::findOrFail($id);
+        abort_unless($user->can('create_report') || $report->user_id === $user->id, 403);
+
+        $validated = $request->validate([
+            'title' => ['sometimes', 'string', 'max:255'],
+            'type' => ['sometimes', 'in:Annual,Quarterly,Brief,Research'],
+            'country_id' => ['nullable', 'exists:countries,id'],
+            'reporting_period_id' => ['nullable', 'exists:reporting_periods,id'],
+            'summary' => ['nullable', 'string'],
+            'completion' => ['sometimes', 'integer', 'min:0', 'max:100'],
+            'due_at' => ['nullable', 'date'],
+        ]);
+
+        $report->update($validated);
+
+        return response()->json($this->formatReport($report->fresh(['country', 'period', 'user'])));
+    }
+
+    public function updateReportStatus(Request $request, int $id): JsonResponse
+    {
+        $user = $request->user();
+        $report = Report::findOrFail($id);
+
+        $validated = $request->validate([
+            'status' => ['required', 'in:draft,submitted,review,approved,published,archived'],
+        ]);
+
+        $newStatus = $validated['status'];
+
+        $allowedTransitions = [
+            'draft'     => ['submitted'],
+            'submitted' => ['review', 'draft'],
+            'review'    => ['approved', 'submitted'],
+            'approved'  => ['published', 'review'],
+            'published' => ['archived'],
+        ];
+
+        abort_unless(
+            in_array($newStatus, $allowedTransitions[$report->status] ?? []) || $user->hasRole('super_admin'),
+            422
+        );
+
+        $report->update([
+            'status'       => $newStatus,
+            'published_at' => $newStatus === 'published' ? now() : $report->published_at,
+            'is_public'    => $newStatus === 'published',
+        ]);
+
+        ActivityLog::create([
+            'user_id'      => $user->id,
+            'country_id'   => $report->country_id,
+            'action'       => 'Report status → ' . $newStatus,
+            'subject_type' => 'report',
+            'subject_id'   => $report->id,
+            'icon'         => 'update',
+            'metadata'     => ['title' => $report->title, 'status' => $newStatus],
+            'created_at'   => now(),
+        ]);
+
+        return response()->json(['status' => $report->fresh()->status]);
+    }
+
+    public function deleteReport(Request $request, int $id): JsonResponse
+    {
+        $user = $request->user();
+        $report = Report::findOrFail($id);
+        abort_unless($user->hasRole('super_admin') || $report->user_id === $user->id, 403);
+
+        $report->delete();
+
+        return response()->json(['message' => 'Report deleted.']);
+    }
+
+    public function getReportSharing(Request $request, int $id): JsonResponse
+    {
+        $report = Report::findOrFail($id);
+
+        return response()->json([
+            'is_public'    => $report->is_public,
+            'download_url' => $report->download_url,
+            'shared_with'  => [],
+        ]);
+    }
+
+    public function updateReportSharing(Request $request, int $id): JsonResponse
+    {
+        $report = Report::findOrFail($id);
+        abort_unless(
+            $request->user()->can('publish_public_content') || $report->user_id === $request->user()->id,
+            403
+        );
+
+        $validated = $request->validate([
+            'is_public' => ['required', 'boolean'],
+        ]);
+
+        $report->update(['is_public' => $validated['is_public']]);
+
+        return response()->json(['is_public' => $report->fresh()->is_public]);
+    }
+
+    public function indicators(Request $request): JsonResponse
+    {
+        $user = $request->user();
+
+        $indicators = Indicator::query()
+            ->with(['country', 'period'])
+            ->when($user->country_id, fn ($q) => $q->where('country_id', $user->country_id))
+            ->orderBy('code')
+            ->get()
+            ->map(fn ($i) => [
+                'id'           => $i->id,
+                'code'         => $i->code,
+                'outcome_code' => $i->outcome_code,
+                'name'         => $i->name,
+                'value'        => $i->value,
+                'trend'        => $i->trend,
+                'status'       => $i->status,
+                'country'      => $i->country?->name,
+                'period'       => $i->period?->label,
+                'notes'        => $i->notes,
+            ]);
+
+        return response()->json($indicators);
+    }
+
+    public function storeIndicator(Request $request): JsonResponse
+    {
+        abort_unless($request->user()->can('upload_indicators'), 403);
+
+        $validated = $request->validate([
+            'code'                => ['required', 'string', 'max:20'],
+            'outcome_code'        => ['required', 'string', 'max:20'],
+            'name'                => ['required', 'string', 'max:255'],
+            'country_id'          => ['nullable', 'exists:countries,id'],
+            'reporting_period_id' => ['nullable', 'exists:reporting_periods,id'],
+            'value'               => ['nullable', 'integer'],
+            'trend'               => ['nullable', 'in:up,down,stable'],
+            'status'              => ['nullable', 'in:achieved,on-track,at-risk,off-track'],
+            'notes'               => ['nullable', 'string'],
+        ]);
+
+        $indicator = Indicator::create([
+            ...$validated,
+            'country_id' => $validated['country_id'] ?? $request->user()->country_id,
+            'is_public'  => false,
+        ]);
+
+        return response()->json(['id' => $indicator->id, 'message' => 'Indicator saved.'], 201);
+    }
+
+    public function evidence(Request $request): JsonResponse
+    {
+        $user = $request->user();
+
+        $items = Evidence::query()
+            ->with(['country', 'period'])
+            ->when($user->country_id, fn ($q) => $q->where('country_id', $user->country_id))
+            ->latest()
+            ->get()
+            ->map(fn ($e) => [
+                'id'            => $e->id,
+                'title'         => $e->title,
+                'evidence_type' => $e->evidence_type,
+                'status'        => $e->status,
+                'country'       => $e->country?->name,
+                'period'        => $e->period?->label,
+                'tags'          => $e->tags,
+                'files_count'   => count($e->files ?? []),
+                'created_at'    => $e->created_at?->format('M j, Y'),
+            ]);
+
+        return response()->json($items);
+    }
+
+    private function formatReport(Report $report): array
+    {
+        return [
+            'id'                   => $report->id,
+            'title'                => $report->title,
+            'slug'                 => $report->slug,
+            'type'                 => $report->type,
+            'status'               => $report->status,
+            'summary'              => $report->summary,
+            'completion'           => $report->completion,
+            'country'              => $report->country?->name ?? 'Regional',
+            'country_id'           => $report->country_id,
+            'period'               => $report->period?->label ?? 'N/A',
+            'reporting_period_id'  => $report->reporting_period_id,
+            'due_at'               => $report->due_at?->format('Y-m-d'),
+            'published_at'         => $report->published_at?->format('M j, Y'),
+            'is_public'            => $report->is_public,
+            'lastEdited'           => optional($report->updated_at)->format('M j, Y'),
+            'owner'                => $report->user?->name ?? 'System',
+            'owner_id'             => $report->user_id,
+        ];
+    }
 }
