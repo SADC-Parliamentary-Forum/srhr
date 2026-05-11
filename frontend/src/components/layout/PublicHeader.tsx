@@ -28,7 +28,7 @@ export function PublicHeader() {
             alt="SADC PF Logo"
             width={44}
             height={44}
-            className="object-contain shrink-0 rounded-lg"
+            className="object-contain shrink-0"
             priority
           />
           <div className="flex flex-col leading-tight">

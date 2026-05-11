@@ -31,7 +31,7 @@ export default function PortalSidebar() {
           alt="SADC PF Logo"
           width={40}
           height={40}
-          className="object-contain rounded-lg shrink-0"
+          className="object-contain shrink-0"
         />
         <div className="min-w-0">
           <p className="text-[13px] font-extrabold text-primary tracking-wide leading-tight">SADC PF</p>

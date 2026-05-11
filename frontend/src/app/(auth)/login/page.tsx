@@ -29,7 +29,7 @@ function InputField({
   placeholder: string; required?: boolean; minLength?: number
 }) {
   return (
-    <div className="relative">
+    <div className="relative" suppressHydrationWarning>
       <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-[#414844] pointer-events-none">
         <span className="material-symbols-outlined text-[20px]">{icon}</span>
       </span>
@@ -321,13 +321,10 @@ function LoginPageInner() {
             style={{ backgroundImage: 'radial-gradient(circle at 20% 80%, #fed65b, transparent 55%), radial-gradient(circle at 80% 10%, #abcfbb, transparent 50%)' }}
           />
 
-          {/* Top logo */}
-          <div className="relative z-10 flex items-center gap-3">
-            <Image src="/sadc-pf-logo.jpg" alt="SADC PF Logo" width={48} height={48} className="object-contain rounded-xl shrink-0" priority />
-            <div>
-              <div className="text-[16px] font-extrabold text-[#fed65b] tracking-wide">SADC PF</div>
-              <div className="text-[12px] font-semibold text-[#abcfbb] tracking-wide">SRHR Portal</div>
-            </div>
+          {/* Top brand text */}
+          <div className="relative z-10">
+            <div className="text-[16px] font-extrabold text-[#fed65b] tracking-wide">SADC PF</div>
+            <div className="text-[12px] font-semibold text-[#abcfbb] tracking-wide">SRHR Portal</div>
           </div>
 
           {/* Centre copy */}
