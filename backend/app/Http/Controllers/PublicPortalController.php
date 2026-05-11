@@ -11,11 +11,16 @@ use Illuminate\Http\Request;
 
 class PublicPortalController extends Controller
 {
+    private const HIDDEN_COUNTRY_CODES = ['KM', 'SC', 'RW'];
+
     public function dashboard(): JsonResponse
     {
         $publicReports = Report::query()->where('is_public', true);
         $publicIndicators = Indicator::query()->where('is_public', true);
-        $countries = Country::query()->where('is_active', true)->get();
+        $countries = Country::query()
+            ->where('is_active', true)
+            ->whereNotIn('code', self::HIDDEN_COUNTRY_CODES)
+            ->get();
 
         $countryStatuses = $countries->map(function (Country $country) {
             $status = $country->indicators()
@@ -100,6 +105,7 @@ class PublicPortalController extends Controller
 
         $countries = Country::query()
             ->where('is_active', true)
+            ->whereNotIn('code', self::HIDDEN_COUNTRY_CODES)
             ->when($search !== '', fn ($query) => $query->where('name', 'like', "%{$search}%"))
             ->orderBy('name')
             ->get()
@@ -133,7 +139,10 @@ class PublicPortalController extends Controller
 
     public function country(string $slug): JsonResponse
     {
-        $country = Country::query()->where('slug', $slug)->firstOrFail();
+        $country = Country::query()
+            ->where('slug', $slug)
+            ->whereNotIn('code', self::HIDDEN_COUNTRY_CODES)
+            ->firstOrFail();
         $reports = $country->reports()->where('is_public', true)->with('period')->latest('published_at')->get();
         $indicators = $country->indicators()->where('is_public', true)->orderBy('code')->get();
         $recentActivity = ActivityLog::query()
@@ -209,6 +218,7 @@ class PublicPortalController extends Controller
             ->values();
 
         $countries = Report::query()->where('is_public', true)->with('country')->get()
+            ->filter(fn (Report $report) => $report->country && !in_array($report->country->code, self::HIDDEN_COUNTRY_CODES, true))
             ->pluck('country.name')->filter()->unique()->values();
 
         return response()->json([

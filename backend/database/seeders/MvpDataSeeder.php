@@ -14,7 +14,7 @@ class MvpDataSeeder extends Seeder
 
         $now = now()->toDateTimeString();
 
-        // ── 1. Reporting Periods (2022–2024) ──────────────────────────────────
+        // 1. Reporting Periods (2022-2024)
         DB::table('reporting_periods')->delete();
 
         $periodIds = [];
@@ -42,11 +42,11 @@ class MvpDataSeeder extends Seeder
         $p24q3 = $periodIds['2024 Q3'];
         $p24q4 = $periodIds['2024 Q4'];
 
-        // ── 2. Country ID map (safe — looks up by code not position) ──────────
+        // 2. Country ID map (safe - looks up by code not position)
         $c = DB::table('countries')->pluck('id', 'code');
         // $c['MW'], $c['TZ'], etc.
 
-        // ── 3. Users — all 9 roles represented ───────────────────────────────
+        // 3. Users - all 9 roles represented
         $userDefs = [
             // email => [name, org, country_code, role]
             'ronald@sadc-pf.org'     => ['Ronald Windwaai',  'SADC Parliamentary Forum',   'MW', 'super_admin'],
@@ -108,7 +108,7 @@ class MvpDataSeeder extends Seeder
         $u8 = $userIds['nomsa@parliament.sz'];      // communications_user
         $u9 = $userIds['fatima@parliament.ao'];     // programme_manager (Angola)
 
-        // ── 4. Reports — all 16 countries ────────────────────────────────────
+        // 4. Reports - 14 SADC countries plus regional items
         DB::table('reports')->delete();
 
         // [user_id, country_code, period_key, title, type, status, is_public, completion, summary]
@@ -167,10 +167,6 @@ class MvpDataSeeder extends Seeder
             // Mauritius
             [$u2, 'MU', $p24q4, 'Mauritius SRHR Annual Report 2024',       'Annual',    'published', true,  100, 'Annual SRHR monitoring report for Mauritius 2024.'],
             [$u2, 'MU', $p24q2, 'Mauritius Q2 2024 Brief',                 'Brief',     'approved',  true,  100, 'Quarterly SRHR evidence brief for Mauritius Q2 2024.'],
-            // Seychelles
-            [$u2, 'SC', $p24q4, 'Seychelles SRHR Annual Report 2024',      'Annual',    'published', true,  100, 'Annual SRHR report for Seychelles 2024 covering legislative and budget progress.'],
-            // Comoros
-            [$u1, 'KM', $p24q4, 'Comoros SRHR Annual Report 2024',         'Annual',    'submitted', false,  88, 'Annual SRHR data submission package for Comoros 2024.'],
             // Regional
             [$u1, null, $p23q4, 'SADC Regional SRHR Synthesis 2023',       'Annual',    'published', true,  100, 'Regional synthesis of SRHR progress and country compliance trends for 2023.'],
             [$u1, null, $p24q4, 'SADC Regional SRHR Synthesis 2024',       'Annual',    'published', true,  100, 'Regional synthesis consolidating 2024 country submissions and outcome area performance.'],
@@ -207,7 +203,7 @@ class MvpDataSeeder extends Seeder
         }
         DB::table('reports')->insert($reports);
 
-        // ── 5. Indicators — all 16 countries × 4 outcomes × 3 indicators × 4 quarters 2024
+        // 5. Indicators - 14 SADC countries x 4 outcomes x 3 indicators x 4 quarters in 2024
         DB::table('indicators')->delete();
 
         $outcomeIndicators = [
@@ -242,13 +238,11 @@ class MvpDataSeeder extends Seeder
             'ZM' => ['statuses' => ['on-track', 'at-risk', 'on-track', 'on-track'],           'range' => [45, 82]],
             'TZ' => ['statuses' => ['on-track', 'on-track', 'achieved', 'at-risk'],           'range' => [44, 80]],
             'MW' => ['statuses' => ['achieved', 'on-track', 'at-risk', 'on-track'],           'range' => [42, 85]],
-            'SC' => ['statuses' => ['on-track', 'achieved', 'on-track', 'on-track'],          'range' => [55, 88]],
             'ZW' => ['statuses' => ['at-risk', 'on-track', 'on-track', 'at-risk'],            'range' => [35, 72]],
             'MZ' => ['statuses' => ['at-risk', 'at-risk', 'on-track', 'off-track'],           'range' => [25, 65]],
             'LS' => ['statuses' => ['on-track', 'at-risk', 'at-risk', 'on-track'],            'range' => [30, 68]],
             'SZ' => ['statuses' => ['on-track', 'on-track', 'at-risk', 'at-risk'],            'range' => [32, 70]],
             'AO' => ['statuses' => ['at-risk', 'off-track', 'at-risk', 'off-track'],          'range' => [18, 55]],
-            'KM' => ['statuses' => ['at-risk', 'at-risk', 'off-track', 'at-risk'],            'range' => [20, 52]],
             'CD' => ['statuses' => ['off-track', 'at-risk', 'off-track', 'at-risk'],          'range' => [15, 48]],
             'MG' => ['statuses' => ['at-risk', 'off-track', 'at-risk', 'at-risk'],            'range' => [22, 55]],
         ];
@@ -291,7 +285,7 @@ class MvpDataSeeder extends Seeder
             DB::table('indicators')->insert($chunk);
         }
 
-        // ── 6. Evidence — all 16 countries ────────────────────────────────────
+        // 6. Evidence - 14 SADC countries plus regional items
         DB::table('evidences')->delete();
 
         $evidenceRows = [
@@ -319,8 +313,6 @@ class MvpDataSeeder extends Seeder
             [$u1, 'CD', $p24q4, 'DRC SRHR Legislative and Budget Review 2024', 'Document', 'submitted', ['legislation','budget'],      ['O2.I1','O3.I1'], [['name'=>'cd-review-2024.pdf','size'=>921000]]],
             [$u1, 'MG', $p24q4, 'Madagascar Family Planning Success Story',    'Story',    'submitted', ['family-planning','success'], ['O4.I2'],          []],
             [$u2, 'MU', $p24q4, 'Mauritius SRHR Services Quality Assessment',  'Research', 'submitted', ['quality','assessment'],      ['O4.I1','O4.I2'], [['name'=>'mu-quality-assessment-2024.pdf','size'=>612000]]],
-            [$u2, 'SC', $p24q4, 'Seychelles National SRHR Strategy 2024–2028', 'Document', 'submitted', ['strategy','national'],       ['O2.I1','O2.I3'], [['name'=>'sc-srhr-strategy-2024.pdf','size'=>445000]]],
-            [$u1, 'KM', $p24q4, 'Comoros SRHR Data Submission Package 2024',   'Document', 'submitted', ['data','submission'],         ['O3.I1','O4.I1'], [['name'=>'km-data-package-2024.pdf','size'=>367000]]],
             [$u1, null, $p23q4, 'SADC Regional SRHR Assessment Research',      'Research', 'submitted', ['regional','cross-country'],  ['O2.I1','O3.I1','O4.I1','O5.I1'], [['name'=>'sadc-regional-assessment-2023.pdf','size'=>1572864]]],
             [$u2, null, $p24q4, 'SADC Parliamentary SRHR Framework 2025',      'Document', 'submitted', ['regional','parliament'],     ['O2.I1','O2.I2'], [['name'=>'sadc-parliament-framework-2025.pdf','size'=>892000]]],
         ];
@@ -332,7 +324,7 @@ class MvpDataSeeder extends Seeder
                 'country_id'          => $cc ? ($c[$cc] ?? null) : null,
                 'reporting_period_id' => $pid,
                 'title'               => $title,
-                'description'         => "Supporting evidence for SRHR monitoring and evaluation" . ($cc ? " — {$cc}" : " — SADC Region") . ".",
+                'description'         => "Supporting evidence for SRHR monitoring and evaluation" . ($cc ? " - {$cc}" : " - SADC Region") . ".",
                 'evidence_type'       => $type,
                 'status'              => $status,
                 'tags'                => json_encode($tags),
@@ -344,7 +336,7 @@ class MvpDataSeeder extends Seeder
         }
         DB::table('evidences')->insert($evidences);
 
-        // ── 7. Activity Logs ──────────────────────────────────────────────────
+        // 7. Activity Logs
         DB::table('activity_logs')->delete();
 
         $logs = [
@@ -368,7 +360,6 @@ class MvpDataSeeder extends Seeder
             [$u8, 'SZ', 'Indicator data uploaded for Eswatini Q2 2024',               'indicator', null, 'upload_file', 9,  4],
             [$u9, 'MZ', 'Report submitted: Mozambique Q2 2024 Monitoring',             'report',    null, 'description', 11, 1],
             [$u7, 'ZA', 'Report created: South Africa Q2 2024 Research Summary',       'report',    null, 'add_circle',  13, 3],
-            [$u2, 'SC', 'Report published: Seychelles SRHR Annual Report 2024',        'report',    null, 'public',      13, 0],
             [$u6, 'ZM', 'Indicators reviewed for Zambia Q3 2024',                     'indicator', null, 'rate_review', 14, 2],
             [$u1, 'NA', 'Report published: Namibia SRHR Annual Report 2024',           'report',    null, 'public',      15, 0],
             [$u4, 'TZ', 'Evidence uploaded: Tanzania Budget Utilisation Report 2024',  'evidence',  null, 'attach_file', 17, 1],
