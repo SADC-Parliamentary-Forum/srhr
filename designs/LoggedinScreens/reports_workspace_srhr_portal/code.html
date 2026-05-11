@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reports Workspace - SRHR Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-secondary-fixed": "#241a00",
+                        "surface-bright": "#fbf9f8",
+                        "background": "#fbf9f8",
+                        "tertiary": "#131310",
+                        "on-primary-fixed-variant": "#2d4d3e",
+                        "secondary-fixed-dim": "#e9c349",
+                        "primary-fixed": "#c6ebd7",
+                        "on-surface-variant": "#414844",
+                        "secondary": "#735c00",
+                        "secondary-fixed": "#ffe088",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#e4e2e2",
+                        "on-primary-container": "#749684",
+                        "on-secondary": "#ffffff",
+                        "inverse-surface": "#303030",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e4e2e2",
+                        "on-surface": "#1b1c1c",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f5f3f3",
+                        "surface": "#fbf9f8",
+                        "primary-fixed-dim": "#abcfbb",
+                        "on-tertiary-fixed-variant": "#474742",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#eae8e7",
+                        "secondary-container": "#fed65b",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-container": "#745c00",
+                        "on-tertiary-container": "#908f89",
+                        "primary-container": "#0b2d20",
+                        "tertiary-fixed-dim": "#c9c6c0",
+                        "on-secondary-fixed-variant": "#574500",
+                        "outline": "#727974",
+                        "surface-tint": "#446555",
+                        "primary": "#00170d",
+                        "surface-dim": "#dbd9d9",
+                        "inverse-primary": "#abcfbb",
+                        "tertiary-fixed": "#e5e2db",
+                        "surface-container": "#efeded",
+                        "on-primary-fixed": "#002115",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#282824",
+                        "on-tertiary-fixed": "#1c1c18",
+                        "on-background": "#1b1c1c",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#c1c8c2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "40px",
+                        "gutter": "16px",
+                        "xl": "64px",
+                        "base": "8px",
+                        "sm": "12px",
+                        "md": "24px",
+                        "xs": "4px",
+                        "container-margin": "20px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Manrope"],
+                        "display": ["Manrope"],
+                        "ussd-mono": ["Courier"],
+                        "h1": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "label-lg": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "body-sm": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "label-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display": ["40px", {"lineHeight": "1.2", "fontWeight": "800"}],
+                        "ussd-mono": ["16px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                        "h1": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "h2": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                        "label-lg": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                        "h3": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col md:flex-row">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-screen w-64 border-r border-outline-variant bg-surface dark:bg-inverse-surface text-primary dark:text-inverse-primary sticky top-0 shrink-0 z-40 font-body-md text-body-md font-label-md text-label-md transition-all duration-300 ease-in-out">
+<div class="p-lg flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">corporate_fare</span>
+</div>
+<div>
+<h1 class="text-h2 font-h2 font-black text-primary dark:text-inverse-primary leading-none">SRHR Portal</h1>
+<p class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant">Secure Reporting</p>
+</div>
+</div>
+<div class="px-md pb-md">
+<button class="w-full flex items-center justify-center gap-sm py-sm px-md rounded-full bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary transition-colors font-label-lg text-label-lg">
+<span class="material-symbols-outlined">center_focus_strong</span>
+                Focus Mode
+            </button>
+</div>
+<ul class="flex-1 overflow-y-auto py-sm">
+<li>
+<a class="flex items-center gap-md py-sm px-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md py-sm px-lg text-primary dark:text-inverse-primary font-bold border-r-4 border-secondary bg-surface-container-low dark:bg-inverse-surface hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">work</span>
+<span>Reports Workspace</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md py-sm px-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined">edit_note</span>
+<span>Data Capture</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md py-sm px-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span>Analysis</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md py-sm px-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined">library_books</span>
+<span>Library</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md py-sm px-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Administration</span>
+</a>
+</li>
+</ul>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-w-0">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-gutter py-xs w-full sticky top-0 z-50 bg-surface-bright dark:bg-inverse-surface text-primary dark:text-inverse-primary font-label-lg text-label-lg shadow-sm scale-95 duration-150 origin-top">
+<div class="flex items-center gap-md md:hidden">
+<span class="font-display text-display text-primary dark:text-inverse-primary leading-none text-[24px]">SRHR Portal</span>
+</div>
+<div class="hidden md:flex flex-1 items-center justify-between px-lg">
+<div class="flex items-center gap-md">
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-full py-xs pl-md pr-xl focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-body-sm text-body-sm" placeholder="Search..." type="text"/>
+</div>
+</div>
+<nav class="flex gap-lg">
+<a class="text-secondary-container font-bold border-b-2 border-secondary-container pb-xs hover:text-secondary dark:hover:text-secondary-fixed transition-colors" href="#">Reports</a>
+<a class="text-on-surface-variant dark:text-surface-variant pb-xs hover:text-secondary dark:hover:text-secondary-fixed transition-colors" href="#">Data</a>
+<a class="text-on-surface-variant dark:text-surface-variant pb-xs hover:text-secondary dark:hover:text-secondary-fixed transition-colors" href="#">Library</a>
+</nav>
+</div>
+<div class="flex items-center gap-sm md:gap-md shrink-0">
+<button class="hidden md:flex text-on-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="hidden md:flex text-on-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors">
+<span class="material-symbols-outlined">public</span>
+</button>
+<button class="hidden md:flex text-on-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors">
+<span class="material-symbols-outlined">calendar_today</span>
+</button>
+<div class="flex gap-sm">
+<button class="px-md py-xs rounded-full border border-primary text-primary hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors font-label-lg text-label-lg">AI Assistant</button>
+<button class="px-md py-xs rounded-full bg-primary text-on-primary hover:bg-primary-container hover:text-on-primary-container transition-colors font-label-lg text-label-lg">Add / Upload</button>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-dim overflow-hidden shrink-0 border border-outline-variant ml-sm">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A close up professional headshot of a business person in a modern corporate setting. The lighting is bright and even, highlighting their face against a soft, out of focus office background. The overall mood is approachable, reliable, and trustworthy, fitting perfectly with a secure reporting portal aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZYiKbt5JV0qTH-zNIrll4T5BLVeDFNSWxgd7YxYSkHtzBysH57Z5gxSFeqceleteG1K3IZQL1uLRR03wfAVsbzm_a5qfWDuUdUZ7Fyl_jPS2FmUsnAJg_c43Byltmzb0pDl8CsgLgF1wVUGruBYA8XgXNzFpG4rJkhqpar6Nc1GcWyrrZy3bCTdQQNe-yY6yVMkHESLyNRyoJfQlsZ75tnFJJf-UiFAMlfKr1SvN9dEJPBTtkseAiFwrKWIjWY2RG23LizWHJyA"/>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 p-gutter md:p-lg flex gap-lg overflow-x-hidden">
+<div class="flex-1 flex flex-col gap-md max-w-7xl mx-auto">
+<header class="mb-sm">
+<h2 class="font-h1 text-h1 text-primary mb-xs">Reports Workspace</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Manage, review, and track all regional submissions.</p>
+</header>
+<!-- Tabs -->
+<div class="border-b border-outline-variant flex overflow-x-auto hide-scrollbar gap-lg font-label-lg text-label-lg">
+<button class="pb-sm border-b-2 border-primary text-primary font-bold whitespace-nowrap">My Reports</button>
+<button class="pb-sm border-b-2 border-transparent text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap">Submitted</button>
+<button class="pb-sm border-b-2 border-transparent text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap">Review</button>
+<button class="pb-sm border-b-2 border-transparent text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap">Approved</button>
+<button class="pb-sm border-b-2 border-transparent text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap">Generated</button>
+<button class="pb-sm border-b-2 border-transparent text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap">Published</button>
+</div>
+<!-- Bento Grid Layout for Reports -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md mt-sm">
+<!-- Report Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-sm border border-primary/10 hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-secondary"></div>
+<div class="flex justify-between items-start mb-sm">
+<span class="inline-block px-sm py-xs rounded-full bg-surface-container text-on-surface font-label-md text-label-md">Draft</span>
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined">more_vert</span></button>
+</div>
+<h3 class="font-h3 text-h3 text-primary mb-xs leading-tight">Malawi April 2026 Monthly</h3>
+<div class="flex items-center gap-xs text-on-surface-variant font-body-sm text-body-sm mb-md">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span>Malawi</span>
+<span class="mx-xs">•</span>
+<span>Apr 2026</span>
+</div>
+<div class="mb-md">
+<div class="flex justify-between font-label-md text-label-md text-on-surface-variant mb-xs">
+<span>Completion</span>
+<span>45%</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-1.5">
+<div class="bg-secondary-container h-1.5 rounded-full" style="width: 45%"></div>
+</div>
+</div>
+<div class="flex items-center justify-between mt-auto pt-sm border-t border-outline-variant/30">
+<div class="flex items-center gap-xs text-error font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">error</span>
+                                Missing Evidence
+                            </div>
+<button class="font-label-lg text-label-lg text-primary hover:text-secondary transition-colors">Open</button>
+</div>
+</div>
+<!-- Report Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-sm border border-primary/10 hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary"></div>
+<div class="flex justify-between items-start mb-sm">
+<span class="inline-block px-sm py-xs rounded-full bg-primary-fixed text-on-primary-fixed font-label-md text-label-md">Submitted</span>
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined">more_vert</span></button>
+</div>
+<h3 class="font-h3 text-h3 text-primary mb-xs leading-tight">Kenya Q1 Impact Review</h3>
+<div class="flex items-center gap-xs text-on-surface-variant font-body-sm text-body-sm mb-md">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span>Kenya</span>
+<span class="mx-xs">•</span>
+<span>Q1 2026</span>
+</div>
+<div class="mb-md">
+<div class="flex justify-between font-label-md text-label-md text-on-surface-variant mb-xs">
+<span>Completion</span>
+<span>100%</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-1.5">
+<div class="bg-primary h-1.5 rounded-full" style="width: 100%"></div>
+</div>
+</div>
+<div class="flex items-center justify-between mt-auto pt-sm border-t border-outline-variant/30">
+<div class="flex items-center gap-xs text-primary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+                                Fully Verified
+                            </div>
+<div class="flex gap-sm">
+<button class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors">Review</button>
+<button class="font-label-lg text-label-lg text-primary hover:text-secondary transition-colors">Export</button>
+</div>
+</div>
+</div>
+<!-- Report Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-sm border border-primary/10 hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-outline-variant"></div>
+<div class="flex justify-between items-start mb-sm">
+<span class="inline-block px-sm py-xs rounded-full bg-error-container text-on-error-container font-label-md text-label-md">Action Required</span>
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined">more_vert</span></button>
+</div>
+<h3 class="font-h3 text-h3 text-primary mb-xs leading-tight">Uganda Annual Summary</h3>
+<div class="flex items-center gap-xs text-on-surface-variant font-body-sm text-body-sm mb-md">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span>Uganda</span>
+<span class="mx-xs">•</span>
+<span>2025</span>
+</div>
+<div class="mb-md">
+<div class="flex justify-between font-label-md text-label-md text-on-surface-variant mb-xs">
+<span>Completion</span>
+<span>85%</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-1.5">
+<div class="bg-secondary h-1.5 rounded-full" style="width: 85%"></div>
+</div>
+</div>
+<div class="flex items-center justify-between mt-auto pt-sm border-t border-outline-variant/30">
+<div class="flex items-center gap-xs text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">pending</span>
+                                Pending Approvals
+                            </div>
+<button class="font-label-lg text-label-lg text-primary hover:text-secondary transition-colors">Open</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Contextual AI Panel -->
+<aside class="hidden xl:flex flex-col w-80 bg-surface-container-lowest rounded-xl shadow-sm border border-primary/10 p-md shrink-0 h-[calc(100vh-140px)] sticky top-[100px]">
+<div class="flex items-center gap-sm mb-md border-b border-outline-variant pb-sm">
+<span class="material-symbols-outlined text-secondary text-[24px]">auto_awesome</span>
+<h3 class="font-h3 text-h3 text-primary">AI Report Assistant</h3>
+</div>
+<div class="flex-1 overflow-y-auto pr-sm custom-scrollbar flex flex-col gap-md">
+<div class="bg-surface-container-low p-sm rounded-lg border border-outline-variant/30">
+<p class="font-body-sm text-body-sm text-on-surface mb-xs">I noticed the <strong class="font-bold">Malawi April 2026</strong> report is missing 3 evidence attachments. Would you like me to flag the responsible officers?</p>
+<div class="flex gap-xs mt-sm">
+<button class="px-sm py-xs bg-primary text-on-primary rounded-md font-label-md text-label-md hover:bg-primary-container transition-colors">Yes, flag them</button>
+<button class="px-sm py-xs border border-primary text-primary rounded-md font-label-md text-label-md hover:bg-surface-dim transition-colors">Dismiss</button>
+</div>
+</div>
+<div class="bg-surface-container-low p-sm rounded-lg border border-outline-variant/30">
+<p class="font-body-sm text-body-sm text-on-surface mb-xs">Data anomaly detected in <strong class="font-bold">Kenya Q1 Impact Review</strong>. The reported figures for 'Outreach' deviate by 40% from the historical trend.</p>
+<button class="text-primary font-label-md text-label-md hover:underline flex items-center gap-xs mt-xs">
+<span class="material-symbols-outlined text-[16px]">query_stats</span>
+                            View Analysis
+                        </button>
+</div>
+</div>
+<div class="mt-md pt-sm border-t border-outline-variant relative">
+<input class="w-full bg-surface-container rounded-full py-sm pl-md pr-xl border border-transparent focus:border-secondary focus:ring-1 focus:ring-secondary outline-none font-body-sm text-body-sm transition-all" placeholder="Ask AI..." type="text"/>
+<button class="absolute right-xs top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center text-primary hover:text-secondary transition-colors">
+<span class="material-symbols-outlined text-[20px]">send</span>
+</button>
+</div>
+</aside>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-xl right-xl lg:right-[360px] xl:right-[380px] bg-primary text-on-primary rounded-xl shadow-[0_4px_12px_rgba(0,23,13,0.15)] flex items-center gap-sm px-md py-sm hover:bg-primary-container transition-all hover:-translate-y-1 z-40 group">
+<span class="material-symbols-outlined">add</span>
+<span class="font-label-lg text-label-lg font-bold">Generate Report</span>
+</button>
+<!-- Footer -->
+<footer class="w-full py-md px-lg flex justify-between items-center mt-auto bg-surface-container-lowest dark:bg-surface-container-highest text-primary dark:text-inverse-primary font-label-md text-label-md border-t border-outline-variant opacity-80 hover:opacity-100">
+<div class="font-label-lg text-label-lg text-primary">SRHR Portal</div>
+<div>© 2024 SRHR Global Reporting System. All rights reserved.</div>
+<nav class="flex gap-md">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Support</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Documentation</a>
+</nav>
+</footer>
+</div>
+<style>
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: var(--color-outline-variant);
+            border-radius: 4px;
+        }
+    </style>
+</body></html>

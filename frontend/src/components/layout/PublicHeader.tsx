@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 
@@ -19,18 +20,23 @@ export function PublicHeader() {
 
   return (
     <header className="bg-[#00170d] sticky top-0 z-50 shadow-sm">
-      <div className="flex justify-between items-center w-full px-5 py-3 max-w-[1440px] mx-auto">
+      <div className="flex justify-between items-center w-full px-5 py-2 max-w-[1440px] mx-auto">
         {/* Logo */}
-        <Link
-          href="/"
-          onClick={() => setMobileOpen(false)}
-          className="text-[18px] md:text-[20px] font-bold text-[#fed65b] flex items-center gap-2 leading-tight shrink-0"
-        >
-          <span className="material-symbols-outlined text-[24px]" style={{ fontVariationSettings: "'FILL' 1" }}>
-            health_and_safety
-          </span>
-          <span className="hidden sm:inline">SADC PF SRHR Portal</span>
-          <span className="sm:hidden">SRHR Portal</span>
+        <Link href="/" onClick={() => setMobileOpen(false)} className="flex items-center gap-3 shrink-0">
+          <div className="bg-white rounded-lg p-1 flex items-center justify-center shrink-0" style={{ width: 44, height: 44 }}>
+            <Image
+              src="/sadc-pf-logo.jpg"
+              alt="SADC PF Logo"
+              width={36}
+              height={36}
+              className="object-contain"
+              priority
+            />
+          </div>
+          <div className="flex flex-col leading-tight">
+            <span className="text-[13px] font-extrabold text-[#fed65b] tracking-wide">SADC PF</span>
+            <span className="text-[11px] font-semibold text-[#abcfbb] tracking-wide hidden sm:block">SRHR Portal</span>
+          </div>
         </Link>
 
         {/* Desktop Nav */}
@@ -54,7 +60,7 @@ export function PublicHeader() {
           })}
         </nav>
 
-        {/* Right side: auth buttons + hamburger */}
+        {/* Right: auth buttons + hamburger */}
         <div className="flex items-center gap-2">
           <Link
             href="/login"
@@ -69,7 +75,6 @@ export function PublicHeader() {
             Register
           </Link>
 
-          {/* Hamburger — shown below lg */}
           <button
             onClick={() => setMobileOpen((v) => !v)}
             aria-label="Toggle navigation"
@@ -94,9 +99,7 @@ export function PublicHeader() {
                 onClick={() => setMobileOpen(false)}
                 className={[
                   'text-[15px] font-semibold px-3 py-2.5 rounded transition-all',
-                  isActive
-                    ? 'text-[#fed65b] bg-[#0b2d20]'
-                    : 'text-white hover:text-[#fed65b] hover:bg-[#0b2d20]',
+                  isActive ? 'text-[#fed65b] bg-[#0b2d20]' : 'text-white hover:text-[#fed65b] hover:bg-[#0b2d20]',
                 ].join(' ')}
               >
                 {link.label}

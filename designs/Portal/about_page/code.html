@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>About - SADC PF SRHR Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Courier&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#414844",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e4e2e2",
+                        "primary-container": "#0b2d20",
+                        "inverse-primary": "#abcfbb",
+                        "tertiary": "#131310",
+                        "on-primary-fixed-variant": "#2d4d3e",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#e5e2db",
+                        "secondary-fixed": "#ffe088",
+                        "on-tertiary-fixed": "#1c1c18",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-tertiary-container": "#908f89",
+                        "tertiary-container": "#282824",
+                        "secondary-container": "#fed65b",
+                        "tertiary-fixed-dim": "#c9c6c0",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#fbf9f8",
+                        "surface-dim": "#dbd9d9",
+                        "surface-tint": "#446555",
+                        "primary": "#00170d",
+                        "surface-container-low": "#f5f3f3",
+                        "surface-container-high": "#eae8e7",
+                        "secondary-fixed-dim": "#e9c349",
+                        "on-primary-fixed": "#002115",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#c6ebd7",
+                        "surface-container": "#efeded",
+                        "outline": "#727974",
+                        "background": "#fbf9f8",
+                        "secondary": "#735c00",
+                        "on-background": "#1b1c1c",
+                        "inverse-surface": "#303030",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#745c00",
+                        "primary-fixed-dim": "#abcfbb",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e4e2e2",
+                        "on-secondary-fixed": "#241a00",
+                        "error-container": "#ffdad6",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-secondary": "#ffffff",
+                        "surface": "#fbf9f8",
+                        "on-surface": "#1b1c1c",
+                        "on-tertiary-fixed-variant": "#474742",
+                        "outline-variant": "#c1c8c2",
+                        "on-primary-container": "#749684"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "sm": "12px",
+                        "gutter": "16px",
+                        "container-margin": "20px",
+                        "base": "8px",
+                        "xl": "64px",
+                        "lg": "40px",
+                        "md": "24px"
+                    },
+                    "fontFamily": {
+                        "label-lg": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "ussd-mono": ["Courier"],
+                        "body-sm": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "display": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-lg": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "h3": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "ussd-mono": ["16px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "h2": ["24px", { "lineHeight": "1.3", "fontWeight": "700" }],
+                        "h1": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "label-md": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display": ["40px", { "lineHeight": "1.2", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: #fbf9f8; /* background */
+            color: #1b1c1c; /* on-background */
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-primary dark:bg-primary shadow-sm docked full-width top-0 sticky z-50">
+<div class="flex justify-between items-center w-full px-container-margin py-sm sticky top-0 z-50">
+<div class="text-h3 font-h3 text-secondary-container dark:text-secondary-container">
+                SADC PF SRHR Portal
+            </div>
+<!-- Desktop Navigation -->
+<nav class="hidden md:flex items-center gap-md">
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors hover:bg-primary-container dark:hover:bg-primary-container transition-all px-base py-xs rounded" href="#">Home</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors hover:bg-primary-container dark:hover:bg-primary-container transition-all px-base py-xs rounded" href="#">Dashboard</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors hover:bg-primary-container dark:hover:bg-primary-container transition-all px-base py-xs rounded" href="#">Countries</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors hover:bg-primary-container dark:hover:bg-primary-container transition-all px-base py-xs rounded" href="#">Reports</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors hover:bg-primary-container dark:hover:bg-primary-container transition-all px-base py-xs rounded" href="#">Stories</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors hover:bg-primary-container dark:hover:bg-primary-container transition-all px-base py-xs rounded" href="#">Resources</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors hover:bg-primary-container dark:hover:bg-primary-container transition-all px-base py-xs rounded" href="#">News &amp; Events</a>
+<a class="text-secondary-container font-bold border-b-2 border-secondary-container pb-1 hover:bg-primary-container dark:hover:bg-primary-container transition-all px-base py-xs rounded" href="#">About</a>
+</nav>
+<!-- Actions -->
+<div class="flex items-center gap-sm">
+<button class="hidden md:block font-label-lg text-label-lg text-on-primary bg-transparent border border-on-primary px-sm py-xs rounded hover:bg-primary-container transition-colors">Login</button>
+<button class="font-label-lg text-label-lg text-primary bg-secondary-container px-sm py-xs rounded hover:opacity-90 transition-opacity font-bold">Register</button>
+<!-- Mobile Menu Icon -->
+<button class="md:hidden text-on-primary ml-sm">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col w-full">
+<!-- Hero Section -->
+<section class="relative w-full h-[400px] flex items-center justify-center bg-primary-container overflow-hidden">
+<div class="absolute inset-0 w-full h-full opacity-30 bg-cover bg-center" data-alt="A wide, sweeping photograph of a modern, eco-friendly architectural structure nestled within a vibrant, lush forest. The scene is illuminated by warm, golden hour sunlight filtering through the canopy, creating a hopeful and optimistic mood. The aesthetic blends modern corporate stability with natural organic growth. High contrast between the deep forest greens and the warm gold sunlight." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCD65p2nRI2ixj8a8xoIjez2_6x5r4wF783pKaR7rebtTGRPZtd4B7zXemLtgCF2pNDFBMJae0ag6Q2eh6Gcc-mUcwnrF4EkH6fdzzcNe9fNm98WMy9bt44xTMGRVjVDHJUetTuJqTGUh5GOEke0RfspRPfUfa7Mwg2Pw8S6n7Q7cfGFlzydaLL_QdPBOO3SHGo7H311k_QbEOPFV6IdC6tfkQXt4N3hmZa-oaQ1D8tM_C0HHsSMFFCV_oZ2nHq5btfHDlK3xtSZy4');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary to-transparent opacity-80"></div>
+<div class="relative z-10 text-center px-container-margin max-w-4xl mx-auto">
+<h1 class="font-display text-display text-on-primary mb-md">Advancing SRHR in Southern Africa</h1>
+<p class="font-body-lg text-body-lg text-primary-fixed-dim max-w-2xl mx-auto">
+                    The SADC Parliamentary Forum SRHR Project aims to build the capacity of national parliaments to promote Sexual and Reproductive Health and Rights through legislation and advocacy.
+                </p>
+</div>
+</section>
+<!-- Container for Content -->
+<div class="max-w-7xl mx-auto w-full px-container-margin py-xl flex flex-col gap-xl">
+<!-- Bento Grid: Overview & Vision -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<!-- Project Overview Card -->
+<div class="md:col-span-2 bg-surface-container-low rounded-xl p-md shadow-sm border border-outline-variant/30 flex flex-col gap-sm">
+<div class="flex items-center gap-sm mb-xs">
+<span class="material-symbols-outlined text-secondary text-[32px]">info</span>
+<h2 class="font-h2 text-h2 text-primary">Project Overview</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">
+                        The Sexual and Reproductive Health and Rights (SRHR), HIV and AIDS Governance Project is a flagship initiative of the SADC Parliamentary Forum. Supported by Sida, the project empowers parliamentarians to domesticate regional and international commitments on SRHR into national laws and policies. We strive for a region where fundamental human rights are universally accessible, particularly for women, girls, and vulnerable populations.
+                    </p>
+<div class="mt-auto pt-sm border-t border-outline-variant/50">
+<span class="inline-flex items-center gap-xs bg-primary-container/10 text-primary px-sm py-xs rounded-full font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">calendar_month</span> Phase 3: 2024 - 2028
+                        </span>
+</div>
+</div>
+<!-- Vision Card -->
+<div class="bg-primary rounded-xl p-md shadow-[0_4px_24px_rgba(0,23,13,0.15)] flex flex-col gap-sm justify-center relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary-container/10 rounded-bl-full -z-0"></div>
+<div class="relative z-10 flex flex-col gap-sm items-center text-center">
+<span class="material-symbols-outlined text-secondary-container text-[48px] mb-xs">visibility</span>
+<h2 class="font-h2 text-h2 text-on-primary">Our Vision</h2>
+<p class="font-body-md text-body-md text-primary-fixed-dim">
+                            A highly integrated SADC region wherein human rights are respected, protected, and fulfilled, leading to improved health outcomes and sustainable development for all citizens.
+                        </p>
+</div>
+</div>
+</section>
+<!-- Theory of Change (Asymmetric Layout) -->
+<section class="flex flex-col gap-lg">
+<div class="flex flex-col gap-xs">
+<h2 class="font-h1 text-h1 text-primary">Theory of Change</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl">How legislative action translates to tangible community impact.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-md">
+<!-- Step 1 -->
+<div class="md:col-span-4 bg-surface rounded-lg p-md border border-outline-variant/30 flex flex-col gap-sm relative">
+<div class="absolute -top-3 -left-3 w-8 h-8 bg-secondary-container text-on-secondary-container rounded-full flex items-center justify-center font-bold text-label-lg shadow-sm">1</div>
+<span class="material-symbols-outlined text-surface-tint text-[32px]">gavel</span>
+<h3 class="font-h3 text-h3 text-primary">Legislative Capacity</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Equipping MPs with the knowledge and tools to draft and review SRHR legislation.</p>
+</div>
+<!-- Connector (Hidden on Mobile) -->
+<div class="hidden md:flex md:col-span-1 items-center justify-center">
+<span class="material-symbols-outlined text-outline-variant text-[32px]">arrow_forward</span>
+</div>
+<!-- Step 2 -->
+<div class="md:col-span-3 bg-surface rounded-lg p-md border border-outline-variant/30 flex flex-col gap-sm relative">
+<div class="absolute -top-3 -left-3 w-8 h-8 bg-secondary-container text-on-secondary-container rounded-full flex items-center justify-center font-bold text-label-lg shadow-sm">2</div>
+<span class="material-symbols-outlined text-surface-tint text-[32px]">campaign</span>
+<h3 class="font-h3 text-h3 text-primary">Advocacy</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Championing budget allocations and policy implementation at the national level.</p>
+</div>
+<!-- Connector (Hidden on Mobile) -->
+<div class="hidden md:flex md:col-span-1 items-center justify-center">
+<span class="material-symbols-outlined text-outline-variant text-[32px]">arrow_forward</span>
+</div>
+<!-- Step 3 -->
+<div class="md:col-span-3 bg-surface rounded-lg p-md border border-outline-variant/30 flex flex-col gap-sm relative">
+<div class="absolute -top-3 -left-3 w-8 h-8 bg-primary text-on-primary rounded-full flex items-center justify-center font-bold text-label-lg shadow-sm">3</div>
+<span class="material-symbols-outlined text-primary text-[32px]">group</span>
+<h3 class="font-h3 text-h3 text-primary">Community Impact</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Improved access to services and realized rights for citizens across the region.</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-tertiary dark:bg-tertiary-container full-width bottom-0 mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-container-margin py-lg border-t border-outline-variant">
+<div class="text-h3 font-h3 text-secondary-fixed mb-sm md:mb-0">
+                SADC PF SRHR Portal
+            </div>
+<nav class="flex flex-wrap justify-center gap-sm mb-sm md:mb-0">
+<a class="font-label-md text-label-md text-on-tertiary-container hover:text-secondary-fixed transition-colors underline-offset-4 hover:underline" href="#">Privacy Policy</a>
+<a class="font-label-md text-label-md text-on-tertiary-container hover:text-secondary-fixed transition-colors underline-offset-4 hover:underline" href="#">Terms of Service</a>
+<a class="font-label-md text-label-md text-on-tertiary-container hover:text-secondary-fixed transition-colors underline-offset-4 hover:underline" href="#">Contact Us</a>
+<a class="font-label-md text-label-md text-on-tertiary-container hover:text-secondary-fixed transition-colors underline-offset-4 hover:underline" href="#">SADC Website</a>
+</nav>
+<div class="font-body-sm text-body-sm text-on-tertiary-container text-center md:text-right">
+                © 2024 SADC Parliamentary Forum. All Rights Reserved.
+            </div>
+</div>
+</footer>
+</body></html>

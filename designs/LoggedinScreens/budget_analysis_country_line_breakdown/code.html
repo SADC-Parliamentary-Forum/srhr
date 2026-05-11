@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Budget Breakdown: Country &amp; Activities - SRHR Finance</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Courier:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-low": "#f5f3f3",
+                      "on-primary-container": "#749684",
+                      "secondary-fixed-dim": "#e9c349",
+                      "secondary": "#735c00",
+                      "surface-tint": "#446555",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed": "#241a00",
+                      "on-primary-fixed-variant": "#2d4d3e",
+                      "secondary-fixed": "#ffe088",
+                      "outline-variant": "#c1c8c2",
+                      "on-secondary": "#ffffff",
+                      "primary": "#00170d",
+                      "on-surface-variant": "#414844",
+                      "tertiary-fixed-dim": "#c9c6c0",
+                      "on-secondary-fixed-variant": "#574500",
+                      "on-primary-fixed": "#002115",
+                      "on-primary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "tertiary-container": "#282824",
+                      "outline": "#727974",
+                      "inverse-on-surface": "#f2f0f0",
+                      "on-tertiary-fixed-variant": "#474742",
+                      "surface-variant": "#e4e2e2",
+                      "inverse-primary": "#abcfbb",
+                      "on-secondary-container": "#745c00",
+                      "primary-container": "#0b2d20",
+                      "on-tertiary-fixed": "#1c1c18",
+                      "background": "#fbf9f8",
+                      "surface-dim": "#dbd9d9",
+                      "surface-container-highest": "#e4e2e2",
+                      "error-container": "#ffdad6",
+                      "tertiary-fixed": "#e5e2db",
+                      "on-tertiary": "#ffffff",
+                      "on-error": "#ffffff",
+                      "surface-container-high": "#eae8e7",
+                      "secondary-container": "#fed65b",
+                      "on-background": "#1b1c1c",
+                      "primary-fixed": "#c6ebd7",
+                      "primary-fixed-dim": "#abcfbb",
+                      "on-surface": "#1b1c1c",
+                      "surface-container": "#efeded",
+                      "surface-bright": "#fbf9f8",
+                      "surface": "#fbf9f8",
+                      "error": "#ba1a1a",
+                      "tertiary": "#131310",
+                      "inverse-surface": "#303030",
+                      "on-tertiary-container": "#908f89"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "sm": "12px",
+                      "md": "24px",
+                      "base": "8px",
+                      "gutter": "16px",
+                      "container-margin": "20px",
+                      "xl": "64px",
+                      "lg": "40px"
+              },
+              "fontFamily": {
+                      "label-md": [
+                              "Manrope"
+                      ],
+                      "body-md": [
+                              "Manrope"
+                      ],
+                      "body-sm": [
+                              "Manrope"
+                      ],
+                      "h3": [
+                              "Manrope"
+                      ],
+                      "ussd-mono": [
+                              "Courier"
+                      ],
+                      "h2": [
+                              "Manrope"
+                      ],
+                      "label-lg": [
+                              "Manrope"
+                      ],
+                      "h1": [
+                              "Manrope"
+                      ],
+                      "body-lg": [
+                              "Manrope"
+                      ],
+                      "display": [
+                              "Manrope"
+                      ]
+              },
+              "fontSize": {
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h3": [
+                              "20px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "ussd-mono": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h2": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-lg": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "h1": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display": [
+                              "40px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "800"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24
+        }
+      </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="bg-surface-container-lowest dark:bg-surface-container-low text-primary dark:text-primary-fixed font-body-md text-body-md h-screen w-64 fixed left-0 top-0 shadow-md flex flex-col py-md px-sm border-r border-outline-variant/10 hidden md:flex z-40">
+<div class="flex items-center gap-sm mb-lg px-xs">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center overflow-hidden shrink-0">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">public</span>
+</div>
+<div>
+<h1 class="font-h2 text-h2 text-primary dark:text-primary-fixed tracking-tight">SRHR Finance</h1>
+<p class="font-label-md text-label-md text-on-surface-variant opacity-80">Global Monitoring</p>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-base overflow-y-auto">
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary-fixed/20 dark:hover:bg-primary-fixed-dim/10 transition-all duration-200 ease-in-out cursor-pointer" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-sm bg-secondary-container text-on-secondary-container rounded-lg font-semibold cursor-pointer duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span>Analysis</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary-fixed/20 dark:hover:bg-primary-fixed-dim/10 transition-all duration-200 ease-in-out cursor-pointer" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span>Budgeting</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary-fixed/20 dark:hover:bg-primary-fixed-dim/10 transition-all duration-200 ease-in-out cursor-pointer" href="#">
+<span class="material-symbols-outlined">description</span>
+<span>Reports</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant hover:text-primary hover:bg-primary-fixed/20 dark:hover:bg-primary-fixed-dim/10 transition-all duration-200 ease-in-out cursor-pointer mt-auto" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</div>
+<div class="mt-md px-xs">
+<button class="w-full flex items-center justify-center gap-xs bg-primary text-on-primary font-label-lg text-label-lg py-sm px-gutter rounded-full hover:bg-primary/90 transition-colors shadow-sm">
+<span class="material-symbols-outlined">download</span>
+                Export Data
+            </button>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col md:ml-64 w-full">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface-dim font-label-lg text-label-lg w-full h-16 shadow-sm flex justify-between items-center px-gutter sticky top-0 z-50">
+<div class="flex items-center gap-sm md:hidden">
+<span class="font-display text-h3 text-primary dark:text-primary-fixed-dim">SRHR Portal</span>
+</div>
+<div class="hidden md:flex items-center gap-gutter w-1/3">
+<!-- Search placeholder -->
+</div>
+<div class="flex items-center gap-gutter ml-auto">
+<div class="relative w-48 md:w-64 hidden sm:block">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant/30 rounded-full py-xs pl-lg pr-sm text-body-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" placeholder="Search..." type="text"/>
+</div>
+<button class="text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant/50 dark:hover:bg-surface-variant/20 transition-colors p-xs rounded-full cursor-pointer active:scale-95 duration-150 flex items-center justify-center">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant/50 dark:hover:bg-surface-variant/20 transition-colors p-xs rounded-full cursor-pointer active:scale-95 duration-150 flex items-center justify-center hidden sm:flex">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-container overflow-hidden cursor-pointer ml-xs shadow-sm border border-outline-variant/20">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a woman with dark hair pulled back, wearing a tailored navy blazer over a crisp white blouse. The lighting is soft and even, highlighting a warm, approachable expression. The background is a blurred, bright office environment with a hint of a modern glass partition. The overall style is clean, modern, and trustworthy, matching a corporate banking or high-level administration portal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuACLsNIICgthjMo_0d3Dop7cesThxNF7KAfZtRZn9jPcHIXpyKCWnaBOZ1TGmJiHTFu5ocjXJe0A7MlvBy3bWyG69Q3arYu9F6-gAGg_zcXlHV6hs_dzs-hrYJn8YeDS_msIjauNFpPiVKbE9W3AfI93DEtSjXwj8n5APwPmJaFrIoVDjvcc43B8CjgDNnBHgION6AOIcqf3deFRXjVAxtJCzaG717PBShkpW_OCgwdRQPqi1NuVDH4Oe-SnS6TpIoj18rhYIXygg"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<main class="flex-1 p-container-margin md:p-lg overflow-x-hidden">
+<!-- Header -->
+<div class="mb-lg">
+<h2 class="font-h1 text-h1 text-primary mb-xs">Budget Breakdown: Country &amp; Activities</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Drill down into spending patterns by geography and specific budget lines.</p>
+</div>
+<!-- 1. Top Section: Filters -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-sm mb-lg flex flex-col sm:flex-row gap-gutter items-end border border-outline-variant/10">
+<div class="w-full sm:w-1/3">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs">Country</label>
+<div class="relative">
+<select class="w-full appearance-none bg-surface-container-low border border-outline-variant/30 rounded-lg py-sm pl-sm pr-lg text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors cursor-pointer">
+<option>All Countries</option>
+<option>Malawi</option>
+<option>Lesotho</option>
+<option>DRC</option>
+<option>Namibia</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+<div class="w-full sm:w-1/3">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs">Reporting Period</label>
+<div class="relative">
+<select class="w-full appearance-none bg-surface-container-low border border-outline-variant/30 rounded-lg py-sm pl-sm pr-lg text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors cursor-pointer">
+<option>Q3 2023</option>
+<option>Q2 2023</option>
+<option>Q1 2023</option>
+<option>FY 2022</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+<div class="w-full sm:w-1/3">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs">Activity Code</label>
+<div class="relative">
+<input class="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg py-sm px-sm text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" placeholder="e.g. ACT-102" type="text"/>
+</div>
+</div>
+<div class="w-full sm:w-auto shrink-0 mt-sm sm:mt-0">
+<button class="w-full sm:w-auto bg-surface-container-low hover:bg-surface-variant text-primary border border-outline-variant/30 font-label-md text-label-md py-sm px-gutter rounded-lg transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined" style="font-size: 18px;">filter_list</span>
+                        Apply
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Layout for Main Content -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter mb-lg">
+<!-- Left Column (approx 60% -> 7 cols on lg grid) -->
+<div class="lg:col-span-7 flex flex-col gap-gutter">
+<!-- Spending by Country Bar Chart -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-sm border border-outline-variant/10 flex-1">
+<h3 class="font-h3 text-h3 text-primary mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">bar_chart</span>
+                            Spending by Country
+                        </h3>
+<!-- Simulated Bar Chart -->
+<div class="flex items-end h-48 gap-sm sm:gap-md mt-lg relative pb-md border-b border-outline-variant/20">
+<!-- Y Axis labels -->
+<div class="absolute left-0 top-0 bottom-md w-8 flex flex-col justify-between font-label-md text-label-md text-on-surface-variant text-right pr-xs">
+<span>$5M</span>
+<span>$2.5M</span>
+<span>$0</span>
+</div>
+<!-- Chart Area -->
+<div class="flex-1 flex items-end justify-around h-full pl-10">
+<!-- Bar 1 -->
+<div class="w-12 sm:w-16 flex flex-col items-center gap-xs group">
+<div class="w-full bg-primary-container rounded-t-sm h-[80%] relative group-hover:bg-primary transition-colors cursor-pointer">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface text-on-surface font-label-md text-label-md py-1 px-2 rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">$4.1M</div>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">Malawi</span>
+</div>
+<!-- Bar 2 -->
+<div class="w-12 sm:w-16 flex flex-col items-center gap-xs group">
+<div class="w-full bg-secondary-container rounded-t-sm h-[60%] relative group-hover:bg-secondary transition-colors cursor-pointer">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface text-on-surface font-label-md text-label-md py-1 px-2 rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">$3.0M</div>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">Lesotho</span>
+</div>
+<!-- Bar 3 -->
+<div class="w-12 sm:w-16 flex flex-col items-center gap-xs group">
+<div class="w-full bg-primary-container rounded-t-sm h-[90%] relative group-hover:bg-primary transition-colors cursor-pointer">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface text-on-surface font-label-md text-label-md py-1 px-2 rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">$4.6M</div>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">DRC</span>
+</div>
+<!-- Bar 4 -->
+<div class="w-12 sm:w-16 flex flex-col items-center gap-xs group">
+<div class="w-full bg-surface-tint rounded-t-sm h-[40%] relative group-hover:bg-primary-container transition-colors cursor-pointer">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface text-on-surface font-label-md text-label-md py-1 px-2 rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">$2.1M</div>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">Namibia</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Budget Line Allocation vs Utilisation -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-sm border border-outline-variant/10">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-h3 text-h3 text-primary flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">stacked_bar_chart</span>
+                                Allocation vs Utilisation
+                            </h3>
+<div class="flex items-center gap-sm font-label-md text-label-md">
+<div class="flex items-center gap-xs"><div class="w-3 h-3 rounded-sm bg-surface-tint"></div><span class="text-on-surface-variant">Allocated</span></div>
+<div class="flex items-center gap-xs"><div class="w-3 h-3 rounded-sm bg-secondary-container"></div><span class="text-on-surface-variant">Utilised</span></div>
+</div>
+</div>
+<!-- Simulated Grouped Bar Chart Horizontal -->
+<div class="flex flex-col gap-md">
+<!-- Group 1 -->
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-xs">
+<span class="text-on-surface-variant">Personnel</span>
+<span class="text-primary font-bold">85% Utilised</span>
+</div>
+<div class="w-full h-4 bg-surface-container-low rounded-full overflow-hidden flex relative">
+<div class="absolute top-0 left-0 h-full bg-surface-tint opacity-30 w-full"></div> <!-- Allocated Total -->
+<div class="h-full bg-secondary-container rounded-r-full" style="width: 85%;"></div> <!-- Utilised -->
+</div>
+</div>
+<!-- Group 2 -->
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-xs">
+<span class="text-on-surface-variant">Travel</span>
+<span class="text-primary font-bold">42% Utilised</span>
+</div>
+<div class="w-full h-4 bg-surface-container-low rounded-full overflow-hidden flex relative">
+<div class="absolute top-0 left-0 h-full bg-surface-tint opacity-30 w-[80%]"></div> <!-- Allocated Total relative scale-->
+<div class="h-full bg-secondary-container rounded-r-full" style="width: 33.6%;"></div> <!-- 42% of 80% width -->
+</div>
+</div>
+<!-- Group 3 -->
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-xs">
+<span class="text-on-surface-variant">Equipment</span>
+<span class="text-primary font-bold">92% Utilised</span>
+</div>
+<div class="w-full h-4 bg-surface-container-low rounded-full overflow-hidden flex relative">
+<div class="absolute top-0 left-0 h-full bg-surface-tint opacity-30 w-[60%]"></div> <!-- Allocated Total relative scale-->
+<div class="h-full bg-secondary-container rounded-r-full" style="width: 55.2%;"></div> <!-- 92% of 60% width -->
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column (approx 40% -> 5 cols on lg grid) -->
+<div class="lg:col-span-5 flex flex-col gap-gutter">
+<!-- Highest Variance Country Card (Glassmorphism inspired, slightly elevated) -->
+<div class="bg-primary-container text-on-primary-container rounded-xl p-md shadow-md border border-primary-fixed/20 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined" style="font-size: 80px; font-variation-settings: 'FILL' 1;">trending_down</span>
+</div>
+<h3 class="font-label-md text-label-md text-primary-fixed-dim uppercase tracking-wider mb-sm relative z-10">Highest Variance Country</h3>
+<div class="flex items-end gap-md relative z-10">
+<div>
+<div class="font-h1 text-h1 text-on-primary mb-xs">Lesotho</div>
+<div class="font-body-sm text-body-sm text-primary-fixed">-18% under budget</div>
+</div>
+<div class="flex-1 flex justify-end">
+<!-- Sparkline simulated -->
+<svg class="w-24 h-12 stroke-secondary-fixed" fill="none" preserveaspectratio="none" viewbox="0 0 100 50">
+<path d="M0,25 L20,30 L40,15 L60,35 L80,20 L100,40" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+<circle cx="100" cy="40" fill="#ffe088" r="4"></circle>
+</svg>
+</div>
+</div>
+</div>
+<!-- Budget Line Distribution Doughnut Chart -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-sm border border-outline-variant/10 flex-1 flex flex-col">
+<h3 class="font-h3 text-h3 text-primary mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">donut_large</span>
+                            Distribution
+                        </h3>
+<div class="flex-1 flex flex-col items-center justify-center py-sm">
+<!-- Simulated Doughnut Chart using CSS conic-gradient -->
+<div class="w-48 h-48 rounded-full relative flex items-center justify-center shadow-inner" style="background: conic-gradient(
+                                    #0b2d20 0% 45%,    /* Personnel */
+                                    #735c00 45% 70%,   /* Equipment */
+                                    #446555 70% 85%,   /* Travel */
+                                    #fed65b 85% 100%   /* Meetings */
+                                 );">
+<!-- Inner cutout -->
+<div class="w-32 h-32 bg-surface-container-lowest rounded-full flex flex-col items-center justify-center shadow-sm">
+<span class="font-label-md text-label-md text-on-surface-variant">Total Spend</span>
+<span class="font-h2 text-h2 text-primary">$13.8M</span>
+</div>
+</div>
+</div>
+<!-- Legend -->
+<div class="grid grid-cols-2 gap-sm mt-md font-label-md text-label-md">
+<div class="flex items-center gap-xs">
+<div class="w-3 h-3 rounded-full bg-primary-container"></div>
+<span class="text-on-surface-variant">Personnel (45%)</span>
+</div>
+<div class="flex items-center gap-xs">
+<div class="w-3 h-3 rounded-full bg-secondary"></div>
+<span class="text-on-surface-variant">Equipment (25%)</span>
+</div>
+<div class="flex items-center gap-xs">
+<div class="w-3 h-3 rounded-full bg-surface-tint"></div>
+<span class="text-on-surface-variant">Travel (15%)</span>
+</div>
+<div class="flex items-center gap-xs">
+<div class="w-3 h-3 rounded-full bg-secondary-container"></div>
+<span class="text-on-surface-variant">Meetings (15%)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Section: Detailed Breakdown Data Table -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/10 overflow-hidden">
+<div class="p-md border-b border-outline-variant/20 flex justify-between items-center">
+<h3 class="font-h3 text-h3 text-primary flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">table_chart</span>
+                        Detailed Breakdown
+                    </h3>
+<button class="text-primary hover:bg-surface-variant p-xs rounded-full transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low font-label-md text-label-md text-on-surface-variant">
+<th class="py-sm px-md border-b border-outline-variant/20 font-semibold whitespace-nowrap">Country</th>
+<th class="py-sm px-md border-b border-outline-variant/20 font-semibold whitespace-nowrap">Budget Line</th>
+<th class="py-sm px-md border-b border-outline-variant/20 font-semibold whitespace-nowrap">Activity Code</th>
+<th class="py-sm px-md border-b border-outline-variant/20 font-semibold text-right whitespace-nowrap">Total Budget</th>
+<th class="py-sm px-md border-b border-outline-variant/20 font-semibold text-right whitespace-nowrap">Actual Spend</th>
+<th class="py-sm px-md border-b border-outline-variant/20 font-semibold text-center whitespace-nowrap">% Utilised</th>
+<th class="py-sm px-md border-b border-outline-variant/20 font-semibold text-center whitespace-nowrap">Status</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm divide-y divide-outline-variant/10">
+<tr class="hover:bg-surface-variant/30 transition-colors">
+<td class="py-sm px-md font-semibold text-primary">DRC</td>
+<td class="py-sm px-md text-on-surface">Personnel</td>
+<td class="py-sm px-md text-on-surface-variant font-ussd-mono">ACT-101</td>
+<td class="py-sm px-md text-right font-ussd-mono">$1,200,000</td>
+<td class="py-sm px-md text-right font-ussd-mono">$1,104,000</td>
+<td class="py-sm px-md text-center font-ussd-mono">92%</td>
+<td class="py-sm px-md text-center">
+<span class="inline-block bg-primary-fixed text-on-primary-fixed-variant px-sm py-xs rounded-full font-label-md text-label-md">On Track</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-variant/30 transition-colors">
+<td class="py-sm px-md font-semibold text-primary">Lesotho</td>
+<td class="py-sm px-md text-on-surface">Travel</td>
+<td class="py-sm px-md text-on-surface-variant font-ussd-mono">ACT-204</td>
+<td class="py-sm px-md text-right font-ussd-mono">$450,000</td>
+<td class="py-sm px-md text-right font-ussd-mono">$189,000</td>
+<td class="py-sm px-md text-center font-ussd-mono text-secondary">42%</td>
+<td class="py-sm px-md text-center">
+<span class="inline-block bg-secondary-fixed text-on-secondary-fixed-variant px-sm py-xs rounded-full font-label-md text-label-md">Under-utilised</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-variant/30 transition-colors">
+<td class="py-sm px-md font-semibold text-primary">Malawi</td>
+<td class="py-sm px-md text-on-surface">Equipment</td>
+<td class="py-sm px-md text-on-surface-variant font-ussd-mono">ACT-302</td>
+<td class="py-sm px-md text-right font-ussd-mono">$800,000</td>
+<td class="py-sm px-md text-right font-ussd-mono">$840,000</td>
+<td class="py-sm px-md text-center font-ussd-mono text-error">105%</td>
+<td class="py-sm px-md text-center">
+<span class="inline-block bg-error-container text-on-error-container px-sm py-xs rounded-full font-label-md text-label-md">Over-utilised</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-variant/30 transition-colors">
+<td class="py-sm px-md font-semibold text-primary">Namibia</td>
+<td class="py-sm px-md text-on-surface">Meetings</td>
+<td class="py-sm px-md text-on-surface-variant font-ussd-mono">ACT-105</td>
+<td class="py-sm px-md text-right font-ussd-mono">$250,000</td>
+<td class="py-sm px-md text-right font-ussd-mono">$200,000</td>
+<td class="py-sm px-md text-center font-ussd-mono">80%</td>
+<td class="py-sm px-md text-center">
+<span class="inline-block bg-primary-fixed text-on-primary-fixed-variant px-sm py-xs rounded-full font-label-md text-label-md">On Track</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-sm border-t border-outline-variant/20 bg-surface-container-low flex justify-between items-center text-body-sm text-on-surface-variant">
+<span>Showing 1 to 4 of 24 entries</span>
+<div class="flex gap-xs">
+<button class="px-sm py-xs border border-outline-variant/30 rounded bg-surface hover:bg-surface-variant transition-colors disabled:opacity-50" disabled="">Prev</button>
+<button class="px-sm py-xs border border-outline-variant/30 rounded bg-surface hover:bg-surface-variant transition-colors">Next</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

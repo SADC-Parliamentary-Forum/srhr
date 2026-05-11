@@ -1,0 +1,37 @@
+# PRD: Logged-in Budget Analysis Component
+SRHR Dashboard Portal — National Activities Budget Utilisation
+
+## 1. Product Overview
+The Budget Analysis Component is a secure, logged-in module within the SRHR Dashboard Portal. It allows authorised users to upload monthly budget utilisation data, analyse expenditure patterns, identify under-utilisation, compare country and activity spending, generate priority actions, and export budget analysis reports.
+
+## 2. Product Goal
+The goal is to provide a simple but powerful budget reporting tool that helps users answer:
+- How much of the budget has been utilised?
+- Which activities are spending?
+- Which activities are under-utilised?
+- Which countries have recorded spending?
+- Which countries have no spending?
+- Which activities need acceleration?
+- Are budget records reconciled?
+- What should be prioritised in the next reporting period?
+
+## 3. Location in the Logged-in Portal
+- **Primary Location:** Analysis → Budget Analysis
+- **Secondary Entry Points:** Dashboard Widget, Data Capture Upload, Reports Workspace.
+
+## 4. Main Screen Structure & Tabs
+- **Screen Name:** Budget Analysis
+- **Tabs:** Overview, Activities, Countries, No-Spend, Variance, Reconciliation, Priority Actions, AI Insights.
+
+## 5. Key Visual Components
+- **Budget Cards:** High-level metrics (Total Budget, Utilisation, Balance, Rate).
+- **Utilisation Gauge:** Semi-circle visual of spent vs. remaining.
+- **Activity Ranking Chart:** Horizontal ranked bar chart.
+- **Country Utilisation Table:** Breakdown by nation with status chips.
+- **Priority Action Cards:** Dynamic recommendations based on data (Accelerate, Sustain, Follow Up, Reconcile).
+
+## 6. Budget Upload Flow
+A 10-step guided wizard for Excel ingestion, column mapping, and validation.
+
+## 7. AI Integration
+Dedicated "AI Insights" tab for automated summaries, under-utilisation analysis, and narrative drafting for reports.

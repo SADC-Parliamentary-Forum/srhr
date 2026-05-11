@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Public Publishing Queue - SRHR Portal</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Manrope & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Courier+Prime&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "error": "#ba1a1a",
+                        "tertiary": "#131310",
+                        "secondary-fixed-dim": "#e9c349",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-tertiary-container": "#908f89",
+                        "tertiary-container": "#282824",
+                        "on-tertiary-fixed": "#1c1c18",
+                        "background": "#fbf9f8",
+                        "on-secondary-container": "#745c00",
+                        "on-primary-fixed-variant": "#2d4d3e",
+                        "outline": "#727974",
+                        "on-tertiary-fixed-variant": "#474742",
+                        "primary-fixed": "#c6ebd7",
+                        "surface": "#fbf9f8",
+                        "surface-container-highest": "#e4e2e2",
+                        "surface-variant": "#e4e2e2",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#eae8e7",
+                        "outline-variant": "#c1c8c2",
+                        "tertiary-fixed-dim": "#c9c6c0",
+                        "inverse-primary": "#abcfbb",
+                        "on-primary-container": "#749684",
+                        "secondary-fixed": "#ffe088",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#414844",
+                        "surface-bright": "#fbf9f8",
+                        "on-secondary-fixed": "#241a00",
+                        "primary-fixed-dim": "#abcfbb",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#303030",
+                        "surface-tint": "#446555",
+                        "primary-container": "#0b2d20",
+                        "inverse-on-surface": "#f2f0f0",
+                        "primary": "#00170d",
+                        "on-surface": "#1b1c1c",
+                        "surface-dim": "#dbd9d9",
+                        "surface-container": "#efeded",
+                        "on-primary-fixed": "#002115",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#e5e2db",
+                        "secondary": "#735c00",
+                        "on-secondary": "#ffffff",
+                        "surface-container-low": "#f5f3f3",
+                        "secondary-container": "#fed65b",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-background": "#1b1c1c"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "base": "8px",
+                        "md": "24px",
+                        "container-margin": "20px",
+                        "xl": "64px",
+                        "xs": "4px",
+                        "sm": "12px",
+                        "gutter": "16px",
+                        "lg": "40px"
+                    },
+                    fontFamily: {
+                        "label-md": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "ussd-mono": ["Courier Prime", "Courier"],
+                        "display": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "body-sm": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "label-lg": ["Manrope"]
+                    },
+                    fontSize: {
+                        "label-md": ["12px", { lineHeight: "1.2", letterSpacing: "0.05em", fontWeight: "600" }],
+                        "h3": ["20px", { lineHeight: "1.4", fontWeight: "600" }],
+                        "h1": ["32px", { lineHeight: "1.2", fontWeight: "700" }],
+                        "ussd-mono": ["16px", { lineHeight: "1.4", fontWeight: "400" }],
+                        "display": ["40px", { lineHeight: "1.2", fontWeight: "800" }],
+                        "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+                        "h2": ["24px", { lineHeight: "1.3", fontWeight: "700" }],
+                        "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+                        "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+                        "label-lg": ["14px", { lineHeight: "1.2", letterSpacing: "0.02em", fontWeight: "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        /* Custom scrollbar for modern feel */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #c1c8c2; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #727974; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex antialiased">
+<!-- Shared Component: SideNavBar -->
+<aside class="w-64 border-r border-outline-variant bg-surface flex flex-col h-screen sticky top-0 hidden md:flex shrink-0 z-40">
+<!-- Header -->
+<div class="p-md flex items-center gap-sm border-b border-outline-variant/30">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-[24px]">corporate_fare</span>
+</div>
+<div class="flex flex-col">
+<span class="text-h2 font-h2 font-black text-primary truncate">SRHR Portal</span>
+<span class="text-label-md font-label-md text-on-surface-variant">Secure Reporting</span>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<nav class="flex-1 overflow-y-auto py-sm px-sm flex flex-col gap-xs mt-sm">
+<!-- Inactive -->
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all duration-300 ease-in-out group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">dashboard</span>
+<span class="font-body-md text-body-md font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all duration-300 ease-in-out group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">work</span>
+<span class="font-body-md text-body-md font-label-md text-label-md">Reports Workspace</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all duration-300 ease-in-out group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">edit_note</span>
+<span class="font-body-md text-body-md font-label-md text-label-md">Data Capture</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all duration-300 ease-in-out group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">analytics</span>
+<span class="font-body-md text-body-md font-label-md text-label-md">Analysis</span>
+</a>
+<!-- Active Navigation -->
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg bg-surface-container-highest text-primary font-bold border-r-4 border-secondary transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined icon-fill text-primary">library_books</span>
+<span class="font-body-md text-body-md font-label-md text-label-md">Library</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all duration-300 ease-in-out group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">settings</span>
+<span class="font-body-md text-body-md font-label-md text-label-md">Administration</span>
+</a>
+</nav>
+<!-- CTA -->
+<div class="p-md mt-auto border-t border-outline-variant/30">
+<button class="w-full flex items-center justify-center gap-sm py-sm px-gutter border border-outline-variant rounded-lg text-on-surface hover:bg-surface-container-low transition-colors font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">center_focus_strong</span>
+                Focus Mode
+            </button>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col min-w-0 min-h-screen">
+<!-- Shared Component: TopAppBar -->
+<header class="flex justify-between items-center px-gutter py-xs w-full sticky top-0 z-50 shadow-sm bg-surface-bright">
+<div class="flex items-center gap-md">
+<!-- Mobile Menu Button (Hidden on Desktop) -->
+<button class="md:hidden p-xs text-on-surface rounded-full hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="font-display text-display text-primary hidden lg:block tracking-tight text-[28px]">SRHR Portal</span>
+</div>
+<!-- Top Navigation Links -->
+<nav class="hidden md:flex items-center h-full">
+<a class="px-sm py-sm mx-xs font-label-lg text-label-lg text-on-surface-variant hover:text-secondary transition-colors h-full flex items-center border-b-2 border-transparent" href="#">Reports</a>
+<a class="px-sm py-sm mx-xs font-label-lg text-label-lg text-on-surface-variant hover:text-secondary transition-colors h-full flex items-center border-b-2 border-transparent" href="#">Data</a>
+<!-- Active Top Nav -->
+<a class="px-sm py-sm mx-xs font-label-lg text-label-lg text-secondary-container font-bold border-b-2 border-secondary-container h-full flex items-center" href="#">Library</a>
+</nav>
+<!-- Actions & Profile -->
+<div class="flex items-center gap-sm">
+<!-- Search Bar Placeholder -->
+<div class="hidden lg:flex items-center bg-surface-container-low rounded-full px-sm py-xs border border-outline-variant/50 focus-within:border-primary transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-sm font-body-sm text-on-surface placeholder:text-on-surface-variant/70 w-48 ml-xs p-0" placeholder="Search..." type="text"/>
+</div>
+<div class="flex items-center gap-xs mx-sm">
+<button class="p-xs text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-full transition-all scale-95 duration-150">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+</button>
+<button class="p-xs text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-full transition-all scale-95 duration-150 hidden sm:block">
+<span class="material-symbols-outlined text-[22px]">public</span>
+</button>
+<button class="p-xs text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-full transition-all scale-95 duration-150 hidden sm:block">
+<span class="material-symbols-outlined text-[22px]">calendar_today</span>
+</button>
+</div>
+<div class="flex items-center gap-sm">
+<button class="hidden sm:flex items-center gap-xs px-sm py-xs rounded-full border border-primary text-primary font-label-md text-label-md hover:bg-primary hover:text-on-primary transition-colors">
+                        Add / Upload
+                    </button>
+<button class="hidden lg:flex items-center gap-xs px-sm py-xs rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md hover:bg-secondary hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined text-[18px]">smart_toy</span>
+                        AI Assistant
+                    </button>
+<!-- Avatar -->
+<div class="w-9 h-9 rounded-full bg-surface-dim border border-outline-variant overflow-hidden shrink-0 ml-xs cursor-pointer hover:ring-2 ring-primary transition-all">
+<!-- Placeholder for avatar -->
+<div class="w-full h-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center font-bold text-label-md">
+                            US
+                        </div>
+</div>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 p-container-margin md:p-lg flex flex-col gap-md max-w-[1400px] w-full mx-auto">
+<!-- Context & Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-md pb-sm border-b border-outline-variant/30">
+<div>
+<!-- Breadcrumb/Context -->
+<div class="flex items-center gap-xs text-body-sm font-body-sm text-on-surface-variant mb-xs">
+<span>Library</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-primary font-medium">Public Publishing</span>
+</div>
+<h1 class="font-h1 text-h1 text-on-surface">Queue Management</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs max-w-2xl">Review and approve content submissions before they are published to the public-facing SRHR site. Ensure all items have necessary validations.</p>
+</div>
+<!-- Filter/Sort Controls -->
+<div class="flex flex-wrap items-center gap-sm">
+<div class="flex bg-surface-container-low rounded-lg p-xs border border-outline-variant/30">
+<button class="px-sm py-xs rounded text-label-md font-label-md bg-surface-container-lowest shadow-sm text-primary transition-colors">Pending Approval</button>
+<button class="px-sm py-xs rounded text-label-md font-label-md text-on-surface-variant hover:text-on-surface transition-colors">Recently Published</button>
+</div>
+<button class="flex items-center gap-xs px-sm py-xs border border-outline-variant rounded-lg text-on-surface hover:bg-surface-container-low transition-colors font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                        Filter
+                    </button>
+</div>
+</div>
+<!-- The Queue (List of Cards) -->
+<div class="flex flex-col gap-sm">
+<!-- Queue Item 1: Story -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_4px_16px_-4px_rgba(0,23,13,0.06)] border border-outline-variant/20 p-md flex flex-col lg:flex-row gap-md lg:items-center hover:shadow-[0_8px_24px_-8px_rgba(0,23,13,0.08)] transition-shadow">
+<!-- Left: Metadata -->
+<div class="flex-1 flex flex-col gap-xs">
+<div class="flex items-center gap-sm mb-xs">
+<span class="inline-flex items-center gap-xs px-2 py-1 rounded-full bg-[#f2f0f0] text-on-surface-variant font-label-md text-[11px] uppercase tracking-wider">
+<span class="material-symbols-outlined text-[14px]">auto_stories</span>
+                                Story
+                            </span>
+<span class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                                Submitted 2 hours ago
+                            </span>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface leading-snug">Impact of Community Health Workers in Rural Clinics: A Case Study from Region 4</h3>
+<div class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-sm">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">person</span> Submitter: Dr. Amina Diallo</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>ID: PUB-9821</span>
+</div>
+</div>
+<!-- Middle: Status Indicators -->
+<div class="flex flex-wrap lg:flex-col gap-sm justify-center lg:w-48 shrink-0">
+<div class="inline-flex items-center gap-xs px-sm py-1 rounded-full bg-primary-fixed text-on-primary-fixed border border-primary-fixed-dim/30">
+<span class="material-symbols-outlined icon-fill text-[16px]">check_circle</span>
+<span class="font-label-md text-label-md">Consent Verified</span>
+</div>
+<div class="inline-flex items-center gap-xs px-sm py-1 rounded-full bg-primary-fixed text-on-primary-fixed border border-primary-fixed-dim/30">
+<span class="material-symbols-outlined icon-fill text-[16px]">verified</span>
+<span class="font-label-md text-label-md">Data Validated</span>
+</div>
+</div>
+<!-- Right: Actions -->
+<div class="flex flex-wrap items-center gap-sm shrink-0 lg:ml-md border-t lg:border-t-0 lg:border-l border-outline-variant/30 pt-md lg:pt-0 lg:pl-md">
+<button class="p-xs text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-full transition-colors group relative" title="Preview Public View">
+<span class="material-symbols-outlined">visibility</span>
+<span class="absolute -top-8 left-1/2 -translate-x-1/2 bg-tertiary text-on-tertiary text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Preview View</span>
+</button>
+<button class="px-sm py-xs border border-outline-variant text-on-surface font-label-md text-label-md rounded-lg hover:border-primary hover:text-primary transition-colors bg-transparent">
+                            Return to Draft
+                        </button>
+<button class="px-md py-xs bg-primary text-on-primary font-label-md text-label-md rounded-lg hover:bg-primary-container transition-colors shadow-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">publish</span>
+                            Approve &amp; Publish
+                        </button>
+</div>
+</div>
+<!-- Queue Item 2: Achievement -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_4px_16px_-4px_rgba(0,23,13,0.06)] border border-outline-variant/20 p-md flex flex-col lg:flex-row gap-md lg:items-center hover:shadow-[0_8px_24px_-8px_rgba(0,23,13,0.08)] transition-shadow relative overflow-hidden">
+<!-- Subtle highlight for urgent/attention needed -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary-container"></div>
+<!-- Left: Metadata -->
+<div class="flex-1 flex flex-col gap-xs pl-xs">
+<div class="flex items-center gap-sm mb-xs">
+<span class="inline-flex items-center gap-xs px-2 py-1 rounded-full bg-[#f2f0f0] text-on-surface-variant font-label-md text-[11px] uppercase tracking-wider">
+<span class="material-symbols-outlined text-[14px]">emoji_events</span>
+                                Achievement
+                            </span>
+<span class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                                Submitted Yesterday
+                            </span>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface leading-snug">Milestone Reached: 10,000 Contraceptive Units Distributed in Q2</h3>
+<div class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-sm">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">person</span> Submitter: Logistics Team Alpha</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>ID: PUB-9820</span>
+</div>
+</div>
+<!-- Middle: Status Indicators (Mixed State) -->
+<div class="flex flex-wrap lg:flex-col gap-sm justify-center lg:w-48 shrink-0">
+<div class="inline-flex items-center gap-xs px-sm py-1 rounded-full bg-surface-container-highest text-on-surface-variant border border-outline-variant/30 opacity-80">
+<span class="material-symbols-outlined text-[16px]">pending</span>
+<span class="font-label-md text-label-md">Consent Pending</span>
+</div>
+<div class="inline-flex items-center gap-xs px-sm py-1 rounded-full bg-primary-fixed text-on-primary-fixed border border-primary-fixed-dim/30">
+<span class="material-symbols-outlined icon-fill text-[16px]">verified</span>
+<span class="font-label-md text-label-md">Data Validated</span>
+</div>
+</div>
+<!-- Right: Actions -->
+<div class="flex flex-wrap items-center gap-sm shrink-0 lg:ml-md border-t lg:border-t-0 lg:border-l border-outline-variant/30 pt-md lg:pt-0 lg:pl-md">
+<button class="p-xs text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-full transition-colors group relative" title="Preview Public View">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="px-sm py-xs border border-outline-variant text-on-surface font-label-md text-label-md rounded-lg hover:border-primary hover:text-primary transition-colors bg-transparent">
+                            Return to Draft
+                        </button>
+<!-- Disabled state due to pending consent -->
+<button class="px-md py-xs bg-surface-container-highest text-on-surface-variant font-label-md text-label-md rounded-lg cursor-not-allowed opacity-60 flex items-center gap-xs" disabled="" title="Requires Consent Verification">
+<span class="material-symbols-outlined text-[18px]">publish</span>
+                            Approve &amp; Publish
+                        </button>
+</div>
+</div>
+<!-- Queue Item 3: News -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_4px_16px_-4px_rgba(0,23,13,0.06)] border border-outline-variant/20 p-md flex flex-col lg:flex-row gap-md lg:items-center hover:shadow-[0_8px_24px_-8px_rgba(0,23,13,0.08)] transition-shadow">
+<!-- Left: Metadata -->
+<div class="flex-1 flex flex-col gap-xs">
+<div class="flex items-center gap-sm mb-xs">
+<span class="inline-flex items-center gap-xs px-2 py-1 rounded-full bg-[#f2f0f0] text-on-surface-variant font-label-md text-[11px] uppercase tracking-wider">
+<span class="material-symbols-outlined text-[14px]">newspaper</span>
+                                News
+                            </span>
+<span class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                                Submitted 3 days ago
+                            </span>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface leading-snug">Annual SRHR Global Conference Highlights &amp; Key Takeaways</h3>
+<div class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-sm">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">person</span> Submitter: Communications Dept</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>ID: PUB-9815</span>
+</div>
+</div>
+<!-- Middle: Status Indicators -->
+<div class="flex flex-wrap lg:flex-col gap-sm justify-center lg:w-48 shrink-0">
+<div class="inline-flex items-center gap-xs px-sm py-1 rounded-full bg-surface-container-highest text-on-surface-variant border border-outline-variant/30 opacity-80" title="Not applicable for News">
+<span class="material-symbols-outlined text-[16px]">remove</span>
+<span class="font-label-md text-label-md">Consent N/A</span>
+</div>
+<div class="inline-flex items-center gap-xs px-sm py-1 rounded-full bg-primary-fixed text-on-primary-fixed border border-primary-fixed-dim/30">
+<span class="material-symbols-outlined icon-fill text-[16px]">verified</span>
+<span class="font-label-md text-label-md">Data Validated</span>
+</div>
+</div>
+<!-- Right: Actions -->
+<div class="flex flex-wrap items-center gap-sm shrink-0 lg:ml-md border-t lg:border-t-0 lg:border-l border-outline-variant/30 pt-md lg:pt-0 lg:pl-md">
+<button class="p-xs text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-full transition-colors group relative" title="Preview Public View">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="px-sm py-xs border border-outline-variant text-on-surface font-label-md text-label-md rounded-lg hover:border-primary hover:text-primary transition-colors bg-transparent">
+                            Return to Draft
+                        </button>
+<button class="px-md py-xs bg-primary text-on-primary font-label-md text-label-md rounded-lg hover:bg-primary-container transition-colors shadow-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">publish</span>
+                            Approve &amp; Publish
+                        </button>
+</div>
+</div>
+</div>
+<!-- Empty State / End of List -->
+<div class="py-lg flex flex-col items-center justify-center text-on-surface-variant opacity-60 mt-sm border border-dashed border-outline-variant rounded-xl bg-surface-container-lowest/50">
+<span class="material-symbols-outlined text-[48px] mb-xs">done_all</span>
+<p class="font-body-md text-body-md">No more pending items in the queue.</p>
+</div>
+</main>
+<!-- Shared Component: Footer -->
+<footer class="w-full py-md px-lg flex justify-between items-center mt-auto border-t border-outline-variant bg-surface-container-lowest flex-wrap gap-sm">
+<div class="flex items-center gap-sm">
+<span class="font-label-lg text-label-lg text-primary opacity-80 hover:opacity-100 transition-opacity">SRHR Portal</span>
+<span class="text-on-surface-variant text-label-md font-label-md">© 2024 SRHR Global Reporting System. All rights reserved.</span>
+</div>
+<nav class="flex items-center gap-md">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">Support</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">Documentation</a>
+</nav>
+</footer>
+</div>
+</body></html>

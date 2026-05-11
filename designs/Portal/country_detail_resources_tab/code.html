@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zambia - Resources | SADC PF SRHR Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#474742",
+                        "inverse-primary": "#abcfbb",
+                        "surface-bright": "#fbf9f8",
+                        "primary-fixed-dim": "#abcfbb",
+                        "surface-container": "#efeded",
+                        "on-secondary-fixed": "#241a00",
+                        "on-background": "#1b1c1c",
+                        "on-primary-container": "#749684",
+                        "on-secondary-fixed-variant": "#574500",
+                        "secondary-fixed-dim": "#e9c349",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#303030",
+                        "outline-variant": "#c1c8c2",
+                        "on-primary-fixed-variant": "#2d4d3e",
+                        "on-primary-fixed": "#002115",
+                        "surface-container-high": "#eae8e7",
+                        "secondary": "#735c00",
+                        "surface-container-highest": "#e4e2e2",
+                        "surface-dim": "#dbd9d9",
+                        "secondary-container": "#fed65b",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#c9c6c0",
+                        "tertiary": "#131310",
+                        "secondary-fixed": "#ffe088",
+                        "tertiary-fixed": "#e5e2db",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#414844",
+                        "error-container": "#ffdad6",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#446555",
+                        "background": "#fbf9f8",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#908f89",
+                        "surface": "#fbf9f8",
+                        "primary-fixed": "#c6ebd7",
+                        "primary": "#00170d",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#1c1c18",
+                        "tertiary-container": "#282824",
+                        "primary-container": "#0b2d20",
+                        "outline": "#727974",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#745c00",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-surface": "#1b1c1c",
+                        "surface-variant": "#e4e2e2",
+                        "surface-container-low": "#f5f3f3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-margin": "20px",
+                        "lg": "40px",
+                        "md": "24px",
+                        "xl": "64px",
+                        "sm": "12px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "ussd-mono": ["Courier"],
+                        "h2": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "display": ["Manrope"],
+                        "label-lg": ["Manrope"],
+                        "body-sm": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "h1": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "ussd-mono": ["16px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                        "h2": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display": ["40px", {"lineHeight": "1.2", "fontWeight": "800"}],
+                        "label-lg": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "h3": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "h1": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-primary dark:bg-primary shadow-sm docked full-width top-0 sticky flex justify-between items-center w-full px-container-margin py-sm z-50">
+<div class="flex items-center gap-md">
+<div class="text-h3 font-h3 text-secondary-container dark:text-secondary-container">
+                SADC PF SRHR Portal
+            </div>
+</div>
+<nav class="hidden md:flex items-center gap-gutter">
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors hover:bg-primary-container dark:hover:bg-primary-container transition-all px-sm py-xs rounded" href="#">Home</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors hover:bg-primary-container dark:hover:bg-primary-container transition-all px-sm py-xs rounded" href="#">Dashboard</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors hover:bg-primary-container dark:hover:bg-primary-container transition-all px-sm py-xs rounded" href="#">Countries</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors hover:bg-primary-container dark:hover:bg-primary-container transition-all px-sm py-xs rounded" href="#">Reports</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors hover:bg-primary-container dark:hover:bg-primary-container transition-all px-sm py-xs rounded" href="#">Stories</a>
+<a class="text-secondary-container font-bold border-b-2 border-secondary-container pb-1 hover:bg-primary-container dark:hover:bg-primary-container transition-all px-sm py-xs rounded" href="#">Resources</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors hover:bg-primary-container dark:hover:bg-primary-container transition-all px-sm py-xs rounded" href="#">News &amp; Events</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors hover:bg-primary-container dark:hover:bg-primary-container transition-all px-sm py-xs rounded" href="#">About</a>
+</nav>
+<div class="flex items-center gap-sm">
+<button class="text-on-primary font-label-lg hover:text-secondary-container transition-colors">Login</button>
+<button class="bg-secondary-container text-on-secondary-container font-label-lg px-gutter py-xs rounded hover:opacity-90 transition-opacity">Register</button>
+</div>
+</header>
+<main class="flex-grow pb-xl">
+<!-- Country Header Area (Consistent) -->
+<section class="bg-surface-container-low pt-lg pb-md border-b border-outline-variant/30">
+<div class="max-w-[1200px] mx-auto px-container-margin">
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-md mb-lg">
+<div class="flex items-center gap-md">
+<div class="w-16 h-12 rounded overflow-hidden shadow-sm border border-outline-variant/20">
+<img alt="Flag of Zambia" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYiP2tOm7MuPVUffTeaW9EWR-iT4pklvdQL4fgaBcTHRnhkSkCQ0vJkPv66sXdKLS7Ayq3sIT3MN8ekh6Wg0SHcdiIsLdJZYWQO-BCKIYF8HEOuBLeBLsdTPS-CUpEneJ82W05YVoPZR5df2b4Fm_FUij-I-Xnby--jny55Uu3pazyLEPWNb9_TGdf8U7C-iFadochoOBDMLJxHktDVRazdFyyIjLDfHdQorieQXz-cZp8IJMNWwU4Xed0stBNCMr7_nQiP3sm_Yc"/>
+</div>
+<div>
+<h1 class="font-h1 text-h1 text-on-surface">Zambia</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Member State SRHR Profile</p>
+</div>
+</div>
+</div>
+<!-- Key Metric Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-md">
+<div class="bg-surface rounded-lg p-md shadow-[0_4px_24px_rgba(0,23,13,0.04)] border border-primary/5 flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="calendar_today" data-weight="fill" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+</div>
+<div>
+<p class="font-label-sm text-on-surface-variant mb-xs">Latest Period</p>
+<p class="font-h3 text-h3 text-on-surface">2023 - Q4</p>
+</div>
+</div>
+<div class="bg-surface rounded-lg p-md shadow-[0_4px_24px_rgba(0,23,13,0.04)] border border-primary/5 flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-secondary-container/30 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="description" data-weight="fill" style="font-variation-settings: 'FILL' 1;">description</span>
+</div>
+<div>
+<p class="font-label-sm text-on-surface-variant mb-xs">Total Reports</p>
+<p class="font-h3 text-h3 text-on-surface">42</p>
+</div>
+</div>
+<div class="bg-surface rounded-lg p-md shadow-[0_4px_24px_rgba(0,23,13,0.04)] border border-primary/5 flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-inverse-primary/30 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined" data-icon="trending_up" data-weight="fill" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+</div>
+<div>
+<p class="font-label-sm text-on-surface-variant mb-xs">Achievement Score</p>
+<p class="font-h3 text-h3 text-on-surface">78%</p>
+</div>
+</div>
+</div>
+<!-- Tab Navigation -->
+<div class="flex gap-md border-b border-outline-variant/30 overflow-x-auto">
+<a class="px-sm py-sm font-label-lg text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap" href="#">Overview</a>
+<a class="px-sm py-sm font-label-lg text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap" href="#">Indicators</a>
+<a class="px-sm py-sm font-label-lg text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap" href="#">Policy Framework</a>
+<a class="px-sm py-sm font-label-lg text-primary border-b-2 border-primary font-bold whitespace-nowrap" href="#">Resources</a>
+</div>
+</div>
+</section>
+<!-- Resources Content Area -->
+<section class="max-w-[1200px] mx-auto px-container-margin py-lg">
+<!-- Featured Resources -->
+<div class="mb-xl">
+<h2 class="font-h2 text-h2 text-on-surface mb-md">Featured Resources</h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-md">
+<!-- Featured Card 1 -->
+<div class="bg-primary text-on-primary rounded-xl p-lg flex flex-col justify-between relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-md opacity-20 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-[120px]" data-icon="book" data-weight="fill" style="font-variation-settings: 'FILL' 1;">book</span>
+</div>
+<div class="relative z-10">
+<span class="inline-block px-sm py-xs bg-secondary-container text-on-secondary-container font-label-sm rounded-full mb-md">Global Guideline</span>
+<h3 class="font-h2 text-h2 mb-sm">WHO SRHR Implementation Guide 2023</h3>
+<p class="font-body-md text-on-primary/80 mb-lg max-w-[80%]">Comprehensive technical guidance for implementing high-quality SRHR interventions adapted for the SADC region.</p>
+</div>
+<div class="relative z-10 flex items-center gap-sm mt-auto">
+<button class="bg-secondary-container text-on-secondary-container font-label-lg px-gutter py-sm rounded-lg hover:opacity-90 transition-opacity flex items-center gap-xs">
+<span class="material-symbols-outlined text-[20px]" data-icon="download">download</span>
+                                Download PDF
+                            </button>
+</div>
+</div>
+<!-- Featured Card 2 -->
+<div class="bg-surface-container rounded-xl p-lg border border-outline-variant/30 flex flex-col justify-between hover:shadow-[0_4px_24px_rgba(0,23,13,0.06)] transition-shadow">
+<div>
+<span class="inline-block px-sm py-xs bg-primary/10 text-primary font-label-sm rounded-full mb-md">Legal Framework</span>
+<h3 class="font-h3 text-h3 text-on-surface mb-sm">SADC Model Law on Eradicating Child Marriage</h3>
+<p class="font-body-md text-on-surface-variant mb-lg">Key regional legislative framework adopted by SADC Parliamentary Forum to guide national law reform.</p>
+</div>
+<div class="flex items-center justify-between mt-auto pt-md border-t border-outline-variant/20">
+<div class="text-sm text-on-surface-variant flex items-center gap-sm">
+<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-[16px]" data-icon="calendar_month">calendar_month</span> 2016</span>
+<span>•</span>
+<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-[16px]" data-icon="insert_drive_file">insert_drive_file</span> PDF, 3.1 MB</span>
+</div>
+<button class="text-primary font-label-lg hover:text-primary-container flex items-center gap-xs">
+                                Download <span class="material-symbols-outlined text-[20px]" data-icon="arrow_downward">arrow_downward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Search and Filter -->
+<div class="bg-surface rounded-xl p-md shadow-[0_4px_24px_rgba(0,23,13,0.02)] border border-outline-variant/20 mb-lg flex flex-col md:flex-row gap-md items-center">
+<div class="relative flex-grow w-full">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full pl-xl pr-sm py-sm rounded-lg border-outline-variant/50 focus:border-primary focus:ring-primary bg-surface-bright text-on-surface font-body-md" placeholder="Search resources..." type="text"/>
+</div>
+<div class="flex gap-sm w-full md:w-auto overflow-x-auto pb-2 md:pb-0">
+<select class="rounded-lg border-outline-variant/50 focus:border-primary focus:ring-primary bg-surface-bright text-on-surface font-body-sm py-sm pl-sm pr-lg">
+<option>All Types</option>
+<option>Toolkits</option>
+<option>Guidelines</option>
+<option>Technical Papers</option>
+<option>Legal Frameworks</option>
+</select>
+<select class="rounded-lg border-outline-variant/50 focus:border-primary focus:ring-primary bg-surface-bright text-on-surface font-body-sm py-sm pl-sm pr-lg">
+<option>Sort by: Newest</option>
+<option>Sort by: Oldest</option>
+<option>Sort by: Name (A-Z)</option>
+</select>
+</div>
+</div>
+<!-- Resource Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<div class="bg-surface rounded-lg border border-outline-variant/30 hover:shadow-[0_4px_24px_rgba(0,23,13,0.08)] transition-all duration-300 flex flex-col group">
+<div class="p-md flex-grow">
+<div class="flex justify-between items-start mb-sm">
+<span class="inline-block px-sm py-[2px] bg-primary/5 text-primary font-label-md rounded-full">Toolkit</span>
+</div>
+<h4 class="font-h3 text-h3 text-on-surface mb-sm group-hover:text-primary transition-colors">National SRHR Advocacy Toolkit</h4>
+<p class="font-body-sm text-on-surface-variant line-clamp-3">A practical guide for civil society organizations and parliamentarians in Zambia to advocate for improved SRHR funding and policy implementation.</p>
+</div>
+<div class="px-md py-sm border-t border-outline-variant/20 bg-surface-container-low/50">
+<div class="flex items-center justify-between mb-sm">
+<span class="font-body-sm text-on-surface-variant flex items-center gap-xs"><span class="material-symbols-outlined text-[16px]" data-icon="event">event</span> Oct 2023</span>
+<span class="font-body-sm text-on-surface-variant flex items-center gap-xs"><span class="material-symbols-outlined text-[16px]" data-icon="description">description</span> PDF, 1.8 MB</span>
+</div>
+<div class="flex items-center gap-sm pt-xs">
+<button class="flex-1 bg-primary text-on-primary font-label-md py-sm rounded hover:bg-primary-container transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[18px]" data-icon="download">download</span> Download
+                            </button>
+<button class="flex-1 border border-primary text-primary font-label-md py-sm rounded hover:bg-primary/5 transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[18px]" data-icon="visibility">visibility</span> Preview
+                            </button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface rounded-lg border border-outline-variant/30 hover:shadow-[0_4px_24px_rgba(0,23,13,0.08)] transition-all duration-300 flex flex-col group">
+<div class="p-md flex-grow">
+<div class="flex justify-between items-start mb-sm">
+<span class="inline-block px-sm py-[2px] bg-secondary/10 text-secondary font-label-md rounded-full">Technical Paper</span>
+</div>
+<h4 class="font-h3 text-h3 text-on-surface mb-sm group-hover:text-primary transition-colors">Adolescent Health Indicators Report 2022</h4>
+<p class="font-body-sm text-on-surface-variant line-clamp-3">Detailed analysis of adolescent sexual and reproductive health trends in Zambia, including maternal mortality and contraception uptake rates.</p>
+</div>
+<div class="px-md py-sm border-t border-outline-variant/20 bg-surface-container-low/50">
+<div class="flex items-center justify-between mb-sm">
+<span class="font-body-sm text-on-surface-variant flex items-center gap-xs"><span class="material-symbols-outlined text-[16px]" data-icon="event">event</span> Mar 2023</span>
+<span class="font-body-sm text-on-surface-variant flex items-center gap-xs"><span class="material-symbols-outlined text-[16px]" data-icon="description">description</span> PDF, 4.2 MB</span>
+</div>
+<div class="flex items-center gap-sm pt-xs">
+<button class="flex-1 bg-primary text-on-primary font-label-md py-sm rounded hover:bg-primary-container transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[18px]" data-icon="download">download</span> Download
+                            </button>
+<button class="flex-1 border border-primary text-primary font-label-md py-sm rounded hover:bg-primary/5 transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[18px]" data-icon="visibility">visibility</span> Preview
+                            </button>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface rounded-lg border border-outline-variant/30 hover:shadow-[0_4px_24px_rgba(0,23,13,0.08)] transition-all duration-300 flex flex-col group">
+<div class="p-md flex-grow">
+<div class="flex justify-between items-start mb-sm">
+<span class="inline-block px-sm py-[2px] bg-primary-container/10 text-primary-container font-label-md rounded-full">Guideline</span>
+</div>
+<h4 class="font-h3 text-h3 text-on-surface mb-sm group-hover:text-primary transition-colors">Maternal Health Financing Guidelines</h4>
+<p class="font-body-sm text-on-surface-variant line-clamp-3">National guidelines detailing budgetary allocation requirements and domestic resource mobilization strategies for maternal health services.</p>
+</div>
+<div class="px-md py-sm border-t border-outline-variant/20 bg-surface-container-low/50">
+<div class="flex items-center justify-between mb-sm">
+<span class="font-body-sm text-on-surface-variant flex items-center gap-xs"><span class="material-symbols-outlined text-[16px]" data-icon="event">event</span> Aug 2022</span>
+<span class="font-body-sm text-on-surface-variant flex items-center gap-xs"><span class="material-symbols-outlined text-[16px]" data-icon="description">description</span> PDF, 2.1 MB</span>
+</div>
+<div class="flex items-center gap-sm pt-xs">
+<button class="flex-1 bg-primary text-on-primary font-label-md py-sm rounded hover:bg-primary-container transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[18px]" data-icon="download">download</span> Download
+                            </button>
+<button class="flex-1 border border-primary text-primary font-label-md py-sm rounded hover:bg-primary/5 transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[18px]" data-icon="visibility">visibility</span> Preview
+                            </button>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface rounded-lg border border-outline-variant/30 hover:shadow-[0_4px_24px_rgba(0,23,13,0.08)] transition-all duration-300 flex flex-col group">
+<div class="p-md flex-grow">
+<div class="flex justify-between items-start mb-sm">
+<span class="inline-block px-sm py-[2px] bg-tertiary-container/10 text-tertiary-container font-label-md rounded-full">Legal Framework</span>
+</div>
+<h4 class="font-h3 text-h3 text-on-surface mb-sm group-hover:text-primary transition-colors">Gender Equity and Equality Act (2015)</h4>
+<p class="font-body-sm text-on-surface-variant line-clamp-3">Full text of the Zambian legislative act providing for gender equity and equality across all spheres of life, including access to health services.</p>
+</div>
+<div class="px-md py-sm border-t border-outline-variant/20 bg-surface-container-low/50">
+<div class="flex items-center justify-between mb-sm">
+<span class="font-body-sm text-on-surface-variant flex items-center gap-xs"><span class="material-symbols-outlined text-[16px]" data-icon="event">event</span> 2015</span>
+<span class="font-body-sm text-on-surface-variant flex items-center gap-xs"><span class="material-symbols-outlined text-[16px]" data-icon="description">description</span> PDF, 1.5 MB</span>
+</div>
+<div class="flex items-center gap-sm pt-xs">
+<button class="flex-1 bg-primary text-on-primary font-label-md py-sm rounded hover:bg-primary-container transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[18px]" data-icon="download">download</span> Download
+                            </button>
+<button class="flex-1 border border-primary text-primary font-label-md py-sm rounded hover:bg-primary/5 transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[18px]" data-icon="visibility">visibility</span> Preview
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="flex justify-center items-center gap-sm mt-lg pt-md">
+<button class="w-10 h-10 rounded border border-outline-variant flex items-center justify-center text-on-surface-variant hover:bg-surface-container disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[20px]" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded bg-primary text-on-primary font-label-md flex items-center justify-center">1</button>
+<button class="w-10 h-10 rounded border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container font-label-md">2</button>
+<button class="w-10 h-10 rounded border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container font-label-md">3</button>
+<span class="text-on-surface-variant">...</span>
+<button class="w-10 h-10 rounded border border-outline-variant flex items-center justify-center text-on-surface-variant hover:bg-surface-container">
+<span class="material-symbols-outlined text-[20px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-tertiary dark:bg-tertiary-container full-width bottom-0 flat no shadows flex flex-col md:flex-row justify-between items-center w-full px-container-margin py-lg border-t border-outline-variant mt-auto">
+<div class="text-h3 font-h3 text-secondary-fixed mb-md md:mb-0">
+            SADC PF SRHR Portal
+        </div>
+<div class="flex flex-col md:flex-row items-center gap-md">
+<div class="flex gap-md font-label-md text-label-md">
+<a class="text-on-tertiary-container hover:text-secondary-fixed transition-colors hover:underline" href="#">Privacy Policy</a>
+<a class="text-on-tertiary-container hover:text-secondary-fixed transition-colors hover:underline" href="#">Terms of Service</a>
+<a class="text-on-tertiary-container hover:text-secondary-fixed transition-colors hover:underline" href="#">Contact Us</a>
+<a class="text-on-tertiary-container hover:text-secondary-fixed transition-colors hover:underline" href="#">SADC Website</a>
+</div>
+<div class="text-on-tertiary-container font-body-sm text-body-sm mt-sm md:mt-0 ml-lg">
+                © 2024 SADC Parliamentary Forum. All Rights Reserved.
+            </div>
+</div>
+</footer>
+</body></html>

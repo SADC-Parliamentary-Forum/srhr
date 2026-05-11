@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Budget Analysis Portal - Activities</title>
+<!-- Google Fonts: Manrope & Courier (USSD-mono fallback) -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;  /* Default */
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "tertiary": "#131310",
+                            "on-tertiary-container": "#908f89",
+                            "on-secondary-fixed": "#241a00",
+                            "on-background": "#1b1c1c",
+                            "surface-container-low": "#f5f3f3",
+                            "on-error-container": "#93000a",
+                            "secondary-fixed": "#ffe088",
+                            "primary-fixed-dim": "#abcfbb",
+                            "primary": "#00170d",
+                            "on-primary-fixed-variant": "#2d4d3e",
+                            "tertiary-fixed": "#e5e2db",
+                            "on-surface": "#1b1c1c",
+                            "on-surface-variant": "#414844",
+                            "outline-variant": "#c1c8c2",
+                            "on-secondary": "#ffffff",
+                            "surface-container-highest": "#e4e2e2",
+                            "secondary-fixed-dim": "#e9c349",
+                            "on-primary-fixed": "#002115",
+                            "inverse-on-surface": "#f2f0f0",
+                            "on-tertiary-fixed": "#1c1c18",
+                            "inverse-surface": "#303030",
+                            "error-container": "#ffdad6",
+                            "secondary-container": "#fed65b",
+                            "primary-container": "#0b2d20",
+                            "on-secondary-container": "#745c00",
+                            "tertiary-fixed-dim": "#c9c6c0",
+                            "on-tertiary-fixed-variant": "#474742",
+                            "tertiary-container": "#282824",
+                            "surface-dim": "#dbd9d9",
+                            "inverse-primary": "#abcfbb",
+                            "on-error": "#ffffff",
+                            "background": "#fbf9f8",
+                            "surface-container-lowest": "#ffffff",
+                            "primary-fixed": "#c6ebd7",
+                            "outline": "#727974",
+                            "error": "#ba1a1a",
+                            "on-primary-container": "#749684",
+                            "on-primary": "#ffffff",
+                            "on-tertiary": "#ffffff",
+                            "surface-container-high": "#eae8e7",
+                            "secondary": "#735c00",
+                            "surface-container": "#efeded",
+                            "surface-tint": "#446555",
+                            "surface-variant": "#e4e2e2",
+                            "surface-bright": "#fbf9f8",
+                            "surface": "#fbf9f8",
+                            "on-secondary-fixed-variant": "#574500"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px"
+                    },
+                    "spacing": {
+                            "lg": "40px",
+                            "base": "8px",
+                            "xl": "64px",
+                            "gutter": "16px",
+                            "xs": "4px",
+                            "sm": "12px",
+                            "md": "24px",
+                            "container-margin": "20px"
+                    },
+                    "fontFamily": {
+                            "label-lg": ["Manrope"],
+                            "h3": ["Manrope"],
+                            "h1": ["Manrope"],
+                            "ussd-mono": ["Courier"],
+                            "body-sm": ["Manrope"],
+                            "body-md": ["Manrope"],
+                            "label-md": ["Manrope"],
+                            "body-lg": ["Manrope"],
+                            "h2": ["Manrope"],
+                            "display": ["Manrope"]
+                    },
+                    "fontSize": {
+                            "label-lg": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                            "h3": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                            "h1": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                            "ussd-mono": ["16px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                            "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                            "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                            "label-md": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                            "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                            "h2": ["24px", { "lineHeight": "1.3", "fontWeight": "700" }],
+                            "display": ["40px", { "lineHeight": "1.2", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md flex h-screen overflow-hidden antialiased">
+<!-- SideNavBar Component -->
+<aside class="hidden md:flex flex-col h-screen w-64 docked left-0 bg-surface-container-low shadow-sm fixed left-0 top-0 p-gutter border-r border-outline-variant z-40">
+<!-- Header -->
+<div class="flex items-center gap-sm mb-lg px-sm pt-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high overflow-hidden border border-outline-variant flex-shrink-0">
+<img alt="Organization Logo" class="w-full h-full object-cover" data-alt="A macro, abstract view of a modern glass skyscraper reflecting a bright blue sky, symbolizing corporate structure, transparency, and high-trust financial institutions. The lighting is crisp and optimistic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuApnWL59RboU9xaet36p8nh2Pw2Dyttti_cTq87vwHLsRtHZ8DKuL5qpkylrnz3gV6tpc1ysXkzWiibKJCO01sorcgDOaYt5tqosaWFObMqnwskmSRAJguS1jCEIElM5NKNFyV43LMnI4KGyOg4XfbGyn8LWe8mobQ6eKOXvd6rGeWpA0p_FBVS77GLKFPF_UXr1-hKE6z6xt_fLiih1RzFu1PKqCVcPVQz8dH5Ap9QUPD2cI4uqFDWxLOdtqVqDK4OTPDQX-bzpw"/>
+</div>
+<div>
+<h2 class="font-h3 text-h3 font-black text-primary">Capital Secure</h2>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Collective Growth</p>
+</div>
+</div>
+<!-- CTA -->
+<button class="mb-lg w-full bg-primary text-on-primary font-label-lg text-label-lg rounded-lg py-sm px-md flex justify-center items-center gap-base hover:opacity-90 transition-opacity shadow-[0_2px_8px_rgba(0,23,13,0.15)]">
+<span class="material-symbols-outlined" style="font-size: 20px;">add</span>
+            New Analysis
+        </button>
+<!-- Navigation Tabs -->
+<nav class="flex flex-col gap-xs flex-1">
+<a class="flex items-center gap-sm text-on-surface-variant px-md py-sm hover:bg-surface-container-highest rounded-lg transition-all scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-lg text-label-lg">Overview</span>
+</a>
+<!-- Active Tab -->
+<a class="flex items-center gap-sm bg-secondary-container text-on-secondary-container rounded-lg px-md py-sm scale-95 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bar_chart</span>
+<span class="font-label-lg text-label-lg">Activities</span>
+</a>
+<a class="flex items-center gap-sm text-on-surface-variant px-md py-sm hover:bg-surface-container-highest rounded-lg transition-all scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined">public</span>
+<span class="font-label-lg text-label-lg">Countries</span>
+</a>
+<a class="flex items-center gap-sm text-on-surface-variant px-md py-sm hover:bg-surface-container-highest rounded-lg transition-all scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-lg text-label-lg">Reports</span>
+</a>
+<div class="mt-auto">
+<a class="flex items-center gap-sm text-on-surface-variant px-md py-sm hover:bg-surface-container-highest rounded-lg transition-all scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-lg text-label-lg">Settings</span>
+</a>
+</div>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col w-full md:ml-64 h-screen overflow-hidden bg-background">
+<!-- TopAppBar Component -->
+<header class="flex justify-between items-center w-full px-md h-16 sticky top-0 z-50 bg-surface border-b border-outline-variant flat no shadows">
+<!-- Brand / Mobile Menu (if needed) -->
+<div class="flex items-center gap-sm">
+<button class="md:hidden text-on-surface-variant p-xs">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-h3 text-h3 font-bold text-primary">Budget Analysis Portal</h1>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-base">
+<button class="p-sm rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors active:opacity-80">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-sm rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors active:opacity-80">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden border border-outline-variant ml-xs cursor-pointer active:opacity-80 transition-opacity">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A close-up, brightly lit portrait of a professional individual looking slightly off-camera with a confident expression. The background is a soft, blurred modern office environment indicating a high-trust corporate setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJzH2A03oS9dbeStx5twEkS9YCWvL1OlgHwPLzIFZKJ5nx1zpU9oJFKEkEX-9kINxk4EgPN1MFvZaxtCvKTN0KGCB0YzPVU0-bCU4qgNpXpK4wqhFZK4mkjfF3jaXzhn8H-QVCsPiUjnmsTnpHaW6_pzKT8GMotaGHMLM-JuGK8BxjKj1ycqHJrSaWa-j3e4FjeHsTNsAXI4lPTmAkOwep8idGLitv_uOp97QRIV5ZNL7X88LKZWo0LRhEPOaEj6PO-2vSucGrtg"/>
+</div>
+</div>
+</header>
+<!-- Scrollable Canvas -->
+<main class="flex-1 overflow-y-auto p-container-margin pb-xl">
+<!-- Page Context & Sub-navigation (Addressing User's Extended Tab Request) -->
+<div class="mb-lg">
+<div class="flex items-baseline justify-between mb-sm">
+<h2 class="font-h2 text-h2 font-bold text-on-surface">Activities Analysis</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">FY 2024 Q3 Data</p>
+</div>
+<!-- Sub-tabs (Pills) -->
+<div class="flex items-center gap-sm overflow-x-auto pb-xs scrollbar-hide">
+<button class="whitespace-nowrap px-sm py-xs rounded-full font-label-md text-label-md border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors">Overview</button>
+<button class="whitespace-nowrap px-sm py-xs rounded-full font-label-md text-label-md bg-surface-tint text-on-primary border border-transparent shadow-[0_1px_3px_rgba(0,0,0,0.1)]">Activities</button>
+<button class="whitespace-nowrap px-sm py-xs rounded-full font-label-md text-label-md border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors">Countries</button>
+<button class="whitespace-nowrap px-sm py-xs rounded-full font-label-md text-label-md border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors">No-Spend</button>
+<button class="whitespace-nowrap px-sm py-xs rounded-full font-label-md text-label-md border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors">Variance</button>
+<button class="whitespace-nowrap px-sm py-xs rounded-full font-label-md text-label-md border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors">Reconciliation</button>
+<button class="whitespace-nowrap px-sm py-xs rounded-full font-label-md text-label-md border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors">Priority Actions</button>
+<button class="whitespace-nowrap px-sm py-xs rounded-full font-label-md text-label-md border border-primary text-primary hover:bg-surface-container-low transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined" style="font-size: 14px;">auto_awesome</span>
+                        AI Insights
+                    </button>
+</div>
+</div>
+<!-- High-Density Bento Grid: Activity Insights -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-sm mb-lg">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant/30 shadow-[0_4px_12px_rgba(0,23,13,0.03)] flex flex-col justify-between">
+<div class="flex items-center justify-between mb-sm">
+<h3 class="font-label-lg text-label-lg text-on-surface-variant">Largest Allocation</h3>
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-size: 18px;">account_balance_wallet</span>
+</div>
+</div>
+<div>
+<p class="font-h2 text-h2 font-bold text-on-surface mb-xs">US$ 104,649.00</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-xs">
+<span class="inline-block w-2 h-2 rounded-full bg-primary"></span>
+                            B13 Public hearings meeting
+                        </p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant/30 shadow-[0_4px_12px_rgba(0,23,13,0.03)] flex flex-col justify-between relative overflow-hidden">
+<div class="absolute right-0 bottom-0 opacity-5 pointer-events-none">
+<span class="material-symbols-outlined" style="font-size: 100px;">payments</span>
+</div>
+<div class="flex items-center justify-between mb-sm relative z-10">
+<h3 class="font-label-lg text-label-lg text-on-surface-variant">Largest Utilisation</h3>
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-size: 18px;">trending_up</span>
+</div>
+</div>
+<div class="relative z-10">
+<p class="font-h2 text-h2 font-bold text-on-surface mb-xs">US$ 15,516.64</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-xs">
+<span class="inline-block w-2 h-2 rounded-full bg-secondary-fixed-dim"></span>
+                            B12 Multi-stakeholder consultative workshops
+                        </p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant/30 shadow-[0_4px_12px_rgba(0,23,13,0.03)] flex flex-col justify-between">
+<div class="flex items-center justify-between mb-sm">
+<h3 class="font-label-lg text-label-lg text-on-surface-variant">Highest Spending Rate</h3>
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-size: 18px;">bolt</span>
+</div>
+</div>
+<div>
+<div class="flex items-end gap-sm mb-xs">
+<p class="font-h2 text-h2 font-bold text-on-surface">39.9%</p>
+<span class="font-label-md text-label-md text-primary mb-1 bg-primary-fixed px-xs py-[2px] rounded">Fast Pace</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">
+                            B11 Roundtable discussions
+                        </p>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant/30 shadow-[0_4px_12px_rgba(0,23,13,0.03)] flex flex-col justify-between">
+<div class="flex items-center justify-between mb-sm">
+<h3 class="font-label-lg text-label-lg text-on-surface-variant">Lowest Spending Rate</h3>
+<div class="w-8 h-8 rounded-full bg-error-container text-on-error-container flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-size: 18px;">warning_amber</span>
+</div>
+</div>
+<div>
+<div class="flex items-end gap-sm mb-xs">
+<p class="font-h2 text-h2 font-bold text-on-surface">2.4%</p>
+<span class="font-label-md text-label-md text-on-error-container mb-1 bg-error-container px-xs py-[2px] rounded">Flagged</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">
+                            B13 Public hearings meeting
+                        </p>
+</div>
+</div>
+</div>
+<!-- Two-Column Section: Chart & Table -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-md">
+<!-- Horizontal Bar Chart Section (Glassmorphism inspired container) -->
+<div class="lg:col-span-1 bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm p-md flex flex-col">
+<div class="mb-md">
+<h3 class="font-h3 text-h3 font-bold text-on-surface">Top Activities by Utilisation</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Ranked highest to lowest impact</p>
+</div>
+<div class="flex-1 flex flex-col gap-sm justify-center">
+<!-- Bar 1 -->
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-xs">
+<span class="text-on-surface truncate pr-sm">B12 Consultative workshops</span>
+<span class="text-primary font-bold">US$ 15.5k</span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 85%;"></div>
+</div>
+</div>
+<!-- Bar 2 -->
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-xs">
+<span class="text-on-surface truncate pr-sm">B11 Roundtable discussions</span>
+<span class="text-on-surface-variant">US$ 8.2k</span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary-fixed-dim rounded-full" style="width: 55%;"></div>
+</div>
+</div>
+<!-- Bar 3 -->
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-xs">
+<span class="text-on-surface truncate pr-sm">A04 Field assessments</span>
+<span class="text-on-surface-variant">US$ 4.1k</span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-outline-variant rounded-full" style="width: 30%;"></div>
+</div>
+</div>
+<!-- Bar 4 -->
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-xs">
+<span class="text-on-surface truncate pr-sm">B13 Public hearings</span>
+<span class="text-on-surface-variant">US$ 2.5k</span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-outline-variant rounded-full" style="width: 15%;"></div>
+</div>
+</div>
+<!-- Bar 5 -->
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-xs">
+<span class="text-on-surface truncate pr-sm">C01 Material distribution</span>
+<span class="text-on-surface-variant">US$ 1.1k</span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-outline-variant rounded-full" style="width: 8%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Activity Details Table Section -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm overflow-hidden flex flex-col">
+<div class="p-md border-b border-outline-variant/50 flex justify-between items-center bg-surface-bright">
+<h3 class="font-h3 text-h3 font-bold text-on-surface">Activity Details Registry</h3>
+<button class="text-primary hover:bg-surface-container py-xs px-sm rounded transition-colors font-label-md text-label-md flex items-center gap-xs">
+<span class="material-symbols-outlined" style="font-size: 16px;">download</span> Export
+                        </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse min-w-[800px]">
+<thead>
+<tr class="bg-surface-container-lowest border-b border-outline-variant/50 font-label-md text-label-md text-on-surface-variant">
+<th class="py-sm px-md font-semibold">Code / Line</th>
+<th class="py-sm px-md font-semibold">Activity Label</th>
+<th class="py-sm px-md font-semibold text-right">Total Budget</th>
+<th class="py-sm px-md font-semibold text-right">Utilised</th>
+<th class="py-sm px-md font-semibold text-right">Balance</th>
+<th class="py-sm px-md font-semibold text-center">Rate</th>
+<th class="py-sm px-md font-semibold">Status</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm text-on-surface divide-y divide-outline-variant/20">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-highest transition-colors">
+<td class="py-sm px-md">
+<div class="font-ussd-mono text-ussd-mono">B13</div>
+<div class="text-on-surface-variant text-xs">Line 4.2</div>
+</td>
+<td class="py-sm px-md font-medium">Public hearings meeting</td>
+<td class="py-sm px-md text-right font-ussd-mono text-ussd-mono">104,649.00</td>
+<td class="py-sm px-md text-right font-ussd-mono text-ussd-mono">2,511.57</td>
+<td class="py-sm px-md text-right font-ussd-mono text-ussd-mono text-on-surface-variant">102,137.43</td>
+<td class="py-sm px-md text-center">
+<span class="font-bold">2.4%</span>
+</td>
+<td class="py-sm px-md">
+<span class="inline-block px-sm py-xs rounded-full bg-error-container text-on-error-container font-label-md text-label-md">Low Utilisation</span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-highest transition-colors">
+<td class="py-sm px-md">
+<div class="font-ussd-mono text-ussd-mono">B12</div>
+<div class="text-on-surface-variant text-xs">Line 4.1</div>
+</td>
+<td class="py-sm px-md font-medium">Multi-stakeholder consultative workshops</td>
+<td class="py-sm px-md text-right font-ussd-mono text-ussd-mono">55,000.00</td>
+<td class="py-sm px-md text-right font-ussd-mono text-ussd-mono font-bold">15,516.64</td>
+<td class="py-sm px-md text-right font-ussd-mono text-ussd-mono text-on-surface-variant">39,483.36</td>
+<td class="py-sm px-md text-center">
+<span class="font-bold">28.2%</span>
+</td>
+<td class="py-sm px-md">
+<span class="inline-block px-sm py-xs rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md">Moderate</span>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-highest transition-colors">
+<td class="py-sm px-md">
+<div class="font-ussd-mono text-ussd-mono">B11</div>
+<div class="text-on-surface-variant text-xs">Line 3.8</div>
+</td>
+<td class="py-sm px-md font-medium">Roundtable discussions</td>
+<td class="py-sm px-md text-right font-ussd-mono text-ussd-mono">20,550.00</td>
+<td class="py-sm px-md text-right font-ussd-mono text-ussd-mono">8,199.45</td>
+<td class="py-sm px-md text-right font-ussd-mono text-ussd-mono text-on-surface-variant">12,350.55</td>
+<td class="py-sm px-md text-center">
+<span class="font-bold text-primary">39.9%</span>
+</td>
+<td class="py-sm px-md">
+<span class="inline-block px-sm py-xs rounded-full bg-primary-container text-on-primary-container font-label-md text-label-md">On Track</span>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-highest transition-colors">
+<td class="py-sm px-md">
+<div class="font-ussd-mono text-ussd-mono">A04</div>
+<div class="text-on-surface-variant text-xs">Line 2.1</div>
+</td>
+<td class="py-sm px-md font-medium">Field assessments and mapping</td>
+<td class="py-sm px-md text-right font-ussd-mono text-ussd-mono">45,000.00</td>
+<td class="py-sm px-md text-right font-ussd-mono text-ussd-mono">4,100.00</td>
+<td class="py-sm px-md text-right font-ussd-mono text-ussd-mono text-on-surface-variant">40,900.00</td>
+<td class="py-sm px-md text-center">
+<span class="font-bold">9.1%</span>
+</td>
+<td class="py-sm px-md">
+<span class="inline-block px-sm py-xs rounded-full bg-surface-container-high text-on-surface-variant font-label-md text-label-md border border-outline-variant/50">Needs Review</span>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-highest transition-colors">
+<td class="py-sm px-md">
+<div class="font-ussd-mono text-ussd-mono">C01</div>
+<div class="text-on-surface-variant text-xs">Line 5.5</div>
+</td>
+<td class="py-sm px-md font-medium">Material distribution logistics</td>
+<td class="py-sm px-md text-right font-ussd-mono text-ussd-mono">12,000.00</td>
+<td class="py-sm px-md text-right font-ussd-mono text-ussd-mono">1,150.00</td>
+<td class="py-sm px-md text-right font-ussd-mono text-ussd-mono text-on-surface-variant">10,850.00</td>
+<td class="py-sm px-md text-center">
+<span class="font-bold">9.5%</span>
+</td>
+<td class="py-sm px-md">
+<span class="inline-block px-sm py-xs rounded-full bg-surface-container-high text-on-surface-variant font-label-md text-label-md border border-outline-variant/50">Needs Review</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Budget Analysis - Variance</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Courier+Prime&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#131310",
+                    "on-tertiary-container": "#908f89",
+                    "on-secondary-fixed": "#241a00",
+                    "on-background": "#1b1c1c",
+                    "surface-container-low": "#f5f3f3",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed": "#ffe088",
+                    "primary-fixed-dim": "#abcfbb",
+                    "primary": "#00170d",
+                    "on-primary-fixed-variant": "#2d4d3e",
+                    "tertiary-fixed": "#e5e2db",
+                    "on-surface": "#1b1c1c",
+                    "on-surface-variant": "#414844",
+                    "outline-variant": "#c1c8c2",
+                    "on-secondary": "#ffffff",
+                    "surface-container-highest": "#e4e2e2",
+                    "secondary-fixed-dim": "#e9c349",
+                    "on-primary-fixed": "#002115",
+                    "inverse-on-surface": "#f2f0f0",
+                    "on-tertiary-fixed": "#1c1c18",
+                    "inverse-surface": "#303030",
+                    "error-container": "#ffdad6",
+                    "secondary-container": "#fed65b",
+                    "primary-container": "#0b2d20",
+                    "on-secondary-container": "#745c00",
+                    "tertiary-fixed-dim": "#c9c6c0",
+                    "on-tertiary-fixed-variant": "#474742",
+                    "tertiary-container": "#282824",
+                    "surface-dim": "#dbd9d9",
+                    "inverse-primary": "#abcfbb",
+                    "on-error": "#ffffff",
+                    "background": "#fbf9f8",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed": "#c6ebd7",
+                    "outline": "#727974",
+                    "error": "#ba1a1a",
+                    "on-primary-container": "#749684",
+                    "on-primary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-high": "#eae8e7",
+                    "secondary": "#735c00",
+                    "surface-container": "#efeded",
+                    "surface-tint": "#446555",
+                    "surface-variant": "#e4e2e2",
+                    "surface-bright": "#fbf9f8",
+                    "surface": "#fbf9f8",
+                    "on-secondary-fixed-variant": "#574500"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "lg": "40px",
+                    "base": "8px",
+                    "xl": "64px",
+                    "gutter": "16px",
+                    "xs": "4px",
+                    "sm": "12px",
+                    "md": "24px",
+                    "container-margin": "20px"
+            },
+            "fontFamily": {
+                    "label-lg": ["Manrope", "sans-serif"],
+                    "h3": ["Manrope", "sans-serif"],
+                    "h1": ["Manrope", "sans-serif"],
+                    "ussd-mono": ["Courier Prime", "monospace"],
+                    "body-sm": ["Manrope", "sans-serif"],
+                    "body-md": ["Manrope", "sans-serif"],
+                    "label-md": ["Manrope", "sans-serif"],
+                    "body-lg": ["Manrope", "sans-serif"],
+                    "h2": ["Manrope", "sans-serif"],
+                    "display": ["Manrope", "sans-serif"]
+            },
+            "fontSize": {
+                    "label-lg": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                    "h3": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                    "h1": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                    "ussd-mono": ["16px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                    "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                    "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                    "label-md": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                    "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                    "h2": ["24px", { "lineHeight": "1.3", "fontWeight": "700" }],
+                    "display": ["40px", { "lineHeight": "1.2", "fontWeight": "800" }]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+          font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background flex min-h-screen font-body-md text-body-md antialiased">
+<!-- Shared Component: SideNavBar -->
+<nav class="bg-surface-container-low dark:bg-tertiary shadow-sm dark:shadow-none h-screen w-64 docked left-0 fixed top-0 flex flex-col p-gutter border-r border-outline-variant dark:border-outline z-40">
+<!-- Header -->
+<div class="flex items-center gap-sm mb-lg pt-sm">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center shrink-0">
+<img alt="Organization Logo" class="w-full h-full rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfOnLUboAG1FtdYa6ptcP_OdDoyx4i9L9xBQLgM-4Qwvzv5tHtFvqabDRSSKSJxod4sxghoKlwOYCl3ivNmQuUAfSMLvcGmCZGyX1xVDn-g34immgtv9tZ-lakh6Fl2n06ZYAhxgHC6I8ELt91kPqY17JS4ZA_MzbITy19zX_2sFlsh-mrqhIUtvwAcgDSOgs-BKe1GL8OuQGV70XUjm4vEtio7SIn-kuslHv2quZ7Bbi5-8Da_Fa4uNegtQ3R-kJ4mhKiWGoazQ"/>
+</div>
+<div class="flex flex-col">
+<span class="font-h3 text-h3 font-black text-primary dark:text-primary-fixed-dim">Capital Secure</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Collective Growth</span>
+</div>
+</div>
+<!-- Navigation Links -->
+<div class="flex flex-col gap-xs flex-1">
+<!-- Inactive: Overview -->
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-on-tertiary-container px-md py-sm hover:bg-surface-container-highest dark:hover:bg-tertiary-container rounded-lg transition-all scale-95 active:scale-100 font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Overview
+            </a>
+<!-- Inactive: Activities -->
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-on-tertiary-container px-md py-sm hover:bg-surface-container-highest dark:hover:bg-tertiary-container rounded-lg transition-all scale-95 active:scale-100 font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+                Activities
+            </a>
+<!-- Inactive: Countries -->
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-on-tertiary-container px-md py-sm hover:bg-surface-container-highest dark:hover:bg-tertiary-container rounded-lg transition-all scale-95 active:scale-100 font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">public</span>
+                Countries
+            </a>
+<!-- Active: Reports (Variance Analysis is a report) -->
+<a class="flex items-center gap-sm bg-secondary-container dark:bg-primary-container text-on-secondary-container dark:text-on-primary-container rounded-lg px-md py-sm scale-95 active:scale-100 transition-transform font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined fill">description</span>
+                Reports
+            </a>
+<!-- Inactive: Settings -->
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-on-tertiary-container px-md py-sm hover:bg-surface-container-highest dark:hover:bg-tertiary-container rounded-lg transition-all scale-95 active:scale-100 font-label-lg text-label-lg mt-auto" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</div>
+<!-- CTA -->
+<div class="mt-md">
+<button class="w-full bg-primary text-on-primary font-label-lg text-label-lg py-sm px-md rounded-full shadow-sm hover:opacity-90 transition-opacity flex justify-center items-center gap-xs">
+<span class="material-symbols-outlined">add</span>
+                New Analysis
+            </button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="ml-64 flex-1 flex flex-col min-h-screen">
+<!-- Shared Component: TopAppBar -->
+<header class="bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline flex justify-between items-center w-full px-md h-16 sticky top-0 z-50">
+<!-- Left: Search & Brand -->
+<div class="flex items-center gap-md">
+<h1 class="font-h2 text-h2 font-extrabold text-primary dark:text-primary-fixed-dim tracking-tight">Budget Analysis Portal</h1>
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant text-lg">search</span>
+<input class="pl-[36px] pr-sm py-xs bg-surface-container-low border-outline-variant text-on-surface rounded-full text-body-sm focus:ring-primary focus:border-primary w-64 transition-all placeholder:text-on-surface-variant" placeholder="Search analysis..." type="text"/>
+</div>
+</div>
+<!-- Right: Actions -->
+<div class="flex items-center gap-sm">
+<button class="w-10 h-10 flex items-center justify-center text-on-surface-variant dark:text-on-tertiary-container hover:bg-surface-container-high dark:hover:bg-tertiary-container transition-colors rounded-full opacity-80 hover:opacity-100">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center text-on-surface-variant dark:text-on-tertiary-container hover:bg-surface-container-high dark:hover:bg-tertiary-container transition-colors rounded-full opacity-80 hover:opacity-100">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center text-on-surface-variant dark:text-on-tertiary-container hover:bg-surface-container-high dark:hover:bg-tertiary-container transition-colors rounded-full opacity-80 hover:opacity-100">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Page Sub-navigation -->
+<div class="bg-surface border-b border-outline-variant px-lg overflow-x-auto">
+<nav class="flex space-x-md font-label-lg text-label-lg min-w-max">
+<a class="py-sm px-xs text-on-surface-variant hover:text-primary transition-colors border-b-2 border-transparent hover:border-outline-variant" href="#">Overview</a>
+<a class="py-sm px-xs text-on-surface-variant hover:text-primary transition-colors border-b-2 border-transparent hover:border-outline-variant" href="#">Activities</a>
+<a class="py-sm px-xs text-on-surface-variant hover:text-primary transition-colors border-b-2 border-transparent hover:border-outline-variant" href="#">Countries</a>
+<a class="py-sm px-xs text-on-surface-variant hover:text-primary transition-colors border-b-2 border-transparent hover:border-outline-variant" href="#">No-Spend</a>
+<a class="py-sm px-xs text-primary border-b-2 border-primary" href="#">Variance</a>
+<a class="py-sm px-xs text-on-surface-variant hover:text-primary transition-colors border-b-2 border-transparent hover:border-outline-variant" href="#">Reconciliation</a>
+<a class="py-sm px-xs text-on-surface-variant hover:text-primary transition-colors border-b-2 border-transparent hover:border-outline-variant" href="#">Priority Actions</a>
+<a class="py-sm px-xs text-on-surface-variant hover:text-primary transition-colors border-b-2 border-transparent hover:border-outline-variant" href="#">AI Insights</a>
+</nav>
+</div>
+<!-- Main Content Area -->
+<div class="p-lg flex-1 overflow-y-auto">
+<div class="flex items-center justify-between mb-lg">
+<div>
+<h2 class="font-h1 text-h1 text-primary">Variance Analysis</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Review deviations between approved budget and actual spend across all operations.</p>
+</div>
+<button class="bg-surface-container text-primary font-label-lg text-label-lg px-md py-sm border border-outline-variant rounded-full flex items-center gap-xs hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">download</span>
+                    Export Audit Report
+                </button>
+</div>
+<!-- Variance Metric Cards (Bento/Glassmorphism inspired corporate styling) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md mb-xl">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant shadow-[0_4px_24px_-8px_rgba(0,23,13,0.04)] relative overflow-hidden">
+<div class="absolute top-0 right-0 p-sm opacity-10">
+<span class="material-symbols-outlined text-[64px] text-primary">trending_down</span>
+</div>
+<div class="flex items-center gap-sm mb-md relative z-10">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">arrow_downward</span>
+</div>
+<h3 class="font-label-lg text-label-lg text-on-surface-variant">Under-utilised Budget</h3>
+</div>
+<div class="relative z-10">
+<span class="font-display text-display text-primary">$1.2M</span>
+<p class="font-body-sm text-body-sm text-outline mt-xs flex items-center gap-xs">
+<span class="text-on-primary-container font-label-md">14.5%</span> of total approved
+                        </p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant shadow-[0_4px_24px_-8px_rgba(0,23,13,0.04)] relative overflow-hidden">
+<div class="absolute top-0 right-0 p-sm opacity-10">
+<span class="material-symbols-outlined text-[64px] text-error">trending_up</span>
+</div>
+<div class="flex items-center gap-sm mb-md relative z-10">
+<div class="w-8 h-8 rounded-full bg-error-container text-on-error-container flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">arrow_upward</span>
+</div>
+<h3 class="font-label-lg text-label-lg text-on-surface-variant">Over-utilised Budget</h3>
+</div>
+<div class="relative z-10">
+<span class="font-display text-display text-on-background">$450K</span>
+<p class="font-body-sm text-body-sm text-outline mt-xs flex items-center gap-xs">
+<span class="text-error font-label-md">Critical attention needed</span>
+</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-md border border-outline-variant shadow-[0_4px_24px_-8px_rgba(0,23,13,0.04)] relative overflow-hidden">
+<div class="absolute top-0 right-0 p-sm opacity-10">
+<span class="material-symbols-outlined text-[64px] text-secondary">schedule</span>
+</div>
+<div class="flex items-center gap-sm mb-md relative z-10">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">warning</span>
+</div>
+<h3 class="font-label-lg text-label-lg text-on-surface-variant">Activities Behind Schedule</h3>
+</div>
+<div class="relative z-10">
+<span class="font-display text-display text-on-background">12</span>
+<p class="font-body-sm text-body-sm text-outline mt-xs flex items-center gap-xs">
+<span class="text-on-secondary-fixed-variant font-label-md">Across 4 countries</span>
+</p>
+</div>
+</div>
+</div>
+<!-- Variance Table -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm overflow-hidden">
+<div class="p-md border-b border-outline-variant flex justify-between items-center bg-surface-bright">
+<h3 class="font-h3 text-h3 text-primary">Detailed Variance Register</h3>
+<div class="flex gap-sm">
+<select class="bg-surface border-outline-variant text-on-surface text-body-sm rounded-md py-xs pl-sm pr-lg focus:ring-primary focus:border-primary">
+<option>All Countries</option>
+<option>Kenya</option>
+<option>Nigeria</option>
+</select>
+<select class="bg-surface border-outline-variant text-on-surface text-body-sm rounded-md py-xs pl-sm pr-lg focus:ring-primary focus:border-primary">
+<option>Variance &gt; 10%</option>
+<option>All Variances</option>
+</select>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="font-label-md text-label-md text-on-surface-variant py-sm px-md uppercase tracking-wider">Country</th>
+<th class="font-label-md text-label-md text-on-surface-variant py-sm px-md uppercase tracking-wider">Activity Code</th>
+<th class="font-label-md text-label-md text-on-surface-variant py-sm px-md uppercase tracking-wider text-right">Approved Budget</th>
+<th class="font-label-md text-label-md text-on-surface-variant py-sm px-md uppercase tracking-wider text-right">Actual Spend</th>
+<th class="font-label-md text-label-md text-on-surface-variant py-sm px-md uppercase tracking-wider text-right">Variance %</th>
+<th class="font-label-md text-label-md text-on-surface-variant py-sm px-md uppercase tracking-wider">Type</th>
+<th class="font-label-md text-label-md text-on-surface-variant py-sm px-md uppercase tracking-wider">Required Explanation</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/50">
+<!-- Highlighted Row (Error/Over) -->
+<tr class="bg-error-container/20 hover:bg-error-container/40 transition-colors">
+<td class="py-md px-md font-body-sm text-body-sm text-on-background font-medium">Nigeria</td>
+<td class="py-md px-md font-ussd-mono text-ussd-mono text-on-surface-variant">ACT-9021</td>
+<td class="py-md px-md font-body-sm text-body-sm text-on-background text-right">$150,000</td>
+<td class="py-md px-md font-body-sm text-body-sm text-on-background text-right">$185,500</td>
+<td class="py-md px-md font-body-sm text-body-sm text-error text-right font-bold">+23.6%</td>
+<td class="py-md px-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-error-container text-on-error-container font-label-md text-label-md">
+                                        Over-utilised
+                                    </span>
+</td>
+<td class="py-md px-md">
+<input class="w-full bg-surface border-error text-on-surface text-body-sm rounded focus:ring-error focus:border-error py-1 px-2" placeholder="Mandatory explanation required..." type="text" value="Unexpected logistical costs during Q2."/>
+</td>
+</tr>
+<!-- Highlighted Row (Warning/Under) -->
+<tr class="bg-secondary-container/10 hover:bg-secondary-container/20 transition-colors">
+<td class="py-md px-md font-body-sm text-body-sm text-on-background font-medium">Kenya</td>
+<td class="py-md px-md font-ussd-mono text-ussd-mono text-on-surface-variant">ACT-8843</td>
+<td class="py-md px-md font-body-sm text-body-sm text-on-background text-right">$320,000</td>
+<td class="py-md px-md font-body-sm text-body-sm text-on-background text-right">$270,000</td>
+<td class="py-md px-md font-body-sm text-body-sm text-secondary text-right font-bold">-15.6%</td>
+<td class="py-md px-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md">
+                                        Under-utilised
+                                    </span>
+</td>
+<td class="py-md px-md">
+<input class="w-full bg-surface border-secondary text-on-surface text-body-sm rounded focus:ring-secondary focus:border-secondary py-1 px-2" placeholder="Mandatory explanation required..." type="text"/>
+</td>
+</tr>
+<!-- Standard Row (Within threshold) -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-md px-md font-body-sm text-body-sm text-on-background font-medium">South Africa</td>
+<td class="py-md px-md font-ussd-mono text-ussd-mono text-on-surface-variant">ACT-1022</td>
+<td class="py-md px-md font-body-sm text-body-sm text-on-background text-right">$85,000</td>
+<td class="py-md px-md font-body-sm text-body-sm text-on-background text-right">$82,400</td>
+<td class="py-md px-md font-body-sm text-body-sm text-primary-container text-right">-3.0%</td>
+<td class="py-md px-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md">
+                                        On Track
+                                    </span>
+</td>
+<td class="py-md px-md">
+<span class="text-outline font-body-sm italic">Not required (&lt; 10%)</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</body></html>

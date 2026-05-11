@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Budget Analysis - Priority Actions</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#131310",
+                        "on-tertiary-container": "#908f89",
+                        "on-secondary-fixed": "#241a00",
+                        "on-background": "#1b1c1c",
+                        "surface-container-low": "#f5f3f3",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#ffe088",
+                        "primary-fixed-dim": "#abcfbb",
+                        "primary": "#00170d",
+                        "on-primary-fixed-variant": "#2d4d3e",
+                        "tertiary-fixed": "#e5e2db",
+                        "on-surface": "#1b1c1c",
+                        "on-surface-variant": "#414844",
+                        "outline-variant": "#c1c8c2",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e4e2e2",
+                        "secondary-fixed-dim": "#e9c349",
+                        "on-primary-fixed": "#002115",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-tertiary-fixed": "#1c1c18",
+                        "inverse-surface": "#303030",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#fed65b",
+                        "primary-container": "#0b2d20",
+                        "on-secondary-container": "#745c00",
+                        "tertiary-fixed-dim": "#c9c6c0",
+                        "on-tertiary-fixed-variant": "#474742",
+                        "tertiary-container": "#282824",
+                        "surface-dim": "#dbd9d9",
+                        "inverse-primary": "#abcfbb",
+                        "on-error": "#ffffff",
+                        "background": "#fbf9f8",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#c6ebd7",
+                        "outline": "#727974",
+                        "error": "#ba1a1a",
+                        "on-primary-container": "#749684",
+                        "on-primary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#eae8e7",
+                        "secondary": "#735c00",
+                        "surface-container": "#efeded",
+                        "surface-tint": "#446555",
+                        "surface-variant": "#e4e2e2",
+                        "surface-bright": "#fbf9f8",
+                        "surface": "#fbf9f8",
+                        "on-secondary-fixed-variant": "#574500"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "40px",
+                        "base": "8px",
+                        "xl": "64px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "sm": "12px",
+                        "md": "24px",
+                        "container-margin": "20px"
+                    },
+                    "fontFamily": {
+                        "label-lg": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "ussd-mono": ["Courier"],
+                        "body-sm": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "display": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-lg": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "h3": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "h1": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "ussd-mono": ["16px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "h2": ["24px", { "lineHeight": "1.3", "fontWeight": "700" }],
+                        "display": ["40px", { "lineHeight": "1.2", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex antialiased">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 p-gutter border-r border-outline-variant bg-surface-container-low dark:bg-tertiary shadow-sm dark:shadow-none z-40">
+<div class="flex items-center gap-sm mb-lg px-md">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container shrink-0">
+<span class="material-symbols-outlined fill text-h3">account_balance</span>
+</div>
+<div>
+<h1 class="font-h3 text-h3 font-black text-primary dark:text-primary-fixed-dim truncate">Capital Secure</h1>
+<p class="font-label-md text-label-md text-on-surface-variant truncate">Collective Growth</p>
+</div>
+</div>
+<button class="w-full mb-md bg-primary text-on-primary hover:opacity-90 font-label-lg text-label-lg py-sm px-md rounded-lg flex justify-center items-center gap-xs transition-colors shadow-[0_4px_14px_rgba(0,23,13,0.1)]">
+<span class="material-symbols-outlined text-[18px]">add</span>
+            New Analysis
+        </button>
+<div class="flex-1 overflow-y-auto flex flex-col gap-xs">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-on-tertiary-container px-md py-sm hover:bg-surface-container-highest dark:hover:bg-tertiary-container rounded-lg transition-all scale-95 active:scale-100 font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Overview
+            </a>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-on-tertiary-container px-md py-sm hover:bg-surface-container-highest dark:hover:bg-tertiary-container rounded-lg transition-all scale-95 active:scale-100 font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+                Activities
+            </a>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-on-tertiary-container px-md py-sm hover:bg-surface-container-highest dark:hover:bg-tertiary-container rounded-lg transition-all scale-95 active:scale-100 font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">public</span>
+                Countries
+            </a>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-on-tertiary-container px-md py-sm hover:bg-surface-container-highest dark:hover:bg-tertiary-container rounded-lg transition-all scale-95 active:scale-100 font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">description</span>
+                Reports
+            </a>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-on-tertiary-container px-md py-sm hover:bg-surface-container-highest dark:hover:bg-tertiary-container rounded-lg transition-all scale-95 active:scale-100 font-label-lg text-label-lg mt-auto" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0 md:pl-64">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-md h-16 sticky top-0 z-50 bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline">
+<div class="flex items-center gap-sm md:hidden">
+<button class="text-on-surface p-xs hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<div class="flex-1 flex items-center justify-between md:justify-start">
+<h2 class="font-h2 text-h2 font-extrabold text-primary dark:text-primary-fixed-dim truncate mr-md hidden md:block">Budget Analysis Portal</h2>
+<h2 class="font-h3 text-h3 font-bold text-primary dark:text-primary-fixed-dim truncate md:hidden">Budget Analysis</h2>
+</div>
+<div class="flex items-center gap-sm">
+<button class="text-primary dark:text-primary-fixed-dim p-xs hover:bg-surface-container-high dark:hover:bg-tertiary-container transition-colors rounded-full opacity-80 hover:opacity-100">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-primary dark:text-primary-fixed-dim p-xs hover:bg-surface-container-high dark:hover:bg-tertiary-container transition-colors rounded-full opacity-80 hover:opacity-100">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<button class="text-primary dark:text-primary-fixed-dim p-xs hover:bg-surface-container-high dark:hover:bg-tertiary-container transition-colors rounded-full opacity-80 hover:opacity-100">
+<span class="material-symbols-outlined fill">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-container-margin md:p-lg flex-1 overflow-y-auto">
+<!-- Page Header & In-Page Navigation -->
+<div class="mb-lg">
+<h1 class="font-h1 text-h1 text-on-surface mb-sm">Priority Actions</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-md">Key recommendations requiring immediate attention to optimize budget utilization and reconciliation.</p>
+<!-- Horizontal Scrollable Tabs -->
+<div class="flex overflow-x-auto pb-sm gap-sm no-scrollbar border-b border-surface-variant">
+<a class="whitespace-nowrap px-sm py-xs font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high rounded-t-lg transition-colors border-b-2 border-transparent" href="#">Overview</a>
+<a class="whitespace-nowrap px-sm py-xs font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high rounded-t-lg transition-colors border-b-2 border-transparent" href="#">Activities</a>
+<a class="whitespace-nowrap px-sm py-xs font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high rounded-t-lg transition-colors border-b-2 border-transparent" href="#">Countries</a>
+<a class="whitespace-nowrap px-sm py-xs font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high rounded-t-lg transition-colors border-b-2 border-transparent" href="#">No-Spend</a>
+<a class="whitespace-nowrap px-sm py-xs font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high rounded-t-lg transition-colors border-b-2 border-transparent" href="#">Variance</a>
+<a class="whitespace-nowrap px-sm py-xs font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high rounded-t-lg transition-colors border-b-2 border-transparent" href="#">Reconciliation</a>
+<a class="whitespace-nowrap px-sm py-xs font-label-lg text-label-lg text-primary border-b-2 border-primary bg-surface-container-lowest rounded-t-lg" href="#">Priority Actions</a>
+<a class="whitespace-nowrap px-sm py-xs font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high rounded-t-lg transition-colors border-b-2 border-transparent flex items-center gap-xs" href="#">
+<span class="material-symbols-outlined text-[16px]">auto_awesome</span> AI Insights
+                    </a>
+</div>
+</div>
+<!-- Bento Grid Layout for Priority Actions -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-md">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-[0_4px_24px_rgba(0,23,13,0.04)] border border-primary/10 flex flex-col hover:shadow-[0_8px_32px_rgba(0,23,13,0.08)] transition-shadow">
+<div class="flex justify-between items-start mb-sm">
+<div class="bg-error-container text-on-error-container px-sm py-xs rounded-full font-label-md text-label-md inline-flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">warning</span> Open
+                        </div>
+<span class="text-on-surface-variant font-label-md text-label-md">High Impact</span>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface mb-xs mt-sm">Accelerate B13 Public Hearings</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-1 mb-md">Low utilization flagged against a high allocated budget. Recommend immediate scheduling to prevent year-end bottleneck.</p>
+<div class="mt-auto border-t border-surface-variant pt-sm flex justify-end gap-sm">
+<button class="px-sm py-xs font-label-lg text-label-lg text-primary hover:bg-primary-fixed rounded transition-colors">Dismiss</button>
+<button class="px-sm py-xs font-label-lg text-label-lg bg-primary text-on-primary rounded hover:opacity-90 transition-opacity">Assign Action</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-[0_4px_24px_rgba(0,23,13,0.04)] border border-primary/10 flex flex-col hover:shadow-[0_8px_32px_rgba(0,23,13,0.08)] transition-shadow">
+<div class="flex justify-between items-start mb-sm">
+<div class="bg-secondary-container text-on-secondary-container px-sm py-xs rounded-full font-label-md text-label-md inline-flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">sync</span> In Progress
+                        </div>
+<span class="text-on-surface-variant font-label-md text-label-md">Medium Impact</span>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface mb-xs mt-sm">Reconcile Country Reporting</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-1 mb-md">Resolve data source differences between regional reports and central system to ensure accurate quarterly roll-up.</p>
+<div class="mt-auto border-t border-surface-variant pt-sm flex justify-end gap-sm">
+<button class="px-sm py-xs font-label-lg text-label-lg text-primary hover:bg-primary-fixed rounded transition-colors">Details</button>
+<button class="px-sm py-xs font-label-lg text-label-lg border border-primary text-primary rounded hover:bg-primary-fixed transition-colors">Re-assign</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-[0_4px_24px_rgba(0,23,13,0.04)] border border-primary/10 flex flex-col hover:shadow-[0_8px_32px_rgba(0,23,13,0.08)] transition-shadow">
+<div class="flex justify-between items-start mb-sm">
+<div class="bg-error-container text-on-error-container px-sm py-xs rounded-full font-label-md text-label-md inline-flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">warning</span> Open
+                        </div>
+<span class="text-on-surface-variant font-label-md text-label-md">High Impact</span>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface mb-xs mt-sm">Follow Up No-Spend Countries</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-1 mb-md">Zero recorded expenditure in Q2 for Angola and South Africa. Requires urgent outreach to regional directors.</p>
+<div class="mt-auto border-t border-surface-variant pt-sm flex justify-end gap-sm">
+<button class="px-sm py-xs font-label-lg text-label-lg text-primary hover:bg-primary-fixed rounded transition-colors">View Data</button>
+<button class="px-sm py-xs font-label-lg text-label-lg bg-primary text-on-primary rounded hover:opacity-90 transition-opacity">Assign Action</button>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-[0_4px_24px_rgba(0,23,13,0.04)] border border-primary/10 flex flex-col hover:shadow-[0_8px_32px_rgba(0,23,13,0.08)] transition-shadow">
+<div class="flex justify-between items-start mb-sm">
+<div class="bg-primary-container text-on-primary-container px-sm py-xs rounded-full font-label-md text-label-md inline-flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Monitoring
+                        </div>
+<span class="text-on-surface-variant font-label-md text-label-md">Optimization</span>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface mb-xs mt-sm">Sustain B12 Implementation</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-1 mb-md">High performing program area. Capture best practices and evaluate potential for mid-year budget reallocation.</p>
+<div class="mt-auto border-t border-surface-variant pt-sm flex justify-end gap-sm">
+<button class="px-sm py-xs font-label-lg text-label-lg text-primary hover:bg-primary-fixed rounded transition-colors">Log Note</button>
+<button class="px-sm py-xs font-label-lg text-label-lg border border-primary text-primary rounded hover:bg-primary-fixed transition-colors">Assign Review</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

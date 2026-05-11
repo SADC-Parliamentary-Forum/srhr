@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Public SRHR Dashboard - SADC PF</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#414844",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e4e2e2",
+                        "primary-container": "#0b2d20",
+                        "inverse-primary": "#abcfbb",
+                        "tertiary": "#131310",
+                        "on-primary-fixed-variant": "#2d4d3e",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#e5e2db",
+                        "secondary-fixed": "#ffe088",
+                        "on-tertiary-fixed": "#1c1c18",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-tertiary-container": "#908f89",
+                        "tertiary-container": "#282824",
+                        "secondary-container": "#fed65b",
+                        "tertiary-fixed-dim": "#c9c6c0",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#fbf9f8",
+                        "surface-dim": "#dbd9d9",
+                        "surface-tint": "#446555",
+                        "primary": "#00170d",
+                        "surface-container-low": "#f5f3f3",
+                        "surface-container-high": "#eae8e7",
+                        "secondary-fixed-dim": "#e9c349",
+                        "on-primary-fixed": "#002115",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#c6ebd7",
+                        "surface-container": "#efeded",
+                        "outline": "#727974",
+                        "background": "#fbf9f8",
+                        "secondary": "#735c00",
+                        "on-background": "#1b1c1c",
+                        "inverse-surface": "#303030",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#745c00",
+                        "primary-fixed-dim": "#abcfbb",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e4e2e2",
+                        "on-secondary-fixed": "#241a00",
+                        "error-container": "#ffdad6",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-secondary": "#ffffff",
+                        "surface": "#fbf9f8",
+                        "on-surface": "#1b1c1c",
+                        "on-tertiary-fixed-variant": "#474742",
+                        "outline-variant": "#c1c8c2",
+                        "on-primary-container": "#749684"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "sm": "12px",
+                        "gutter": "16px",
+                        "container-margin": "20px",
+                        "base": "8px",
+                        "xl": "64px",
+                        "lg": "40px",
+                        "md": "24px"
+                    },
+                    "fontFamily": {
+                        "label-lg": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "ussd-mono": ["Courier"],
+                        "body-sm": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "display": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-lg": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "h3": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "ussd-mono": ["16px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "h2": ["24px", { "lineHeight": "1.3", "fontWeight": "700" }],
+                        "h1": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "label-md": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display": ["40px", { "lineHeight": "1.2", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(114, 121, 116, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- TopAppBar -->
+<header class="bg-primary dark:bg-primary docked full-width top-0 sticky shadow-sm flex justify-between items-center w-full px-container-margin py-sm sticky top-0 z-50">
+<div class="flex items-center gap-gutter">
+<span class="text-h3 font-h3 text-secondary-container dark:text-secondary-container">SADC PF SRHR Portal</span>
+</div>
+<nav class="hidden md:flex gap-gutter items-center">
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors font-label-lg text-label-lg hover:bg-primary-container dark:hover:bg-primary-container transition-all px-base py-xs rounded" href="#">Home</a>
+<a class="text-secondary-container font-bold border-b-2 border-secondary-container pb-1 font-label-lg text-label-lg px-base py-xs opacity-90 scale-95 transition-transform" href="#">Dashboard</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors font-label-lg text-label-lg hover:bg-primary-container dark:hover:bg-primary-container transition-all px-base py-xs rounded" href="#">Countries</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors font-label-lg text-label-lg hover:bg-primary-container dark:hover:bg-primary-container transition-all px-base py-xs rounded" href="#">Reports</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors font-label-lg text-label-lg hover:bg-primary-container dark:hover:bg-primary-container transition-all px-base py-xs rounded" href="#">Stories</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors font-label-lg text-label-lg hover:bg-primary-container dark:hover:bg-primary-container transition-all px-base py-xs rounded" href="#">Resources</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors font-label-lg text-label-lg hover:bg-primary-container dark:hover:bg-primary-container transition-all px-base py-xs rounded" href="#">News &amp; Events</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors font-label-lg text-label-lg hover:bg-primary-container dark:hover:bg-primary-container transition-all px-base py-xs rounded" href="#">About</a>
+</nav>
+<div class="flex gap-sm">
+<button class="font-label-lg text-label-lg px-container-margin py-base border border-outline text-on-primary rounded hover:bg-primary-container transition-colors">Login</button>
+<button class="font-label-lg text-label-lg px-container-margin py-base bg-secondary-container text-on-secondary-container rounded font-bold hover:opacity-90 transition-opacity">Register</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="w-full max-w-[1440px] mx-auto px-container-margin py-lg flex flex-col gap-xl">
+<!-- Header Section -->
+<section class="flex flex-col md:flex-row justify-between items-start md:items-end gap-gutter">
+<div>
+<h1 class="font-display text-display text-primary">Public SRHR Dashboard</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-xs">Overview of Regional Sexual and Reproductive Health and Rights Performance.</p>
+</div>
+<button class="flex items-center gap-xs font-label-md text-label-md px-sm py-base bg-surface-container rounded-full border border-outline-variant hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                Download PDF Report
+            </button>
+</section>
+<!-- Filter Bar -->
+<section class="glass-card rounded-lg p-sm shadow-[0_4px_24px_rgba(0,23,13,0.04)] flex flex-wrap gap-sm items-center">
+<div class="flex-1 min-w-[200px] relative">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded pl-xl pr-sm py-base font-body-sm text-body-sm focus:border-primary focus:ring-1 focus:ring-primary transition-colors outline-none" placeholder="Search keywords..." type="text"/>
+</div>
+<div class="flex gap-sm overflow-x-auto pb-xs md:pb-0 hide-scrollbar flex-nowrap">
+<select class="bg-surface-container-lowest border border-outline-variant rounded px-sm py-base font-body-sm text-body-sm min-w-[140px] focus:border-primary outline-none cursor-pointer">
+<option value="">All Countries</option>
+<option value="ao">Angola</option>
+<option value="bw">Botswana</option>
+</select>
+<select class="bg-surface-container-lowest border border-outline-variant rounded px-sm py-base font-body-sm text-body-sm min-w-[160px] focus:border-primary outline-none cursor-pointer">
+<option value="">Reporting Period</option>
+<option value="2024">2024</option>
+<option value="2023">2023</option>
+</select>
+<select class="bg-surface-container-lowest border border-outline-variant rounded px-sm py-base font-body-sm text-body-sm min-w-[140px] focus:border-primary outline-none cursor-pointer">
+<option value="">Outcome</option>
+<option value="o2">Outcome 2</option>
+<option value="o3">Outcome 3</option>
+</select>
+<select class="bg-surface-container-lowest border border-outline-variant rounded px-sm py-base font-body-sm text-body-sm min-w-[140px] focus:border-primary outline-none cursor-pointer">
+<option value="">Theme</option>
+<option value="health">Health</option>
+<option value="rights">Rights</option>
+</select>
+</div>
+<button class="font-label-md text-label-md text-primary hover:bg-surface-variant px-sm py-base rounded transition-colors flex items-center gap-xs ml-auto">
+<span class="material-symbols-outlined text-[16px]">filter_list</span>
+                More Filters
+            </button>
+</section>
+<!-- Summary Cards (Bento) -->
+<section class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-gutter">
+<!-- Hero Card -->
+<div class="md:col-span-2 lg:col-span-2 bg-primary rounded-xl p-md text-on-primary shadow-[0_8px_32px_rgba(0,23,13,0.1)] relative overflow-hidden flex flex-col justify-between min-h-[240px]">
+<div class="absolute -right-12 -top-12 w-64 h-64 bg-primary-container rounded-full opacity-50 blur-3xl pointer-events-none"></div>
+<div>
+<h3 class="font-h3 text-h3 text-secondary-container">Regional Progress</h3>
+<p class="font-body-sm text-body-sm text-on-primary-fixed-variant mt-xs max-w-[80%]">Overall completion rate across all 15 SADC member states for the current strategic cycle.</p>
+</div>
+<div class="flex items-end gap-sm mt-lg">
+<span class="font-display text-display leading-none">68%</span>
+<span class="font-label-md text-label-md bg-secondary-container text-on-secondary-container px-xs py-[2px] rounded-full flex items-center gap-[2px] mb-1">
+<span class="material-symbols-outlined text-[12px]">trending_up</span> +4% YoY
+                    </span>
+</div>
+</div>
+<!-- Metric Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-[0_4px_24px_rgba(0,23,13,0.02)] flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<h4 class="font-label-lg text-label-lg text-on-surface-variant">Countries Reporting</h4>
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">public</span>
+</div>
+</div>
+<div class="mt-md">
+<span class="font-h1 text-h1 text-primary">12</span>
+<span class="font-body-sm text-body-sm text-outline">/ 15</span>
+</div>
+</div>
+<!-- Metric Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-[0_4px_24px_rgba(0,23,13,0.02)] flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<h4 class="font-label-lg text-label-lg text-on-surface-variant">Public Reports</h4>
+<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">description</span>
+</div>
+</div>
+<div class="mt-md">
+<span class="font-h1 text-h1 text-primary">148</span>
+<span class="font-body-sm text-body-sm text-outline">Published</span>
+</div>
+</div>
+</section>
+<!-- Performance Grid Layout -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Outcome Performance (List) -->
+<div class="lg:col-span-1 bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-[0_4px_24px_rgba(0,23,13,0.02)] flex flex-col h-full">
+<h3 class="font-h3 text-h3 text-primary mb-sm">Outcome Performance</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md border-b border-outline-variant pb-sm">Status of strategic outcomes across the region.</p>
+<div class="flex flex-col gap-xs overflow-y-auto pr-xs flex-1">
+<!-- Outcome Item -->
+<div class="flex items-center justify-between p-sm hover:bg-surface-container transition-colors rounded border border-transparent hover:border-outline-variant">
+<div class="flex items-start gap-sm">
+<div class="w-8 h-8 rounded bg-primary-container text-on-primary-container flex items-center justify-center font-bold font-label-md shrink-0">O2</div>
+<div>
+<h5 class="font-label-lg text-label-lg text-primary">Legal Frameworks</h5>
+<p class="font-body-sm text-[12px] text-outline line-clamp-1">Domestication of SRHR models</p>
+</div>
+</div>
+<span class="font-label-md text-[10px] uppercase tracking-wider bg-[#e6f4ea] text-[#137333] px-xs py-[2px] rounded-full shrink-0">Achieved</span>
+</div>
+<!-- Outcome Item -->
+<div class="flex items-center justify-between p-sm hover:bg-surface-container transition-colors rounded border border-transparent hover:border-outline-variant">
+<div class="flex items-start gap-sm">
+<div class="w-8 h-8 rounded bg-primary-container text-on-primary-container flex items-center justify-center font-bold font-label-md shrink-0">O3</div>
+<div>
+<h5 class="font-label-lg text-label-lg text-primary">Budget Allocation</h5>
+<p class="font-body-sm text-[12px] text-outline line-clamp-1">Domestic funding increases</p>
+</div>
+</div>
+<span class="font-label-md text-[10px] uppercase tracking-wider bg-[#e8f0fe] text-[#1a73e8] px-xs py-[2px] rounded-full shrink-0">On Track</span>
+</div>
+<!-- Outcome Item -->
+<div class="flex items-center justify-between p-sm hover:bg-surface-container transition-colors rounded border border-transparent hover:border-outline-variant">
+<div class="flex items-start gap-sm">
+<div class="w-8 h-8 rounded bg-primary-container text-on-primary-container flex items-center justify-center font-bold font-label-md shrink-0">O4</div>
+<div>
+<h5 class="font-label-lg text-label-lg text-primary">Youth Access</h5>
+<p class="font-body-sm text-[12px] text-outline line-clamp-1">Adolescent friendly services</p>
+</div>
+</div>
+<span class="font-label-md text-[10px] uppercase tracking-wider bg-[#fce8e6] text-[#c5221f] px-xs py-[2px] rounded-full shrink-0">At Risk</span>
+</div>
+<!-- Outcome Item -->
+<div class="flex items-center justify-between p-sm hover:bg-surface-container transition-colors rounded border border-transparent hover:border-outline-variant">
+<div class="flex items-start gap-sm">
+<div class="w-8 h-8 rounded bg-primary-container text-on-primary-container flex items-center justify-center font-bold font-label-md shrink-0">O5</div>
+<div>
+<h5 class="font-label-lg text-label-lg text-primary">Gender Violence</h5>
+<p class="font-body-sm text-[12px] text-outline line-clamp-1">Reduction in GBV incidents</p>
+</div>
+</div>
+<span class="font-label-md text-[10px] uppercase tracking-wider bg-[#e8f0fe] text-[#1a73e8] px-xs py-[2px] rounded-full shrink-0">On Track</span>
+</div>
+</div>
+<button class="w-full mt-sm py-xs text-center font-label-md text-primary hover:bg-surface-variant rounded transition-colors">View All Outcomes</button>
+</div>
+<!-- Country Performance (Map/Grid Hybrid) -->
+<div class="lg:col-span-2 bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-[0_4px_24px_rgba(0,23,13,0.02)] flex flex-col h-full min-h-[400px]">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-h3 text-h3 text-primary">Country Reporting Status</h3>
+<div class="flex gap-xs">
+<button class="p-xs bg-surface-variant rounded text-on-surface-variant hover:bg-outline-variant transition-colors"><span class="material-symbols-outlined text-[18px]">grid_view</span></button>
+<button class="p-xs bg-transparent border border-outline-variant rounded text-outline hover:bg-surface-variant transition-colors"><span class="material-symbols-outlined text-[18px]">map</span></button>
+</div>
+</div>
+<!-- Grid Visualization -->
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-sm flex-1">
+<!-- Country Card -->
+<div class="border border-outline-variant rounded p-sm flex flex-col items-center justify-center text-center hover:shadow-[0_4px_12px_rgba(0,23,13,0.05)] hover:border-primary-fixed transition-all cursor-pointer">
+<div class="w-10 h-10 rounded-full bg-primary-container text-secondary-container flex items-center justify-center font-bold mb-xs">BW</div>
+<span class="font-label-md text-label-md text-primary">Botswana</span>
+<span class="font-body-sm text-[10px] text-[#137333] mt-xs">Up to date</span>
+</div>
+<!-- Country Card -->
+<div class="border border-outline-variant rounded p-sm flex flex-col items-center justify-center text-center hover:shadow-[0_4px_12px_rgba(0,23,13,0.05)] hover:border-primary-fixed transition-all cursor-pointer">
+<div class="w-10 h-10 rounded-full bg-primary-container text-secondary-container flex items-center justify-center font-bold mb-xs">ZA</div>
+<span class="font-label-md text-label-md text-primary">South Africa</span>
+<span class="font-body-sm text-[10px] text-[#137333] mt-xs">Up to date</span>
+</div>
+<!-- Country Card -->
+<div class="border border-outline-variant rounded p-sm flex flex-col items-center justify-center text-center hover:shadow-[0_4px_12px_rgba(0,23,13,0.05)] hover:border-primary-fixed transition-all cursor-pointer bg-surface-container">
+<div class="w-10 h-10 rounded-full bg-surface-variant text-outline flex items-center justify-center font-bold mb-xs">MZ</div>
+<span class="font-label-md text-label-md text-primary">Mozambique</span>
+<span class="font-body-sm text-[10px] text-[#c5221f] mt-xs">Pending Q3</span>
+</div>
+<!-- Country Card -->
+<div class="border border-outline-variant rounded p-sm flex flex-col items-center justify-center text-center hover:shadow-[0_4px_12px_rgba(0,23,13,0.05)] hover:border-primary-fixed transition-all cursor-pointer">
+<div class="w-10 h-10 rounded-full bg-primary-container text-secondary-container flex items-center justify-center font-bold mb-xs">NA</div>
+<span class="font-label-md text-label-md text-primary">Namibia</span>
+<span class="font-body-sm text-[10px] text-[#137333] mt-xs">Up to date</span>
+</div>
+<!-- Country Card -->
+<div class="border border-outline-variant rounded p-sm flex flex-col items-center justify-center text-center hover:shadow-[0_4px_12px_rgba(0,23,13,0.05)] hover:border-primary-fixed transition-all cursor-pointer">
+<div class="w-10 h-10 rounded-full bg-primary-container text-secondary-container flex items-center justify-center font-bold mb-xs">ZM</div>
+<span class="font-label-md text-label-md text-primary">Zambia</span>
+<span class="font-body-sm text-[10px] text-[#137333] mt-xs">Up to date</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-tertiary dark:bg-tertiary-container full-width bottom-0 flat no shadows flex flex-col md:flex-row justify-between items-center w-full px-container-margin py-lg border-t border-outline-variant mt-xl">
+<div class="flex items-center gap-sm mb-sm md:mb-0">
+<span class="text-h3 font-h3 text-secondary-fixed">SADC PF</span>
+<span class="font-body-sm text-body-sm text-on-tertiary dark:text-on-tertiary-container ml-sm">© 2024 SADC Parliamentary Forum. All Rights Reserved.</span>
+</div>
+<nav class="flex gap-gutter items-center">
+<a class="font-label-md text-label-md text-on-tertiary-container hover:text-secondary-fixed transition-colors Link underline on hover" href="#">Privacy Policy</a>
+<a class="font-label-md text-label-md text-on-tertiary-container hover:text-secondary-fixed transition-colors Link underline on hover" href="#">Terms of Service</a>
+<a class="font-label-md text-label-md text-on-tertiary-container hover:text-secondary-fixed transition-colors Link underline on hover" href="#">Contact Us</a>
+<a class="font-label-md text-label-md text-on-tertiary-container hover:text-secondary-fixed transition-colors Link underline on hover" href="#">SADC Website</a>
+</nav>
+</footer>
+</body></html>

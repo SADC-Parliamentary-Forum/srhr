@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { PublicHeader } from '@/components/layout/PublicHeader'
@@ -315,8 +316,13 @@ function LoginPageInner() {
 
           {/* Top logo */}
           <div className="relative z-10 flex items-center gap-3">
-            <span className="material-symbols-outlined text-[36px] text-[#fed65b]" style={{ fontVariationSettings: "'FILL' 1" }}>health_and_safety</span>
-            <span className="text-[18px] font-bold text-white tracking-wide">SADC PF SRHR Portal</span>
+            <div className="bg-white rounded-xl p-1.5 flex items-center justify-center shrink-0">
+              <Image src="/sadc-pf-logo.jpg" alt="SADC PF Logo" width={48} height={48} className="object-contain" priority />
+            </div>
+            <div>
+              <div className="text-[16px] font-extrabold text-[#fed65b] tracking-wide">SADC PF</div>
+              <div className="text-[12px] font-semibold text-[#abcfbb] tracking-wide">SRHR Portal</div>
+            </div>
           </div>
 
           {/* Centre copy */}
@@ -354,9 +360,14 @@ function LoginPageInner() {
           <div className="w-full max-w-lg py-4">
 
             {/* Mobile logo (only on small screens) */}
-            <div className="flex lg:hidden items-center gap-2.5 mb-8">
-              <span className="material-symbols-outlined text-[28px] text-[#00170d]" style={{ fontVariationSettings: "'FILL' 1" }}>health_and_safety</span>
-              <span className="text-[16px] font-bold text-[#00170d]">SADC PF SRHR Portal</span>
+            <div className="flex lg:hidden items-center gap-3 mb-8">
+              <div className="bg-[#00170d] rounded-xl p-1.5 flex items-center justify-center shrink-0">
+                <Image src="/sadc-pf-logo.jpg" alt="SADC PF Logo" width={36} height={36} className="object-contain brightness-0 invert" />
+              </div>
+              <div>
+                <div className="text-[15px] font-extrabold text-[#00170d] tracking-wide">SADC PF</div>
+                <div className="text-[11px] font-semibold text-[#414844]">SRHR Portal</div>
+              </div>
             </div>
 
             {/* Card */}

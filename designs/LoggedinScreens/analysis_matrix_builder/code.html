@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Analysis Matrix Builder - SRHR Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#00170d",
+                    "secondary-fixed-dim": "#e9c349",
+                    "primary-container": "#0b2d20",
+                    "surface-tint": "#446555",
+                    "on-error": "#ffffff",
+                    "secondary-fixed": "#ffe088",
+                    "on-primary-fixed": "#002115",
+                    "surface-container-high": "#eae8e7",
+                    "on-secondary-fixed-variant": "#574500",
+                    "surface-container-low": "#f5f3f3",
+                    "on-primary-fixed-variant": "#2d4d3e",
+                    "on-error-container": "#93000a",
+                    "outline": "#727974",
+                    "tertiary-fixed-dim": "#c9c6c0",
+                    "on-tertiary-fixed": "#1c1c18",
+                    "inverse-surface": "#303030",
+                    "on-secondary-fixed": "#241a00",
+                    "inverse-primary": "#abcfbb",
+                    "on-background": "#1b1c1c",
+                    "secondary-container": "#fed65b",
+                    "outline-variant": "#c1c8c2",
+                    "on-surface": "#1b1c1c",
+                    "tertiary-fixed": "#e5e2db",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#f2f0f0",
+                    "secondary": "#735c00",
+                    "surface-bright": "#fbf9f8",
+                    "primary-fixed": "#c6ebd7",
+                    "on-primary": "#ffffff",
+                    "surface-container": "#efeded",
+                    "surface": "#fbf9f8",
+                    "tertiary-container": "#282824",
+                    "tertiary": "#131310",
+                    "on-tertiary-fixed-variant": "#474742",
+                    "background": "#fbf9f8",
+                    "error-container": "#ffdad6",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-container": "#749684",
+                    "on-tertiary-container": "#908f89",
+                    "primary-fixed-dim": "#abcfbb",
+                    "on-surface-variant": "#414844",
+                    "surface-container-highest": "#e4e2e2",
+                    "on-secondary-container": "#745c00",
+                    "surface-dim": "#dbd9d9",
+                    "surface-variant": "#e4e2e2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "64px",
+                    "md": "24px",
+                    "container-margin": "20px",
+                    "gutter": "16px",
+                    "sm": "12px",
+                    "lg": "40px",
+                    "base": "8px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "body-md": ["Manrope"],
+                    "h1": ["Manrope"],
+                    "label-lg": ["Manrope"],
+                    "ussd-mono": ["Courier"],
+                    "body-lg": ["Manrope"],
+                    "label-md": ["Manrope"],
+                    "h2": ["Manrope"],
+                    "display": ["Manrope"],
+                    "h3": ["Manrope"],
+                    "body-sm": ["Manrope"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "h1": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "label-lg": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "ussd-mono": ["16px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "h2": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                    "display": ["40px", {"lineHeight": "1.2", "fontWeight": "800"}],
+                    "h3": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col md:flex-row">
+<!-- SideNavBar (Web) -->
+<aside class="hidden md:flex flex-col h-screen w-64 border-r border-outline-variant bg-surface dark:bg-inverse-surface text-primary dark:text-inverse-primary font-body-md text-body-md font-label-md text-label-md sticky top-0 z-40">
+<div class="p-gutter flex flex-col gap-sm">
+<h1 class="font-h2 text-h2 font-black text-primary dark:text-inverse-primary truncate" title="SRHR Portal">SRHR Portal</h1>
+<p class="font-label-md text-label-md text-on-surface-variant">Secure Reporting</p>
+</div>
+<nav class="flex-1 overflow-y-auto py-sm">
+<ul class="flex flex-col">
+<li>
+<a class="flex items-center px-gutter py-sm gap-sm text-on-surface-variant hover:bg-surface-container-highest transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dashboard</span>
+<span class="font-label-lg text-label-lg">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center px-gutter py-sm gap-sm text-on-surface-variant hover:bg-surface-container-highest transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">work</span>
+<span class="font-label-lg text-label-lg">Reports Workspace</span>
+</a>
+</li>
+<li>
+<a class="flex items-center px-gutter py-sm gap-sm text-on-surface-variant hover:bg-surface-container-highest transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">edit_note</span>
+<span class="font-label-lg text-label-lg">Data Capture</span>
+</a>
+</li>
+<!-- Active Nav Item -->
+<li>
+<a class="flex items-center px-gutter py-sm gap-sm text-primary dark:text-inverse-primary font-bold border-r-4 border-secondary bg-surface-container-low transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="font-label-lg text-label-lg">Analysis</span>
+</a>
+</li>
+<li>
+<a class="flex items-center px-gutter py-sm gap-sm text-on-surface-variant hover:bg-surface-container-highest transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">library_books</span>
+<span class="font-label-lg text-label-lg">Library</span>
+</a>
+</li>
+<li>
+<a class="flex items-center px-gutter py-sm gap-sm text-on-surface-variant hover:bg-surface-container-highest transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+<span class="font-label-lg text-label-lg">Administration</span>
+</a>
+</li>
+</ul>
+</nav>
+<div class="p-gutter border-t border-outline-variant bg-surface-container-low">
+<button class="w-full flex items-center justify-center gap-base py-sm px-gutter bg-primary-container text-on-primary-container rounded-DEFAULT font-label-lg text-label-lg hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">center_focus_strong</span>
+                Focus Mode
+            </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-h-screen max-w-full overflow-hidden">
+<!-- TopAppBar (Web & Mobile) -->
+<header class="flex justify-between items-center px-gutter py-xs w-full sticky top-0 z-50 shadow-sm bg-surface-bright dark:bg-inverse-surface text-primary dark:text-inverse-primary font-label-lg text-label-lg">
+<div class="flex items-center gap-md">
+<button class="md:hidden p-xs text-primary hover:bg-surface-container-highest rounded-full transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="font-display text-display text-primary dark:text-inverse-primary hidden md:block text-h3 leading-none">SRHR Portal</span>
+</div>
+<!-- Web Navigation Links (Hidden on mobile) -->
+<nav class="hidden md:flex items-center gap-md h-full">
+<a class="h-full flex items-center px-xs py-md text-on-surface-variant hover:text-secondary border-b-2 border-transparent transition-colors duration-150" href="#">Reports</a>
+<a class="h-full flex items-center px-xs py-md text-on-surface-variant hover:text-secondary border-b-2 border-transparent transition-colors duration-150" href="#">Data</a>
+<a class="h-full flex items-center px-xs py-md text-on-surface-variant hover:text-secondary border-b-2 border-transparent transition-colors duration-150" href="#">Library</a>
+</nav>
+<div class="flex items-center gap-sm">
+<!-- Search (Placeholder for "on_right") -->
+<div class="hidden lg:flex relative items-center">
+<span class="material-symbols-outlined absolute left-sm text-on-surface-variant text-body-sm">search</span>
+<input class="pl-lg pr-sm py-xs bg-surface-container rounded-full border border-outline-variant text-body-sm font-body-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary w-48 transition-all" placeholder="Search matrix..." type="text"/>
+</div>
+<!-- Icon Actions -->
+<div class="flex items-center gap-xs text-on-surface-variant">
+<button class="p-xs hover:bg-surface-container-highest rounded-full transition-colors duration-150 scale-95 hover:text-secondary"><span class="material-symbols-outlined">notifications</span></button>
+<button class="p-xs hover:bg-surface-container-highest rounded-full transition-colors duration-150 scale-95 hover:text-secondary"><span class="material-symbols-outlined">public</span></button>
+<button class="p-xs hover:bg-surface-container-highest rounded-full transition-colors duration-150 scale-95 hover:text-secondary"><span class="material-symbols-outlined">calendar_today</span></button>
+</div>
+<!-- Primary Action -->
+<button class="hidden sm:flex items-center px-sm py-xs bg-primary text-on-primary rounded-DEFAULT font-label-md text-label-md hover:opacity-90 transition-opacity">Add / Upload</button>
+<!-- Secondary Action (AI Assistant) -->
+<button class="hidden lg:flex items-center gap-xs px-sm py-xs border border-primary text-primary rounded-DEFAULT font-label-md text-label-md hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+                    AI Assistant
+                </button>
+<!-- Profile Avatar -->
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed-dim overflow-hidden flex-shrink-0 ml-xs border border-outline-variant">
+<img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq6Cjo1G61HhDf3pl5IHAzq_gqAXdGIjl3Gi-fkfI8pvHCrop-6sV0il-il8pVrHR103922dS5E219X6eCGkaRF_Rd0bG54NT8NNh8sLQZ9cncdO2njK0f1tXmrwuLbZwSx9iVowdN7qXL6HPsNZukXnpkKXb1N_oXhIEAt-ljl1VWnUlLmT9ZmE0ywnDgBdc5g0l2JcNL6dtxrycpEwbJJbyOu5O1AAWXHNBC4pRZ1-7rJ9Bh45vS0VoySEjtJLlaH3hauD6g8g"/>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 p-container-margin md:p-md lg:p-lg flex flex-col gap-md overflow-hidden bg-background">
+<!-- Page Header & Filters -->
+<div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-sm">
+<div>
+<h2 class="font-h1 text-h1 text-primary">Analysis Matrix Builder</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Compare indicators across regions and timeframes.</p>
+</div>
+<!-- High-level Actions -->
+<div class="flex items-center gap-sm self-end lg:self-auto">
+<button class="flex items-center gap-xs px-sm py-xs bg-surface text-primary border border-outline-variant rounded-DEFAULT font-label-md text-label-md hover:bg-surface-container transition-colors shadow-[0_1px_2px_rgba(0,23,13,0.04)]">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+                        Configure View
+                    </button>
+<button class="flex items-center gap-xs px-sm py-xs bg-primary text-on-primary rounded-DEFAULT font-label-md text-label-md hover:opacity-90 transition-opacity shadow-[0_1px_2px_rgba(0,23,13,0.04)]">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                        Export
+                    </button>
+</div>
+</div>
+<!-- Complex Filtering Header (Level 1 Elevation) -->
+<div class="bg-surface p-md rounded-lg shadow-[0_4px_12px_rgba(0,23,13,0.04)] border border-primary/10 flex flex-col gap-md">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<!-- Indicator Selection -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">monitoring</span>
+                            Select Indicators
+                        </label>
+<div class="relative">
+<select class="w-full appearance-none bg-surface-container-lowest border border-outline-variant text-on-surface font-body-md text-body-md rounded-DEFAULT py-xs pl-sm pr-lg focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none">
+<option>Maternal Mortality Ratio</option>
+<option>Contraceptive Prevalence Rate</option>
+<option>Adolescent Birth Rate</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+<div class="flex flex-wrap gap-xs mt-xs">
+<span class="inline-flex items-center gap-xs px-xs py-[2px] bg-primary-container text-on-primary-container rounded-full font-label-md text-label-md">
+                                MMR <button class="hover:text-error transition-colors leading-none"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-xs px-xs py-[2px] bg-primary-container text-on-primary-container rounded-full font-label-md text-label-md">
+                                CPR <button class="hover:text-error transition-colors leading-none"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+</div>
+</div>
+<!-- Region Selection -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">public</span>
+                            Select Regions
+                        </label>
+<div class="relative">
+<select class="w-full appearance-none bg-surface-container-lowest border border-outline-variant text-on-surface font-body-md text-body-md rounded-DEFAULT py-xs pl-sm pr-lg focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none">
+<option>Sub-Saharan Africa</option>
+<option>South Asia</option>
+<option>Latin America</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+<div class="flex flex-wrap gap-xs mt-xs">
+<span class="inline-flex items-center gap-xs px-xs py-[2px] bg-surface-variant text-on-surface-variant rounded-full font-label-md text-label-md border border-outline-variant/50">
+                                Kenya <button class="hover:text-error transition-colors leading-none"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-xs px-xs py-[2px] bg-surface-variant text-on-surface-variant rounded-full font-label-md text-label-md border border-outline-variant/50">
+                                Uganda <button class="hover:text-error transition-colors leading-none"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+</div>
+</div>
+<!-- Timeframe Selection -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">date_range</span>
+                            Time Period
+                        </label>
+<div class="flex items-center gap-sm">
+<div class="relative flex-1">
+<select class="w-full appearance-none bg-surface-container-lowest border border-outline-variant text-on-surface font-body-md text-body-md rounded-DEFAULT py-xs pl-sm pr-lg focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none">
+<option>2023 Q1</option>
+<option>2023 Q2</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[18px]">expand_more</span>
+</div>
+<span class="text-on-surface-variant font-label-md text-label-md">to</span>
+<div class="relative flex-1">
+<select class="w-full appearance-none bg-surface-container-lowest border border-outline-variant text-on-surface font-body-md text-body-md rounded-DEFAULT py-xs pl-sm pr-lg focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none">
+<option>2023 Q4</option>
+<option>2024 Q1</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[18px]">expand_more</span>
+</div>
+</div>
+<label class="flex items-center gap-xs mt-xs cursor-pointer">
+<input checked="" class="form-checkbox text-primary rounded-sm border-outline focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="font-label-md text-label-md text-on-surface">Pin Baseline Column</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Workspace & Sidebar Layout -->
+<div class="flex flex-col xl:flex-row gap-md flex-1 overflow-hidden">
+<!-- Matrix Workspace (Main Data Grid) -->
+<div class="flex-1 bg-surface rounded-lg shadow-[0_4px_12px_rgba(0,23,13,0.04)] border border-primary/10 flex flex-col overflow-hidden">
+<!-- Grid Toolbar -->
+<div class="flex items-center justify-between p-sm border-b border-outline-variant bg-surface-bright">
+<h3 class="font-h3 text-h3 text-primary">Performance Matrix</h3>
+<div class="flex items-center gap-sm">
+<label class="flex items-center gap-xs cursor-pointer text-on-surface-variant hover:text-primary transition-colors">
+<input class="form-checkbox text-primary rounded-sm border-outline focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="font-label-md text-label-md">Show Variance</span>
+</label>
+<div class="w-px h-4 bg-outline-variant"></div>
+<button class="p-xs text-on-surface-variant hover:text-primary hover:bg-surface-container rounded-DEFAULT transition-all" title="Full Screen">
+<span class="material-symbols-outlined text-[20px]">fullscreen</span>
+</button>
+</div>
+</div>
+<!-- The Grid (Scrollable) -->
+<div class="flex-1 overflow-auto bg-surface-container-lowest p-sm">
+<table class="w-full text-left border-collapse min-w-[800px]">
+<thead class="sticky top-0 z-10 bg-surface-bright shadow-[0_1px_0_rgba(0,0,0,0.1)]">
+<tr>
+<th class="p-sm font-label-lg text-label-lg text-on-surface-variant border-b border-r border-outline-variant/50 bg-surface-bright w-1/4">Indicator / Region</th>
+<!-- Pinned Baseline -->
+<th class="p-sm font-label-lg text-label-lg text-primary border-b border-r border-outline-variant/50 bg-primary-fixed/20 relative group">
+<div class="flex items-center justify-between">
+                                            Baseline (2022)
+                                            <span class="material-symbols-outlined text-[16px] text-primary opacity-50 group-hover:opacity-100 cursor-pointer" title="Unpin">push_pin</span>
+</div>
+</th>
+<th class="p-sm font-label-lg text-label-lg text-on-surface-variant border-b border-r border-outline-variant/50 bg-surface-bright">2023 Q1</th>
+<th class="p-sm font-label-lg text-label-lg text-on-surface-variant border-b border-r border-outline-variant/50 bg-surface-bright">2023 Q2</th>
+<th class="p-sm font-label-lg text-label-lg text-on-surface-variant border-b border-outline-variant/50 bg-surface-bright">2023 Q3</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-surface">
+<!-- Row Group: Kenya -->
+<tr class="bg-surface-container-low border-b border-outline-variant/30">
+<td class="p-sm font-label-lg text-label-lg text-primary" colspan="5">Kenya</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest border-b border-outline-variant/20 transition-colors">
+<td class="p-sm border-r border-outline-variant/30 text-on-surface-variant pl-md">Maternal Mortality Ratio</td>
+<td class="p-sm border-r border-outline-variant/30 bg-primary-fixed/10 font-ussd-mono">342</td>
+<td class="p-sm border-r border-outline-variant/30">
+<div class="flex items-center justify-between">
+<span class="font-ussd-mono">338</span>
+<span class="inline-flex items-center px-xs py-[2px] rounded-full bg-[#e6f4ea] text-[#137333] font-label-md text-label-md gap-xs">
+<span class="material-symbols-outlined text-[14px]">arrow_downward</span> 1.2%
+                                            </span>
+</div>
+</td>
+<td class="p-sm border-r border-outline-variant/30">
+<div class="flex items-center justify-between">
+<span class="font-ussd-mono">335</span>
+<span class="inline-flex items-center px-xs py-[2px] rounded-full bg-[#e6f4ea] text-[#137333] font-label-md text-label-md gap-xs">
+<span class="material-symbols-outlined text-[14px]">arrow_downward</span> 0.9%
+                                            </span>
+</div>
+</td>
+<td class="p-sm">
+<div class="flex items-center justify-between">
+<span class="font-ussd-mono font-bold">345</span>
+<span class="inline-flex items-center px-xs py-[2px] rounded-full bg-error-container text-on-error-container font-label-md text-label-md gap-xs" title="At Risk">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span> 2.9%
+                                            </span>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest border-b border-outline-variant/50 transition-colors">
+<td class="p-sm border-r border-outline-variant/30 text-on-surface-variant pl-md">Contraceptive Prev. Rate</td>
+<td class="p-sm border-r border-outline-variant/30 bg-primary-fixed/10 font-ussd-mono">58%</td>
+<td class="p-sm border-r border-outline-variant/30">
+<div class="flex items-center justify-between">
+<span class="font-ussd-mono">58.5%</span>
+<span class="material-symbols-outlined text-[16px] text-outline">horizontal_rule</span>
+</div>
+</td>
+<td class="p-sm border-r border-outline-variant/30">
+<div class="flex items-center justify-between">
+<span class="font-ussd-mono">59.2%</span>
+<span class="inline-flex items-center px-xs py-[2px] rounded-full bg-[#e6f4ea] text-[#137333] font-label-md text-label-md gap-xs">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+</span>
+</div>
+</td>
+<td class="p-sm">
+<div class="flex items-center justify-between">
+<span class="font-ussd-mono">60.1%</span>
+<span class="inline-flex items-center px-xs py-[2px] rounded-full bg-[#e6f4ea] text-[#137333] font-label-md text-label-md gap-xs">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+</span>
+</div>
+</td>
+</tr>
+<!-- Row Group: Uganda -->
+<tr class="bg-surface-container-low border-b border-outline-variant/30">
+<td class="p-sm font-label-lg text-label-lg text-primary" colspan="5">Uganda</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest border-b border-outline-variant/20 transition-colors">
+<td class="p-sm border-r border-outline-variant/30 text-on-surface-variant pl-md">Maternal Mortality Ratio</td>
+<td class="p-sm border-r border-outline-variant/30 bg-primary-fixed/10 font-ussd-mono">375</td>
+<td class="p-sm border-r border-outline-variant/30">
+<div class="flex items-center justify-between text-on-surface-variant opacity-60">
+<span class="font-body-sm italic">Data Pending</span>
+<span class="material-symbols-outlined text-[16px]">pending</span>
+</div>
+</td>
+<td class="p-sm border-r border-outline-variant/30">
+<div class="flex items-center justify-between">
+<span class="font-ussd-mono">370</span>
+<span class="inline-flex items-center px-xs py-[2px] rounded-full bg-[#e6f4ea] text-[#137333] font-label-md text-label-md gap-xs">
+<span class="material-symbols-outlined text-[14px]">arrow_downward</span> 1.3%
+                                            </span>
+</div>
+</td>
+<td class="p-sm">
+<div class="flex items-center justify-between">
+<span class="font-ussd-mono">368</span>
+<span class="inline-flex items-center px-xs py-[2px] rounded-full bg-[#e6f4ea] text-[#137333] font-label-md text-label-md gap-xs">
+<span class="material-symbols-outlined text-[14px]">arrow_downward</span> 0.5%
+                                            </span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Matrix Footer / Pagination -->
+<div class="p-sm border-t border-outline-variant bg-surface-bright flex justify-between items-center text-body-sm text-on-surface-variant">
+<span>Showing 2 of 12 Regions</span>
+<div class="flex gap-xs">
+<button class="p-xs hover:bg-surface-container rounded disabled:opacity-50"><span class="material-symbols-outlined text-[18px]">chevron_left</span></button>
+<button class="p-xs hover:bg-surface-container rounded"><span class="material-symbols-outlined text-[18px]">chevron_right</span></button>
+</div>
+</div>
+</div>
+<!-- AI Insights Sidebar (Level 2 Elevation metaphor) -->
+<aside class="w-full xl:w-80 bg-surface-bright rounded-lg shadow-[0_4px_16px_rgba(0,23,13,0.06)] border border-secondary/20 flex flex-col flex-shrink-0">
+<div class="p-sm border-b border-outline-variant flex items-center gap-sm bg-secondary/5 rounded-t-lg">
+<span class="material-symbols-outlined text-secondary text-[24px]">auto_awesome</span>
+<h3 class="font-h3 text-h3 text-secondary">AI Insights</h3>
+</div>
+<div class="p-sm flex flex-col gap-sm overflow-y-auto">
+<!-- Insight Card 1 (Deviation) -->
+<div class="bg-error-container/20 border border-error-container p-sm rounded-md flex flex-col gap-xs">
+<div class="flex items-start gap-xs text-on-error-container">
+<span class="material-symbols-outlined text-[18px] mt-[2px]">trending_up</span>
+<h4 class="font-label-lg text-label-lg">Significant Deviation</h4>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">Kenya's MMR spiked by 2.9% in 2023 Q3, breaking a 4-quarter downward trend. Recommend deeper review of localized Q3 incident reports.</p>
+<button class="text-error font-label-md text-label-md text-left hover:underline self-start mt-xs">View Related Reports</button>
+</div>
+<!-- Insight Card 2 (Data Gap) -->
+<div class="bg-surface-container p-sm rounded-md border border-outline-variant/50 flex flex-col gap-xs">
+<div class="flex items-start gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] mt-[2px]">warning</span>
+<h4 class="font-label-lg text-label-lg">Data Gap Detected</h4>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">Uganda MMR data for 2023 Q1 is missing. This affects regional aggregate calculations.</p>
+<button class="text-primary font-label-md text-label-md text-left hover:underline self-start mt-xs">Send Reminder</button>
+</div>
+<!-- Insight Card 3 (Positive Trend) -->
+<div class="bg-primary-fixed/20 p-sm rounded-md border border-primary/10 flex flex-col gap-xs">
+<div class="flex items-start gap-xs text-primary">
+<span class="material-symbols-outlined text-[18px] mt-[2px]">check_circle</span>
+<h4 class="font-label-lg text-label-lg">Target Reached</h4>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">Kenya CPR has surpassed the 60% regional target in 2023 Q3.</p>
+</div>
+</div>
+<div class="p-sm border-t border-outline-variant mt-auto">
+<button class="w-full py-xs border border-secondary text-secondary rounded-DEFAULT font-label-md text-label-md hover:bg-secondary/5 transition-colors flex justify-center items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">refresh</span>
+                            Recalculate Insights
+                        </button>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-md px-lg flex justify-between items-center mt-auto border-t border-outline-variant bg-surface-container-lowest dark:bg-surface-container-highest text-primary dark:text-inverse-primary font-label-md text-label-md">
+<div class="font-label-lg text-label-lg text-primary">© 2024 SRHR Global Reporting System. All rights reserved.</div>
+<div class="flex gap-md">
+<a class="text-on-surface-variant hover:text-primary opacity-80 hover:opacity-100 transition-opacity" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary opacity-80 hover:opacity-100 transition-opacity" href="#">Support</a>
+<a class="text-on-surface-variant hover:text-primary opacity-80 hover:opacity-100 transition-opacity" href="#">Documentation</a>
+</div>
+</footer>
+</div>
+</body></html>

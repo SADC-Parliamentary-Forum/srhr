@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Stories of Change - SRHR Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "tertiary": "#131310",
+                        "secondary-fixed-dim": "#e9c349",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-tertiary-container": "#908f89",
+                        "tertiary-container": "#282824",
+                        "on-tertiary-fixed": "#1c1c18",
+                        "background": "#fbf9f8",
+                        "on-secondary-container": "#745c00",
+                        "on-primary-fixed-variant": "#2d4d3e",
+                        "outline": "#727974",
+                        "on-tertiary-fixed-variant": "#474742",
+                        "primary-fixed": "#c6ebd7",
+                        "surface": "#fbf9f8",
+                        "surface-container-highest": "#e4e2e2",
+                        "surface-variant": "#e4e2e2",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#eae8e7",
+                        "outline-variant": "#c1c8c2",
+                        "tertiary-fixed-dim": "#c9c6c0",
+                        "inverse-primary": "#abcfbb",
+                        "on-primary-container": "#749684",
+                        "secondary-fixed": "#ffe088",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#414844",
+                        "surface-bright": "#fbf9f8",
+                        "on-secondary-fixed": "#241a00",
+                        "primary-fixed-dim": "#abcfbb",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#303030",
+                        "surface-tint": "#446555",
+                        "primary-container": "#0b2d20",
+                        "inverse-on-surface": "#f2f0f0",
+                        "primary": "#00170d",
+                        "on-surface": "#1b1c1c",
+                        "surface-dim": "#dbd9d9",
+                        "surface-container": "#efeded",
+                        "on-primary-fixed": "#002115",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#e5e2db",
+                        "secondary": "#735c00",
+                        "on-secondary": "#ffffff",
+                        "surface-container-low": "#f5f3f3",
+                        "secondary-container": "#fed65b",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-background": "#1b1c1c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "md": "24px",
+                        "container-margin": "20px",
+                        "xl": "64px",
+                        "xs": "4px",
+                        "sm": "12px",
+                        "gutter": "16px",
+                        "lg": "40px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "ussd-mono": ["Courier"],
+                        "display": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "body-sm": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "label-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "h3": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "h1": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "ussd-mono": ["16px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "display": ["40px", { "lineHeight": "1.2", "fontWeight": "800" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "h2": ["24px", { "lineHeight": "1.3", "fontWeight": "700" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-lg": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col md:flex-row">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-screen w-64 border-r border-outline-variant bg-surface dark:bg-inverse-surface sticky top-0 transition-all duration-300 ease-in-out shrink-0">
+<div class="p-lg flex flex-col items-start gap-sm">
+<div class="w-12 h-12 bg-surface-container-highest rounded-full flex items-center justify-center overflow-hidden border border-outline-variant">
+<img alt="Organization Logo" class="w-full h-full object-cover" data-alt="A clean, minimalist logo featuring a geometric leaf design in deep forest green and gold on a white background, representing growth and security in a corporate setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaMYanBVCnjY7rNl8M2FOeRFDpZMmJp20Ahu6N73iG0xfbbpL8VJNB_QHI9UiK67zY7sni7MR90oAdXR_AdwOL2QwCX05b6jmybpX-4OL_eZnc_Tp1D1sMsk8xkdPeh8FJ1q2uRFBtfbml6ESeRLghVQHkj1-ek_veuc108dmBBifwwVFSu2jmDfmHCT85LR9tNYjvIRq-chBSI-dUdK7tmD6lbjh2O_7crWW5BWkKIil8QMGJu-JUAkSf38jmbn_9Rnk5YgbZzQ"/>
+</div>
+<div>
+<h1 class="text-h2 font-h2 font-black text-primary dark:text-inverse-primary">SRHR Portal</h1>
+<p class="font-label-md text-label-md text-on-surface-variant">Secure Reporting</p>
+</div>
+</div>
+<div class="flex-1 px-sm py-md flex flex-col gap-xs overflow-y-auto">
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant dark:text-surface-variant font-body-md text-body-md hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant dark:text-surface-variant font-body-md text-body-md hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">work</span>
+                Reports Workspace
+            </a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant dark:text-surface-variant font-body-md text-body-md hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">edit_note</span>
+                Data Capture
+            </a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant dark:text-surface-variant font-body-md text-body-md hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">analytics</span>
+                Analysis
+            </a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-primary dark:text-inverse-primary font-bold border-r-4 border-secondary font-body-md text-body-md hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">library_books</span>
+                Library
+            </a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant dark:text-surface-variant font-body-md text-body-md hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Administration
+            </a>
+</div>
+<div class="p-sm mt-auto border-t border-outline-variant bg-surface-container-low dark:bg-inverse-surface">
+<button class="w-full py-sm px-md rounded-full bg-surface-container-highest text-on-surface font-label-md text-label-md flex items-center justify-center gap-xs hover:bg-surface-variant transition-all duration-300 ease-in-out">
+<span class="material-symbols-outlined text-[18px]">center_focus_strong</span>
+                Focus Mode
+            </button>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col min-w-0">
+<!-- TopAppBar (Mobile & Web) -->
+<header class="flex justify-between items-center px-gutter py-xs w-full sticky top-0 z-50 shadow-sm bg-surface-bright dark:bg-inverse-surface">
+<div class="flex items-center gap-sm">
+<span class="md:hidden font-display text-display text-primary dark:text-inverse-primary tracking-tight">SRHR Portal</span>
+<nav class="hidden md:flex items-center gap-md ml-md">
+<a class="font-label-lg text-label-lg text-on-surface-variant dark:text-surface-variant hover:text-secondary dark:hover:text-secondary-fixed scale-95 duration-150" href="#">Reports</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant dark:text-surface-variant hover:text-secondary dark:hover:text-secondary-fixed scale-95 duration-150" href="#">Data</a>
+<a class="font-label-lg text-label-lg text-secondary-container font-bold border-b-2 border-secondary-container hover:text-secondary dark:hover:text-secondary-fixed scale-95 duration-150 pb-xs" href="#">Library</a>
+</nav>
+</div>
+<div class="flex items-center gap-sm">
+<div class="hidden md:flex items-center bg-surface-container-highest rounded-full px-sm py-xs border border-outline-variant focus-within:border-primary transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant mr-xs text-[20px]">search</span>
+<input class="bg-transparent border-none outline-none text-body-sm font-body-sm text-on-surface w-48 placeholder-on-surface-variant" placeholder="Search..." type="text"/>
+</div>
+<div class="flex items-center gap-xs">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">public</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">calendar_today</span>
+</button>
+</div>
+<div class="hidden lg:flex items-center gap-sm border-l border-outline-variant pl-sm ml-xs">
+<button class="px-md py-sm rounded-full border border-primary text-primary font-label-md text-label-md hover:bg-primary-fixed transition-colors">
+                        AI Assistant
+                    </button>
+<button class="px-md py-sm rounded-full bg-primary text-on-primary font-label-md text-label-md hover:opacity-90 transition-opacity shadow-[0_4px_14px_0_rgba(0,23,13,0.1)]">
+                        Add / Upload
+                    </button>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden ml-sm border border-outline-variant">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A professional headshot of a confident individual in a modern office setting. The lighting is bright and even, highlighting a friendly expression. The background is slightly blurred." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZxlJxYIQhAQ7xaVGSWCSQNa1CuC-X7pfANNLHkR3s-wwTw3CT0NqSwMBgYFm8z-ilWaJD_RMtDaKeYU_vOq54ZKMycQZPNlP30CtJNd_oD4b66JIQMmQH4tFCzyFPWnXRK75-i-eOpLWSEeReEpoxsxKX6f5Xs7dmO6GKDs7XPrnHPO76Ah175-Vodx-Ng-w0lG7ocB7HmCtmnjqSc2KEs_88vDowisyImKksQvBSj_olwydYAAtmXk7eZExZK1hJIrkX4S1czQ"/>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 p-container-margin md:p-md lg:p-lg flex flex-col xl:flex-row gap-lg overflow-y-auto">
+<!-- Left: Stories Grid -->
+<div class="flex-1 flex flex-col gap-md">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-sm mb-sm">
+<div>
+<h2 class="font-h1 text-h1 text-primary">Stories of Change</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Narrative impact stories documenting community progress.</p>
+</div>
+<button class="flex items-center gap-xs px-md py-sm bg-primary text-on-primary rounded-full font-label-md text-label-md hover:opacity-90 transition-opacity shadow-sm">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                        Add Story
+                    </button>
+</div>
+<!-- Bento Grid Layout for Stories -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md auto-rows-min">
+<!-- Story Card 1: Featured (Spans 2 columns on larger screens) -->
+<div class="md:col-span-2 bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-[0_4px_24px_0_rgba(0,23,13,0.04)] overflow-hidden flex flex-col md:flex-row group hover:shadow-[0_8px_32px_0_rgba(0,23,13,0.08)] transition-shadow">
+<div class="w-full md:w-2/5 h-48 md:h-auto relative">
+<img alt="Community meeting" class="w-full h-full object-cover" data-alt="A diverse group of community members sitting in a circle during a sunny outdoor meeting in a rural African village. The mood is collaborative and hopeful. Warm natural lighting highlights the vibrant clothing and engaged expressions. The overall style is documentary photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_FWszYCu7TZS9J3isrcDcJmbCFNvdHrdLNwKzzsDhGHJPDaJYvP16oaCd54LugRwbONXt4gts8whfSbIz8bA71VxzFeTX1KT7y1xwXaPiKEDnlVaqw0k635vI-ZP1DpUqCkb9Ia0ZsLHLqsSpzs_0rlxaA9APGmWHnBuennmd8F3MaJb2n2vaj2oemAa0HBtGjl1vo22yA28Poyjvv6iXAZFUmg4NcVayO1U3d75RSnP0DgyvPVrPRLubP0R9GVvHhMAbRhnXIA"/>
+<div class="absolute top-sm left-sm bg-surface/90 backdrop-blur-sm px-xs py-xs rounded-full flex items-center gap-xs border border-outline-variant/20">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+<span class="font-label-md text-label-md text-primary text-[10px]">Approved for Public</span>
+</div>
+</div>
+<div class="p-md flex-1 flex flex-col">
+<div class="flex items-center gap-sm mb-sm">
+<span class="px-sm py-xs bg-surface-container-highest rounded-full font-label-md text-label-md text-on-surface-variant text-[10px]">Kenya</span>
+<span class="px-sm py-xs bg-primary-fixed/20 rounded-full font-label-md text-label-md text-primary-container text-[10px] flex items-center gap-xs">
+<span class="material-symbols-outlined text-[12px]">health_and_safety</span>
+                                    Maternal Health
+                                </span>
+</div>
+<h3 class="font-h3 text-h3 text-primary mb-xs group-hover:text-surface-tint transition-colors">Empowering Young Mothers in Rural Kisumu</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-3 mb-md flex-1">Through the new community savings initiative, young mothers have established a collective fund ensuring emergency transport to health facilities, significantly reducing maternal risks during the rainy season.</p>
+<div class="flex items-center justify-between border-t border-outline-variant/20 pt-sm mt-auto">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-on-surface-variant text-[16px]">visibility</span>
+<span class="font-label-md text-label-md text-on-surface-variant text-[11px]">1.2k Views</span>
+</div>
+<button class="text-secondary font-label-md text-label-md hover:underline">Read Full Story</button>
+</div>
+</div>
+</div>
+<!-- Story Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-[0_4px_24px_0_rgba(0,23,13,0.04)] overflow-hidden flex flex-col group hover:shadow-[0_8px_32px_0_rgba(0,23,13,0.08)] transition-shadow">
+<div class="w-full h-40 relative">
+<img alt="Classroom setting" class="w-full h-full object-cover" data-alt="A brightly lit classroom with young female students actively participating in a lesson. One student is standing, speaking confidently, while others listen attentively. The environment looks resource-constrained but energetic. The lighting is natural, streaming through large windows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDH48sbVt6gWPOq6OA6TrO6NSCOO_MLI_BpZ9P02wZennVBayBbFbIIAIKcGpRq67sWpm8OjVRk0GR5Vy3jxqJ1K-hBEFskDGtk2PSAbYPaf4JHwea16kgetFiuqjDcQkZcFz_W9ZOKBQHN0fQCIT-A16H0h3KgoHwGN3BzOltlOJmCl-lDrpBgoupoxqMWnvpMLohwuon-DOta86430q1RwraVnuBzbZ6Ars6mLvFmuasReY-ZB345gc6KGhEK0H5WHk-HFRpgpg"/>
+<div class="absolute top-sm left-sm bg-surface/90 backdrop-blur-sm px-xs py-xs rounded-full flex items-center gap-xs border border-outline-variant/20">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="font-label-md text-label-md text-primary text-[10px]">Internal Only</span>
+</div>
+</div>
+<div class="p-md flex-1 flex flex-col">
+<div class="flex items-center gap-sm mb-sm">
+<span class="px-sm py-xs bg-surface-container-highest rounded-full font-label-md text-label-md text-on-surface-variant text-[10px]">Uganda</span>
+</div>
+<h3 class="font-h3 text-h3 text-primary mb-xs text-[18px] group-hover:text-surface-tint transition-colors">Peer Education Success in Kampala Schools</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-md flex-1 text-[13px]">A detailed look at the challenges and breakthroughs in rolling out the new peer-to-peer SRHR education module.</p>
+<div class="flex items-center justify-between border-t border-outline-variant/20 pt-sm mt-auto">
+<button class="text-primary font-label-md text-label-md hover:underline w-full text-center">Review Details</button>
+</div>
+</div>
+</div>
+<!-- Story Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-[0_4px_24px_0_rgba(0,23,13,0.04)] overflow-hidden flex flex-col group hover:shadow-[0_8px_32px_0_rgba(0,23,13,0.08)] transition-shadow">
+<div class="w-full h-40 relative">
+<img alt="Clinic worker" class="w-full h-full object-cover" data-alt="A dedicated healthcare worker in a clean, modest clinic setting, organizing medical supplies on a shelf. The lighting is soft and practical. The mood is diligent and essential. Colors are muted with pops of clinical blue and white." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBd8-tRgLGXFpxMg7MvrAdtKzSST3ETxD--NTIuohP1JqwNdOKoX0qM6xsEAwzfJc_2kmFxmQNf0aLbqOhVa9p6dsBHzIfA8cqaw36PbOM7PMA2_27QYnEeMreNcUZmH6OoVRTlXEi018SA6_F3VSqINMdO6GfbK1m6tsN0LADUdGL4vGDySOZw5qIArY0hGy-FxeKuJM3J0HXQZonAtQjdaSj7EDPJzsw_T_JTHmOq6m_mdgFg-w-RaUtaWSQMJhBOINqnq5UR8A"/>
+<div class="absolute top-sm left-sm bg-surface/90 backdrop-blur-sm px-xs py-xs rounded-full flex items-center gap-xs border border-outline-variant/20">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+<span class="font-label-md text-label-md text-primary text-[10px]">Approved for Public</span>
+</div>
+</div>
+<div class="p-md flex-1 flex flex-col">
+<div class="flex items-center gap-sm mb-sm">
+<span class="px-sm py-xs bg-surface-container-highest rounded-full font-label-md text-label-md text-on-surface-variant text-[10px]">Rwanda</span>
+<span class="px-sm py-xs bg-primary-fixed/20 rounded-full font-label-md text-label-md text-primary-container text-[10px] flex items-center gap-xs">
+<span class="material-symbols-outlined text-[12px]">inventory_2</span>
+                                    Supply Chain
+                                </span>
+</div>
+<h3 class="font-h3 text-h3 text-primary mb-xs text-[18px] group-hover:text-surface-tint transition-colors">Last-Mile Delivery Innovations</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-md flex-1 text-[13px]">How local motorcycle couriers are transforming contraceptive availability in remote districts.</p>
+<div class="flex items-center justify-between border-t border-outline-variant/20 pt-sm mt-auto">
+<button class="text-secondary font-label-md text-label-md hover:underline w-full text-center">Read Full Story</button>
+</div>
+</div>
+</div>
+<!-- Story Card 4 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-[0_4px_24px_0_rgba(0,23,13,0.04)] overflow-hidden flex flex-col group hover:shadow-[0_8px_32px_0_rgba(0,23,13,0.08)] transition-shadow">
+<div class="w-full h-40 relative bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[48px] text-outline-variant">image</span>
+<div class="absolute top-sm left-sm bg-surface/90 backdrop-blur-sm px-xs py-xs rounded-full flex items-center gap-xs border border-outline-variant/20">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed-dim"></span>
+<span class="font-label-md text-label-md text-primary text-[10px]">Draft in Review</span>
+</div>
+</div>
+<div class="p-md flex-1 flex flex-col">
+<div class="flex items-center gap-sm mb-sm">
+<span class="px-sm py-xs bg-surface-container-highest rounded-full font-label-md text-label-md text-on-surface-variant text-[10px]">Tanzania</span>
+</div>
+<h3 class="font-h3 text-h3 text-primary mb-xs text-[18px] group-hover:text-surface-tint transition-colors">Youth Advocacy Policy Shift</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-md flex-1 text-[13px]">Initial notes on the recent policy dialogue led by youth champions.</p>
+<div class="flex items-center justify-between border-t border-outline-variant/20 pt-sm mt-auto">
+<button class="text-primary font-label-md text-label-md hover:underline w-full text-center">Edit Draft</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: AI Story Summary Panel -->
+<aside class="w-full xl:w-80 shrink-0 flex flex-col gap-md">
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/50 shadow-[0_4px_24px_0_rgba(0,23,13,0.06)] p-md flex flex-col h-full sticky top-md">
+<div class="flex items-center gap-sm mb-md pb-sm border-b border-outline-variant/30">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined">auto_awesome</span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 text-primary text-[18px]">AI Story Drafter</h3>
+<p class="font-label-md text-label-md text-on-surface-variant text-[11px]">Convert Internal Reports</p>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md">Select an internal report to generate a public-friendly narrative summary preserving key impact metrics.</p>
+<div class="flex flex-col gap-sm flex-1">
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface">Source Report</label>
+<div class="relative">
+<select class="w-full bg-surface border border-outline-variant rounded-lg px-sm py-sm font-body-sm text-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary appearance-none">
+<option>Select a report...</option>
+<option>Q3 Uganda Peer Ed Evaluation</option>
+<option>Annual Supply Chain Audit - RW</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">arrow_drop_down</span>
+</div>
+</div>
+<div class="flex flex-col gap-xs mt-sm">
+<label class="font-label-md text-label-md text-on-surface">Target Audience Tone</label>
+<div class="flex gap-sm">
+<label class="flex-1 cursor-pointer">
+<input checked="" class="peer sr-only" name="tone" type="radio"/>
+<div class="text-center px-xs py-sm border border-outline-variant rounded-lg font-label-md text-label-md text-on-surface-variant peer-checked:bg-primary-fixed peer-checked:border-primary peer-checked:text-primary transition-colors">Donors</div>
+</label>
+<label class="flex-1 cursor-pointer">
+<input class="peer sr-only" name="tone" type="radio"/>
+<div class="text-center px-xs py-sm border border-outline-variant rounded-lg font-label-md text-label-md text-on-surface-variant peer-checked:bg-primary-fixed peer-checked:border-primary peer-checked:text-primary transition-colors">General Public</div>
+</label>
+</div>
+</div>
+<div class="mt-auto pt-md flex flex-col gap-sm">
+<div class="bg-surface-container-high rounded-lg p-sm border border-outline-variant/30 hidden">
+<!-- Placeholder for generated content area -->
+<p class="font-body-sm text-body-sm text-on-surface-variant italic">Generated draft will appear here...</p>
+</div>
+<button class="w-full py-sm px-md bg-surface text-primary border border-primary rounded-full font-label-md text-label-md hover:bg-primary-fixed transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">edit_document</span>
+                                Generate Draft
+                            </button>
+</div>
+</div>
+</div>
+</aside>
+</main>
+<!-- Footer -->
+<footer class="w-full py-md px-lg flex justify-between items-center mt-auto border-t border-outline-variant bg-surface-container-lowest dark:bg-surface-container-highest">
+<div class="font-label-lg text-label-lg text-primary">
+                © 2024 SRHR Global Reporting System. All rights reserved.
+            </div>
+<div class="flex gap-md">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary opacity-80 hover:opacity-100" href="#">Support</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary opacity-80 hover:opacity-100" href="#">Documentation</a>
+</div>
+</footer>
+</div>
+</body></html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zambia - Interventions</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#446555",
+                        "surface-container-low": "#f5f3f3",
+                        "inverse-surface": "#303030",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#fed65b",
+                        "secondary": "#735c00",
+                        "on-secondary-container": "#745c00",
+                        "primary": "#00170d",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#2d4d3e",
+                        "tertiary-fixed-dim": "#c9c6c0",
+                        "on-surface": "#1b1c1c",
+                        "tertiary-fixed": "#e5e2db",
+                        "surface-bright": "#fbf9f8",
+                        "on-surface-variant": "#414844",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#241a00",
+                        "on-tertiary-container": "#908f89",
+                        "tertiary-container": "#282824",
+                        "on-secondary-fixed-variant": "#574500",
+                        "primary-container": "#0b2d20",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#e9c349",
+                        "background": "#fbf9f8",
+                        "tertiary": "#131310",
+                        "surface-container-highest": "#e4e2e2",
+                        "on-primary-container": "#749684",
+                        "surface-dim": "#dbd9d9",
+                        "surface-container": "#efeded",
+                        "secondary-fixed": "#ffe088",
+                        "outline-variant": "#c1c8c2",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#abcfbb",
+                        "on-tertiary-fixed": "#1c1c18",
+                        "surface-container-high": "#eae8e7",
+                        "surface": "#fbf9f8",
+                        "on-primary-fixed": "#002115",
+                        "primary-fixed": "#c6ebd7",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-tertiary-fixed-variant": "#474742",
+                        "on-error-container": "#93000a",
+                        "outline": "#727974",
+                        "error": "#ba1a1a",
+                        "on-background": "#1b1c1c",
+                        "surface-variant": "#e4e2e2",
+                        "inverse-primary": "#abcfbb"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "lg": "40px",
+                        "container-margin": "20px",
+                        "xl": "64px",
+                        "sm": "12px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "h2": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "body-sm": ["Manrope"],
+                        "ussd-mono": ["Courier"],
+                        "label-lg": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "display": ["Manrope"],
+                        "label-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "h2": ["24px", { "lineHeight": "1.3", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "ussd-mono": ["16px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "label-lg": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "h1": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "h3": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display": ["40px", { "lineHeight": "1.2", "fontWeight": "800" }],
+                        "label-md": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-primary dark:bg-primary text-on-primary dark:text-on-primary docked full-width top-0 sticky shadow-sm flex justify-between items-center w-full px-container-margin py-sm z-50">
+<div class="flex items-center gap-gutter">
+<span class="text-h3 font-h3 text-secondary-container dark:text-secondary-container">SADC PF SRHR Portal</span>
+</div>
+<!-- Web Navigation -->
+<nav class="hidden md:flex items-center gap-md">
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors font-label-lg text-label-lg" href="#">Home</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors font-label-lg text-label-lg" href="#">Dashboard</a>
+<a class="text-secondary-container font-bold border-b-2 border-secondary-container pb-1 font-label-lg text-label-lg" href="#">Countries</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors font-label-lg text-label-lg" href="#">Reports</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors font-label-lg text-label-lg" href="#">Stories</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors font-label-lg text-label-lg" href="#">Resources</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors font-label-lg text-label-lg" href="#">News &amp; Events</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors font-label-lg text-label-lg" href="#">About</a>
+</nav>
+<div class="flex items-center gap-gutter">
+<button class="font-label-lg text-label-lg text-on-primary hover:text-secondary-container transition-colors">Login</button>
+<button class="font-label-lg text-label-lg bg-secondary-container text-on-secondary-container px-sm py-base rounded hover:bg-secondary-fixed transition-colors font-bold">Register</button>
+</div>
+</header>
+<main class="flex-grow flex flex-col items-center w-full pb-xl">
+<!-- Country Header -->
+<section class="w-full max-w-7xl px-container-margin mt-lg flex flex-col gap-md">
+<div class="flex items-center gap-md">
+<div class="w-16 h-12 rounded bg-surface-container-high overflow-hidden shadow-sm border border-outline-variant/30 flex items-center justify-center">
+<!-- Placeholder for flag -->
+<img alt="Zambia Flag" class="w-full h-full object-cover" data-alt="A high-quality, perfectly rectangular graphic depicting the national flag of Zambia. The flag features a vibrant green background with a block of three vertical stripes (red, black, and orange) in the bottom right corner, surmounted by an orange eagle in flight. The image is clean, sharp, and brightly lit, fitting a professional corporate dashboard aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBa_GSD6J1-Gg6hkKpY85GvasuVcNyFCeknhFf0QPvu4B2rXJGxl1tFHSHqF4l1cSmn8WK_SUO7vQeHeP12W_G0fMh7Aq2PTv3J6ppgrasaZZLALkRR1ESBHbUXftX7aiXf0xY0hWCdvQ5ELhDL9_0iEazSAf8ZAjvVjBJf6afl6lqiiSYNw9O3SUF4iOKfv8RyzDyGH9-o78LxoxtlmolwoTLRDPCadJTnxy8UvVqbrLR7-AfpDSvi-6R7I2_tI2pf58NpBIW3YZE"/>
+</div>
+<h1 class="font-h1 text-h1 text-primary">Zambia</h1>
+</div>
+<!-- Metrics Bento -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="bg-surface-container-lowest rounded-lg p-md shadow-[0_4px_12px_rgba(0,23,13,0.04)] border border-primary/10 flex flex-col gap-xs">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Latest Period</span>
+<span class="font-h2 text-h2 text-primary">Q4 2023</span>
+</div>
+<div class="bg-surface-container-lowest rounded-lg p-md shadow-[0_4px_12px_rgba(0,23,13,0.04)] border border-primary/10 flex flex-col gap-xs">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Total Reports</span>
+<span class="font-h2 text-h2 text-primary">15</span>
+</div>
+<div class="bg-surface-container-lowest rounded-lg p-md shadow-[0_4px_12px_rgba(0,23,13,0.04)] border border-primary/10 flex flex-col gap-xs">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Achieved</span>
+<div class="flex items-baseline gap-sm">
+<span class="font-h2 text-h2 text-primary">68%</span>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-surface-tint" style="width: 68%;"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Tab Navigation -->
+<div class="w-full border-b border-outline-variant mt-lg">
+<div class="w-full max-w-7xl px-container-margin mx-auto flex overflow-x-auto no-scrollbar">
+<a class="px-md py-sm font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap border-b-2 border-transparent" href="#">Overview</a>
+<a class="px-md py-sm font-label-lg text-label-lg text-primary border-b-2 border-primary font-bold whitespace-nowrap" href="#">Interventions</a>
+<a class="px-md py-sm font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap border-b-2 border-transparent" href="#">Reports</a>
+<a class="px-md py-sm font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap border-b-2 border-transparent" href="#">Key Contacts</a>
+</div>
+</div>
+<!-- Filters -->
+<section class="w-full max-w-7xl px-container-margin mt-lg">
+<div class="bg-surface-container-lowest rounded-lg p-sm shadow-[0_4px_12px_rgba(0,23,13,0.04)] border border-primary/10 flex flex-col md:flex-row gap-gutter items-center">
+<div class="relative w-full md:w-1/3">
+<span class="material-symbols-outlined absolute left-sm top-1/2 transform -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-xl pr-sm py-sm bg-surface-container-low border border-outline-variant rounded focus:border-surface-tint focus:ring-1 focus:ring-surface-tint outline-none font-body-sm text-body-sm text-on-surface transition-all" placeholder="Search interventions..." type="text"/>
+</div>
+<div class="w-full md:w-1/4">
+<select class="w-full px-sm py-sm bg-surface-container-low border border-outline-variant rounded focus:border-surface-tint focus:ring-1 focus:ring-surface-tint outline-none font-body-sm text-body-sm text-on-surface transition-all appearance-none cursor-pointer">
+<option value="">All Intervention Types</option>
+<option value="committee">Committee Meeting</option>
+<option value="debate">Parliamentary Debate</option>
+<option value="motion">Motion</option>
+<option value="policy">Policy Dialogue</option>
+<option value="legislative">Legislative Review</option>
+</select>
+</div>
+<div class="w-full md:w-1/4">
+<select class="w-full px-sm py-sm bg-surface-container-low border border-outline-variant rounded focus:border-surface-tint focus:ring-1 focus:ring-surface-tint outline-none font-body-sm text-body-sm text-on-surface transition-all appearance-none cursor-pointer">
+<option value="">All Focus Areas</option>
+<option value="maternal">Maternal Health</option>
+<option value="youth">Youth Access</option>
+<option value="gbv">Gender-Based Violence</option>
+<option value="hiv">HIV/AIDS</option>
+</select>
+</div>
+<button class="w-full md:w-auto bg-surface-container-low text-on-surface font-label-md text-label-md px-md py-sm rounded border border-outline-variant hover:bg-surface-container transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                    Clear Filters
+                </button>
+</div>
+</section>
+<!-- Interventions List -->
+<section class="w-full max-w-7xl px-container-margin mt-lg flex flex-col gap-gutter">
+<!-- Item 1 -->
+<div class="bg-surface-container-lowest rounded-lg p-md shadow-[0_4px_12px_rgba(0,23,13,0.04)] border border-primary/10 hover:shadow-[0_8px_24px_rgba(0,23,13,0.08)] transition-shadow">
+<div class="flex flex-col md:flex-row justify-between gap-md">
+<div class="flex flex-col gap-xs flex-grow">
+<div class="flex items-center gap-sm flex-wrap">
+<span class="bg-primary-container text-on-primary-container font-label-md text-label-md px-sm py-xs rounded-full">Policy Dialogue</span>
+<span class="bg-surface-container-high text-on-surface font-label-md text-label-md px-sm py-xs rounded-full">Maternal Health</span>
+</div>
+<h3 class="font-h3 text-h3 text-primary mt-sm">National Budget Review for Health Sector</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">Reviewed the proposed national budget allocation for maternal health services in rural clinics. Advocated for a 15% increase in funding to address medical supply shortages.</p>
+<div class="flex items-center gap-gutter mt-sm text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+                                12 Nov 2023
+                            </div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">person</span>
+                                Health Committee
+                            </div>
+</div>
+</div>
+<div class="flex md:flex-col items-center md:items-end justify-between md:justify-start gap-sm min-w-[140px] pt-sm md:pt-0 border-t md:border-t-0 md:border-l border-outline-variant/30 md:pl-md">
+<span class="bg-primary-fixed text-on-primary-fixed font-label-md text-label-md px-sm py-xs rounded-full">Outcome: Approved</span>
+<a class="flex items-center gap-xs text-surface-tint hover:text-primary transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[18px]">description</span>
+                            Related Report
+                        </a>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container-lowest rounded-lg p-md shadow-[0_4px_12px_rgba(0,23,13,0.04)] border border-primary/10 hover:shadow-[0_8px_24px_rgba(0,23,13,0.08)] transition-shadow">
+<div class="flex flex-col md:flex-row justify-between gap-md">
+<div class="flex flex-col gap-xs flex-grow">
+<div class="flex items-center gap-sm flex-wrap">
+<span class="bg-primary-container text-on-primary-container font-label-md text-label-md px-sm py-xs rounded-full">Parliamentary Debate</span>
+<span class="bg-surface-container-high text-on-surface font-label-md text-label-md px-sm py-xs rounded-full">Youth Access</span>
+</div>
+<h3 class="font-h3 text-h3 text-primary mt-sm">Comprehensive Sexuality Education Bill Debate</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">Led a debate on the floor regarding the implementation timeline for the new CSE curriculum in secondary schools, emphasizing the need for teacher training.</p>
+<div class="flex items-center gap-gutter mt-sm text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+                                05 Oct 2023
+                            </div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">person</span>
+                                Hon. J. Banda
+                            </div>
+</div>
+</div>
+<div class="flex md:flex-col items-center md:items-end justify-between md:justify-start gap-sm min-w-[140px] pt-sm md:pt-0 border-t md:border-t-0 md:border-l border-outline-variant/30 md:pl-md">
+<span class="bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md px-sm py-xs rounded-full">Outcome: Pending</span>
+<a class="flex items-center gap-xs text-surface-tint hover:text-primary transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[18px]">movie</span>
+                            View Recording
+                        </a>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="bg-surface-container-lowest rounded-lg p-md shadow-[0_4px_12px_rgba(0,23,13,0.04)] border border-primary/10 hover:shadow-[0_8px_24px_rgba(0,23,13,0.08)] transition-shadow">
+<div class="flex flex-col md:flex-row justify-between gap-md">
+<div class="flex flex-col gap-xs flex-grow">
+<div class="flex items-center gap-sm flex-wrap">
+<span class="bg-primary-container text-on-primary-container font-label-md text-label-md px-sm py-xs rounded-full">Legislative Review</span>
+<span class="bg-surface-container-high text-on-surface font-label-md text-label-md px-sm py-xs rounded-full">Gender-Based Violence</span>
+</div>
+<h3 class="font-h3 text-h3 text-primary mt-sm">Amendments to the Anti-GBV Act</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">Reviewed proposed amendments to strengthen penalties for perpetrators and secure funding for safe houses for victims across all provinces.</p>
+<div class="flex items-center gap-gutter mt-sm text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+                                22 Aug 2023
+                            </div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">person</span>
+                                Legal Affairs Committee
+                            </div>
+</div>
+</div>
+<div class="flex md:flex-col items-center md:items-end justify-between md:justify-start gap-sm min-w-[140px] pt-sm md:pt-0 border-t md:border-t-0 md:border-l border-outline-variant/30 md:pl-md">
+<span class="bg-primary-fixed text-on-primary-fixed font-label-md text-label-md px-sm py-xs rounded-full">Outcome: Adopted</span>
+<a class="flex items-center gap-xs text-surface-tint hover:text-primary transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[18px]">gavel</span>
+                            Hansard Link
+                        </a>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-tertiary dark:bg-tertiary-container text-on-tertiary dark:text-on-tertiary-container full-width bottom-0 flex flex-col md:flex-row justify-between items-center w-full px-container-margin py-lg border-t border-outline-variant mt-xl">
+<div class="mb-sm md:mb-0">
+<span class="text-h3 font-h3 text-secondary-fixed">SADC PF SRHR Portal</span>
+</div>
+<div class="font-body-sm text-body-sm mb-sm md:mb-0">
+            © 2024 SADC Parliamentary Forum. All Rights Reserved.
+        </div>
+<nav class="flex gap-md font-label-md text-label-md">
+<a class="text-on-tertiary-container hover:text-secondary-fixed transition-colors hover:underline" href="#">Privacy Policy</a>
+<a class="text-on-tertiary-container hover:text-secondary-fixed transition-colors hover:underline" href="#">Terms of Service</a>
+<a class="text-on-tertiary-container hover:text-secondary-fixed transition-colors hover:underline" href="#">Contact Us</a>
+<a class="text-on-tertiary-container hover:text-secondary-fixed transition-colors hover:underline" href="#">SADC Website</a>
+</nav>
+</footer>
+</body></html>

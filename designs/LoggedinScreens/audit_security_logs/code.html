@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Audit &amp; Security Log</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#1c1c18",
+                        "primary-fixed-dim": "#abcfbb",
+                        "outline-variant": "#c1c8c2",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#131310",
+                        "surface-container-highest": "#e4e2e2",
+                        "on-primary-container": "#749684",
+                        "surface-dim": "#dbd9d9",
+                        "surface-container": "#efeded",
+                        "secondary-fixed": "#ffe088",
+                        "error": "#ba1a1a",
+                        "on-background": "#1b1c1c",
+                        "surface-variant": "#e4e2e2",
+                        "inverse-primary": "#abcfbb",
+                        "outline": "#727974",
+                        "primary-fixed": "#c6ebd7",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-tertiary-fixed-variant": "#474742",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#eae8e7",
+                        "surface": "#fbf9f8",
+                        "on-primary-fixed": "#002115",
+                        "tertiary-fixed-dim": "#c9c6c0",
+                        "on-surface": "#1b1c1c",
+                        "on-secondary-container": "#745c00",
+                        "primary": "#00170d",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#2d4d3e",
+                        "secondary": "#735c00",
+                        "surface-tint": "#446555",
+                        "surface-container-low": "#f5f3f3",
+                        "inverse-surface": "#303030",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#fed65b",
+                        "tertiary-container": "#282824",
+                        "on-secondary-fixed-variant": "#574500",
+                        "primary-container": "#0b2d20",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#e9c349",
+                        "background": "#fbf9f8",
+                        "on-secondary-fixed": "#241a00",
+                        "on-tertiary-container": "#908f89",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#e5e2db",
+                        "surface-bright": "#fbf9f8",
+                        "on-surface-variant": "#414844",
+                        "on-primary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "40px",
+                        "container-margin": "20px",
+                        "xl": "64px",
+                        "sm": "12px",
+                        "base": "8px",
+                        "md": "24px",
+                        "gutter": "16px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "display": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "ussd-mono": ["Courier"],
+                        "label-lg": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "body-sm": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "h3": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "label-md": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "display": ["40px", {"lineHeight": "1.2", "fontWeight": "800"}],
+                        "h2": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "ussd-mono": ["16px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                        "h1": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Hide scrollbar for clean UI but keep functionality */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md flex h-screen overflow-hidden antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- SideNavBar (Shared Component) -->
+<aside class="hidden md:flex flex-col h-full sticky top-0 h-screen w-64 border-r border-outline-variant bg-surface transition-all duration-300 ease-in-out z-40">
+<div class="p-md flex flex-col gap-sm border-b border-outline-variant/30 bg-surface-container-low">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined icon-fill">shield_person</span>
+</div>
+<div>
+<h1 class="text-h2 font-h2 font-black text-primary">SRHR Portal</h1>
+<p class="font-label-md text-label-md text-on-surface-variant">Secure Reporting</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto py-sm font-body-md text-body-md font-label-md text-label-md text-primary">
+<ul class="space-y-xs px-sm">
+<li>
+<a class="flex items-center gap-md px-sm py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all duration-300 ease-in-out group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">dashboard</span>
+<span>Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-sm py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all duration-300 ease-in-out group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">work</span>
+<span>Reports Workspace</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-sm py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all duration-300 ease-in-out group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">edit_note</span>
+<span>Data Capture</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-sm py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all duration-300 ease-in-out group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">analytics</span>
+<span>Analysis</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-sm py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all duration-300 ease-in-out group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">library_books</span>
+<span>Library</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-sm py-sm rounded-lg text-primary font-bold border-r-4 border-secondary bg-surface-container-low transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined icon-fill">settings</span>
+<span>Administration</span>
+</a>
+</li>
+</ul>
+</nav>
+<div class="p-md border-t border-outline-variant/30">
+<button class="w-full flex items-center justify-center gap-sm py-sm px-md rounded-full bg-surface border border-outline hover:bg-surface-container-highest transition-colors text-primary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+                Focus Mode
+            </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col h-screen overflow-hidden relative">
+<!-- TopAppBar (Shared Component) -->
+<header class="flex justify-between items-center px-gutter py-xs w-full sticky top-0 z-50 shadow-sm bg-surface-bright transition-all scale-95 duration-150 origin-top">
+<div class="flex items-center gap-md">
+<!-- Mobile Menu Trigger -->
+<button class="md:hidden p-xs text-primary hover:bg-surface-container rounded-full">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="font-display text-display text-primary hidden md:block text-[24px] tracking-tight">SRHR Portal</span>
+</div>
+<nav class="hidden lg:flex items-center gap-md font-label-lg text-label-lg text-primary">
+<a class="text-on-surface-variant hover:text-secondary transition-colors py-sm px-xs" href="#">Reports</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors py-sm px-xs" href="#">Data</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors py-sm px-xs" href="#">Library</a>
+</nav>
+<div class="flex items-center gap-sm">
+<!-- Search on Right -->
+<div class="hidden sm:flex items-center bg-surface-container rounded-full px-sm py-xs border border-transparent focus-within:border-primary transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-sm font-body-sm w-32 lg:w-48 placeholder:text-on-surface-variant/60" placeholder="Search portal..." type="text"/>
+</div>
+<div class="flex items-center gap-xs ml-sm border-r border-outline-variant/50 pr-sm">
+<button class="p-xs text-on-surface-variant hover:text-secondary transition-colors rounded-full hover:bg-surface-container">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-xs text-on-surface-variant hover:text-secondary transition-colors rounded-full hover:bg-surface-container">
+<span class="material-symbols-outlined">public</span>
+</button>
+<button class="p-xs text-on-surface-variant hover:text-secondary transition-colors rounded-full hover:bg-surface-container">
+<span class="material-symbols-outlined">calendar_today</span>
+</button>
+</div>
+<div class="flex items-center gap-sm pl-xs">
+<button class="hidden md:flex items-center gap-xs text-secondary font-label-md text-label-md hover:bg-secondary/10 px-sm py-xs rounded-full transition-colors">
+<span class="material-symbols-outlined text-[18px]">smart_toy</span>
+                        AI Assistant
+                    </button>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-md py-sm rounded-full shadow-sm hover:shadow-md transition-shadow flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                        Add / Upload
+                    </button>
+<img alt="User profile" class="w-8 h-8 rounded-full object-cover border border-outline-variant/50 cursor-pointer ml-xs" data-alt="A professional headshot of a confident corporate executive in a modern, brightly lit office environment. The lighting is soft and natural, emphasizing approachability and competence. The color palette features neutral tones with subtle warm highlights, aligning with a high-trust, human-centric financial or administrative brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlQG3gbCIGMmNJk8I_sv31KQ4xX6r1ArNX10TvGbjd3cgJ5dXj7Jn_0h_1pGtaNbII2b7hlMPffPviWesRPQEwM1AmNruBWhaFmz7PaTHtuNidbSBwRN8WkgmkwK5zF4xArLOkXU_ctHLp0AzB9WMfuFyArpRp6cRweQeiU3Zu0APXbrhzFBrutiOwFz32xdYHfW2mZG4j1AqM4_cCW9sGky5A5R8tzgEVY02cck4DFx0e58D4BCx6JSaq8ccCZgcJpyDvVQLS1w"/>
+</div>
+</div>
+</header>
+<!-- Main Scrollable Canvas -->
+<main class="flex-1 overflow-y-auto bg-surface-container-low p-gutter md:p-md lg:p-lg">
+<!-- Page Header -->
+<div class="max-w-7xl mx-auto mb-lg flex flex-col md:flex-row md:items-end justify-between gap-md">
+<div>
+<div class="flex items-center gap-sm mb-xs">
+<span class="font-label-md text-label-md text-primary tracking-widest uppercase bg-primary/5 px-xs py-[2px] rounded">Administration Workspace</span>
+</div>
+<h2 class="font-h1 text-h1 text-primary tracking-tight">Audit &amp; Security Logs</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mt-xs">Chronological feed of critical system actions, data integrity events, and user access changes across the reporting portal.</p>
+</div>
+<div class="flex gap-sm">
+<button class="flex items-center gap-xs font-label-md text-label-md text-on-surface bg-surface border border-outline-variant rounded-full px-md py-sm hover:bg-surface-container transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                        Export CSV
+                    </button>
+</div>
+</div>
+<!-- Bento Filter Grid -->
+<div class="max-w-7xl mx-auto mb-lg grid grid-cols-1 md:grid-cols-12 gap-sm md:gap-md">
+<!-- Search Box -->
+<div class="md:col-span-5 bg-surface rounded-xl shadow-[0_2px_12px_rgba(0,23,13,0.03)] p-sm border border-outline-variant/30 flex flex-col justify-center relative overflow-hidden group">
+<div class="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-surface-container to-transparent opacity-50 pointer-events-none"></div>
+<label class="font-label-md text-label-md text-on-surface-variant mb-xs px-xs">Global Search</label>
+<div class="flex items-center bg-surface-container-lowest border border-outline-variant/50 rounded-lg px-sm py-sm focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
+<span class="material-symbols-outlined text-on-surface-variant mr-sm">search</span>
+<input class="w-full bg-transparent border-none focus:ring-0 font-body-md text-body-md p-0 placeholder:text-on-surface-variant/50" placeholder="Search IDs, users, or exact actions..." type="text"/>
+</div>
+</div>
+<!-- Action Type Filters (Glassmorphism inspired pills) -->
+<div class="md:col-span-4 bg-surface rounded-xl shadow-[0_2px_12px_rgba(0,23,13,0.03)] p-sm border border-outline-variant/30 flex flex-col justify-center">
+<label class="font-label-md text-label-md text-on-surface-variant mb-xs px-xs">Action Type</label>
+<div class="flex flex-wrap gap-xs">
+<button class="font-label-md text-label-md px-sm py-xs rounded-full bg-primary-container text-on-primary-container border border-primary/20 hover:bg-primary hover:text-on-primary transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">security</span>
+                            Security
+                        </button>
+<button class="font-label-md text-label-md px-sm py-xs rounded-full bg-surface-container text-on-surface border border-outline-variant hover:bg-surface-container-highest transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">database</span>
+                            Data
+                        </button>
+<button class="font-label-md text-label-md px-sm py-xs rounded-full bg-surface-container text-on-surface border border-outline-variant hover:bg-surface-container-highest transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">key</span>
+                            Access
+                        </button>
+<button class="font-label-md text-label-md px-sm py-xs rounded-full bg-surface-container text-on-surface border border-outline-variant hover:bg-surface-container-highest transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+                            Approvals
+                        </button>
+</div>
+</div>
+<!-- Date Range (Asymmetric structural card) -->
+<div class="md:col-span-3 bg-primary text-on-primary rounded-xl shadow-[0_4px_16px_rgba(0,23,13,0.15)] p-sm border border-primary-container flex flex-col justify-between relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-[120px]">date_range</span>
+</div>
+<label class="font-label-md text-label-md text-primary-fixed-dim mb-xs px-xs relative z-10">Timeframe</label>
+<button class="flex items-center justify-between w-full bg-on-primary/10 hover:bg-on-primary/20 border border-on-primary/20 rounded-lg px-sm py-sm transition-colors relative z-10">
+<span class="font-body-md text-body-md">Last 30 Days</span>
+<span class="material-symbols-outlined text-[20px]">arrow_drop_down</span>
+</button>
+</div>
+</div>
+<!-- Log Feed (Vertical Timeline / Elevated Cards) -->
+<div class="max-w-7xl mx-auto relative before:absolute before:inset-y-0 before:left-[28px] md:before:left-[240px] before:w-[2px] before:bg-outline-variant/30">
+<!-- Log Entry 1: Security Alert -->
+<div class="relative flex flex-col md:flex-row gap-sm md:gap-lg mb-md group">
+<!-- Timeline Node & Timestamp -->
+<div class="md:w-[200px] flex-shrink-0 flex items-start md:justify-end pt-sm z-10 relative">
+<div class="absolute left-[20px] md:left-auto md:-right-[29px] top-[20px] w-4 h-4 rounded-full border-4 border-surface bg-error shadow-sm z-20 group-hover:scale-125 transition-transform"></div>
+<div class="ml-xl md:ml-0 md:pr-xl text-left md:text-right">
+<div class="font-ussd-mono text-ussd-mono text-on-surface-variant font-semibold">2023-10-27</div>
+<div class="font-label-md text-label-md text-on-surface-variant/70">14:32:05 UTC</div>
+</div>
+</div>
+<!-- Content Card -->
+<div class="flex-1 ml-xl md:ml-0 bg-surface rounded-xl shadow-[0_2px_8px_rgba(0,23,13,0.04)] border border-outline-variant/30 p-md hover:shadow-[0_4px_16px_rgba(0,23,13,0.08)] transition-all hover:border-error/30 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-error"></div>
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-sm">
+<div>
+<div class="flex items-center gap-xs mb-xs">
+<span class="bg-error-container text-on-error-container font-label-md text-label-md px-xs py-[2px] rounded flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">gpp_maybe</span> Security
+                                    </span>
+<span class="font-label-md text-label-md text-error">High Severity</span>
+</div>
+<h3 class="font-h3 text-h3 text-primary mb-xs">Multiple Failed Login Attempts</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-2xl">Detected 5 consecutive failed login attempts from IP address 192.168.1.45 targeting the admin account. Account temporarily locked per policy.</p>
+</div>
+<div class="flex-shrink-0 flex flex-col items-end gap-sm mt-sm sm:mt-0">
+<div class="flex items-center gap-xs bg-surface-container-lowest border border-outline-variant/50 rounded-full py-xs px-sm shadow-sm">
+<span class="w-6 h-6 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant text-[12px] font-bold">SY</span>
+<span class="font-label-md text-label-md text-on-surface">System Guard</span>
+</div>
+<a class="font-label-md text-label-md text-secondary hover:text-secondary-fixed flex items-center gap-xs group/link" href="#">
+                                    View Details <span class="material-symbols-outlined text-[16px] group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Log Entry 2: Data Upload -->
+<div class="relative flex flex-col md:flex-row gap-sm md:gap-lg mb-md group">
+<div class="md:w-[200px] flex-shrink-0 flex items-start md:justify-end pt-sm z-10 relative">
+<div class="absolute left-[20px] md:left-auto md:-right-[29px] top-[20px] w-4 h-4 rounded-full border-4 border-surface bg-primary shadow-sm z-20 group-hover:scale-125 transition-transform"></div>
+<div class="ml-xl md:ml-0 md:pr-xl text-left md:text-right">
+<div class="font-ussd-mono text-ussd-mono text-on-surface-variant font-semibold">2023-10-27</div>
+<div class="font-label-md text-label-md text-on-surface-variant/70">11:15:22 UTC</div>
+</div>
+</div>
+<div class="flex-1 ml-xl md:ml-0 bg-surface rounded-xl shadow-[0_2px_8px_rgba(0,23,13,0.04)] border border-outline-variant/30 p-md hover:shadow-[0_4px_16px_rgba(0,23,13,0.08)] transition-all hover:border-primary/30 relative overflow-hidden">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-sm">
+<div>
+<div class="flex items-center gap-xs mb-xs">
+<span class="bg-surface-container-high text-on-surface font-label-md text-label-md px-xs py-[2px] rounded border border-outline-variant/50 flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">database</span> Data
+                                    </span>
+</div>
+<h3 class="font-h3 text-h3 text-primary mb-xs">Q3 Financial Report Uploaded</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-2xl">Bulk data upload completed via CSV. Added 4,520 new records to the Regional Finance dataset. Integrity check passed.</p>
+</div>
+<div class="flex-shrink-0 flex flex-col items-end gap-sm mt-sm sm:mt-0">
+<div class="flex items-center gap-xs bg-surface-container-lowest border border-outline-variant/50 rounded-full py-xs px-sm shadow-sm">
+<img alt="Data Analyst" class="w-6 h-6 rounded-full object-cover" data-alt="A close-up portrait of a professional male data analyst in a bright, modern corporate setting. He wears a smart casual outfit. The ambient lighting highlights a sense of reliability, trust, and modern corporate efficiency." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAU729ESvrw4b90yYuqH25LodWvt8LcBJNUogAet641cvsyb940-TGEmoocbD_UdxymiuNzLX3XjUL1xwgCQe1cqD6mpDRr8yDn655_uV0A15kiAfhkiuUh1-3FGW5Q0KpNrFdg87HZGVl46RRraIEKxK8allfUT8JSEYaDBTtvUJzHOGe62POE24zPuu9Trvy3WvDNrBqZ7mwdniV3EXksGdmRq1nDnat4jBNefUGoZu1hQkK6csMxF24NenyQpMqnZoWdFF3qoQ"/>
+<span class="font-label-md text-label-md text-on-surface">David Chen</span>
+</div>
+<a class="font-label-md text-label-md text-secondary hover:text-secondary-fixed flex items-center gap-xs group/link" href="#">
+                                    View Details <span class="material-symbols-outlined text-[16px] group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Log Entry 3: Access Change -->
+<div class="relative flex flex-col md:flex-row gap-sm md:gap-lg mb-md group">
+<div class="md:w-[200px] flex-shrink-0 flex items-start md:justify-end pt-sm z-10 relative">
+<div class="absolute left-[20px] md:left-auto md:-right-[29px] top-[20px] w-4 h-4 rounded-full border-4 border-surface bg-secondary-container shadow-sm z-20 group-hover:scale-125 transition-transform"></div>
+<div class="ml-xl md:ml-0 md:pr-xl text-left md:text-right">
+<div class="font-ussd-mono text-ussd-mono text-on-surface-variant font-semibold">2023-10-26</div>
+<div class="font-label-md text-label-md text-on-surface-variant/70">09:45:00 UTC</div>
+</div>
+</div>
+<div class="flex-1 ml-xl md:ml-0 bg-surface rounded-xl shadow-[0_2px_8px_rgba(0,23,13,0.04)] border border-outline-variant/30 p-md hover:shadow-[0_4px_16px_rgba(0,23,13,0.08)] transition-all hover:border-secondary-container/50 relative overflow-hidden">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-sm">
+<div>
+<div class="flex items-center gap-xs mb-xs">
+<span class="bg-surface-container-high text-on-surface font-label-md text-label-md px-xs py-[2px] rounded border border-outline-variant/50 flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">key</span> Access
+                                    </span>
+</div>
+<h3 class="font-h3 text-h3 text-primary mb-xs">Role Permission Modified</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-2xl">User 'sarah.jenkins@srhr.org' granted 'Publisher' rights for the Global Health dataset workspace. Approved by System Admin.</p>
+</div>
+<div class="flex-shrink-0 flex flex-col items-end gap-sm mt-sm sm:mt-0">
+<div class="flex items-center gap-xs bg-surface-container-lowest border border-outline-variant/50 rounded-full py-xs px-sm shadow-sm">
+<img alt="System Admin" class="w-6 h-6 rounded-full object-cover" data-alt="A portrait of a confident female IT administrator in a well-lit server room or modern tech office. She looks professional and secure, embodying the system's high-trust, stable, and human-centric brand pillars." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC87I7v40Z3gBZ3recCTz_zuIet9WHv014mvlsirY65wxoM7tKmrx7ZIuvDcUH8rZ61YUITTvQwNKjr4XWo7K0AxvOa_PdurRbhjG7QNWurrkDeSmlwF5LhzmdPh26PQEYQfpIwDjfNy6UIoHtZ4DIidyQW9c1zrGOQmhRZRh1h8Qq1omxwLAlrAdgtMV8fpaduiAcqBjS6_7UuG7pHJem7pONDMzcybiVpXAvSn8uCux74KW-L1h5cEEpFKw2q2XBl6n4U_pTbDQ"/>
+<span class="font-label-md text-label-md text-on-surface">Admin Root</span>
+</div>
+<a class="font-label-md text-label-md text-secondary hover:text-secondary-fixed flex items-center gap-xs group/link" href="#">
+                                    View Details <span class="material-symbols-outlined text-[16px] group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Log Entry 4: Publishing Approval -->
+<div class="relative flex flex-col md:flex-row gap-sm md:gap-lg mb-md group">
+<div class="md:w-[200px] flex-shrink-0 flex items-start md:justify-end pt-sm z-10 relative">
+<div class="absolute left-[20px] md:left-auto md:-right-[29px] top-[20px] w-4 h-4 rounded-full border-4 border-surface bg-primary shadow-sm z-20 group-hover:scale-125 transition-transform"></div>
+<div class="ml-xl md:ml-0 md:pr-xl text-left md:text-right">
+<div class="font-ussd-mono text-ussd-mono text-on-surface-variant font-semibold">2023-10-25</div>
+<div class="font-label-md text-label-md text-on-surface-variant/70">16:20:11 UTC</div>
+</div>
+</div>
+<div class="flex-1 ml-xl md:ml-0 bg-surface-bright rounded-xl shadow-[0_2px_8px_rgba(0,23,13,0.04)] border border-outline-variant/30 p-md hover:shadow-[0_4px_16px_rgba(0,23,13,0.08)] transition-all hover:border-primary/30 relative overflow-hidden">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-sm">
+<div>
+<div class="flex items-center gap-xs mb-xs">
+<span class="bg-surface-container-high text-on-surface font-label-md text-label-md px-xs py-[2px] rounded border border-outline-variant/50 flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">verified</span> Approval
+                                    </span>
+</div>
+<h3 class="font-h3 text-h3 text-primary mb-xs">Document Published to Library</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-2xl">Document ID: SRHR-2023-11 'Annual Sustainability Review' passed final compliance check and was published to the public portal.</p>
+</div>
+<div class="flex-shrink-0 flex flex-col items-end gap-sm mt-sm sm:mt-0">
+<div class="flex items-center gap-xs bg-surface-container-lowest border border-outline-variant/50 rounded-full py-xs px-sm shadow-sm">
+<img alt="Compliance Officer" class="w-6 h-6 rounded-full object-cover" data-alt="A portrait of a warm but professional female compliance officer in a modern corporate setting. She is wearing business attire. The environment is styled with neutral tones and soft lighting, reinforcing a feeling of stability and meticulous attention to detail." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA93Xb2v6-mFsK2TCLACtWQeoST--xBzrFjDij_-5Yio6hHLy4YUrHKMC0TvV__fYJRKDE1q2-h7zNP-KR_1_TJAj1kttBYUGqXSwJDvfvTr68KkZn01y_znf6uZH3wkCsYHUInQtnHbaoK9DgZGmlfL5tPG3nwkcT0IdeePwQD7uR7Gs8h0WQua8GD2d6gHS1iCceFvfXWJk9xqWLybV7Jb1Nb4i0YU-S3J-1tvN5Wk0nfdyoYYwWpPaPwJm6gbiPVR2LHWDw1Nw"/>
+<span class="font-label-md text-label-md text-on-surface">Elena Rostova</span>
+</div>
+<a class="font-label-md text-label-md text-secondary hover:text-secondary-fixed flex items-center gap-xs group/link" href="#">
+                                    View Details <span class="material-symbols-outlined text-[16px] group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Load More Button -->
+<div class="relative flex flex-col md:flex-row gap-sm md:gap-lg mt-lg">
+<div class="md:w-[200px] flex-shrink-0"></div>
+<div class="flex-1 ml-xl md:ml-0 flex justify-center">
+<button class="font-label-md text-label-md text-primary bg-surface border border-outline-variant hover:bg-surface-container-highest px-xl py-sm rounded-full shadow-sm transition-all flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">refresh</span> Load Older Logs
+                        </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="w-full py-md px-lg flex flex-col md:flex-row justify-between items-center mt-auto bg-surface-container-lowest border-t border-outline-variant z-40">
+<div class="font-label-lg text-label-lg text-primary mb-sm md:mb-0">
+                SRHR Portal
+            </div>
+<div class="font-label-md text-label-md text-on-surface-variant mb-sm md:mb-0">
+                © 2024 SRHR Global Reporting System. All rights reserved.
+            </div>
+<div class="flex gap-md font-label-md text-label-md">
+<a class="text-on-surface-variant hover:text-primary opacity-80 hover:opacity-100 transition-opacity" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary opacity-80 hover:opacity-100 transition-opacity" href="#">Support</a>
+<a class="text-on-surface-variant hover:text-primary opacity-80 hover:opacity-100 transition-opacity" href="#">Documentation</a>
+</div>
+</footer>
+</div>
+</body></html>

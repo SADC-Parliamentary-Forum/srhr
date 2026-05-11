@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
 const navItems = [
@@ -23,13 +24,20 @@ export default function PortalSidebar() {
 
   return (
     <aside className="bg-surface h-screen w-64 border-r border-outline-variant flex flex-col sticky top-0 shrink-0">
-      <div className="p-lg flex items-center gap-sm">
-        <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center shrink-0">
-          <span className="material-symbols-outlined text-on-primary text-2xl">corporate_fare</span>
+      {/* Logo */}
+      <div className="px-md py-sm flex items-center gap-sm border-b border-outline-variant/40">
+        <div className="bg-primary rounded-lg p-1 flex items-center justify-center shrink-0" style={{ width: 40, height: 40 }}>
+          <Image
+            src="/sadc-pf-logo.jpg"
+            alt="SADC PF Logo"
+            width={32}
+            height={32}
+            className="object-contain brightness-0 invert"
+          />
         </div>
-        <div>
-          <h1 className="text-h2 font-black text-primary">SRHR Portal</h1>
-          <p className="text-xs text-on-surface-variant">Secure Reporting</p>
+        <div className="min-w-0">
+          <p className="text-[13px] font-extrabold text-primary tracking-wide leading-tight">SADC PF</p>
+          <p className="text-[10px] font-semibold text-on-surface-variant tracking-wide leading-tight">SRHR Portal</p>
         </div>
       </div>
 
@@ -46,14 +54,14 @@ export default function PortalSidebar() {
                   : 'text-on-surface-variant hover:bg-surface-container-high'
               }`}
             >
-              <span className="material-symbols-outlined text-[20px]">{item.icon}</span>
-              <span className="text-sm font-semibold">{item.label}</span>
+              <span className="material-symbols-outlined text-[20px] shrink-0">{item.icon}</span>
+              <span className="text-sm font-semibold truncate">{item.label}</span>
             </Link>
           )
         })}
       </nav>
 
-      <div className="p-lg">
+      <div className="p-md border-t border-outline-variant/40">
         <button className="w-full py-sm px-md rounded-full bg-secondary-container text-on-secondary-container text-sm font-semibold flex items-center justify-center gap-sm hover:opacity-90 transition-opacity">
           <span className="material-symbols-outlined text-[18px]">center_focus_strong</span>
           Focus Mode

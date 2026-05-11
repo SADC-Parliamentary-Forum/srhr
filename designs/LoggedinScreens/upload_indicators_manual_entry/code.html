@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Manual Indicator Entry - SRHR Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Courier&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#e9c349",
+                    "primary-fixed": "#c6ebd7",
+                    "on-surface-variant": "#414844",
+                    "secondary": "#735c00",
+                    "secondary-fixed": "#ffe088",
+                    "on-error": "#ffffff",
+                    "inverse-on-surface": "#f2f0f0",
+                    "on-secondary-fixed": "#241a00",
+                    "surface-bright": "#fbf9f8",
+                    "background": "#fbf9f8",
+                    "tertiary": "#131310",
+                    "on-primary-fixed-variant": "#2d4d3e",
+                    "surface-container-low": "#f5f3f3",
+                    "surface": "#fbf9f8",
+                    "primary-fixed-dim": "#abcfbb",
+                    "on-tertiary-fixed-variant": "#474742",
+                    "error": "#ba1a1a",
+                    "surface-container-high": "#eae8e7",
+                    "secondary-container": "#fed65b",
+                    "surface-container-highest": "#e4e2e2",
+                    "on-primary-container": "#749684",
+                    "on-secondary": "#ffffff",
+                    "inverse-surface": "#303030",
+                    "error-container": "#ffdad6",
+                    "surface-variant": "#e4e2e2",
+                    "on-surface": "#1b1c1c",
+                    "on-error-container": "#93000a",
+                    "surface-tint": "#446555",
+                    "primary": "#00170d",
+                    "surface-dim": "#dbd9d9",
+                    "inverse-primary": "#abcfbb",
+                    "tertiary-fixed": "#e5e2db",
+                    "surface-container": "#efeded",
+                    "on-primary-fixed": "#002115",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-container": "#745c00",
+                    "on-tertiary-container": "#908f89",
+                    "primary-container": "#0b2d20",
+                    "tertiary-fixed-dim": "#c9c6c0",
+                    "on-secondary-fixed-variant": "#574500",
+                    "outline": "#727974",
+                    "on-background": "#1b1c1c",
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#c1c8c2",
+                    "tertiary-container": "#282824",
+                    "on-tertiary-fixed": "#1c1c18"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "64px",
+                    "lg": "40px",
+                    "gutter": "16px",
+                    "sm": "12px",
+                    "md": "24px",
+                    "base": "8px",
+                    "xs": "4px",
+                    "container-margin": "20px"
+            },
+            "fontFamily": {
+                    "label-lg": [
+                            "Manrope"
+                    ],
+                    "h3": [
+                            "Manrope"
+                    ],
+                    "h2": [
+                            "Manrope"
+                    ],
+                    "h1": [
+                            "Manrope"
+                    ],
+                    "label-md": [
+                            "Manrope"
+                    ],
+                    "body-sm": [
+                            "Manrope"
+                    ],
+                    "body-md": [
+                            "Manrope"
+                    ],
+                    "body-lg": [
+                            "Manrope"
+                    ],
+                    "ussd-mono": [
+                            "Courier"
+                    ],
+                    "display": [
+                            "Manrope"
+                    ]
+            },
+            "fontSize": {
+                    "label-lg": [
+                            "14px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "letterSpacing": "0.02em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "h3": [
+                            "20px",
+                            {
+                                    "lineHeight": "1.4",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "h2": [
+                            "24px",
+                            {
+                                    "lineHeight": "1.3",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "h1": [
+                            "32px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "label-md": [
+                            "12px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-sm": [
+                            "14px",
+                            {
+                                    "lineHeight": "1.5",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "ussd-mono": [
+                            "16px",
+                            {
+                                    "lineHeight": "1.4",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "display": [
+                            "40px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "fontWeight": "800"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-gutter py-xs w-full sticky top-0 z-50 shadow-sm bg-surface-bright dark:bg-inverse-surface">
+<div class="flex items-center gap-md">
+<span class="font-display text-display text-primary dark:text-inverse-primary">SRHR Portal</span>
+<nav class="hidden md:flex gap-sm ml-lg">
+<a class="font-label-lg text-label-lg text-secondary-container font-bold border-b-2 border-secondary-container px-base py-xs" href="#">Reports</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant dark:text-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors px-base py-xs" href="#">Data</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant dark:text-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors px-base py-xs" href="#">Library</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<div class="hidden lg:flex items-center bg-surface-container-low rounded-full px-sm py-xs border border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px] mr-xs">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-sm text-on-surface w-48 p-0" placeholder="Search..." type="text"/>
+</div>
+<button class="hidden md:flex items-center gap-xs bg-primary text-on-primary font-label-md text-label-md px-md py-sm rounded-full hover:bg-primary-container transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                Add / Upload
+            </button>
+<button class="hidden md:flex items-center gap-xs border border-primary text-primary font-label-md text-label-md px-md py-sm rounded-full hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]">smart_toy</span>
+                AI Assistant
+            </button>
+<div class="flex items-center gap-xs text-on-surface-variant">
+<button class="p-xs hover:text-primary transition-colors rounded-full hover:bg-surface-container-highest"><span class="material-symbols-outlined">notifications</span></button>
+<button class="p-xs hover:text-primary transition-colors rounded-full hover:bg-surface-container-highest"><span class="material-symbols-outlined">public</span></button>
+<button class="p-xs hover:text-primary transition-colors rounded-full hover:bg-surface-container-highest"><span class="material-symbols-outlined">calendar_today</span></button>
+</div>
+<img alt="User profile" class="w-10 h-10 rounded-full border-2 border-surface-container-highest cursor-pointer object-cover" data-alt="A professional headshot of a business user in a modern corporate setting. Warm, optimistic lighting reflects the professional and reliable nature of the brand. High-resolution portrait suitable for an avatar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAa386E8exutJ5WliAgNzntXbHmnyzmnggDo37ucf5_dM74FbY1Tu2YisTQDFkG6y2zzTQlkDFDYvlek_07GmTgB-4AdCtnhaMrsmTTQ2BsCAR40BdmgjfsrWe4KZ5BTMZth4ROnUhC3bLW8LCdgItGBcjGWmLN_ISkLqfSe3zp0cQp27jorViWshcwP9shURwm0m8Q6YxfB0q1Ho0dBb9NuWcUVh3b0bkNY_JKhdgFZs3dCWhpGH4Ouf5bpM4Ypk31bKDyNLhLww"/>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col h-full sticky top-[72px] h-[calc(100vh-72px)] w-64 border-r border-outline-variant bg-surface dark:bg-inverse-surface z-40 transition-all duration-300 ease-in-out">
+<div class="p-md flex items-center gap-sm border-b border-outline-variant/30">
+<div class="w-10 h-10 rounded bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined">corporate_fare</span>
+</div>
+<div>
+<h2 class="font-label-lg text-label-lg text-on-surface">SRHR Portal</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-[11px]">Secure Reporting</p>
+</div>
+</div>
+<nav class="flex-1 py-md overflow-y-auto">
+<ul class="space-y-1 px-sm">
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant font-label-md text-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+                            Dashboard
+                        </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant font-label-md text-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">work</span>
+                            Reports Workspace
+                        </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-primary dark:text-inverse-primary font-bold border-r-4 border-secondary bg-primary-fixed/20 font-label-md text-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px] fill">edit_note</span>
+                            Data Capture
+                        </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant font-label-md text-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">analytics</span>
+                            Analysis
+                        </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant font-label-md text-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">library_books</span>
+                            Library
+                        </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant font-label-md text-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+                            Administration
+                        </a>
+</li>
+</ul>
+</nav>
+<div class="p-md mt-auto border-t border-outline-variant/30">
+<button class="w-full flex justify-center items-center gap-xs border border-outline-variant text-on-surface font-label-md text-label-md px-sm py-sm rounded-lg hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[18px]">visibility_off</span>
+                    Focus Mode
+                </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto bg-surface-container-lowest p-container-margin md:p-lg relative">
+<div class="max-w-7xl mx-auto space-y-lg pb-xl">
+<!-- Progress Bar & Header -->
+<section class="space-y-md">
+<!-- Wizard Progress (7 Steps) -->
+<div class="w-full">
+<div class="flex items-center justify-between relative">
+<!-- Background Track -->
+<div class="absolute top-1/2 left-0 w-full h-1 bg-surface-container-highest -translate-y-1/2 z-0 rounded-full"></div>
+<!-- Active Track (up to step 3) -->
+<div class="absolute top-1/2 left-0 w-[33.33%] h-1 bg-primary -translate-y-1/2 z-0 rounded-full"></div>
+<!-- Steps -->
+<div class="relative z-10 flex flex-col items-center gap-xs">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-md text-label-md shadow-sm">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant hidden sm:block text-xs">Setup</span>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-xs">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-md text-label-md shadow-sm">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant hidden sm:block text-xs">Period</span>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-xs">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container border-2 border-secondary flex items-center justify-center font-label-md text-label-md shadow-md ring-4 ring-secondary-container/20">
+                                    3
+                                </div>
+<span class="font-label-md text-label-md text-on-surface font-bold hidden sm:block text-xs">Details</span>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-xs">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant border border-outline-variant flex items-center justify-center font-label-md text-label-md">
+                                    4
+                                </div>
+<span class="font-label-md text-label-md text-outline hidden sm:block text-xs">Narrative</span>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-xs">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant border border-outline-variant flex items-center justify-center font-label-md text-label-md">
+                                    5
+                                </div>
+<span class="font-label-md text-label-md text-outline hidden sm:block text-xs">Review</span>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-xs">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant border border-outline-variant flex items-center justify-center font-label-md text-label-md">
+                                    6
+                                </div>
+<span class="font-label-md text-label-md text-outline hidden sm:block text-xs">Sign-off</span>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-xs">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant border border-outline-variant flex items-center justify-center font-label-md text-label-md">
+                                    7
+                                </div>
+<span class="font-label-md text-label-md text-outline hidden sm:block text-xs">Complete</span>
+</div>
+</div>
+</div>
+<div>
+<h1 class="font-h1 text-h1 text-primary">Manual Indicator Entry</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-xs">Enter your indicator results for the selected period below. Changes are saved as drafts until validated.</p>
+</div>
+</section>
+<div class="flex flex-col lg:flex-row gap-lg">
+<!-- Main Form Area -->
+<div class="flex-1 space-y-md">
+<!-- Indicator Card 1 -->
+<div class="bg-surface rounded-xl border border-outline-variant/30 p-md shadow-[0_4px_24px_rgba(0,23,13,0.04)] relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-secondary"></div>
+<div class="flex justify-between items-start mb-sm">
+<div>
+<span class="inline-block px-xs py-1 bg-surface-container-high rounded text-[10px] font-ussd-mono text-on-surface-variant mb-xs">IND-MH-001</span>
+<h3 class="font-h3 text-h3 text-on-surface leading-tight">Maternal Health Consultations Conducted</h3>
+</div>
+<span class="inline-flex items-center px-sm py-1 rounded-full bg-primary-fixed text-primary-container font-label-md text-label-md text-xs whitespace-nowrap">
+<span class="w-2 h-2 rounded-full bg-primary-container mr-xs"></span>
+                                    On Track
+                                </span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md mb-md p-sm bg-surface-container-lowest rounded-lg border border-surface-container-high">
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs text-xs">Baseline</label>
+<div class="font-body-md text-body-md text-on-surface bg-surface-container-low px-sm py-xs rounded border border-transparent">1,250</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs text-xs">Target</label>
+<div class="font-body-md text-body-md text-on-surface bg-surface-container-low px-sm py-xs rounded border border-transparent">1,500</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-primary mb-xs text-xs">Actual Result *</label>
+<input class="w-full font-body-md text-body-md text-on-surface bg-surface-bright px-sm py-xs rounded border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary transition-colors" type="number" value="1420"/>
+</div>
+</div>
+<div class="space-y-sm">
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs text-xs">Narrative / Remarks</label>
+<textarea class="w-full font-body-sm text-body-sm text-on-surface bg-surface-bright p-sm rounded border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-none placeholder:text-outline" placeholder="Provide qualitative context for this result..." rows="2"></textarea>
+</div>
+<div class="flex justify-end">
+<button class="flex items-center gap-xs text-secondary font-label-md text-label-md hover:text-primary transition-colors px-sm py-xs rounded hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-[18px]">attachment</span>
+                                        Link Evidence
+                                    </button>
+</div>
+</div>
+</div>
+<!-- Indicator Card 2 (Warning State) -->
+<div class="bg-surface rounded-xl border border-error/20 p-md shadow-[0_4px_24px_rgba(0,23,13,0.04)] relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-error"></div>
+<div class="flex justify-between items-start mb-sm">
+<div>
+<span class="inline-block px-xs py-1 bg-surface-container-high rounded text-[10px] font-ussd-mono text-on-surface-variant mb-xs">IND-MH-005</span>
+<h3 class="font-h3 text-h3 text-on-surface leading-tight">Community Health Workers Trained</h3>
+</div>
+<span class="inline-flex items-center px-sm py-1 rounded-full bg-error-container text-on-error-container font-label-md text-label-md text-xs whitespace-nowrap">
+<span class="material-symbols-outlined text-[14px] mr-xs">warning</span>
+                                    At Risk
+                                </span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md mb-md p-sm bg-surface-container-lowest rounded-lg border border-error/10">
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs text-xs">Baseline</label>
+<div class="font-body-md text-body-md text-on-surface bg-surface-container-low px-sm py-xs rounded border border-transparent">45</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs text-xs">Target</label>
+<div class="font-body-md text-body-md text-on-surface bg-surface-container-low px-sm py-xs rounded border border-transparent">100</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-error mb-xs text-xs">Actual Result *</label>
+<input class="w-full font-body-md text-body-md text-on-surface bg-error-container/20 px-sm py-xs rounded border border-error focus:border-error focus:ring-1 focus:ring-error transition-colors" type="number" value="62"/>
+<p class="text-[11px] text-error mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">info</span> Result is &gt;30% below target.</p>
+</div>
+</div>
+<div class="space-y-sm">
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs text-xs">Narrative / Remarks <span class="text-error">*</span></label>
+<textarea class="w-full font-body-sm text-body-sm text-on-surface bg-surface-bright p-sm rounded border border-error focus:border-error focus:ring-1 focus:ring-error transition-colors resize-none" placeholder="Explanation required for off-target result..." rows="2"></textarea>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-error text-xs font-label-md">Justification required</span>
+<button class="flex items-center gap-xs text-secondary font-label-md text-label-md hover:text-primary transition-colors px-sm py-xs rounded hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-[18px]">attachment</span>
+                                        Link Evidence
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Side Panel: Data Completeness -->
+<div class="w-full lg:w-80 flex-shrink-0">
+<div class="bg-surface rounded-xl border border-outline-variant/30 p-md shadow-[0_4px_24px_rgba(0,23,13,0.04)] sticky top-24">
+<h3 class="font-h3 text-h3 text-on-surface mb-sm flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">analytics</span>
+                                Data Completeness
+                            </h3>
+<div class="mb-md">
+<div class="flex justify-between items-end mb-xs">
+<span class="font-label-lg text-label-lg text-on-surface">12 of 20</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Indicators Updated</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[60%] rounded-full"></div>
+</div>
+</div>
+<div class="space-y-sm">
+<h4 class="font-label-md text-label-md text-outline uppercase tracking-wider text-[10px]">Status Breakdown</h4>
+<div class="flex items-center justify-between p-sm bg-primary-fixed/10 rounded border border-primary-fixed-dim/30">
+<div class="flex items-center gap-sm">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-body-sm text-body-sm text-on-surface">Achieved</span>
+</div>
+<span class="font-label-md text-label-md text-primary">4</span>
+</div>
+<div class="flex items-center justify-between p-sm bg-surface-container-low rounded border border-outline-variant/30">
+<div class="flex items-center gap-sm">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-body-sm text-body-sm text-on-surface">On Track</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">6</span>
+</div>
+<div class="flex items-center justify-between p-sm bg-error-container/20 rounded border border-error/20">
+<div class="flex items-center gap-sm">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="font-body-sm text-body-sm text-on-surface">At Risk</span>
+</div>
+<span class="font-label-md text-label-md text-error">2</span>
+</div>
+<div class="flex items-center justify-between p-sm bg-surface-container-lowest rounded border border-dashed border-outline-variant">
+<div class="flex items-center gap-sm">
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Pending</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">8</span>
+</div>
+</div>
+<div class="mt-md pt-md border-t border-outline-variant/30">
+<button class="w-full flex justify-center items-center gap-xs text-primary font-label-md text-label-md py-sm rounded hover:bg-primary-fixed/20 transition-colors">
+<span class="material-symbols-outlined text-[18px]">save</span>
+                                    Save Draft
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Footer Fixed -->
+<div class="fixed bottom-0 left-0 md:left-64 right-0 bg-surface border-t border-outline-variant p-md shadow-[0_-4px_24px_rgba(0,0,0,0.05)] z-40 flex justify-between items-center">
+<button class="px-lg py-sm border border-primary text-primary font-label-lg text-label-lg rounded-full hover:bg-surface-container-low transition-colors">
+                    Back
+                </button>
+<div class="flex gap-md items-center">
+<span class="text-on-surface-variant font-body-sm text-body-sm hidden sm:inline">Draft saved 2 mins ago</span>
+<button class="px-lg py-sm bg-primary text-on-primary font-label-lg text-label-lg rounded-full hover:bg-primary-container transition-colors shadow-sm flex items-center gap-xs">
+                        Validate &amp; Continue
+                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</main>
+</div>
+<!-- Global Footer injected to satisfy structure, placed appropriately in layout flow if needed, though usually fixed footers replace standard footers in wizards -->
+<footer class="hidden w-full py-md px-lg flex justify-between items-center mt-auto bg-surface-container-lowest dark:bg-surface-container-highest border-t border-outline-variant">
+<span class="font-label-md text-label-md text-primary dark:text-inverse-primary">© 2024 SRHR Global Reporting System. All rights reserved.</span>
+<div class="flex gap-md">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary opacity-80 hover:opacity-100" href="#">Support</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary opacity-80 hover:opacity-100" href="#">Documentation</a>
+</div>
+</footer>
+</body></html>

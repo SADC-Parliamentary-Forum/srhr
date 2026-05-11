@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reports Library - SADC PF SRHR</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#414844",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e4e2e2",
+                        "primary-container": "#0b2d20",
+                        "inverse-primary": "#abcfbb",
+                        "tertiary": "#131310",
+                        "on-primary-fixed-variant": "#2d4d3e",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#e5e2db",
+                        "secondary-fixed": "#ffe088",
+                        "on-tertiary-fixed": "#1c1c18",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-tertiary-container": "#908f89",
+                        "tertiary-container": "#282824",
+                        "secondary-container": "#fed65b",
+                        "tertiary-fixed-dim": "#c9c6c0",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#fbf9f8",
+                        "surface-dim": "#dbd9d9",
+                        "surface-tint": "#446555",
+                        "primary": "#00170d",
+                        "surface-container-low": "#f5f3f3",
+                        "surface-container-high": "#eae8e7",
+                        "secondary-fixed-dim": "#e9c349",
+                        "on-primary-fixed": "#002115",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#c6ebd7",
+                        "surface-container": "#efeded",
+                        "outline": "#727974",
+                        "background": "#fbf9f8",
+                        "secondary": "#735c00",
+                        "on-background": "#1b1c1c",
+                        "inverse-surface": "#303030",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#745c00",
+                        "primary-fixed-dim": "#abcfbb",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e4e2e2",
+                        "on-secondary-fixed": "#241a00",
+                        "error-container": "#ffdad6",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-secondary": "#ffffff",
+                        "surface": "#fbf9f8",
+                        "on-surface": "#1b1c1c",
+                        "on-tertiary-fixed-variant": "#474742",
+                        "outline-variant": "#c1c8c2",
+                        "on-primary-container": "#749684"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "sm": "12px",
+                        "gutter": "16px",
+                        "container-margin": "20px",
+                        "base": "8px",
+                        "xl": "64px",
+                        "lg": "40px",
+                        "md": "24px"
+                    },
+                    "fontFamily": {
+                        "label-lg": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "ussd-mono": ["Courier"],
+                        "body-sm": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "display": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-lg": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "h3": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "ussd-mono": ["16px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "h2": ["24px", { "lineHeight": "1.3", "fontWeight": "700" }],
+                        "h1": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "label-md": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display": ["40px", { "lineHeight": "1.2", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopAppBar from JSON -->
+<header class="bg-primary dark:bg-primary shadow-sm flex justify-between items-center w-full px-container-margin py-sm sticky top-0 z-50">
+<div class="flex items-center gap-md">
+<span class="text-h3 font-h3 text-secondary-container dark:text-secondary-container">SADC PF SRHR Portal</span>
+<nav class="hidden md:flex gap-md ml-lg">
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors hover:bg-primary-container dark:hover:bg-primary-container transition-all font-label-lg text-label-lg py-sm px-xs" href="#">Home</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors hover:bg-primary-container dark:hover:bg-primary-container transition-all font-label-lg text-label-lg py-sm px-xs" href="#">Dashboard</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors hover:bg-primary-container dark:hover:bg-primary-container transition-all font-label-lg text-label-lg py-sm px-xs" href="#">Countries</a>
+<a class="text-secondary-container font-bold border-b-2 border-secondary-container pb-1 hover:bg-primary-container dark:hover:bg-primary-container transition-all font-label-lg text-label-lg py-sm px-xs opacity-90 scale-95 transition-transform" href="#">Reports</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors hover:bg-primary-container dark:hover:bg-primary-container transition-all font-label-lg text-label-lg py-sm px-xs" href="#">Stories</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors hover:bg-primary-container dark:hover:bg-primary-container transition-all font-label-lg text-label-lg py-sm px-xs" href="#">Resources</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors hover:bg-primary-container dark:hover:bg-primary-container transition-all font-label-lg text-label-lg py-sm px-xs" href="#">News &amp; Events</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors hover:bg-primary-container dark:hover:bg-primary-container transition-all font-label-lg text-label-lg py-sm px-xs" href="#">About</a>
+</nav>
+</div>
+<div class="hidden md:flex items-center gap-sm">
+<button class="font-label-lg text-label-lg text-on-primary bg-transparent border border-on-primary px-container-margin py-xs rounded hover:bg-primary-container transition-colors">Login</button>
+<button class="font-label-lg text-label-lg text-primary bg-secondary-container px-container-margin py-xs rounded hover:opacity-90 transition-opacity">Register</button>
+</div>
+<button class="md:hidden text-on-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<main class="flex-grow w-full max-w-7xl mx-auto px-container-margin py-lg flex flex-col gap-xl">
+<!-- Header Section -->
+<section class="flex flex-col gap-sm">
+<h1 class="font-h1 text-h1 text-primary">Reports Library</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl">Explore our comprehensive collection of regional reports, research briefs, and monthly updates across the SADC region. Access vital data and insights driving our shared financial and health initiatives.</p>
+</section>
+<!-- Main Content Area: Sidebar Filters + Grid -->
+<div class="flex flex-col lg:flex-row gap-lg">
+<!-- Filter Sidebar -->
+<aside class="w-full lg:w-1/4 flex flex-col gap-md">
+<!-- Search -->
+<div class="bg-surface-container rounded-lg p-md shadow-sm border border-outline-variant/10">
+<label class="font-label-lg text-label-lg text-primary mb-base block">Search Reports</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded pl-xl py-sm font-body-sm text-body-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="Keywords, titles..." type="text"/>
+</div>
+</div>
+<!-- Filters -->
+<div class="bg-surface-container rounded-lg p-md shadow-sm border border-outline-variant/10 flex flex-col gap-md">
+<div class="flex justify-between items-center">
+<h3 class="font-h3 text-h3 text-primary">Filters</h3>
+<button class="font-label-md text-label-md text-primary underline hover:text-surface-tint">Clear All</button>
+</div>
+<!-- Filter Group: Country -->
+<div class="flex flex-col gap-base">
+<label class="font-label-lg text-label-lg text-on-surface-variant">Country</label>
+<select class="w-full bg-surface-container-lowest border border-outline-variant rounded px-sm py-sm font-body-sm text-body-sm focus:border-primary outline-none appearance-none cursor-pointer">
+<option>All Countries</option>
+<option>South Africa</option>
+<option>Namibia</option>
+<option>Botswana</option>
+<option>Zimbabwe</option>
+<option>Zambia</option>
+</select>
+</div>
+<!-- Filter Group: Report Type -->
+<div class="flex flex-col gap-base">
+<label class="font-label-lg text-label-lg text-on-surface-variant">Report Type</label>
+<div class="flex flex-col gap-xs">
+<label class="flex items-center gap-sm cursor-pointer hover:bg-surface-container-high p-xs rounded transition-colors">
+<input class="rounded border-outline-variant text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="font-body-sm text-body-sm">Annual Reports</span>
+</label>
+<label class="flex items-center gap-sm cursor-pointer hover:bg-surface-container-high p-xs rounded transition-colors">
+<input class="rounded border-outline-variant text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="font-body-sm text-body-sm">Monthly Updates</span>
+</label>
+<label class="flex items-center gap-sm cursor-pointer hover:bg-surface-container-high p-xs rounded transition-colors">
+<input class="rounded border-outline-variant text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="font-body-sm text-body-sm">Research Briefs</span>
+</label>
+<label class="flex items-center gap-sm cursor-pointer hover:bg-surface-container-high p-xs rounded transition-colors">
+<input class="rounded border-outline-variant text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="font-body-sm text-body-sm">Regional Synthesis</span>
+</label>
+</div>
+</div>
+<!-- Filter Group: Year -->
+<div class="flex flex-col gap-base">
+<label class="font-label-lg text-label-lg text-on-surface-variant">Year</label>
+<select class="w-full bg-surface-container-lowest border border-outline-variant rounded px-sm py-sm font-body-sm text-body-sm focus:border-primary outline-none appearance-none cursor-pointer">
+<option>All Years</option>
+<option>2024</option>
+<option>2023</option>
+<option>2022</option>
+</select>
+</div>
+<!-- Filter Group: Theme -->
+<div class="flex flex-col gap-base">
+<label class="font-label-lg text-label-lg text-on-surface-variant">Theme</label>
+<select class="w-full bg-surface-container-lowest border border-outline-variant rounded px-sm py-sm font-body-sm text-body-sm focus:border-primary outline-none appearance-none cursor-pointer">
+<option>All Themes</option>
+<option>Financial Inclusion</option>
+<option>Health Systems</option>
+<option>Policy Advocacy</option>
+</select>
+</div>
+</div>
+</aside>
+<!-- Reports Grid Area -->
+<div class="w-full lg:w-3/4 flex flex-col gap-md">
+<!-- Results Header -->
+<div class="flex justify-between items-center bg-surface-container-lowest p-sm rounded border border-outline-variant/20 shadow-sm">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Showing <strong class="text-primary">1-6</strong> of <strong class="text-primary">124</strong> reports</span>
+<div class="flex items-center gap-sm">
+<label class="font-label-sm text-label-sm text-on-surface-variant hidden sm:block">Sort by:</label>
+<select class="bg-surface border-none text-primary font-label-md text-label-md focus:ring-0 cursor-pointer">
+<option>Newest First</option>
+<option>Oldest First</option>
+<option>Title A-Z</option>
+</select>
+</div>
+</div>
+<!-- Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Report Card 1 -->
+<article class="bg-surface-container-lowest rounded-xl p-md flex flex-col gap-md border border-outline-variant/20 hover:shadow-[0_4px_20px_rgba(0,23,13,0.08)] transition-shadow duration-300 relative group">
+<div class="flex justify-between items-start">
+<div class="flex gap-xs flex-wrap">
+<span class="bg-primary-fixed text-on-primary-fixed px-sm py-xs rounded-full font-label-md text-label-md">Annual Report</span>
+<span class="bg-surface-container text-on-surface-variant px-sm py-xs rounded-full font-label-md text-label-md border border-outline-variant/30">Regional</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors cursor-pointer">bookmark</span>
+</div>
+<div class="flex flex-col gap-xs flex-grow">
+<h3 class="font-h3 text-h3 text-primary line-clamp-2">SADC Region Comprehensive SRHR and Financial Inclusion Synthesis</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-3">An overarching analysis of policy integration between community savings groups and health initiatives across member states during the past fiscal year.</p>
+</div>
+<div class="flex flex-col gap-sm mt-auto pt-sm border-t border-outline-variant/20">
+<div class="flex items-center gap-sm font-body-sm text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span>Published: Dec 2023</span>
+<span class="mx-xs">•</span>
+<span>2.4 MB</span>
+</div>
+<div class="flex gap-sm">
+<button class="flex-1 bg-primary text-on-primary font-label-md text-label-md py-sm rounded flex items-center justify-center gap-xs hover:bg-surface-tint transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span> Download PDF
+                                </button>
+<button class="bg-surface-container-high text-primary border border-outline-variant/30 font-label-md text-label-md px-md py-sm rounded flex items-center justify-center hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Report Card 2 -->
+<article class="bg-surface-container-lowest rounded-xl p-md flex flex-col gap-md border border-outline-variant/20 hover:shadow-[0_4px_20px_rgba(0,23,13,0.08)] transition-shadow duration-300 relative group">
+<div class="flex justify-between items-start">
+<div class="flex gap-xs flex-wrap">
+<span class="bg-secondary-container text-on-secondary-container px-sm py-xs rounded-full font-label-md text-label-md">Research Brief</span>
+<span class="bg-surface-container text-on-surface-variant px-sm py-xs rounded-full font-label-md text-label-md border border-outline-variant/30">Zambia</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors cursor-pointer">bookmark</span>
+</div>
+<div class="flex flex-col gap-xs flex-grow">
+<h3 class="font-h3 text-h3 text-primary line-clamp-2">Impact of Micro-savings on Maternal Health Outcomes in Rural Zambia</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-3">A targeted study examining the correlation between participation in structured community savings and improved access to prenatal care.</p>
+</div>
+<div class="flex flex-col gap-sm mt-auto pt-sm border-t border-outline-variant/20">
+<div class="flex items-center gap-sm font-body-sm text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span>Published: Nov 2023</span>
+<span class="mx-xs">•</span>
+<span>1.1 MB</span>
+</div>
+<div class="flex gap-sm">
+<button class="flex-1 bg-primary text-on-primary font-label-md text-label-md py-sm rounded flex items-center justify-center gap-xs hover:bg-surface-tint transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span> Download PDF
+                                </button>
+<button class="bg-surface-container-high text-primary border border-outline-variant/30 font-label-md text-label-md px-md py-sm rounded flex items-center justify-center hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Report Card 3 -->
+<article class="bg-surface-container-lowest rounded-xl p-md flex flex-col gap-md border border-outline-variant/20 hover:shadow-[0_4px_20px_rgba(0,23,13,0.08)] transition-shadow duration-300 relative group">
+<div class="flex justify-between items-start">
+<div class="flex gap-xs flex-wrap">
+<span class="bg-surface-tint text-on-primary px-sm py-xs rounded-full font-label-md text-label-md">Monthly Update</span>
+<span class="bg-surface-container text-on-surface-variant px-sm py-xs rounded-full font-label-md text-label-md border border-outline-variant/30">South Africa</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors cursor-pointer">bookmark</span>
+</div>
+<div class="flex flex-col gap-xs flex-grow">
+<h3 class="font-h3 text-h3 text-primary line-clamp-2">October Operations and Disbursement Summary</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-3">Routine monthly summary detailing fund disbursement rates to local health clinics supported by regional cooperative banking partners.</p>
+</div>
+<div class="flex flex-col gap-sm mt-auto pt-sm border-t border-outline-variant/20">
+<div class="flex items-center gap-sm font-body-sm text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span>Published: Oct 2023</span>
+<span class="mx-xs">•</span>
+<span>0.8 MB</span>
+</div>
+<div class="flex gap-sm">
+<button class="flex-1 bg-primary text-on-primary font-label-md text-label-md py-sm rounded flex items-center justify-center gap-xs hover:bg-surface-tint transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span> Download PDF
+                                </button>
+<button class="bg-surface-container-high text-primary border border-outline-variant/30 font-label-md text-label-md px-md py-sm rounded flex items-center justify-center hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Report Card 4 -->
+<article class="bg-surface-container-lowest rounded-xl p-md flex flex-col gap-md border border-outline-variant/20 hover:shadow-[0_4px_20px_rgba(0,23,13,0.08)] transition-shadow duration-300 relative group">
+<div class="flex justify-between items-start">
+<div class="flex gap-xs flex-wrap">
+<span class="bg-primary-fixed text-on-primary-fixed px-sm py-xs rounded-full font-label-md text-label-md">Policy Doc</span>
+<span class="bg-surface-container text-on-surface-variant px-sm py-xs rounded-full font-label-md text-label-md border border-outline-variant/30">Botswana</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors cursor-pointer">bookmark_added</span>
+</div>
+<div class="flex flex-col gap-xs flex-grow">
+<h3 class="font-h3 text-h3 text-primary line-clamp-2">Draft Framework for Integrating Savings Groups into National Health Strategy</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-3">Working document outlining proposed legislative changes to formally recognize informal savings structures within health funding models.</p>
+</div>
+<div class="flex flex-col gap-sm mt-auto pt-sm border-t border-outline-variant/20">
+<div class="flex items-center gap-sm font-body-sm text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span>Published: Sep 2023</span>
+<span class="mx-xs">•</span>
+<span>3.2 MB</span>
+</div>
+<div class="flex gap-sm">
+<button class="flex-1 bg-primary text-on-primary font-label-md text-label-md py-sm rounded flex items-center justify-center gap-xs hover:bg-surface-tint transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span> Download PDF
+                                </button>
+<button class="bg-surface-container-high text-primary border border-outline-variant/30 font-label-md text-label-md px-md py-sm rounded flex items-center justify-center hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</div>
+</div>
+</article>
+</div>
+<!-- Pagination -->
+<div class="flex justify-center items-center gap-sm mt-lg">
+<button class="w-10 h-10 rounded-full flex items-center justify-center border border-outline-variant text-on-surface-variant hover:bg-surface-container transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center bg-primary text-on-primary font-label-md text-label-md shadow-sm">1</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center border border-outline-variant text-on-surface-variant hover:bg-surface-container transition-colors font-label-md text-label-md">2</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center border border-outline-variant text-on-surface-variant hover:bg-surface-container transition-colors font-label-md text-label-md">3</button>
+<span class="text-on-surface-variant">...</span>
+<button class="w-10 h-10 rounded-full flex items-center justify-center border border-outline-variant text-on-surface-variant hover:bg-surface-container transition-colors font-label-md text-label-md">12</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center border border-outline-variant text-on-surface-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer from JSON -->
+<footer class="bg-tertiary dark:bg-tertiary-container flex flex-col md:flex-row justify-between items-center w-full px-container-margin py-lg border-t border-outline-variant mt-auto">
+<div class="flex flex-col items-center md:items-start gap-sm mb-md md:mb-0">
+<span class="text-h3 font-h3 text-secondary-fixed">SADC PF SRHR Portal</span>
+<span class="text-on-tertiary dark:text-on-tertiary-container font-body-sm text-body-sm">© 2024 SADC Parliamentary Forum. All Rights Reserved.</span>
+</div>
+<div class="flex flex-wrap justify-center gap-md">
+<a class="font-label-md text-label-md text-on-tertiary-container hover:text-secondary-fixed transition-colors Link underline on hover" href="#">Privacy Policy</a>
+<a class="font-label-md text-label-md text-on-tertiary-container hover:text-secondary-fixed transition-colors Link underline on hover" href="#">Terms of Service</a>
+<a class="font-label-md text-label-md text-on-tertiary-container hover:text-secondary-fixed transition-colors Link underline on hover" href="#">Contact Us</a>
+<a class="font-label-md text-label-md text-on-tertiary-container hover:text-secondary-fixed transition-colors Link underline on hover" href="#">SADC Website</a>
+</div>
+</footer>
+</body></html>

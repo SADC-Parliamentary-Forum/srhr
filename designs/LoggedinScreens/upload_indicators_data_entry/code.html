@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Indicator Upload Wizard - Enter Details</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#efeded",
+                        "background": "#fbf9f8",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#abcfbb",
+                        "on-tertiary-fixed": "#1c1c18",
+                        "surface-variant": "#e4e2e2",
+                        "surface": "#fbf9f8",
+                        "outline-variant": "#c1c8c2",
+                        "on-primary-container": "#749684",
+                        "secondary": "#735c00",
+                        "inverse-on-surface": "#f2f0f0",
+                        "tertiary-fixed-dim": "#c9c6c0",
+                        "on-tertiary": "#ffffff",
+                        "surface-bright": "#fbf9f8",
+                        "inverse-surface": "#303030",
+                        "surface-container-high": "#eae8e7",
+                        "secondary-container": "#fed65b",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#dbd9d9",
+                        "error-container": "#ffdad6",
+                        "primary": "#00170d",
+                        "error": "#ba1a1a",
+                        "tertiary": "#131310",
+                        "on-secondary-container": "#745c00",
+                        "on-tertiary-container": "#908f89",
+                        "inverse-primary": "#abcfbb",
+                        "surface-tint": "#446555",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-primary-fixed-variant": "#2d4d3e",
+                        "primary-fixed": "#c6ebd7",
+                        "on-surface-variant": "#414844",
+                        "secondary-fixed": "#ffe088",
+                        "tertiary-container": "#282824",
+                        "tertiary-fixed": "#e5e2db",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#474742",
+                        "primary-container": "#0b2d20",
+                        "on-surface": "#1b1c1c",
+                        "on-secondary-fixed": "#241a00",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#f5f3f3",
+                        "surface-container-highest": "#e4e2e2",
+                        "secondary-fixed-dim": "#e9c349",
+                        "on-primary-fixed": "#002115",
+                        "on-background": "#1b1c1c",
+                        "on-secondary": "#ffffff",
+                        "outline": "#727974"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "gutter": "16px",
+                        "base": "8px",
+                        "xl": "64px",
+                        "container-margin": "20px",
+                        "xs": "4px",
+                        "sm": "12px",
+                        "lg": "40px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "display": ["Manrope"],
+                        "ussd-mono": ["Courier"],
+                        "h1": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "label-lg": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "body-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display": ["40px", { "lineHeight": "1.2", "fontWeight": "800" }],
+                        "ussd-mono": ["16px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "h1": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "h2": ["24px", { "lineHeight": "1.3", "fontWeight": "700" }],
+                        "label-lg": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "h3": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.surface'); color: theme('colors.on-surface'); }
+        /* Tonal Layering Shadows */
+        .elevation-1 { box-shadow: 0 4px 12px rgba(0, 23, 13, 0.04); }
+        .elevation-2 { box-shadow: 0 8px 24px rgba(0, 23, 13, 0.08); }
+    </style>
+</head>
+<body class="font-body-md text-body-md min-h-screen flex flex-col">
+<!-- Focused Transactional Header (Main Nav Suppressed per Rules) -->
+<header class="bg-surface-bright border-b border-outline-variant/30 py-sm px-lg flex justify-between items-center sticky top-0 z-50">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">dataset</span>
+<span class="font-h3 text-h3 text-primary">SRHR Portal</span>
+</div>
+<button class="flex items-center gap-xs text-on-surface-variant hover:text-on-surface transition-colors font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">close</span>
+            Exit Wizard
+        </button>
+</header>
+<main class="flex-grow flex justify-center py-xl px-gutter">
+<div class="w-full max-w-[960px] flex flex-col gap-lg">
+<!-- Header & Stepper Area -->
+<div class="flex flex-col gap-md">
+<h1 class="font-h1 text-h1 text-primary">Upload Indicators</h1>
+<!-- Progress Stepper -->
+<div class="flex items-center gap-sm w-full overflow-x-auto pb-xs">
+<!-- Step 1 -->
+<div class="flex items-center gap-sm opacity-60">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-lg text-label-lg">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<span class="font-label-lg text-label-lg text-on-surface whitespace-nowrap">Select Source</span>
+</div>
+<div class="flex-grow h-px bg-outline-variant mx-xs opacity-60 min-w-[40px]"></div>
+<!-- Step 2 -->
+<div class="flex items-center gap-sm opacity-60">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-lg text-label-lg">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<span class="font-label-lg text-label-lg text-on-surface whitespace-nowrap">Map Fields</span>
+</div>
+<div class="flex-grow h-px bg-outline-variant mx-xs opacity-60 min-w-[40px]"></div>
+<!-- Step 3 (Active) -->
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-lg text-label-lg">3</div>
+<span class="font-label-lg text-label-lg text-primary whitespace-nowrap">Enter Details</span>
+</div>
+<div class="flex-grow h-px bg-outline-variant mx-xs min-w-[40px]"></div>
+<!-- Step 4 -->
+<div class="flex items-center gap-sm opacity-40">
+<div class="w-8 h-8 rounded-full bg-surface-variant text-on-surface-variant border border-outline-variant flex items-center justify-center font-label-lg text-label-lg">4</div>
+<span class="font-label-lg text-label-lg text-on-surface-variant whitespace-nowrap">Review</span>
+</div>
+</div>
+</div>
+<!-- Main Content Area: Dropzone & Preview -->
+<div class="flex flex-col gap-md">
+<!-- File Drop Zone Card -->
+<div class="bg-surface rounded-xl border border-primary/10 elevation-1 p-md flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<div>
+<h2 class="font-h3 text-h3 text-primary mb-xs">Excel Data Upload</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Drag and drop your populated indicator file here, or click to browse.</p>
+</div>
+<a class="flex items-center gap-xs font-label-md text-label-md text-primary hover:text-surface-tint transition-colors bg-surface-container-low px-sm py-xs rounded-md" href="#">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                            Download Template
+                        </a>
+</div>
+<div class="mt-sm border-2 border-dashed border-outline-variant rounded-lg bg-surface-container-lowest hover:bg-surface-container-low transition-colors cursor-pointer flex flex-col items-center justify-center py-xl px-md group">
+<div class="w-16 h-16 rounded-full bg-primary-fixed/30 flex items-center justify-center mb-sm group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[32px] text-primary" style="font-variation-settings: 'FILL' 1;">cloud_upload</span>
+</div>
+<p class="font-h3 text-h3 text-primary mb-xs text-center">Drop your .xlsx file here</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-center max-w-sm">
+                            Ensure your columns match the expected format. Maximum file size is 25MB.
+                        </p>
+</div>
+</div>
+<!-- Data Preview Table Card -->
+<div class="bg-surface rounded-xl border border-primary/10 elevation-1 overflow-hidden flex flex-col">
+<div class="px-md py-sm border-b border-outline-variant/30 flex items-center justify-between bg-surface-container-lowest">
+<h3 class="font-label-lg text-label-lg text-primary">Data Mapping Preview</h3>
+<span class="font-label-md text-label-md text-on-surface-variant bg-surface-container px-sm py-xs rounded-full">Showing top 3 rows</span>
+</div>
+<div class="overflow-x-auto w-full">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low font-label-md text-label-md text-on-surface-variant border-b border-outline-variant/50">
+<th class="py-sm px-md font-normal w-1/4">Outcome</th>
+<th class="py-sm px-md font-normal w-1/5">Indicator Code</th>
+<th class="py-sm px-md font-normal text-right">Target</th>
+<th class="py-sm px-md font-normal text-right">Actual</th>
+<th class="py-sm px-md font-normal text-center">Status</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm text-on-surface divide-y divide-outline-variant/20">
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="py-sm px-md align-top truncate max-w-[200px]" title="Improved Maternal Health Access">Improved Maternal Health...</td>
+<td class="py-sm px-md align-top font-ussd-mono text-on-surface-variant">IND-MH-001</td>
+<td class="py-sm px-md align-top text-right">5,000</td>
+<td class="py-sm px-md align-top text-right font-medium">4,850</td>
+<td class="py-sm px-md align-top text-center">
+<span class="inline-flex items-center justify-center px-sm py-xs rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-md text-[10px]">
+                                            Mapped
+                                        </span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="py-sm px-md align-top truncate max-w-[200px]" title="Community Education Workshops">Community Education Wor...</td>
+<td class="py-sm px-md align-top font-ussd-mono text-on-surface-variant">IND-EDU-042</td>
+<td class="py-sm px-md align-top text-right">120</td>
+<td class="py-sm px-md align-top text-right font-medium">125</td>
+<td class="py-sm px-md align-top text-center">
+<span class="inline-flex items-center justify-center px-sm py-xs rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-md text-[10px]">
+                                            Mapped
+                                        </span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors bg-error-container/10">
+<td class="py-sm px-md align-top truncate max-w-[200px]" title="Facility Infrastructure Updates">Facility Infrastructure U...</td>
+<td class="py-sm px-md align-top font-ussd-mono text-on-surface-variant">IND-INF-011</td>
+<td class="py-sm px-md align-top text-right text-error">--</td>
+<td class="py-sm px-md align-top text-right font-medium">14</td>
+<td class="py-sm px-md align-top text-center">
+<span class="inline-flex items-center justify-center px-sm py-xs rounded-full bg-error-container text-on-error-container font-label-md text-[10px]">
+                                            Missing Target
+                                        </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Wizard Action Footer -->
+<div class="flex justify-between items-center mt-md pt-md border-t border-outline-variant/30">
+<button class="bg-transparent border border-primary text-primary hover:bg-surface-container-low transition-colors px-lg py-sm rounded-full font-label-lg text-label-lg flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+                    Back
+                </button>
+<button class="bg-primary text-on-primary hover:bg-primary-container transition-colors px-lg py-sm rounded-full font-label-lg text-label-lg flex items-center gap-xs elevation-1">
+                    Validate
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</main>
+</body></html>

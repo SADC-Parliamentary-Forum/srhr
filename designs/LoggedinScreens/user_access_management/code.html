@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>User Management - SRHR Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#1c1c18",
+                        "primary-fixed-dim": "#abcfbb",
+                        "outline-variant": "#c1c8c2",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#131310",
+                        "surface-container-highest": "#e4e2e2",
+                        "on-primary-container": "#749684",
+                        "surface-dim": "#dbd9d9",
+                        "surface-container": "#efeded",
+                        "secondary-fixed": "#ffe088",
+                        "error": "#ba1a1a",
+                        "on-background": "#1b1c1c",
+                        "surface-variant": "#e4e2e2",
+                        "inverse-primary": "#abcfbb",
+                        "outline": "#727974",
+                        "primary-fixed": "#c6ebd7",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-tertiary-fixed-variant": "#474742",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#eae8e7",
+                        "surface": "#fbf9f8",
+                        "on-primary-fixed": "#002115",
+                        "tertiary-fixed-dim": "#c9c6c0",
+                        "on-surface": "#1b1c1c",
+                        "on-secondary-container": "#745c00",
+                        "primary": "#00170d",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#2d4d3e",
+                        "secondary": "#735c00",
+                        "surface-tint": "#446555",
+                        "surface-container-low": "#f5f3f3",
+                        "inverse-surface": "#303030",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#fed65b",
+                        "tertiary-container": "#282824",
+                        "on-secondary-fixed-variant": "#574500",
+                        "primary-container": "#0b2d20",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#e9c349",
+                        "background": "#fbf9f8",
+                        "on-secondary-fixed": "#241a00",
+                        "on-tertiary-container": "#908f89",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#e5e2db",
+                        "surface-bright": "#fbf9f8",
+                        "on-surface-variant": "#414844",
+                        "on-primary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "40px",
+                        "container-margin": "20px",
+                        "xl": "64px",
+                        "sm": "12px",
+                        "base": "8px",
+                        "md": "24px",
+                        "gutter": "16px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "display": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "ussd-mono": ["Courier"],
+                        "label-lg": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "body-sm": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "h3": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "label-md": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "display": ["40px", {"lineHeight": "1.2", "fontWeight": "800"}],
+                        "h2": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "ussd-mono": ["16px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                        "h1": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-surface-bright dark:bg-inverse-surface shadow-sm flex justify-between items-center px-gutter py-xs w-full sticky top-0 z-50">
+<div class="flex items-center gap-md">
+<h1 class="font-display text-display text-primary dark:text-inverse-primary tracking-tight">SRHR Portal</h1>
+<nav class="hidden md:flex gap-gutter items-center ml-lg">
+<a class="font-label-lg text-label-lg text-on-surface-variant dark:text-surface-variant hover:text-secondary dark:hover:text-secondary-fixed scale-95 duration-150 py-sm" href="#">Reports</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant dark:text-surface-variant hover:text-secondary dark:hover:text-secondary-fixed scale-95 duration-150 py-sm" href="#">Data</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant dark:text-surface-variant hover:text-secondary dark:hover:text-secondary-fixed scale-95 duration-150 py-sm" href="#">Library</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<!-- Search -->
+<div class="hidden lg:flex relative">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="pl-[36px] pr-sm py-sm rounded-lg bg-surface-container border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary text-body-sm w-64 transition-all" placeholder="Search users..." type="text"/>
+</div>
+<div class="flex items-center gap-sm">
+<button class="p-base text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-base text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="public">public</span>
+</button>
+<button class="p-base text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+</button>
+</div>
+<div class="flex items-center gap-gutter border-l border-outline-variant pl-gutter">
+<button class="font-label-lg text-label-lg text-primary border border-primary px-gutter py-sm rounded-DEFAULT hover:bg-primary hover:text-on-primary transition-colors">AI Assistant</button>
+<button class="font-label-lg text-label-lg bg-primary text-on-primary px-gutter py-sm rounded-DEFAULT hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm">Add / Upload</button>
+<img alt="User profile" class="w-10 h-10 rounded-full border border-outline-variant object-cover cursor-pointer hover:opacity-80 transition-opacity" data-alt="A close-up, professional headshot of a person looking directly at the camera. The image should have a clean, neutral background typical of a corporate profile photo. The lighting should be soft and even, highlighting the subject's features subtly. The overall aesthetic should align with a modern corporate environment, conveying trust and approachability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpqpUEmRRTftElGl2Z6RDJYaPFnuKfuJdmsfLBrxHyTwwcWAI4FgX0SibT6Cj1bC2hBd1xD_CJgSgeLm28YjaMjRkuPPZFpo5k-iDpuc20iu9DZZl3AYXsdbUfFTcBszFlvNUczZntIAmuqMNv7VOonLaQ2CzMIrnmbImtxgqi3tIcJApF3u6lXUgMCe7POo2phPUodiBnsb24lWQjluRn_98plVrCNweyuDH1HUR0To8iLI_AsZed1KybySMhD-mBGiDN1_k_uQ"/>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col h-[calc(100vh-72px)] sticky top-[72px] bg-surface dark:bg-inverse-surface w-64 border-r border-outline-variant shrink-0">
+<div class="p-lg border-b border-outline-variant flex items-center gap-gutter bg-surface-container-low dark:bg-inverse-surface">
+<div class="w-12 h-12 rounded-lg bg-primary flex items-center justify-center text-on-primary font-h3 text-h3">
+                    OR
+                </div>
+<div>
+<h2 class="font-h3 text-h3 text-primary dark:text-inverse-primary">SRHR Portal</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Secure Reporting</p>
+</div>
+</div>
+<nav class="flex-1 py-md flex flex-col gap-xs overflow-y-auto">
+<a class="flex items-center gap-gutter px-lg py-sm font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                    Dashboard
+                </a>
+<a class="flex items-center gap-gutter px-lg py-sm font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+                    Reports Workspace
+                </a>
+<a class="flex items-center gap-gutter px-lg py-sm font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="edit_note">edit_note</span>
+                    Data Capture
+                </a>
+<a class="flex items-center gap-gutter px-lg py-sm font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+                    Analysis
+                </a>
+<a class="flex items-center gap-gutter px-lg py-sm font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="library_books">library_books</span>
+                    Library
+                </a>
+<a class="flex items-center gap-gutter px-lg py-sm font-label-md text-label-md text-primary dark:text-inverse-primary font-bold border-r-4 border-secondary transition-all duration-300 ease-in-out bg-surface-container-low" href="#">
+<span class="material-symbols-outlined" data-icon="settings" data-weight="fill">settings</span>
+                    Administration
+                </a>
+</nav>
+<div class="p-lg mt-auto border-t border-outline-variant">
+<button class="w-full flex items-center justify-center gap-sm py-sm px-gutter border border-outline text-on-surface font-label-md text-label-md rounded-lg hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined" data-icon="center_focus_strong">center_focus_strong</span>
+                    Focus Mode
+                </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 overflow-y-auto p-container-margin md:p-lg bg-surface-container-low">
+<!-- Header Section -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-xl gap-gutter">
+<div>
+<h2 class="font-h1 text-h1 text-primary mb-xs">User Management</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Manage organization access, roles, and user statuses.</p>
+</div>
+<button class="font-label-lg text-label-lg bg-primary text-on-primary px-md py-sm rounded-DEFAULT shadow-[0_4px_14px_0_rgba(0,23,13,0.15)] hover:shadow-[0_6px_20px_rgba(0,23,13,0.23)] hover:-translate-y-[1px] transition-all flex items-center gap-sm">
+<span class="material-symbols-outlined" data-icon="person_add">person_add</span>
+                    Invite New User
+                </button>
+</div>
+<!-- Dashboard Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-lg">
+<!-- Sidebar Summary (Bento Style) -->
+<div class="lg:col-span-1 flex flex-col gap-md">
+<!-- Stats Card 1 -->
+<div class="bg-surface rounded-xl p-md border border-outline-variant shadow-sm relative overflow-hidden group hover:border-primary/30 transition-colors">
+<div class="absolute top-0 right-0 w-24 h-24 bg-primary-fixed opacity-20 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
+<div class="flex items-center gap-sm mb-sm relative z-10">
+<span class="material-symbols-outlined text-primary bg-primary-fixed p-sm rounded-full" data-icon="group">group</span>
+<h3 class="font-label-lg text-label-lg text-on-surface-variant">Active Users</h3>
+</div>
+<div class="font-display text-display text-primary relative z-10">
+                            1,248
+                        </div>
+<div class="flex items-center gap-xs mt-sm text-surface-tint font-body-sm text-body-sm relative z-10">
+<span class="material-symbols-outlined text-[16px]" data-icon="trending_up">trending_up</span>
+<span>+12 this week</span>
+</div>
+</div>
+<!-- Stats Card 2 -->
+<div class="bg-surface rounded-xl p-md border border-outline-variant shadow-sm relative overflow-hidden group hover:border-secondary-container/50 transition-colors">
+<div class="absolute top-0 right-0 w-24 h-24 bg-secondary-container opacity-20 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
+<div class="flex items-center gap-sm mb-sm relative z-10">
+<span class="material-symbols-outlined text-secondary bg-secondary-fixed p-sm rounded-full" data-icon="schedule">schedule</span>
+<h3 class="font-label-lg text-label-lg text-on-surface-variant">Pending Invites</h3>
+</div>
+<div class="font-display text-display text-secondary relative z-10">
+                            34
+                        </div>
+<div class="mt-sm">
+<button class="font-label-md text-label-md text-secondary underline hover:text-on-secondary-container transition-colors">Resend all pending</button>
+</div>
+</div>
+</div>
+<!-- Main Data Area -->
+<div class="lg:col-span-3 flex flex-col gap-md">
+<!-- Filters Bar -->
+<div class="bg-surface rounded-xl p-md border border-outline-variant shadow-sm flex flex-col sm:flex-row gap-gutter justify-between items-center">
+<div class="relative w-full sm:w-72">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full pl-[36px] pr-sm py-sm rounded-lg bg-surface-container border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary text-body-sm transition-all shadow-sm" placeholder="Search by name or email..." type="text"/>
+</div>
+<div class="flex gap-sm w-full sm:w-auto overflow-x-auto pb-2 sm:pb-0 hide-scrollbar">
+<button class="whitespace-nowrap px-gutter py-sm rounded-full border border-primary text-primary font-label-md text-label-md bg-primary-fixed/20">All Roles</button>
+<button class="whitespace-nowrap px-gutter py-sm rounded-full border border-outline-variant text-on-surface-variant font-label-md text-label-md hover:bg-surface-container">Admin</button>
+<button class="whitespace-nowrap px-gutter py-sm rounded-full border border-outline-variant text-on-surface-variant font-label-md text-label-md hover:bg-surface-container">Reporter</button>
+<button class="whitespace-nowrap px-gutter py-sm rounded-full border border-outline-variant text-on-surface-variant font-label-md text-label-md hover:bg-surface-container flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]" data-icon="filter_list">filter_list</span>
+                                More Filters
+                            </button>
+</div>
+</div>
+<!-- Data Table Container -->
+<div class="bg-surface rounded-xl border border-outline-variant shadow-sm overflow-hidden flex-1">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="px-gutter py-sm font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">User</th>
+<th class="px-gutter py-sm font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Role</th>
+<th class="px-gutter py-sm font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Country</th>
+<th class="px-gutter py-sm font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Status</th>
+<th class="px-gutter py-sm font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Last Active</th>
+<th class="px-gutter py-sm font-label-md text-label-md text-on-surface-variant uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-surface divide-y divide-outline-variant/50">
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="px-gutter py-sm">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-primary-fixed text-primary-container flex items-center justify-center font-h3 text-[14px]">ES</div>
+<div>
+<div class="font-label-lg text-label-lg">Elena Smith</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">elena@example.com</div>
+</div>
+</div>
+</td>
+<td class="px-gutter py-sm"><span class="bg-surface-container-high px-2 py-1 rounded-DEFAULT font-label-md text-label-md">Admin</span></td>
+<td class="px-gutter py-sm">Kenya</td>
+<td class="px-gutter py-sm"><span class="bg-primary-fixed/30 text-primary-container px-2 py-1 rounded-full font-label-md text-label-md inline-flex items-center gap-xs"><span class="w-2 h-2 rounded-full bg-surface-tint"></span>Active</span></td>
+<td class="px-gutter py-sm text-on-surface-variant">2 hours ago</td>
+<td class="px-gutter py-sm text-right">
+<button class="p-xs text-on-surface-variant hover:text-primary transition-colors opacity-0 group-hover:opacity-100"><span class="material-symbols-outlined" data-icon="edit">edit</span></button>
+<button class="p-xs text-on-surface-variant hover:text-error transition-colors opacity-0 group-hover:opacity-100"><span class="material-symbols-outlined" data-icon="block">block</span></button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="px-gutter py-sm">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed text-tertiary-container flex items-center justify-center font-h3 text-[14px]">MK</div>
+<div>
+<div class="font-label-lg text-label-lg">Marcus Kane</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">marcus.k@example.com</div>
+</div>
+</div>
+</td>
+<td class="px-gutter py-sm"><span class="bg-surface-container-high px-2 py-1 rounded-DEFAULT font-label-md text-label-md">Reporter</span></td>
+<td class="px-gutter py-sm">Nigeria</td>
+<td class="px-gutter py-sm"><span class="bg-primary-fixed/30 text-primary-container px-2 py-1 rounded-full font-label-md text-label-md inline-flex items-center gap-xs"><span class="w-2 h-2 rounded-full bg-surface-tint"></span>Active</span></td>
+<td class="px-gutter py-sm text-on-surface-variant">Yesterday</td>
+<td class="px-gutter py-sm text-right">
+<button class="p-xs text-on-surface-variant hover:text-primary transition-colors opacity-0 group-hover:opacity-100"><span class="material-symbols-outlined" data-icon="edit">edit</span></button>
+<button class="p-xs text-on-surface-variant hover:text-error transition-colors opacity-0 group-hover:opacity-100"><span class="material-symbols-outlined" data-icon="block">block</span></button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="px-gutter py-sm">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed text-secondary-container flex items-center justify-center font-h3 text-[14px]">SJ</div>
+<div>
+<div class="font-label-lg text-label-lg">Sarah Jenkins</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">s.jenkins@example.com</div>
+</div>
+</div>
+</td>
+<td class="px-gutter py-sm"><span class="bg-surface-container-high px-2 py-1 rounded-DEFAULT font-label-md text-label-md">Viewer</span></td>
+<td class="px-gutter py-sm">South Africa</td>
+<td class="px-gutter py-sm"><span class="bg-secondary-fixed/30 text-on-secondary-fixed px-2 py-1 rounded-full font-label-md text-label-md inline-flex items-center gap-xs"><span class="w-2 h-2 rounded-full bg-secondary"></span>Pending</span></td>
+<td class="px-gutter py-sm text-on-surface-variant">Never</td>
+<td class="px-gutter py-sm text-right">
+<button class="p-xs text-on-surface-variant hover:text-primary transition-colors opacity-0 group-hover:opacity-100"><span class="material-symbols-outlined" data-icon="mail">mail</span></button>
+<button class="p-xs text-on-surface-variant hover:text-error transition-colors opacity-0 group-hover:opacity-100"><span class="material-symbols-outlined" data-icon="delete">delete</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-sm border-t border-outline-variant bg-surface-container-lowest flex justify-between items-center">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Showing 1 to 3 of 1,248</span>
+<div class="flex gap-xs">
+<button class="p-xs rounded-DEFAULT border border-outline-variant text-on-surface-variant hover:bg-surface-container disabled:opacity-50"><span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span></button>
+<button class="p-xs rounded-DEFAULT border border-outline-variant text-on-surface-variant hover:bg-surface-container"><span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span></button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-highest w-full py-md px-lg flex justify-between items-center mt-auto border-t border-outline-variant flat z-10 relative">
+<div class="font-label-lg text-label-lg text-primary">SRHR Portal</div>
+<div class="font-label-md text-label-md text-primary dark:text-inverse-primary">
+            © 2024 SRHR Global Reporting System. All rights reserved.
+        </div>
+<div class="flex gap-md">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary opacity-80 hover:opacity-100" href="#">Support</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary opacity-80 hover:opacity-100" href="#">Documentation</a>
+</div>
+</footer>
+</body></html>

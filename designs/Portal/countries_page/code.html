@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SADC PF SRHR Portal - Countries Listing</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#414844",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e4e2e2",
+                        "primary-container": "#0b2d20",
+                        "inverse-primary": "#abcfbb",
+                        "tertiary": "#131310",
+                        "on-primary-fixed-variant": "#2d4d3e",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#e5e2db",
+                        "secondary-fixed": "#ffe088",
+                        "on-tertiary-fixed": "#1c1c18",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-tertiary-container": "#908f89",
+                        "tertiary-container": "#282824",
+                        "secondary-container": "#fed65b",
+                        "tertiary-fixed-dim": "#c9c6c0",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#fbf9f8",
+                        "surface-dim": "#dbd9d9",
+                        "surface-tint": "#446555",
+                        "primary": "#00170d",
+                        "surface-container-low": "#f5f3f3",
+                        "surface-container-high": "#eae8e7",
+                        "secondary-fixed-dim": "#e9c349",
+                        "on-primary-fixed": "#002115",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#c6ebd7",
+                        "surface-container": "#efeded",
+                        "outline": "#727974",
+                        "background": "#fbf9f8",
+                        "secondary": "#735c00",
+                        "on-background": "#1b1c1c",
+                        "inverse-surface": "#303030",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#745c00",
+                        "primary-fixed-dim": "#abcfbb",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e4e2e2",
+                        "on-secondary-fixed": "#241a00",
+                        "error-container": "#ffdad6",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-secondary": "#ffffff",
+                        "surface": "#fbf9f8",
+                        "on-surface": "#1b1c1c",
+                        "on-tertiary-fixed-variant": "#474742",
+                        "outline-variant": "#c1c8c2",
+                        "on-primary-container": "#749684"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "sm": "12px",
+                        "gutter": "16px",
+                        "container-margin": "20px",
+                        "base": "8px",
+                        "xl": "64px",
+                        "lg": "40px",
+                        "md": "24px"
+                    },
+                    "fontFamily": {
+                        "label-lg": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "ussd-mono": ["Courier"],
+                        "body-sm": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "display": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-lg": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "h3": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "ussd-mono": ["16px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "h2": ["24px", { "lineHeight": "1.3", "fontWeight": "700" }],
+                        "h1": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "label-md": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display": ["40px", { "lineHeight": "1.2", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md text-body-md antialiased">
+<!-- TopAppBar -->
+<header class="bg-primary dark:bg-primary docked full-width top-0 sticky shadow-sm flex justify-between items-center w-full px-container-margin py-sm z-50">
+<div class="flex items-center gap-gutter">
+<span class="text-h3 font-h3 text-secondary-container dark:text-secondary-container tracking-tight">SADC PF SRHR Portal</span>
+</div>
+<nav class="hidden md:flex items-center gap-gutter">
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors hover:bg-primary-container dark:hover:bg-primary-container transition-all px-3 py-2 rounded-DEFAULT font-label-lg text-label-lg" href="#">Home</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors hover:bg-primary-container dark:hover:bg-primary-container transition-all px-3 py-2 rounded-DEFAULT font-label-lg text-label-lg" href="#">Dashboard</a>
+<a class="text-secondary-container font-bold border-b-2 border-secondary-container pb-1 hover:bg-primary-container dark:hover:bg-primary-container transition-all px-3 py-2 rounded-DEFAULT font-label-lg text-label-lg opacity-90 scale-95 transition-transform" href="#">Countries</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors hover:bg-primary-container dark:hover:bg-primary-container transition-all px-3 py-2 rounded-DEFAULT font-label-lg text-label-lg" href="#">Reports</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors hover:bg-primary-container dark:hover:bg-primary-container transition-all px-3 py-2 rounded-DEFAULT font-label-lg text-label-lg" href="#">Stories</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors hover:bg-primary-container dark:hover:bg-primary-container transition-all px-3 py-2 rounded-DEFAULT font-label-lg text-label-lg" href="#">Resources</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors hover:bg-primary-container dark:hover:bg-primary-container transition-all px-3 py-2 rounded-DEFAULT font-label-lg text-label-lg" href="#">News &amp; Events</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors hover:bg-primary-container dark:hover:bg-primary-container transition-all px-3 py-2 rounded-DEFAULT font-label-lg text-label-lg" href="#">About</a>
+</nav>
+<div class="flex items-center gap-base">
+<button class="text-on-primary dark:text-on-primary font-label-lg text-label-lg hover:bg-primary-container dark:hover:bg-primary-container transition-all px-4 py-2 rounded-full border border-outline-variant/30">Login</button>
+<button class="bg-secondary-container text-on-secondary-container font-label-lg text-label-lg hover:opacity-90 transition-all px-4 py-2 rounded-full font-bold">Register</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-7xl mx-auto px-container-margin py-lg flex flex-col gap-xl">
+<!-- Page Header & Filters -->
+<section class="flex flex-col gap-md">
+<div>
+<h1 class="font-h1 text-h1 text-on-background mb-xs">Countries</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Explore SRHR reporting and progress across SADC member states.</p>
+</div>
+<div class="bg-surface rounded-xl p-md shadow-[0_4px_24px_rgba(0,23,13,0.04)] border border-primary/10 flex flex-col md:flex-row gap-gutter items-end">
+<div class="flex-grow w-full">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs">Search Countries</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-DEFAULT focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors font-body-md text-body-md text-on-surface placeholder-outline" placeholder="e.g. Angola, Botswana" type="text"/>
+</div>
+</div>
+<div class="w-full md:w-48">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs">Period</label>
+<select class="w-full px-4 py-2 bg-surface-container-low border border-outline-variant rounded-DEFAULT focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors font-body-md text-body-md text-on-surface appearance-none">
+<option>2023 - 2024</option>
+<option>2022 - 2023</option>
+<option>2021 - 2022</option>
+</select>
+</div>
+<div class="w-full md:w-48">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs">Outcome Focus</label>
+<select class="w-full px-4 py-2 bg-surface-container-low border border-outline-variant rounded-DEFAULT focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors font-body-md text-body-md text-on-surface appearance-none">
+<option>All Outcomes</option>
+<option>Maternal Health</option>
+<option>Youth SRHR</option>
+</select>
+</div>
+<div class="w-full md:w-48">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs">Status</label>
+<select class="w-full px-4 py-2 bg-surface-container-low border border-outline-variant rounded-DEFAULT focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors font-body-md text-body-md text-on-surface appearance-none">
+<option>All Statuses</option>
+<option>On Track</option>
+<option>Needs Attention</option>
+</select>
+</div>
+</div>
+</section>
+<!-- Country Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Country Card 1 -->
+<article class="bg-surface rounded-xl shadow-[0_4px_24px_rgba(0,23,13,0.04)] border border-primary/10 overflow-hidden flex flex-col transition-transform hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(0,23,13,0.08)]">
+<div class="h-32 bg-primary-container relative overflow-hidden">
+<img alt="Landscape of Angola" class="w-full h-full object-cover opacity-60 mix-blend-overlay" data-alt="A sweeping, majestic landscape view of Angola during golden hour, featuring rolling hills and vibrant skies. The scene is bathed in warm, soft sunlight, conveying a sense of stability and institutional growth. The color palette incorporates deep forest greens and warm golden hues, aligning with a modern corporate aesthetic that feels high-trust and secure." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDY5TR-JoyucSUFg1Dy_V-6YEfd19_9dvAbVFqm_KU4W9iEVMHywOk-qR5ehpwdeNK4uDI8z19THw62a8SyoVYQKuxxAyjoSB91A4xkA1CWUwo5Qqft9H_D3rEjFlyHdurkmv5Tq409zdF45SX5FWGSrdSrtjzhWih-ciM0FvaosqrpsQR0_-2hrxIW3fV48ykl-gMYsdJUbyxfAFZ70bVT-kd_MB7Ed48-udcJQ33K911-tFnVoUHDonc-9npj5wgTaS8sFEeoXIo"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container to-transparent"></div>
+<div class="absolute bottom-md left-md right-md flex justify-between items-end">
+<h2 class="font-h2 text-h2 text-on-primary">Angola</h2>
+<span class="bg-primary-fixed text-on-primary-fixed px-3 py-1 rounded-full font-label-md text-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> On Track
+                        </span>
+</div>
+</div>
+<div class="p-md flex flex-col gap-md flex-grow">
+<div class="grid grid-cols-2 gap-sm">
+<div class="bg-surface-container p-sm rounded-lg flex flex-col items-center text-center">
+<span class="font-h3 text-h3 text-primary">Q4 '23</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Latest Period</span>
+</div>
+<div class="bg-surface-container p-sm rounded-lg flex flex-col items-center text-center">
+<span class="font-h3 text-h3 text-primary">12</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Reports Pub.</span>
+</div>
+</div>
+<div class="flex flex-col gap-xs">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-md text-label-md text-on-surface-variant">Indicators Achieved</span>
+<span class="font-label-md text-label-md text-primary">68%</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 68%"></div>
+</div>
+</div>
+<div class="mt-auto pt-sm border-t border-outline-variant/30 flex justify-end">
+<button class="text-primary hover:bg-primary/5 px-4 py-2 rounded-full font-label-lg text-label-lg transition-colors flex items-center gap-2">
+                            View Country <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Country Card 2 -->
+<article class="bg-surface rounded-xl shadow-[0_4px_24px_rgba(0,23,13,0.04)] border border-primary/10 overflow-hidden flex flex-col transition-transform hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(0,23,13,0.08)]">
+<div class="h-32 bg-primary-container relative overflow-hidden">
+<img alt="Landscape of Botswana" class="w-full h-full object-cover opacity-60 mix-blend-overlay" data-alt="An expansive, serene landscape of the Okavango Delta in Botswana, captured from an aerial perspective. Soft, natural daylight illuminates the lush greenery and weaving waterways, creating a calm, secure atmosphere. The composition emphasizes deep greens and subtle earthy tones, reflecting a professional, modern corporate aesthetic grounded in growth and stability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVNs2W5D3fUsnA5Yr1blCDP5twrJHKgvRpzwKl7weeBeUu3qlGC2f5yKHtBtjkxQYciDJJv09AIIHa0pkcfRlqxxS6euXksLMjORYzj4Bec9eYGlCW61VaUL_tlWTkTniJV_xBT4qSZngsnCUwfmNR3y2fNCsaNYSb5pzUWPfgR_pcLskQucoEr5Ti3U0gdxRD_s3ZLNkPK032bw7do10FqyRsbL1k2Y9n5gcB_AL6HuMnCkCS6XqT29G5GBAzJKRypS69UUtFnQ0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container to-transparent"></div>
+<div class="absolute bottom-md left-md right-md flex justify-between items-end">
+<h2 class="font-h2 text-h2 text-on-primary">Botswana</h2>
+<span class="bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-full font-label-md text-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> In Progress
+                        </span>
+</div>
+</div>
+<div class="p-md flex flex-col gap-md flex-grow">
+<div class="grid grid-cols-2 gap-sm">
+<div class="bg-surface-container p-sm rounded-lg flex flex-col items-center text-center">
+<span class="font-h3 text-h3 text-primary">Q1 '24</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Latest Period</span>
+</div>
+<div class="bg-surface-container p-sm rounded-lg flex flex-col items-center text-center">
+<span class="font-h3 text-h3 text-primary">8</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Reports Pub.</span>
+</div>
+</div>
+<div class="flex flex-col gap-xs">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-md text-label-md text-on-surface-variant">Indicators Achieved</span>
+<span class="font-label-md text-label-md text-primary">45%</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2">
+<div class="bg-secondary h-2 rounded-full" style="width: 45%"></div>
+</div>
+</div>
+<div class="mt-auto pt-sm border-t border-outline-variant/30 flex justify-end">
+<button class="text-primary hover:bg-primary/5 px-4 py-2 rounded-full font-label-lg text-label-lg transition-colors flex items-center gap-2">
+                            View Country <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Country Card 3 -->
+<article class="bg-surface rounded-xl shadow-[0_4px_24px_rgba(0,23,13,0.04)] border border-primary/10 overflow-hidden flex flex-col transition-transform hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(0,23,13,0.08)]">
+<div class="h-32 bg-primary-container relative overflow-hidden">
+<img alt="Landscape of DRC" class="w-full h-full object-cover opacity-60 mix-blend-overlay" data-alt="A lush, dense tropical forest canopy in the Democratic Republic of Congo, viewed under a bright, clear morning sky. The lighting is crisp and optimistic, highlighting the vibrant variations of green foliage. The scene communicates enduring stability and natural wealth, carefully stylized to match a high-trust, modern corporate UI palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuDBCFgHHr-SJabwu-j-vuegajnEI_SctF4gctR07olEMTjwnoxSCIKmrCRLz2V4KbMsTb4Hh41PGk2P0G6upA-9Cei6esR-I0xm2nR1fhEcgsCqIU-lqbGYrHmIVLF9beL-kg44MXM6u_W_kIe6egyy9WpE6T7s6FMPdVktUBLwrLejsobo_U1LL1eakcGWzYCVS4mq0nfSA41Qf0AL8BBC4J_s8vb97rQxbx8wrB57s2z9ho2Lp10L6N5cKDN4V_QMlxp3f5gjI"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container to-transparent"></div>
+<div class="absolute bottom-md left-md right-md flex justify-between items-end">
+<h2 class="font-h2 text-h2 text-on-primary">DRC</h2>
+<span class="bg-error-container text-on-error-container px-3 py-1 rounded-full font-label-md text-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">warning</span> Needs Attention
+                        </span>
+</div>
+</div>
+<div class="p-md flex flex-col gap-md flex-grow">
+<div class="grid grid-cols-2 gap-sm">
+<div class="bg-surface-container p-sm rounded-lg flex flex-col items-center text-center">
+<span class="font-h3 text-h3 text-primary">Q3 '23</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Latest Period</span>
+</div>
+<div class="bg-surface-container p-sm rounded-lg flex flex-col items-center text-center">
+<span class="font-h3 text-h3 text-primary">4</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Reports Pub.</span>
+</div>
+</div>
+<div class="flex flex-col gap-xs">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-md text-label-md text-on-surface-variant">Indicators Achieved</span>
+<span class="font-label-md text-label-md text-primary">22%</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2">
+<div class="bg-error h-2 rounded-full" style="width: 22%"></div>
+</div>
+</div>
+<div class="mt-auto pt-sm border-t border-outline-variant/30 flex justify-end">
+<button class="text-primary hover:bg-primary/5 px-4 py-2 rounded-full font-label-lg text-label-lg transition-colors flex items-center gap-2">
+                            View Country <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Country Card 4 -->
+<article class="bg-surface rounded-xl shadow-[0_4px_24px_rgba(0,23,13,0.04)] border border-primary/10 overflow-hidden flex flex-col transition-transform hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(0,23,13,0.08)]">
+<div class="h-32 bg-primary-container relative overflow-hidden">
+<img alt="Landscape of Eswatini" class="w-full h-full object-cover opacity-60 mix-blend-overlay" data-alt="A picturesque view of the Ezulwini Valley in Eswatini, featuring smooth granite peaks and verdant plains. The atmosphere is tranquil and grounded, bathed in high-key, soft white lighting typical of a bright, modern UI. The color scheme is dominated by rich forest greens and subtle greys, fostering a sense of professional reliability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHzgzzzCqekqtPyBE9ZE9EtahmDXt4l2fKV2rPu9JWuMNbybWSVPIKAxoyZ8IPju2JnI_yNpjNgjoF7k9B3IDUPSq1X-2gfMc7DRPxt3dbDsb_9391p9gtdlbVpXGN9X7vWX967Iud4by7djzos7Lv7ntlf0KMlJcgZtOpT_lzptj2Tq9eLBWErYMOkxZW1xykziid5DnUh_t6J-QTAO7Uk06579amiTH0WfqShf_dm3vv3ov8lVs-AZ8WXveZWbL2ix6hRoX2JmM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container to-transparent"></div>
+<div class="absolute bottom-md left-md right-md flex justify-between items-end">
+<h2 class="font-h2 text-h2 text-on-primary">Eswatini</h2>
+<span class="bg-primary-fixed text-on-primary-fixed px-3 py-1 rounded-full font-label-md text-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> On Track
+                        </span>
+</div>
+</div>
+<div class="p-md flex flex-col gap-md flex-grow">
+<div class="grid grid-cols-2 gap-sm">
+<div class="bg-surface-container p-sm rounded-lg flex flex-col items-center text-center">
+<span class="font-h3 text-h3 text-primary">Q4 '23</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Latest Period</span>
+</div>
+<div class="bg-surface-container p-sm rounded-lg flex flex-col items-center text-center">
+<span class="font-h3 text-h3 text-primary">15</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Reports Pub.</span>
+</div>
+</div>
+<div class="flex flex-col gap-xs">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-md text-label-md text-on-surface-variant">Indicators Achieved</span>
+<span class="font-label-md text-label-md text-primary">81%</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 81%"></div>
+</div>
+</div>
+<div class="mt-auto pt-sm border-t border-outline-variant/30 flex justify-end">
+<button class="text-primary hover:bg-primary/5 px-4 py-2 rounded-full font-label-lg text-label-lg transition-colors flex items-center gap-2">
+                            View Country <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</article>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-tertiary dark:bg-tertiary-container full-width bottom-0 mt-auto border-t border-outline-variant flex flex-col md:flex-row justify-between items-center w-full px-container-margin py-lg z-10">
+<div class="mb-4 md:mb-0 text-center md:text-left">
+<span class="text-h3 font-h3 text-secondary-fixed block mb-2">SADC PF SRHR Portal</span>
+<p class="font-body-sm text-body-sm text-on-tertiary-container">© 2024 SADC Parliamentary Forum. All Rights Reserved.</p>
+</div>
+<div class="flex gap-gutter flex-wrap justify-center md:justify-end">
+<a class="text-on-tertiary-container hover:text-secondary-fixed transition-colors font-label-md text-label-md hover:underline" href="#">Privacy Policy</a>
+<a class="text-on-tertiary-container hover:text-secondary-fixed transition-colors font-label-md text-label-md hover:underline" href="#">Terms of Service</a>
+<a class="text-on-tertiary-container hover:text-secondary-fixed transition-colors font-label-md text-label-md hover:underline" href="#">Contact Us</a>
+<a class="text-on-tertiary-container hover:text-secondary-fixed transition-colors font-label-md text-label-md hover:underline" href="#">SADC Website</a>
+</div>
+</footer>
+</body></html>

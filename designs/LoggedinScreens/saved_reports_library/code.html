@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Saved Reports &amp; Templates - SRHR Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#abcfbb",
+                        "on-tertiary-fixed": "#1c1c18",
+                        "inverse-primary": "#abcfbb",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#908f89",
+                        "on-surface-variant": "#414844",
+                        "on-error": "#ffffff",
+                        "background": "#fbf9f8",
+                        "surface-container": "#efeded",
+                        "primary-fixed": "#c6ebd7",
+                        "primary-container": "#0b2d20",
+                        "primary": "#00170d",
+                        "outline-variant": "#c1c8c2",
+                        "on-secondary-container": "#745c00",
+                        "tertiary-fixed": "#e5e2db",
+                        "surface-bright": "#fbf9f8",
+                        "error-container": "#ffdad6",
+                        "on-background": "#1b1c1c",
+                        "on-primary-fixed": "#002115",
+                        "secondary-fixed": "#ffe088",
+                        "on-secondary-fixed": "#241a00",
+                        "inverse-surface": "#303030",
+                        "surface-container-highest": "#e4e2e2",
+                        "outline": "#727974",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#574500",
+                        "surface-container-low": "#f5f3f3",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#e9c349",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#131310",
+                        "surface": "#fbf9f8",
+                        "secondary-container": "#fed65b",
+                        "secondary": "#735c00",
+                        "surface-variant": "#e4e2e2",
+                        "on-primary-container": "#749684",
+                        "on-tertiary-fixed-variant": "#474742",
+                        "surface-tint": "#446555",
+                        "tertiary-fixed-dim": "#c9c6c0",
+                        "surface-dim": "#dbd9d9",
+                        "on-primary-fixed-variant": "#2d4d3e",
+                        "inverse-on-surface": "#f2f0f0",
+                        "tertiary-container": "#282824",
+                        "on-surface": "#1b1c1c",
+                        "surface-container-high": "#eae8e7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "md": "24px",
+                        "lg": "40px",
+                        "container-margin": "20px",
+                        "xl": "64px",
+                        "sm": "12px",
+                        "gutter": "16px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "ussd-mono": ["Courier"],
+                        "body-lg": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "body-sm": ["Manrope"],
+                        "label-lg": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "display": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "h2": ["24px", { "lineHeight": "1.3", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "ussd-mono": ["16px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "h3": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-lg": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "h1": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "display": ["40px", { "lineHeight": "1.2", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+<!-- SideNavBar (Web) -->
+<aside class="hidden md:flex bg-surface dark:bg-inverse-surface h-screen w-64 border-r border-outline-variant flex-col sticky top-0 bg-surface-container-low dark:bg-inverse-surface z-40">
+<div class="p-gutter flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container overflow-hidden">
+<img alt="Organization Logo" class="w-full h-full object-cover" data-alt="A clean, minimalist corporate logo symbol featuring an abstract leaf or geometric shape in deep forest green, set against a bright, warm light-mode background. The logo communicates stability, growth, and modern professionalism, fitting the overall Stockfel modern corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCU0EZzWcks-VdzqeYXFOc0YTuYxjuo8S0abfGgpYKj08QJCSgYsZDDWBgCT2pj8shVM3JYq2a0jINO3ER5KBJvVzrnyUYtSclNvqqa0kLZSDI7ryLXrFwHwm77jnDewpcdLPYvoZQITUnltzhpXY5Fp6OVrIZSD6C_YRzpasT3yxhTPg6fWy2juujwMVASvnwNFB3k23XWBPIQnXQXUZuCwrfmZjMuq8Pfp-k87UA1OXil4UMYdfbJdtbKR4gTprR_yARsE3Mo_g"/>
+</div>
+<div>
+<h1 class="font-h2 text-h2 font-black text-primary dark:text-inverse-primary">SRHR Portal</h1>
+<p class="font-label-md text-label-md text-on-surface-variant">Secure Reporting</p>
+</div>
+</div>
+<nav class="flex-1 px-sm py-xs space-y-xs overflow-y-auto font-body-md text-body-md font-label-md text-label-md">
+<a class="flex items-center gap-sm px-gutter py-sm rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-sm px-gutter py-sm rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">work</span>
+                Reports Workspace
+            </a>
+<a class="flex items-center gap-sm px-gutter py-sm rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">edit_note</span>
+                Data Capture
+            </a>
+<a class="flex items-center gap-sm px-gutter py-sm rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">analytics</span>
+                Analysis
+            </a>
+<a class="flex items-center gap-sm px-gutter py-sm rounded-lg bg-surface-container-highest text-primary dark:text-inverse-primary font-bold border-r-4 border-secondary transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined fill">library_books</span>
+                Library
+            </a>
+<a class="flex items-center gap-sm px-gutter py-sm rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Administration
+            </a>
+</nav>
+<div class="p-gutter mt-auto">
+<button class="w-full flex items-center justify-center gap-sm py-sm px-gutter rounded-full bg-surface-container-low border border-outline text-on-surface hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">do_not_disturb_on</span>
+<span class="font-label-md text-label-md">Focus Mode</span>
+</button>
+</div>
+</aside>
+<div class="flex-1 flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-gutter py-xs w-full sticky top-0 z-50 bg-surface-bright dark:bg-inverse-surface shadow-sm font-label-lg text-label-lg text-primary dark:text-inverse-primary">
+<div class="flex items-center gap-md">
+<!-- Mobile Menu Button -->
+<button class="md:hidden p-xs rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="font-display text-display text-primary dark:text-inverse-primary md:hidden">SRHR Portal</div>
+<!-- Desktop Nav Links -->
+<nav class="hidden md:flex items-center gap-md ml-lg">
+<a class="py-sm text-on-surface-variant dark:text-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors" href="#">Reports</a>
+<a class="py-sm text-on-surface-variant dark:text-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors" href="#">Data</a>
+<a class="py-sm text-secondary-container font-bold border-b-2 border-secondary-container transition-colors" href="#">Library</a>
+</nav>
+</div>
+<div class="flex items-center gap-sm">
+<!-- Search (on right) -->
+<div class="hidden md:flex relative items-center">
+<span class="material-symbols-outlined absolute left-sm text-on-surface-variant">search</span>
+<input class="pl-xl pr-sm py-xs rounded-full bg-surface-container-low border-none focus:ring-1 focus:ring-primary text-body-sm w-48 transition-all" placeholder="Search..." type="text"/>
+</div>
+<div class="flex items-center gap-xs">
+<button class="p-xs rounded-full hover:bg-surface-container text-on-surface-variant transition-colors"><span class="material-symbols-outlined">notifications</span></button>
+<button class="p-xs rounded-full hover:bg-surface-container text-on-surface-variant transition-colors"><span class="material-symbols-outlined">public</span></button>
+<button class="p-xs rounded-full hover:bg-surface-container text-on-surface-variant transition-colors"><span class="material-symbols-outlined">calendar_today</span></button>
+</div>
+<div class="hidden sm:flex items-center gap-sm border-l border-outline-variant pl-sm ml-xs">
+<button class="font-label-md text-label-md text-on-surface bg-surface-container-high hover:bg-surface-container-highest px-md py-xs rounded-full transition-colors">AI Assistant</button>
+<button class="font-label-md text-label-md text-on-primary bg-primary hover:bg-primary-container px-md py-xs rounded-full transition-colors shadow-[0_2px_8px_rgba(0,23,13,0.15)]">Add / Upload</button>
+</div>
+<div class="w-8 h-8 rounded-full overflow-hidden ml-sm border border-outline-variant">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A professional headshot of a person, well-lit against a neutral background. The subject is wearing business casual attire, reflecting a trustworthy and modern corporate persona suitable for a secure financial or reporting application profile avatar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8BzBPX1vUOaY1XbW_SYkQH21uMtuSaWmPYEG238IMzoa5U8dOOL0Pb6aPsd43ykgbSgBEaZJ_CnOfM64TXQGhQXuWyKCGa8koB2RFY7OBodvZkYGaX9pPx9yi_grI7ZSVXPeYw1aeas4PIAJeLKuKZX648i8xXjVeB-txs_AC3iTrl6uEIhIbGfvmOsUo9GPcaNBN42OHyjti_RMSPD7UBx73DsCXhwfHfBNAeWmUokmbOjWqFCEBRnysuBU-NblrWn3DBn5z6w"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 p-container-margin md:p-lg max-w-[1600px] mx-auto w-full">
+<!-- Page Header & Global Controls -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-md mb-lg">
+<div>
+<h2 class="font-h1 text-h1 text-primary mb-xs">Saved Reports &amp; Templates</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Manage your custom reports and access standard reporting templates.</p>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-sm">
+<!-- Global Search -->
+<div class="relative w-full sm:w-64">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-xl pr-sm py-sm rounded-lg bg-surface border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary text-body-md transition-colors" placeholder="Search reports..." type="text"/>
+</div>
+<!-- Filters -->
+<button class="w-full sm:w-auto flex items-center justify-center gap-xs px-md py-sm rounded-lg border border-outline-variant bg-surface hover:bg-surface-container text-on-surface transition-colors">
+<span class="material-symbols-outlined">tune</span>
+<span class="font-label-md text-label-md">Filters</span>
+</button>
+</div>
+</div>
+<!-- Tabs -->
+<div class="flex border-b border-outline-variant mb-md gap-md">
+<button class="py-sm px-xs border-b-2 border-primary font-label-lg text-label-lg text-primary">Report Library</button>
+<button class="py-sm px-xs border-b-2 border-transparent font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors">Template Library</button>
+</div>
+<!-- Bento Grid Layout for Reports -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-md">
+<!-- Report Card 1: Featured/Recent -->
+<div class="col-span-1 md:col-span-2 lg:col-span-2 row-span-2 bg-surface-container-lowest rounded-xl p-md flex flex-col shadow-[0_4px_12px_rgba(0,23,13,0.04)] border border-outline-variant/30 hover:shadow-[0_8px_24px_rgba(0,23,13,0.08)] transition-all">
+<div class="flex justify-between items-start mb-md">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined fill">monitoring</span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 text-primary">Q3 Financial Overview</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Last updated: Today, 09:41 AM</p>
+</div>
+</div>
+<button class="p-xs rounded-full hover:bg-surface-container text-on-surface-variant"><span class="material-symbols-outlined">more_vert</span></button>
+</div>
+<div class="flex-1 bg-surface-container-low rounded-lg p-sm mb-md flex items-center justify-center border border-outline-variant/50">
+<!-- Abstract representation of a chart -->
+<div class="w-full h-32 flex items-end gap-2 px-md pt-md">
+<div class="w-1/4 bg-primary-fixed rounded-t-sm" style="height: 40%"></div>
+<div class="w-1/4 bg-secondary-container rounded-t-sm" style="height: 70%"></div>
+<div class="w-1/4 bg-primary rounded-t-sm" style="height: 55%"></div>
+<div class="w-1/4 bg-primary-container rounded-t-sm" style="height: 90%"></div>
+</div>
+</div>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex items-center gap-sm">
+<span class="inline-flex items-center gap-xs px-sm py-1 rounded-full bg-primary-fixed-dim/20 text-on-primary-fixed font-label-md text-label-md">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+                                Weekly Auto-Sync
+                            </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">by Sarah J.</span>
+</div>
+<div class="flex gap-xs">
+<button class="p-sm rounded-lg hover:bg-surface-container text-on-surface-variant transition-colors" title="Edit"><span class="material-symbols-outlined text-[20px]">edit</span></button>
+<button class="p-sm rounded-lg bg-primary text-on-primary hover:bg-primary-container transition-colors shadow-sm font-label-md text-label-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">download</span> Export
+                            </button>
+</div>
+</div>
+</div>
+<!-- Report Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-md flex flex-col shadow-[0_4px_12px_rgba(0,23,13,0.04)] border border-outline-variant/30">
+<div class="flex justify-between items-start mb-md">
+<h3 class="font-h3 text-h3 text-primary line-clamp-2">Regional Performance Audit</h3>
+<button class="p-xs rounded-full hover:bg-surface-container text-on-surface-variant"><span class="material-symbols-outlined">more_vert</span></button>
+</div>
+<div class="mb-md">
+<span class="inline-flex items-center gap-xs px-sm py-1 rounded-full bg-surface-variant text-on-surface-variant font-label-md text-label-md mb-sm">
+                            Manual Update
+                        </span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Last: Oct 12, 2023</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Author: System Admin</p>
+</div>
+<div class="mt-auto flex justify-end gap-sm border-t border-outline-variant pt-sm">
+<button class="font-label-md text-label-md text-primary hover:bg-surface-container px-sm py-xs rounded transition-colors">Duplicate</button>
+<button class="font-label-md text-label-md text-primary hover:bg-surface-container px-sm py-xs rounded transition-colors">View</button>
+</div>
+</div>
+<!-- Report Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-md flex flex-col shadow-[0_4px_12px_rgba(0,23,13,0.04)] border border-outline-variant/30">
+<div class="flex justify-between items-start mb-md">
+<h3 class="font-h3 text-h3 text-primary line-clamp-2">Monthly Member Contributions</h3>
+<button class="p-xs rounded-full hover:bg-surface-container text-on-surface-variant"><span class="material-symbols-outlined">more_vert</span></button>
+</div>
+<div class="mb-md">
+<span class="inline-flex items-center gap-xs px-sm py-1 rounded-full bg-secondary-fixed/50 text-on-secondary-fixed font-label-md text-label-md mb-sm">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+                            Monthly Auto-Sync
+                        </span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Last: Nov 01, 2023</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Author: David M.</p>
+</div>
+<div class="mt-auto flex justify-end gap-sm border-t border-outline-variant pt-sm">
+<button class="font-label-md text-label-md text-primary hover:bg-surface-container px-sm py-xs rounded transition-colors">History</button>
+<button class="font-label-md text-label-md text-primary hover:bg-surface-container px-sm py-xs rounded transition-colors">View</button>
+</div>
+</div>
+<!-- Template Section Header (simulating scroll to templates) -->
+<div class="col-span-full mt-lg mb-sm flex items-center justify-between">
+<h3 class="font-h2 text-h2 text-primary">Pre-built Templates</h3>
+<a class="font-label-md text-label-md text-secondary hover:underline" href="#">View All Templates</a>
+</div>
+<!-- Template Card 1 -->
+<div class="bg-surface-container-low rounded-xl p-md border border-outline-variant/50 hover:border-primary/50 transition-colors cursor-pointer group">
+<div class="w-12 h-12 rounded-lg bg-surface mb-md flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">description</span>
+</div>
+<h4 class="font-h3 text-h3 text-on-surface mb-xs">Quarterly Executive Summary</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md">Standard format for board-level quarterly reporting.</p>
+<button class="w-full py-sm rounded-lg border border-primary text-primary font-label-md text-label-md group-hover:bg-primary group-hover:text-on-primary transition-colors">Use Template</button>
+</div>
+<!-- Template Card 2 -->
+<div class="bg-surface-container-low rounded-xl p-md border border-outline-variant/50 hover:border-primary/50 transition-colors cursor-pointer group">
+<div class="w-12 h-12 rounded-lg bg-surface mb-md flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">table_view</span>
+</div>
+<h4 class="font-h3 text-h3 text-on-surface mb-xs">Detailed Transaction Log</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md">Comprehensive table view of all group activities.</p>
+<button class="w-full py-sm rounded-lg border border-primary text-primary font-label-md text-label-md group-hover:bg-primary group-hover:text-on-primary transition-colors">Use Template</button>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-md px-lg flex justify-between items-center mt-auto bg-surface-container-lowest dark:bg-surface-container-highest border-t border-outline-variant font-label-md text-label-md text-primary dark:text-inverse-primary">
+<div class="font-label-lg text-label-lg text-primary opacity-80 hover:opacity-100">
+                © 2024 SRHR Global Reporting System. All rights reserved.
+            </div>
+<div class="flex gap-md">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Support</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Documentation</a>
+</div>
+</footer>
+</div>
+</body></html>

@@ -1,8 +1,9 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { isAuthenticated } from '@/lib/auth'
 
 const navItems = [
@@ -21,19 +22,21 @@ function isNavActive(pathname: string, href: string): boolean {
   return pathname.startsWith(href)
 }
 
-function BudgetSidebar() {
+function BudgetSidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
   const pathname = usePathname()
 
   return (
-    <aside className="hidden md:flex flex-col fixed left-0 top-0 h-screen w-64 bg-surface-container-low border-r border-outline-variant z-30">
+    <aside className={`flex flex-col fixed left-0 top-0 h-screen w-64 bg-surface-container-low border-r border-outline-variant z-30 transition-transform duration-300 ease-in-out ${
+      open ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+    }`}>
       {/* Logo area */}
-      <div className="p-lg flex items-center gap-sm shrink-0">
-        <div className="w-10 h-10 bg-primary-container rounded-full flex items-center justify-center shrink-0">
-          <span className="material-symbols-outlined text-on-primary-container text-xl">account_balance</span>
+      <div className="px-md py-sm flex items-center gap-sm border-b border-outline-variant/40 shrink-0">
+        <div className="bg-primary rounded-lg p-1 flex items-center justify-center shrink-0" style={{ width: 40, height: 40 }}>
+          <Image src="/sadc-pf-logo.jpg" alt="SADC PF" width={32} height={32} className="object-contain brightness-0 invert" />
         </div>
-        <div>
-          <h3 className="text-title-md font-bold text-on-surface leading-tight">Capital Secure</h3>
-          <p className="text-label-md text-on-surface-variant leading-tight">Collective Growth</p>
+        <div className="min-w-0">
+          <p className="text-[13px] font-extrabold text-primary tracking-wide leading-tight">SADC PF</p>
+          <p className="text-[10px] font-semibold text-on-surface-variant tracking-wide leading-tight">Budget Analysis</p>
         </div>
       </div>
 
@@ -80,13 +83,20 @@ function BudgetSidebar() {
   )
 }
 
-function BudgetTopBar() {
+function BudgetTopBar({ onMenuClick }: { onMenuClick: () => void }) {
   return (
-    <header className="sticky top-0 z-20 bg-surface border-b border-outline-variant h-16 flex items-center px-lg gap-md">
+    <header className="sticky top-0 z-20 bg-surface border-b border-outline-variant h-16 flex items-center px-md gap-md">
       {/* Left */}
       <div className="flex items-center gap-md flex-1 min-w-0">
+        <button
+          className="md:hidden p-2 text-on-surface-variant hover:text-primary transition-colors shrink-0"
+          onClick={onMenuClick}
+          aria-label="Open navigation"
+        >
+          <span className="material-symbols-outlined text-[24px]">menu</span>
+        </button>
         <h2 className="hidden md:block text-title-lg font-extrabold text-primary whitespace-nowrap shrink-0">
-          Budget Analysis Portal
+          Budget Analysis
         </h2>
         <div className="flex items-center gap-sm bg-surface-container-low rounded-full px-md py-sm flex-1 max-w-xs">
           <span className="material-symbols-outlined text-on-surface-variant text-[18px]">search</span>
@@ -116,6 +126,8 @@ function BudgetTopBar() {
 
 export default function BudgetLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter()
+  const pathname = usePathname()
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   useEffect(() => {
     if (!isAuthenticated()) {
@@ -123,11 +135,21 @@ export default function BudgetLayout({ children }: { children: React.ReactNode }
     }
   }, [router])
 
+  useEffect(() => {
+    setSidebarOpen(false)
+  }, [pathname])
+
   return (
     <div className="flex min-h-screen bg-surface">
-      <BudgetSidebar />
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/40 z-20 md:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+      <BudgetSidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <div className="flex flex-col flex-1 md:ml-64 min-w-0">
-        <BudgetTopBar />
+        <BudgetTopBar onMenuClick={() => setSidebarOpen(true)} />
         <main className="flex-1 overflow-auto">
           {children}
         </main>

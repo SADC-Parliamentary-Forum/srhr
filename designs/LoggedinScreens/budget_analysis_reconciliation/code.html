@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Budget Analysis - Reconciliation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#131310",
+                        "on-tertiary-container": "#908f89",
+                        "on-secondary-fixed": "#241a00",
+                        "on-background": "#1b1c1c",
+                        "surface-container-low": "#f5f3f3",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#ffe088",
+                        "primary-fixed-dim": "#abcfbb",
+                        "primary": "#00170d",
+                        "on-primary-fixed-variant": "#2d4d3e",
+                        "tertiary-fixed": "#e5e2db",
+                        "on-surface": "#1b1c1c",
+                        "on-surface-variant": "#414844",
+                        "outline-variant": "#c1c8c2",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e4e2e2",
+                        "secondary-fixed-dim": "#e9c349",
+                        "on-primary-fixed": "#002115",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-tertiary-fixed": "#1c1c18",
+                        "inverse-surface": "#303030",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#fed65b",
+                        "primary-container": "#0b2d20",
+                        "on-secondary-container": "#745c00",
+                        "tertiary-fixed-dim": "#c9c6c0",
+                        "on-tertiary-fixed-variant": "#474742",
+                        "tertiary-container": "#282824",
+                        "surface-dim": "#dbd9d9",
+                        "inverse-primary": "#abcfbb",
+                        "on-error": "#ffffff",
+                        "background": "#fbf9f8",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#c6ebd7",
+                        "outline": "#727974",
+                        "error": "#ba1a1a",
+                        "on-primary-container": "#749684",
+                        "on-primary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#eae8e7",
+                        "secondary": "#735c00",
+                        "surface-container": "#efeded",
+                        "surface-tint": "#446555",
+                        "surface-variant": "#e4e2e2",
+                        "surface-bright": "#fbf9f8",
+                        "surface": "#fbf9f8",
+                        "on-secondary-fixed-variant": "#574500"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "40px",
+                        "base": "8px",
+                        "xl": "64px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "sm": "12px",
+                        "md": "24px",
+                        "container-margin": "20px"
+                    },
+                    "fontFamily": {
+                        "label-lg": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "ussd-mono": ["Courier"],
+                        "body-sm": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "display": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-lg": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "h3": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "h1": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "ussd-mono": ["16px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "h2": ["24px", { "lineHeight": "1.3", "fontWeight": "700" }],
+                        "display": ["40px", { "lineHeight": "1.2", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-full flex flex-col p-gutter border-r border-outline-variant dark:border-outline h-screen w-64 docked left-0 bg-surface-container-low dark:bg-tertiary shadow-sm hidden md:flex z-40">
+<div class="mb-lg flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary font-h3">CS</div>
+<div>
+<h1 class="font-h3 text-h3 font-black text-primary dark:text-primary-fixed-dim">Capital Secure</h1>
+<p class="font-label-md text-label-md text-on-surface-variant">Collective Growth</p>
+</div>
+</div>
+<div class="flex-1 space-y-2 overflow-y-auto">
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-on-tertiary-container px-md py-sm hover:bg-surface-container-highest dark:hover:bg-tertiary-container rounded-lg transition-all scale-95 active:scale-100 font-label-lg text-label-lg font-semibold" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Overview
+            </a>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-on-tertiary-container px-md py-sm hover:bg-surface-container-highest dark:hover:bg-tertiary-container rounded-lg transition-all scale-95 active:scale-100 font-label-lg text-label-lg font-semibold" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+                Activities
+            </a>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-on-tertiary-container px-md py-sm hover:bg-surface-container-highest dark:hover:bg-tertiary-container rounded-lg transition-all scale-95 active:scale-100 font-label-lg text-label-lg font-semibold" href="#">
+<span class="material-symbols-outlined">public</span>
+                Countries
+            </a>
+<a class="flex items-center gap-sm bg-secondary-container dark:bg-primary-container text-on-secondary-container dark:text-on-primary-container rounded-lg px-md py-sm hover:bg-surface-container-highest dark:hover:bg-tertiary-container transition-all scale-95 active:scale-100 font-label-lg text-label-lg font-semibold" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span>
+                Reports
+            </a>
+<a class="flex items-center gap-sm text-on-surface-variant dark:text-on-tertiary-container px-md py-sm hover:bg-surface-container-highest dark:hover:bg-tertiary-container rounded-lg transition-all scale-95 active:scale-100 font-label-lg text-label-lg font-semibold" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</div>
+<div class="mt-auto pt-md border-t border-outline-variant/30">
+<button class="w-full bg-primary text-on-primary font-label-lg text-label-lg font-semibold py-sm rounded-lg hover:bg-on-primary-fixed-variant transition-colors shadow-sm">
+                New Analysis
+            </button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col md:ml-64 h-screen overflow-hidden">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-md h-16 sticky top-0 z-50 docked full-width top-0 bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline">
+<div class="flex items-center gap-md">
+<button class="md:hidden text-on-surface-variant p-sm rounded-full hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="font-h2 text-h2 font-extrabold text-primary dark:text-primary-fixed-dim hidden sm:block">Budget Analysis Portal</h2>
+<div class="relative ml-4 hidden md:block">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="pl-lg pr-md py-xs rounded-full bg-surface-container-low border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary text-body-sm w-64 transition-all" placeholder="Search analyses..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<button class="p-sm text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-tertiary-container transition-colors rounded-full relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-sm text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-tertiary-container transition-colors rounded-full">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<button class="p-xs hover:bg-surface-container-high dark:hover:bg-tertiary-container transition-colors rounded-full">
+<img alt="User profile" class="w-8 h-8 rounded-full border border-outline-variant" data-alt="A professional headshot of a person looking confidently at the camera. The background is a soft, out-of-focus modern office setting, bathed in warm, natural light. The overall aesthetic is clean, corporate, and trustworthy, matching a high-end financial application. The lighting is high-key and flattering." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJTJ9SB0gDI5BRJ_knC7VvZJsD2s41_M_oDrNRG_Y6c0hPowfh1HS6TydE4d8sjaMKgoClSAllS-kEupoO4AtsISNwQhofoakZEoD8cd4GfCmvmn2o49rpOtBtC1nQmXrFbPTC2zODjpp4qGapmqkDQQJJ7KVDAOQjk1dVIZlhiWaG3VIoKAHPny9PyQi0zcQPcisyNZnSLwg2bkyuHwS9CJbnPwpYJYKrSCSdo8uz4IadZ3DRb4M4CgBLE-HtMIeTVhkDgEwVcg"/>
+</button>
+</div>
+</header>
+<!-- Page Content -->
+<div class="flex-1 overflow-y-auto bg-surface-container-lowest p-container-margin md:p-xl space-y-md">
+<!-- Context Header & Tabs -->
+<div class="space-y-sm">
+<h1 class="font-h1 text-h1 text-primary">Reconciliation</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Analyze discrepancies between reported source documents and financial spreadsheets.</p>
+<!-- Internal Tab Navigation -->
+<div class="flex overflow-x-auto gap-sm pb-xs border-b border-outline-variant hide-scrollbar mt-md">
+<button class="px-sm py-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary whitespace-nowrap">Overview</button>
+<button class="px-sm py-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary whitespace-nowrap">Activities</button>
+<button class="px-sm py-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary whitespace-nowrap">Countries</button>
+<button class="px-sm py-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary whitespace-nowrap">No-Spend</button>
+<button class="px-sm py-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary whitespace-nowrap">Variance</button>
+<button class="px-sm py-xs font-label-lg text-label-lg text-primary border-b-2 border-primary whitespace-nowrap">Reconciliation</button>
+<button class="px-sm py-xs font-label-lg text-label-lg text-on-surface-variant hover:text-primary whitespace-nowrap">Priority Actions</button>
+<button class="px-sm py-xs font-label-lg text-label-lg text-secondary border border-secondary rounded-full ml-auto whitespace-nowrap flex items-center gap-xs">
+<span class="material-symbols-outlined text-sm">auto_awesome</span>
+                        AI Insights
+                    </button>
+</div>
+</div>
+<!-- Reconciliation Summary Cards (Bento-ish) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<!-- Source A Card -->
+<div class="bg-surface p-md rounded-xl border border-outline-variant/30 shadow-[0_4px_24px_rgba(0,23,13,0.04)] relative overflow-hidden group">
+<div class="absolute -right-6 -top-6 w-24 h-24 bg-surface-container-highest rounded-full opacity-50 group-hover:scale-110 transition-transform"></div>
+<div class="flex items-center gap-sm mb-sm text-on-surface-variant relative z-10">
+<span class="material-symbols-outlined">description</span>
+<h3 class="font-label-lg text-label-lg">Source A Total</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-xs relative z-10">Status Document (Country Activity)</p>
+<div class="font-h2 text-h2 text-primary relative z-10">US$ 1,245,600.00</div>
+</div>
+<!-- Source B Card -->
+<div class="bg-surface p-md rounded-xl border border-outline-variant/30 shadow-[0_4px_24px_rgba(0,23,13,0.04)] relative overflow-hidden group">
+<div class="absolute -right-6 -top-6 w-24 h-24 bg-surface-container-highest rounded-full opacity-50 group-hover:scale-110 transition-transform"></div>
+<div class="flex items-center gap-sm mb-sm text-on-surface-variant relative z-10">
+<span class="material-symbols-outlined">table_view</span>
+<h3 class="font-label-lg text-label-lg">Source B Total</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-xs relative z-10">Financial Spreadsheet (Aggregated)</p>
+<div class="font-h2 text-h2 text-primary relative z-10">US$ 1,254,670.52</div>
+</div>
+<!-- Difference Card (Highlight) -->
+<div class="bg-error-container p-md rounded-xl border border-error/20 shadow-[0_4px_24px_rgba(186,26,26,0.08)] relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-[120px] text-error">warning</span>
+</div>
+<div class="flex items-center justify-between mb-sm relative z-10">
+<div class="flex items-center gap-sm text-on-error-container">
+<span class="material-symbols-outlined">balance</span>
+<h3 class="font-label-lg text-label-lg">Total Difference</h3>
+</div>
+<span class="bg-error text-on-error font-label-md text-label-md px-2 py-1 rounded-full">Requires Review</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-error-container/80 mb-xs relative z-10">Unreconciled Variance</p>
+<div class="font-h1 text-h1 text-error relative z-10 flex items-baseline gap-xs">
+                        US$ 9,070.52
+                        <span class="material-symbols-outlined text-sm">arrow_upward</span>
+</div>
+</div>
+</div>
+<!-- Detailed Reconciliation Table Section -->
+<div class="bg-surface rounded-xl border border-outline-variant/30 shadow-[0_4px_24px_rgba(0,23,13,0.04)] overflow-hidden">
+<div class="p-md border-b border-outline-variant/50 flex justify-between items-center bg-surface-container-lowest">
+<h3 class="font-h3 text-h3 text-primary">Country Activity Reconciliation</h3>
+<div class="flex gap-sm">
+<button class="p-sm rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors flex items-center gap-xs font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">filter_list</span> Filter
+                        </button>
+<button class="p-sm rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors flex items-center gap-xs font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">download</span> Export
+                        </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">
+<th class="p-sm border-b border-outline-variant/50 font-semibold">Activity Code</th>
+<th class="p-sm border-b border-outline-variant/50 font-semibold">Country</th>
+<th class="p-sm border-b border-outline-variant/50 font-semibold text-right">Source A (Doc)</th>
+<th class="p-sm border-b border-outline-variant/50 font-semibold text-right">Source B (Sheet)</th>
+<th class="p-sm border-b border-outline-variant/50 font-semibold text-right">Variance</th>
+<th class="p-sm border-b border-outline-variant/50 font-semibold text-center">Status</th>
+<th class="p-sm border-b border-outline-variant/50 font-semibold text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-surface divide-y divide-outline-variant/20">
+<!-- Matched Row -->
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="p-sm font-ussd-mono">ACT-001</td>
+<td class="p-sm">Kenya</td>
+<td class="p-sm text-right">$45,000.00</td>
+<td class="p-sm text-right">$45,000.00</td>
+<td class="p-sm text-right text-on-surface-variant">$0.00</td>
+<td class="p-sm text-center">
+<span class="inline-flex items-center gap-xs px-2 py-1 bg-primary-container/20 text-primary-container rounded-full font-label-md text-label-md">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Matched
+                                    </span>
+</td>
+<td class="p-sm text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-xs" title="View Details">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Mismatched Row (The Issue) -->
+<tr class="hover:bg-surface-container-lowest transition-colors bg-error-container/10">
+<td class="p-sm font-ussd-mono text-error font-bold">ACT-042</td>
+<td class="p-sm font-semibold">Nigeria</td>
+<td class="p-sm text-right font-ussd-mono">$112,400.00</td>
+<td class="p-sm text-right font-ussd-mono">$121,470.52</td>
+<td class="p-sm text-right text-error font-bold font-ussd-mono">-$9,070.52</td>
+<td class="p-sm text-center">
+<span class="inline-flex items-center gap-xs px-2 py-1 bg-error-container text-on-error-container rounded-full font-label-md text-label-md">
+<span class="material-symbols-outlined text-[14px]">error</span> Mismatch
+                                    </span>
+</td>
+<td class="p-sm text-right">
+<button class="text-primary hover:bg-primary/10 transition-colors px-sm py-xs rounded-md border border-primary font-label-md text-label-md">
+                                        Reconcile
+                                    </button>
+</td>
+</tr>
+<!-- Matched Row -->
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="p-sm font-ussd-mono">ACT-015</td>
+<td class="p-sm">Rwanda</td>
+<td class="p-sm text-right">$28,500.00</td>
+<td class="p-sm text-right">$28,500.00</td>
+<td class="p-sm text-right text-on-surface-variant">$0.00</td>
+<td class="p-sm text-center">
+<span class="inline-flex items-center gap-xs px-2 py-1 bg-primary-container/20 text-primary-container rounded-full font-label-md text-label-md">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Matched
+                                    </span>
+</td>
+<td class="p-sm text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-xs" title="View Details">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-sm border-t border-outline-variant/50 bg-surface-container-lowest flex justify-end">
+<p class="font-body-sm text-body-sm text-on-surface-variant">Showing 1 to 3 of 45 entries</p>
+</div>
+</div>
+</div>
+</main>
+<style>
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</body></html>

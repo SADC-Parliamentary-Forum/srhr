@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Evidence Library - SRHR Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Courier&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "error": "#ba1a1a",
+                      "tertiary": "#131310",
+                      "secondary-fixed-dim": "#e9c349",
+                      "on-secondary-fixed-variant": "#574500",
+                      "on-tertiary-container": "#908f89",
+                      "tertiary-container": "#282824",
+                      "on-tertiary-fixed": "#1c1c18",
+                      "background": "#fbf9f8",
+                      "on-secondary-container": "#745c00",
+                      "on-primary-fixed-variant": "#2d4d3e",
+                      "outline": "#727974",
+                      "on-tertiary-fixed-variant": "#474742",
+                      "primary-fixed": "#c6ebd7",
+                      "surface": "#fbf9f8",
+                      "surface-container-highest": "#e4e2e2",
+                      "surface-variant": "#e4e2e2",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-high": "#eae8e7",
+                      "outline-variant": "#c1c8c2",
+                      "tertiary-fixed-dim": "#c9c6c0",
+                      "inverse-primary": "#abcfbb",
+                      "on-primary-container": "#749684",
+                      "secondary-fixed": "#ffe088",
+                      "on-tertiary": "#ffffff",
+                      "on-surface-variant": "#414844",
+                      "surface-bright": "#fbf9f8",
+                      "on-secondary-fixed": "#241a00",
+                      "primary-fixed-dim": "#abcfbb",
+                      "on-error": "#ffffff",
+                      "inverse-surface": "#303030",
+                      "surface-tint": "#446555",
+                      "primary-container": "#0b2d20",
+                      "inverse-on-surface": "#f2f0f0",
+                      "primary": "#00170d",
+                      "on-surface": "#1b1c1c",
+                      "surface-dim": "#dbd9d9",
+                      "surface-container": "#efeded",
+                      "on-primary-fixed": "#002115",
+                      "on-error-container": "#93000a",
+                      "tertiary-fixed": "#e5e2db",
+                      "secondary": "#735c00",
+                      "on-secondary": "#ffffff",
+                      "surface-container-low": "#f5f3f3",
+                      "secondary-container": "#fed65b",
+                      "on-primary": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "on-background": "#1b1c1c"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "base": "8px",
+                      "md": "24px",
+                      "container-margin": "20px",
+                      "xl": "64px",
+                      "xs": "4px",
+                      "sm": "12px",
+                      "gutter": "16px",
+                      "lg": "40px"
+              },
+              "fontFamily": {
+                      "label-md": [
+                              "Manrope"
+                      ],
+                      "h3": [
+                              "Manrope"
+                      ],
+                      "h1": [
+                              "Manrope"
+                      ],
+                      "ussd-mono": [
+                              "Courier"
+                      ],
+                      "display": [
+                              "Manrope"
+                      ],
+                      "body-lg": [
+                              "Manrope"
+                      ],
+                      "h2": [
+                              "Manrope"
+                      ],
+                      "body-sm": [
+                              "Manrope"
+                      ],
+                      "body-md": [
+                              "Manrope"
+                      ],
+                      "label-lg": [
+                              "Manrope"
+                      ]
+              },
+              "fontSize": {
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "h3": [
+                              "20px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "h1": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "ussd-mono": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display": [
+                              "40px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h2": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-lg": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col md:flex-row">
+<!-- SideNavBar (Desktop Only) -->
+<nav class="hidden md:flex flex-col h-screen sticky top-0 h-screen w-64 border-r border-outline-variant bg-surface dark:bg-inverse-surface text-primary dark:text-inverse-primary font-body-md text-body-md font-label-md text-label-md bg-surface-container-low dark:bg-inverse-surface transition-all duration-300 ease-in-out">
+<div class="p-gutter border-b border-outline-variant/10">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold">SR</div>
+<div>
+<h1 class="text-h2 font-h2 font-black text-primary dark:text-inverse-primary">SRHR Portal</h1>
+<p class="font-label-md text-label-md text-on-surface-variant">Secure Reporting</p>
+</div>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto py-sm">
+<ul class="space-y-1 px-sm">
+<li>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg hover:bg-surface-container-highest dark:hover:bg-surface-variant text-on-surface-variant dark:text-surface-variant" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                        Dashboard
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg hover:bg-surface-container-highest dark:hover:bg-surface-variant text-on-surface-variant dark:text-surface-variant" href="#">
+<span class="material-symbols-outlined">work</span>
+                        Reports Workspace
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg hover:bg-surface-container-highest dark:hover:bg-surface-variant text-on-surface-variant dark:text-surface-variant" href="#">
+<span class="material-symbols-outlined">edit_note</span>
+                        Data Capture
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg hover:bg-surface-container-highest dark:hover:bg-surface-variant text-on-surface-variant dark:text-surface-variant" href="#">
+<span class="material-symbols-outlined">analytics</span>
+                        Analysis
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg hover:bg-surface-container-highest dark:hover:bg-surface-variant text-primary dark:text-inverse-primary font-bold border-r-4 border-secondary bg-surface-container-highest" href="#">
+<span class="material-symbols-outlined">library_books</span>
+                        Library
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg hover:bg-surface-container-highest dark:hover:bg-surface-variant text-on-surface-variant dark:text-surface-variant" href="#">
+<span class="material-symbols-outlined">settings</span>
+                        Administration
+                    </a>
+</li>
+</ul>
+</div>
+<div class="p-gutter border-t border-outline-variant/10">
+<button class="w-full flex items-center justify-center gap-xs py-sm px-md rounded-lg border border-outline text-primary hover:bg-surface-container-highest transition-colors font-label-md text-label-md">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">visibility_off</span>
+                Focus Mode
+            </button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-h-screen">
+<!-- TopAppBar (Mobile & Global Actions) -->
+<header class="flex justify-between items-center px-gutter py-xs w-full sticky top-0 z-50 bg-surface-bright dark:bg-inverse-surface text-primary dark:text-inverse-primary font-label-lg text-label-lg shadow-sm bg-surface-bright dark:bg-inverse-surface scale-95 duration-150">
+<div class="flex items-center gap-sm md:hidden">
+<span class="material-symbols-outlined">menu</span>
+<span class="font-display text-display text-primary dark:text-inverse-primary">SRHR Portal</span>
+</div>
+<div class="hidden md:flex items-center gap-lg">
+<ul class="flex gap-md">
+<li><a class="text-on-surface-variant dark:text-surface-variant hover:text-secondary dark:hover:text-secondary-fixed" href="#">Reports</a></li>
+<li><a class="text-on-surface-variant dark:text-surface-variant hover:text-secondary dark:hover:text-secondary-fixed" href="#">Data</a></li>
+<li><a class="text-secondary-container font-bold border-b-2 border-secondary-container hover:text-secondary dark:hover:text-secondary-fixed" href="#">Library</a></li>
+</ul>
+</div>
+<div class="flex items-center gap-md">
+<!-- Search -->
+<div class="hidden lg:flex items-center bg-surface-container rounded-full px-sm py-xs border border-outline-variant focus-within:border-primary">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-sm font-body-sm w-48 text-on-surface" placeholder="Search library..." type="text"/>
+</div>
+<div class="flex items-center gap-xs">
+<button class="p-xs text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">notifications</span></button>
+<button class="p-xs text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">public</span></button>
+<button class="p-xs text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">calendar_today</span></button>
+</div>
+<div class="hidden sm:flex gap-sm">
+<button class="px-sm py-xs rounded-full border border-primary text-primary font-label-md hover:bg-surface-container-highest transition-colors">AI Assistant</button>
+<button class="px-sm py-xs rounded-full bg-primary text-on-primary font-label-md hover:bg-primary/90 transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">upload</span>
+                        Add / Upload
+                    </button>
+</div>
+<img alt="User profile" class="w-8 h-8 rounded-full border-2 border-surface-container-highest" data-alt="A close up, high quality headshot portrait of a professional woman. She is wearing modern corporate attire. The background is a soft, blurred light grey studio backdrop. High-key lighting, modern and optimistic mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmE2x-I5CxWCqr4_DSWmxdeHFj_0BVMGjiHxubhhNLXcVNPRmDi7jg4FpGIk1JXRLMJGJ7Nzc-LaQxC82G7P6jgT33_F9BKrnMe8NPitPWMWRvY3NcOtihAK8iDfajjYZNH4FHd-toXjQse4N_3jWLRmD3F0dkip_sY8q2h-EgknIT3f7otojcq6KPZL1G0CsdovwZrULDbBtyB2CFtDfuf8PU0HTnQ0j11S1WGswZ7SmGjFhJYQYWaqGSV51q72zZo9AI0x6FHA"/>
+</div>
+</header>
+<!-- Page Content Canvas -->
+<main class="flex-1 p-container-margin md:p-lg max-w-7xl mx-auto w-full">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-lg gap-md">
+<div>
+<h2 class="text-h1 font-h1 text-primary mb-xs">Evidence Library</h2>
+<p class="text-body-lg font-body-lg text-on-surface-variant max-w-2xl">A centralized repository for validated source documents, supporting verifiable SRHR reporting and public transparency.</p>
+</div>
+<button class="self-start md:self-auto bg-primary text-on-primary px-md py-sm rounded-full font-label-md flex items-center gap-sm shadow-sm hover:shadow-md transition-all">
+<span class="material-symbols-outlined">add</span>
+                    Upload Evidence
+                </button>
+</div>
+<!-- Tabs -->
+<div class="border-b border-outline-variant/30 mb-md overflow-x-auto">
+<nav class="flex gap-lg min-w-max pb-xs">
+<a class="text-primary font-bold border-b-2 border-secondary pb-sm px-xs font-label-md text-label-md whitespace-nowrap" href="#">Evidence</a>
+<a class="text-on-surface-variant hover:text-primary pb-sm px-xs font-label-md text-label-md whitespace-nowrap transition-colors" href="#">Stories</a>
+<a class="text-on-surface-variant hover:text-primary pb-sm px-xs font-label-md text-label-md whitespace-nowrap transition-colors" href="#">Resources</a>
+<a class="text-on-surface-variant hover:text-primary pb-sm px-xs font-label-md text-label-md whitespace-nowrap transition-colors" href="#">Media</a>
+<a class="text-on-surface-variant hover:text-primary pb-sm px-xs font-label-md text-label-md whitespace-nowrap transition-colors" href="#">Public Publishing</a>
+</nav>
+</div>
+<!-- Filter & Search Bar for Evidence -->
+<div class="bg-surface-container-lowest p-sm rounded-xl border border-outline-variant/20 shadow-sm mb-lg flex flex-col md:flex-row gap-sm items-center justify-between">
+<div class="flex-1 w-full relative">
+<span class="material-symbols-outlined absolute left-sm top-1/2 transform -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-low border border-transparent focus:border-primary focus:ring-0 rounded-lg pl-xl pr-sm py-sm text-body-md font-body-md text-on-surface transition-colors" placeholder="Search by title, country, or tags..." type="text"/>
+</div>
+<div class="flex gap-sm w-full md:w-auto overflow-x-auto pb-2 md:pb-0 hide-scrollbar">
+<button class="flex items-center gap-xs px-sm py-xs bg-surface-container-low border border-outline-variant/30 rounded-lg text-body-sm font-body-sm whitespace-nowrap hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[18px]">filter_alt</span> Type
+                    </button>
+<button class="flex items-center gap-xs px-sm py-xs bg-surface-container-low border border-outline-variant/30 rounded-lg text-body-sm font-body-sm whitespace-nowrap hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[18px]">public</span> Country
+                    </button>
+<button class="flex items-center gap-xs px-sm py-xs bg-surface-container-low border border-outline-variant/30 rounded-lg text-body-sm font-body-sm whitespace-nowrap hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[18px]">calendar_month</span> Period
+                    </button>
+<button class="flex items-center gap-xs px-sm py-xs bg-surface-container-low border border-outline-variant/30 rounded-lg text-body-sm font-body-sm whitespace-nowrap hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[18px]">verified</span> Status
+                    </button>
+</div>
+</div>
+<!-- Evidence Grid (Bento/Card Style) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-md">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/20 shadow-sm hover:shadow-md transition-shadow flex flex-col group overflow-hidden">
+<div class="h-32 bg-surface-container flex items-center justify-center relative border-b border-outline-variant/10">
+<div class="absolute top-sm right-sm bg-surface-container-lowest/90 backdrop-blur-sm rounded px-xs py-[2px] text-[10px] font-label-md text-primary flex items-center gap-[2px] border border-outline-variant/20">
+<span class="material-symbols-outlined text-[12px]">picture_as_pdf</span> PDF
+                        </div>
+<span class="material-symbols-outlined text-display text-outline-variant opacity-50 group-hover:scale-110 transition-transform">description</span>
+</div>
+<div class="p-sm flex flex-col flex-1">
+<div class="flex justify-between items-start mb-xs">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-label-md bg-primary-fixed text-on-primary-fixed-variant">Verified</span>
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">more_vert</span></button>
+</div>
+<h3 class="text-body-md font-h3 font-semibold text-primary line-clamp-2 mb-xs flex-1">Q3 Regional Health Assembly Hansard</h3>
+<div class="space-y-1 mb-sm text-body-sm font-body-sm text-on-surface-variant">
+<div class="flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">public</span> Kenya</div>
+<div class="flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">calendar_today</span> Jul - Sep 2023</div>
+</div>
+<div class="flex items-center gap-sm pt-sm border-t border-outline-variant/20 mt-auto">
+<button class="flex-1 flex justify-center items-center gap-xs py-xs text-secondary font-label-md text-label-md hover:bg-secondary/10 rounded transition-colors"><span class="material-symbols-outlined text-[16px]">visibility</span> Preview</button>
+<button class="flex-1 flex justify-center items-center gap-xs py-xs text-primary font-label-md text-label-md hover:bg-primary/5 rounded transition-colors"><span class="material-symbols-outlined text-[16px]">download</span> Save</button>
+</div>
+</div>
+</div>
+<!-- Card 2 (Image Type) -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/20 shadow-sm hover:shadow-md transition-shadow flex flex-col group overflow-hidden">
+<div class="h-32 bg-surface-container relative border-b border-outline-variant/10 overflow-hidden">
+<img alt="Meeting Photo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A wide shot of a community meeting in a well-lit modern hall. People are seated in rows listening to a speaker. Natural light floods in from large windows. The mood is collaborative and professional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoF2K1B6IUnec7CNdvkApvGn3qf-CEcLmoPl9Es7pfDTn5RJYLSvIyhA-SQtRUNXGjkIf70t1UOKpl5Jzt1KpEQqiZMJv32f2KV4aQQqvF4qdqTJQae2F53jx8BUnXPzWhzKRuhutf8c_pT7A6pKceropX0dGl-gdYgM4ifLHcpTUK0VeeGu1MnlTdwx6xZM8EjxbTp5vxP7cjKfq6vZ1AcwUN05m99v-R8Zmn7AG7vMOTuoBxvkmDYspIETQiWEYcm8FMV35eMA"/>
+<div class="absolute top-sm right-sm bg-surface-container-lowest/90 backdrop-blur-sm rounded px-xs py-[2px] text-[10px] font-label-md text-primary flex items-center gap-[2px] border border-outline-variant/20">
+<span class="material-symbols-outlined text-[12px]">image</span> JPG
+                        </div>
+</div>
+<div class="p-sm flex flex-col flex-1">
+<div class="flex justify-between items-start mb-xs">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-label-md bg-secondary-fixed text-on-secondary-fixed-variant">Pending Review</span>
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">more_vert</span></button>
+</div>
+<h3 class="text-body-md font-h3 font-semibold text-primary line-clamp-2 mb-xs flex-1">Community Outreach Attendance Log - District 4</h3>
+<div class="space-y-1 mb-sm text-body-sm font-body-sm text-on-surface-variant">
+<div class="flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">public</span> Uganda</div>
+<div class="flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">calendar_today</span> Oct 12, 2023</div>
+</div>
+<div class="flex items-center gap-sm pt-sm border-t border-outline-variant/20 mt-auto">
+<button class="flex-1 flex justify-center items-center gap-xs py-xs text-secondary font-label-md text-label-md hover:bg-secondary/10 rounded transition-colors"><span class="material-symbols-outlined text-[16px]">visibility</span> Preview</button>
+<button class="flex-1 flex justify-center items-center gap-xs py-xs text-primary font-label-md text-label-md hover:bg-primary/5 rounded transition-colors"><span class="material-symbols-outlined text-[16px]">link</span> Source</button>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/20 shadow-sm hover:shadow-md transition-shadow flex flex-col group overflow-hidden">
+<div class="h-32 bg-surface-container flex items-center justify-center relative border-b border-outline-variant/10">
+<div class="absolute top-sm right-sm bg-surface-container-lowest/90 backdrop-blur-sm rounded px-xs py-[2px] text-[10px] font-label-md text-primary flex items-center gap-[2px] border border-outline-variant/20">
+<span class="material-symbols-outlined text-[12px]">grid_on</span> CSV
+                        </div>
+<span class="material-symbols-outlined text-display text-outline-variant opacity-50 group-hover:scale-110 transition-transform">table_chart</span>
+</div>
+<div class="p-sm flex flex-col flex-1">
+<div class="flex justify-between items-start mb-xs">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-label-md bg-primary-fixed text-on-primary-fixed-variant">Verified</span>
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">more_vert</span></button>
+</div>
+<h3 class="text-body-md font-h3 font-semibold text-primary line-clamp-2 mb-xs flex-1">Annual Clinic Resource Distribution Data</h3>
+<div class="space-y-1 mb-sm text-body-sm font-body-sm text-on-surface-variant">
+<div class="flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">public</span> Global</div>
+<div class="flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">calendar_today</span> 2022 - 2023</div>
+</div>
+<div class="flex items-center gap-sm pt-sm border-t border-outline-variant/20 mt-auto">
+<button class="flex-1 flex justify-center items-center gap-xs py-xs text-secondary font-label-md text-label-md hover:bg-secondary/10 rounded transition-colors"><span class="material-symbols-outlined text-[16px]">visibility</span> Preview</button>
+<button class="flex-1 flex justify-center items-center gap-xs py-xs text-primary font-label-md text-label-md hover:bg-primary/5 rounded transition-colors"><span class="material-symbols-outlined text-[16px]">download</span> Save</button>
+</div>
+</div>
+</div>
+<!-- Card 4 (Report Link) -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/20 shadow-sm hover:shadow-md transition-shadow flex flex-col group overflow-hidden">
+<div class="h-32 bg-surface-container flex items-center justify-center relative border-b border-outline-variant/10">
+<div class="absolute top-sm right-sm bg-surface-container-lowest/90 backdrop-blur-sm rounded px-xs py-[2px] text-[10px] font-label-md text-primary flex items-center gap-[2px] border border-outline-variant/20">
+<span class="material-symbols-outlined text-[12px]">picture_as_pdf</span> PDF
+                        </div>
+<span class="material-symbols-outlined text-display text-outline-variant opacity-50 group-hover:scale-110 transition-transform">article</span>
+</div>
+<div class="p-sm flex flex-col flex-1">
+<div class="flex justify-between items-start mb-xs">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-label-md bg-error-container text-on-error-container">Flagged</span>
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-[18px]">more_vert</span></button>
+</div>
+<h3 class="text-body-md font-h3 font-semibold text-primary line-clamp-2 mb-xs flex-1">Independent Audit Draft - Q2 Financials</h3>
+<div class="space-y-1 mb-sm text-body-sm font-body-sm text-on-surface-variant">
+<div class="flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">public</span> Tanzania</div>
+<div class="flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">calendar_today</span> Apr - Jun 2023</div>
+</div>
+<div class="flex items-center gap-sm pt-sm border-t border-outline-variant/20 mt-auto">
+<button class="flex-1 flex justify-center items-center gap-xs py-xs text-secondary font-label-md text-label-md hover:bg-secondary/10 rounded transition-colors"><span class="material-symbols-outlined text-[16px]">visibility</span> Preview</button>
+<button class="flex-1 flex justify-center items-center gap-xs py-xs text-primary font-label-md text-label-md hover:bg-primary/5 rounded transition-colors"><span class="material-symbols-outlined text-[16px]">link</span> Report</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Load More -->
+<div class="mt-lg flex justify-center">
+<button class="px-md py-sm rounded-full border border-primary text-primary font-label-md text-label-md hover:bg-surface-container-highest transition-colors">Load More Evidence</button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-md px-lg flex justify-between items-center mt-auto border-t border-outline-variant bg-surface-container-lowest dark:bg-surface-container-highest text-primary dark:text-inverse-primary font-label-md text-label-md opacity-80 hover:opacity-100 flex-col md:flex-row gap-sm text-center md:text-left">
+<div class="font-label-lg text-label-lg text-primary">
+                © 2024 SRHR Global Reporting System. All rights reserved.
+            </div>
+<ul class="flex gap-md">
+<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Support</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Documentation</a></li>
+</ul>
+</footer>
+</div>
+</body></html>

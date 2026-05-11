@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SADC PF SRHR Dashboard - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Courier:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#414844",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e4e2e2",
+                        "primary-container": "#0b2d20",
+                        "inverse-primary": "#abcfbb",
+                        "tertiary": "#131310",
+                        "on-primary-fixed-variant": "#2d4d3e",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#e5e2db",
+                        "secondary-fixed": "#ffe088",
+                        "on-tertiary-fixed": "#1c1c18",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-tertiary-container": "#908f89",
+                        "tertiary-container": "#282824",
+                        "secondary-container": "#fed65b",
+                        "tertiary-fixed-dim": "#c9c6c0",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#fbf9f8",
+                        "surface-dim": "#dbd9d9",
+                        "surface-tint": "#446555",
+                        "primary": "#00170d",
+                        "surface-container-low": "#f5f3f3",
+                        "surface-container-high": "#eae8e7",
+                        "secondary-fixed-dim": "#e9c349",
+                        "on-primary-fixed": "#002115",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#c6ebd7",
+                        "surface-container": "#efeded",
+                        "outline": "#727974",
+                        "background": "#fbf9f8",
+                        "secondary": "#735c00",
+                        "on-background": "#1b1c1c",
+                        "inverse-surface": "#303030",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#745c00",
+                        "primary-fixed-dim": "#abcfbb",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e4e2e2",
+                        "on-secondary-fixed": "#241a00",
+                        "error-container": "#ffdad6",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-secondary": "#ffffff",
+                        "surface": "#fbf9f8",
+                        "on-surface": "#1b1c1c",
+                        "on-tertiary-fixed-variant": "#474742",
+                        "outline-variant": "#c1c8c2",
+                        "on-primary-container": "#749684"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "sm": "12px",
+                        "gutter": "16px",
+                        "container-margin": "20px",
+                        "base": "8px",
+                        "xl": "64px",
+                        "lg": "40px",
+                        "md": "24px"
+                    },
+                    "fontFamily": {
+                        "label-lg": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "ussd-mono": ["Courier"],
+                        "body-sm": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "display": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-lg": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "h3": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "ussd-mono": ["16px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "h2": ["24px", { "lineHeight": "1.3", "fontWeight": "700" }],
+                        "h1": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "label-md": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display": ["40px", { "lineHeight": "1.2", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-primary dark:bg-primary docked full-width top-0 sticky shadow-sm z-50">
+<div class="flex justify-between items-center w-full px-container-margin py-sm sticky top-0 z-50 max-w-[1440px] mx-auto">
+<div class="text-h3 font-h3 text-secondary-container dark:text-secondary-container flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">health_and_safety</span>
+                SADC PF SRHR Portal
+            </div>
+<nav class="hidden md:flex gap-md items-center">
+<a class="text-secondary-container font-bold border-b-2 border-secondary-container pb-1 text-label-lg font-label-lg opacity-90 scale-95 transition-transform hover:bg-primary-container dark:hover:bg-primary-container transition-all px-2 rounded-t-sm" href="#">Home</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors text-label-lg font-label-lg hover:bg-primary-container dark:hover:bg-primary-container transition-all px-2 py-1 rounded-sm" href="#">Dashboard</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors text-label-lg font-label-lg hover:bg-primary-container dark:hover:bg-primary-container transition-all px-2 py-1 rounded-sm" href="#">Countries</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors text-label-lg font-label-lg hover:bg-primary-container dark:hover:bg-primary-container transition-all px-2 py-1 rounded-sm" href="#">Reports</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors text-label-lg font-label-lg hover:bg-primary-container dark:hover:bg-primary-container transition-all px-2 py-1 rounded-sm" href="#">Stories</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors text-label-lg font-label-lg hover:bg-primary-container dark:hover:bg-primary-container transition-all px-2 py-1 rounded-sm" href="#">Resources</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors text-label-lg font-label-lg hover:bg-primary-container dark:hover:bg-primary-container transition-all px-2 py-1 rounded-sm" href="#">News &amp; Events</a>
+<a class="text-on-primary font-medium hover:text-secondary-container transition-colors text-label-lg font-label-lg hover:bg-primary-container dark:hover:bg-primary-container transition-all px-2 py-1 rounded-sm" href="#">About</a>
+</nav>
+<div class="flex items-center gap-sm">
+<button class="hidden md:block px-sm py-xs border border-secondary-container text-secondary-container rounded font-label-lg text-label-lg hover:bg-primary-container transition-colors">Login</button>
+<button class="px-sm py-xs bg-secondary-container text-on-secondary-container rounded font-label-lg text-label-lg hover:opacity-90 transition-opacity">Register</button>
+</div>
+</div>
+</header>
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="relative bg-primary text-on-primary overflow-hidden py-xl px-container-margin">
+<!-- Decorative Background Element -->
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at right top, var(--color-secondary-container), transparent 50%);"></div>
+<div class="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-lg items-center relative z-10">
+<div class="flex flex-col gap-md">
+<div class="inline-flex items-center gap-xs px-sm py-xs rounded-full bg-primary-container text-inverse-primary w-fit shadow-[0_4px_12px_rgba(0,23,13,0.4)]">
+<span class="material-symbols-outlined text-sm">public</span>
+<span class="font-label-md text-label-md">Regional Overview</span>
+</div>
+<h1 class="font-display text-display text-secondary-container leading-tight">SADC PF SRHR, HIV and AIDS Governance Dashboard</h1>
+<p class="font-body-lg text-body-lg text-surface-variant max-w-xl">
+                        Tracking parliamentary action, evidence, budgets, legislation, oversight, and stories of change across the SADC region.
+                    </p>
+<div class="flex gap-sm mt-sm">
+<button class="px-md py-sm bg-secondary-container text-on-secondary-container rounded font-label-lg text-label-lg shadow-sm hover:opacity-90 transition-opacity flex items-center gap-xs">
+                            Explore Dashboard
+                            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="px-md py-sm border border-outline-variant text-on-primary rounded font-label-lg text-label-lg hover:bg-primary-container transition-colors">
+                            Learn More
+                        </button>
+</div>
+</div>
+<!-- Hero Right Side: Public Project Snapshot Card -->
+<div class="bg-surface text-on-surface rounded-xl p-md shadow-[0_8px_24px_rgba(0,23,13,0.1)] border border-primary/10 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary-container/10 rounded-bl-full pointer-events-none"></div>
+<div class="flex items-center justify-between mb-md border-b border-outline-variant/30 pb-sm">
+<h2 class="font-h2 text-h2 text-primary flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary-container" style="font-variation-settings: 'FILL' 1;">monitoring</span>
+                            Public Project Snapshot
+                        </h2>
+</div>
+<div class="grid grid-cols-2 gap-sm mb-md">
+<div class="bg-surface-container-low rounded-lg p-sm border border-outline-variant/20 shadow-sm">
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-xs">Active Countries</p>
+<p class="font-h1 text-h1 text-primary">15</p>
+</div>
+<div class="bg-surface-container-low rounded-lg p-sm border border-outline-variant/20 shadow-sm">
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-xs">Total Policies</p>
+<p class="font-h1 text-h1 text-primary">243</p>
+</div>
+<div class="bg-surface-container-low rounded-lg p-sm border border-outline-variant/20 shadow-sm">
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-xs">Budget Allocations</p>
+<p class="font-h1 text-h1 text-primary">$45M</p>
+</div>
+<div class="bg-surface-container-low rounded-lg p-sm border border-outline-variant/20 shadow-sm">
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-xs">Oversight Reports</p>
+<p class="font-h1 text-h1 text-primary">89</p>
+</div>
+</div>
+<div class="bg-primary-container/10 rounded-lg p-sm flex items-start gap-sm border border-primary-container/20">
+<span class="material-symbols-outlined text-primary mt-xs">info</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Data reflects the latest public updates from participating member states for the current fiscal year.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Explore by Country Section -->
+<section class="py-xl px-container-margin bg-surface-container-lowest">
+<div class="max-w-[1440px] mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-end mb-lg gap-sm">
+<div>
+<h2 class="font-h2 text-h2 text-primary mb-xs">Explore by Country</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">Access specific SRHR data, parliamentary resolutions, and national budgets for SADC member states.</p>
+</div>
+<button class="px-sm py-xs border border-primary text-primary rounded font-label-lg text-label-lg hover:bg-surface-container-low transition-colors flex items-center gap-xs">
+                        View All Countries
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-md">
+<!-- Country Card 1 -->
+<a class="group block relative rounded-lg overflow-hidden border border-outline-variant/30 shadow-sm hover:shadow-[0_8px_16px_rgba(0,23,13,0.08)] transition-all bg-surface" href="#">
+<div class="h-32 bg-surface-variant relative">
+<img alt="Landscape of Angola" class="w-full h-full object-cover" data-alt="A sweeping, sun-drenched landscape view of Angola featuring vast savannah plains and distant rugged mountains under a clear blue sky. The lighting is bright and optimistic, casting soft shadows across the terrain. The image embodies a modern, hopeful aesthetic with warm earthy tones and vibrant greens, fitting a professional dashboard interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3oYOkzsS6wcFDVDxh553Q6Pbpe6FECIykkgTGIMvirwdSvDwo4uWjF5HF8hZvjsbSaSuGEpAqq0d9UCS-T8CXDwQ8cP8nAcoMw3-zav0MJnVQ5lOBrMKlcdJ9f_Ov8qV1MoLRkZOGNBug1mfS6ChGe-uAn_aHQJoZpe5PjI2ck6Bgv_j_BwEedRGRbG96_ELXOOn6q87iNGhCebPQU4aTJ5OE0M4_DsGBpzvwvpKhixP7UlFefRxwE7Is8fLOXD0O3WTUnjY2vkU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+<span class="absolute bottom-sm left-sm font-h3 text-h3 text-on-primary group-hover:text-secondary-container transition-colors">Angola</span>
+</div>
+<div class="p-sm flex justify-between items-center bg-surface">
+<div class="flex gap-xs">
+<span class="px-xs py-[2px] bg-primary-container/10 text-primary rounded text-[10px] font-bold uppercase tracking-wider">4 Policies</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+</a>
+<!-- Country Card 2 -->
+<a class="group block relative rounded-lg overflow-hidden border border-outline-variant/30 shadow-sm hover:shadow-[0_8px_16px_rgba(0,23,13,0.08)] transition-all bg-surface" href="#">
+<div class="h-32 bg-surface-variant relative">
+<img alt="Landscape of Botswana" class="w-full h-full object-cover" data-alt="A serene landscape of the Okavango Delta in Botswana, showing lush green wetlands interspersed with clear blue water channels under a bright, partly cloudy sky. The lighting highlights the vibrant natural colors, creating a peaceful and prosperous mood. The composition is clean and modern, designed to sit well within a structured corporate UI layout." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQzlYlO-JwXHuOxYWbghhL2nnvPDFYvmxiADm6CPks2kW4jPqLeFfAzvERtYYpwmFC9fRAobhPLldlh33-1RfXGyeAU1iKYjuEa43o4X2zaqBXPewwVWLC4ZBO2AFB1Jr7i2zUmXlN4H-tdK4MC8YfUXnP8FkebrDzSL7G3l3Yx4Lxk5ecSLzlF3zQBfXw9Yye_wjRwN-SMQgt9xw5f_GxDAeC0OkFRW8zzEzIaHtOxybpUGZauvLfE9yXSj9kvuHQeaKjac7z6fE"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+<span class="absolute bottom-sm left-sm font-h3 text-h3 text-on-primary group-hover:text-secondary-container transition-colors">Botswana</span>
+</div>
+<div class="p-sm flex justify-between items-center bg-surface">
+<div class="flex gap-xs">
+<span class="px-xs py-[2px] bg-primary-container/10 text-primary rounded text-[10px] font-bold uppercase tracking-wider">12 Policies</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+</a>
+<!-- Country Card 3 -->
+<a class="group block relative rounded-lg overflow-hidden border border-outline-variant/30 shadow-sm hover:shadow-[0_8px_16px_rgba(0,23,13,0.08)] transition-all bg-surface" href="#">
+<div class="h-32 bg-surface-variant relative">
+<img alt="Landscape of South Africa" class="w-full h-full object-cover" data-alt="A dynamic view of Cape Town, South Africa, featuring Table Mountain towering over the modern cityscape and harbor. The scene is bathed in golden hour sunlight, giving a warm, majestic glow to the urban and natural elements. The aesthetic is highly professional, polished, and optimistic, aligning with a high-trust corporate design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwuhamKKFywv5TdAYYVTcly8ASTdAmHij5la248aaikBbYu1T4mLeRNGuVqEBiA5dxLuOY-xLKWsIAezZpVz4oB9KIVzot6k9Qus29aboo7a3ngckwEwRvNJcl8ExHVTMp_cxhhU5CfthYKGiORZamn1GtC3D5ZQPB1L_BOw905cEvnJvDka1aRj_D_F0jJcVjVJn16bxVku3xUJZlWsqhjz0yVpF5G59dzkRxYp9HNNurDXyc3OacVVwuLAUvHCUIKcKtRmtpbf4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+<span class="absolute bottom-sm left-sm font-h3 text-h3 text-on-primary group-hover:text-secondary-container transition-colors">South Africa</span>
+</div>
+<div class="p-sm flex justify-between items-center bg-surface">
+<div class="flex gap-xs">
+<span class="px-xs py-[2px] bg-primary-container/10 text-primary rounded text-[10px] font-bold uppercase tracking-wider">28 Policies</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+</a>
+<!-- Country Card 4 -->
+<a class="group block relative rounded-lg overflow-hidden border border-outline-variant/30 shadow-sm hover:shadow-[0_8px_16px_rgba(0,23,13,0.08)] transition-all bg-surface" href="#">
+<div class="h-32 bg-surface-variant relative">
+<div class="w-full h-full bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary-container text-[48px] opacity-50">map</span>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+<span class="absolute bottom-sm left-sm font-h3 text-h3 text-on-primary group-hover:text-secondary-container transition-colors">Zambia</span>
+</div>
+<div class="p-sm flex justify-between items-center bg-surface">
+<div class="flex gap-xs">
+<span class="px-xs py-[2px] bg-primary-container/10 text-primary rounded text-[10px] font-bold uppercase tracking-wider">9 Policies</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+</a>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-tertiary dark:bg-tertiary-container full-width bottom-0 flat no shadows border-t border-outline-variant">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-container-margin py-lg max-w-[1440px] mx-auto gap-md">
+<div class="text-h3 font-h3 text-secondary-fixed flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">health_and_safety</span>
+                SADC PF SRHR Portal
+            </div>
+<nav class="flex flex-wrap justify-center gap-md">
+<a class="text-on-tertiary-container font-label-md text-label-md hover:text-secondary-fixed transition-colors hover:underline" href="#">Privacy Policy</a>
+<a class="text-on-tertiary-container font-label-md text-label-md hover:text-secondary-fixed transition-colors hover:underline" href="#">Terms of Service</a>
+<a class="text-on-tertiary-container font-label-md text-label-md hover:text-secondary-fixed transition-colors hover:underline" href="#">Contact Us</a>
+<a class="text-on-tertiary-container font-label-md text-label-md hover:text-secondary-fixed transition-colors hover:underline" href="#">SADC Website</a>
+</nav>
+<div class="text-on-tertiary dark:text-on-tertiary-container font-body-sm text-body-sm text-center md:text-right">
+                © 2024 SADC Parliamentary Forum. All Rights Reserved.
+            </div>
+</div>
+</footer>
+</body></html>

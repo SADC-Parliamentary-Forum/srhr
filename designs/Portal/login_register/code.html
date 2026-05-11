@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SADC PF SRHR Portal - Login &amp; Register</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-surface-variant": "#414844",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e4e2e2",
+                        "primary-container": "#0b2d20",
+                        "inverse-primary": "#abcfbb",
+                        "tertiary": "#131310",
+                        "on-primary-fixed-variant": "#2d4d3e",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#e5e2db",
+                        "secondary-fixed": "#ffe088",
+                        "on-tertiary-fixed": "#1c1c18",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-tertiary-container": "#908f89",
+                        "tertiary-container": "#282824",
+                        "secondary-container": "#fed65b",
+                        "tertiary-fixed-dim": "#c9c6c0",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#fbf9f8",
+                        "surface-dim": "#dbd9d9",
+                        "surface-tint": "#446555",
+                        "primary": "#00170d",
+                        "surface-container-low": "#f5f3f3",
+                        "surface-container-high": "#eae8e7",
+                        "secondary-fixed-dim": "#e9c349",
+                        "on-primary-fixed": "#002115",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#c6ebd7",
+                        "surface-container": "#efeded",
+                        "outline": "#727974",
+                        "background": "#fbf9f8",
+                        "secondary": "#735c00",
+                        "on-background": "#1b1c1c",
+                        "inverse-surface": "#303030",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#745c00",
+                        "primary-fixed-dim": "#abcfbb",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e4e2e2",
+                        "on-secondary-fixed": "#241a00",
+                        "error-container": "#ffdad6",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-secondary": "#ffffff",
+                        "surface": "#fbf9f8",
+                        "on-surface": "#1b1c1c",
+                        "on-tertiary-fixed-variant": "#474742",
+                        "outline-variant": "#c1c8c2",
+                        "on-primary-container": "#749684"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "xs": "4px",
+                        "sm": "12px",
+                        "gutter": "16px",
+                        "container-margin": "20px",
+                        "base": "8px",
+                        "xl": "64px",
+                        "lg": "40px",
+                        "md": "24px"
+                    },
+                    fontFamily: {
+                        "label-lg": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "ussd-mono": ["Courier"],
+                        "body-sm": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "display": ["Manrope"]
+                    },
+                    fontSize: {
+                        "label-lg": ["14px", { lineHeight: "1.2", letterSpacing: "0.02em", fontWeight: "600" }],
+                        "h3": ["20px", { lineHeight: "1.4", fontWeight: "600" }],
+                        "ussd-mono": ["16px", { lineHeight: "1.4", fontWeight: "400" }],
+                        "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+                        "h2": ["24px", { lineHeight: "1.3", fontWeight: "700" }],
+                        "h1": ["32px", { lineHeight: "1.2", fontWeight: "700" }],
+                        "label-md": ["12px", { lineHeight: "1.2", letterSpacing: "0.05em", fontWeight: "600" }],
+                        "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+                        "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+                        "display": ["40px", { lineHeight: "1.2", fontWeight: "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .custom-radio:checked + div {
+            background-color: theme('colors.primary-container');
+            color: theme('colors.on-primary-container');
+            border-color: theme('colors.primary-container');
+        }
+        /* CSS-only tab toggling simulation for the mockup */
+        #tab-login:checked ~ #content-register { display: none; }
+        #tab-login:checked ~ #content-login { display: block; }
+        #tab-register:checked ~ #content-login { display: none; }
+        #tab-register:checked ~ #content-register { display: block; }
+        
+        #tab-login:checked ~ .tab-nav label[for="tab-login"] {
+            background-color: theme('colors.primary-container');
+            color: theme('colors.on-primary-container');
+        }
+        #tab-login:checked ~ .tab-nav label[for="tab-register"] {
+            background-color: transparent;
+            color: theme('colors.on-surface-variant');
+        }
+        
+        #tab-register:checked ~ .tab-nav label[for="tab-register"] {
+            background-color: theme('colors.primary-container');
+            color: theme('colors.on-primary-container');
+        }
+        #tab-register:checked ~ .tab-nav label[for="tab-login"] {
+            background-color: transparent;
+            color: theme('colors.on-surface-variant');
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased min-h-screen flex flex-col md:flex-row">
+<!-- Left Panel: Branding & Messaging -->
+<div class="hidden md:flex w-full md:w-5/12 bg-primary relative flex-col justify-between p-lg overflow-hidden">
+<!-- Background Image with Overlay -->
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-primary/90 z-10 mix-blend-multiply"></div>
+<img class="w-full h-full object-cover grayscale opacity-50" data-alt="A diverse group of professionals sitting around a modern conference table in a well-lit corporate office. The scene is illuminated by natural daylight streaming through large windows, creating a bright, optimistic light-mode aesthetic. The color palette emphasizes deep greens and warm earth tones, reflecting a professional yet human-centric and collaborative environment. The mood is focused, secure, and forward-looking." src="https://lh3.googleusercontent.com/aida-public/AB6AXuARaQuiaRyGdza_6ZXByCogGdADr5k93tG1O0_A8_tso0ALE1Oii_8IKPH4a0OYYBcUbBZ9g4HtrL52kPc5t8pVtvA4dzJ092l4arXhU1FUHcm0cqfgnbcY7Z5zAA9gfBYqx-ZyI_8g0Wk34-2ocd1lKalb5Mexw_EZNULgo1f4JG28PXZcM3DWp-mhU0KtoSeLGCoT9R1EQqzpBkSoUVlMChKMLAJuH0rW7iqaLOZtqiv76m27aUOfNxjFYrUMzU31aWiH8xcPaDg"/>
+</div>
+<!-- Top Content -->
+<div class="relative z-20 flex items-center gap-sm">
+<span class="material-symbols-outlined text-display text-secondary-container" data-icon="public">public</span>
+<span class="font-h3 text-h3 text-on-primary">SADC PF SRHR Portal</span>
+</div>
+<!-- Middle Messaging -->
+<div class="relative z-20 max-w-md">
+<h1 class="font-display text-display text-on-primary mb-md">Join the Project</h1>
+<p class="font-body-lg text-body-lg text-primary-fixed-dim">
+                Bridge the gap between traditional community collaboration and modern digital insights. Secure your access to collective growth and unwavering stability.
+            </p>
+</div>
+<!-- Bottom Content -->
+<div class="relative z-20">
+<p class="font-body-sm text-body-sm text-primary-fixed">Empowering regional health initiatives.</p>
+</div>
+</div>
+<!-- Right Panel: Auth Card & Forms -->
+<div class="w-full md:w-7/12 flex items-center justify-center p-container-margin md:p-lg lg:p-xl bg-surface relative">
+<!-- Interactive Card Container -->
+<div class="w-full max-w-2xl bg-surface-container-lowest rounded-xl shadow-[0_8px_30px_rgb(0,23,13,0.04)] border border-outline-variant/30 overflow-hidden">
+<!-- Hidden Radios for CSS Tabs -->
+<input class="hidden" id="tab-login" name="auth-tabs" type="radio"/>
+<input checked="" class="hidden" id="tab-register" name="auth-tabs" type="radio"/>
+<!-- Tab Navigation -->
+<div class="tab-nav flex p-sm gap-sm border-b border-outline-variant/30 bg-surface-container-low/50">
+<label class="flex-1 py-sm rounded-lg text-center font-label-lg cursor-pointer transition-colors hover:bg-surface-variant/50" for="tab-login">
+                    Login
+                </label>
+<label class="flex-1 py-sm rounded-lg text-center font-label-lg cursor-pointer transition-colors hover:bg-surface-variant/50" for="tab-register">
+                    Register
+                </label>
+</div>
+<!-- Content Area: REGISTER (Default Active) -->
+<div class="p-md md:p-lg" id="content-register">
+<div class="mb-lg">
+<h2 class="font-h2 text-h2 text-on-surface">Create an Account</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">Submit your details to request access to the portal.</p>
+</div>
+<form class="space-y-gutter">
+<!-- Grid for shorter fields -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Full Name -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs">Full name</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]" data-icon="person">person</span>
+</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-sm pl-xl pr-sm font-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-outline" placeholder="Jane Doe" type="text"/>
+</div>
+</div>
+<!-- Email -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs">Email</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]" data-icon="mail">mail</span>
+</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-sm pl-xl pr-sm font-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-outline" placeholder="jane@organisation.org" type="email"/>
+</div>
+</div>
+<!-- Phone -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs">Phone</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]" data-icon="call">call</span>
+</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-sm pl-xl pr-sm font-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-outline" placeholder="+123 456 7890" type="tel"/>
+</div>
+</div>
+<!-- Country -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs">Country</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]" data-icon="location_on">location_on</span>
+</span>
+<select class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-sm pl-xl pr-sm font-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all appearance-none cursor-pointer">
+<option disabled="" selected="" value="">Select a country</option>
+<option value="za">South Africa</option>
+<option value="zm">Zambia</option>
+<option value="zw">Zimbabwe</option>
+</select>
+<span class="absolute inset-y-0 right-0 flex items-center pr-sm text-on-surface-variant pointer-events-none">
+<span class="material-symbols-outlined text-[20px]" data-icon="arrow_drop_down">arrow_drop_down</span>
+</span>
+</div>
+</div>
+<!-- Organisation -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs">Organisation</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]" data-icon="domain">domain</span>
+</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-sm pl-xl pr-sm font-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-outline" placeholder="Your Institution" type="text"/>
+</div>
+</div>
+<!-- Role Requested -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs">Role requested</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]" data-icon="badge">badge</span>
+</span>
+<select class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-sm pl-xl pr-sm font-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all appearance-none cursor-pointer">
+<option disabled="" selected="" value="">Select a role</option>
+<option value="researcher">Researcher</option>
+<option value="policymaker">Policy Maker</option>
+<option value="partner">Partner</option>
+</select>
+<span class="absolute inset-y-0 right-0 flex items-center pr-sm text-on-surface-variant pointer-events-none">
+<span class="material-symbols-outlined text-[20px]" data-icon="arrow_drop_down">arrow_drop_down</span>
+</span>
+</div>
+</div>
+</div>
+<!-- Full width fields -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs">Reason for access</label>
+<textarea class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-sm font-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none placeholder:text-outline" placeholder="Briefly describe why you need access to this portal..." rows="3"></textarea>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-sm">Upload access request document?</label>
+<div class="flex gap-sm">
+<label class="relative flex-1 cursor-pointer">
+<input class="custom-radio sr-only" name="upload_request" type="radio" value="yes"/>
+<div class="flex items-center justify-center gap-xs w-full border border-outline-variant rounded-lg py-sm font-label-lg text-on-surface-variant transition-all hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-[20px]" data-icon="upload_file">upload_file</span>
+                                    Yes
+                                </div>
+</label>
+<label class="relative flex-1 cursor-pointer">
+<input checked="" class="custom-radio sr-only" name="upload_request" type="radio" value="no"/>
+<div class="flex items-center justify-center gap-xs w-full border border-outline-variant rounded-lg py-sm font-label-lg text-on-surface-variant transition-all hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-[20px]" data-icon="block">block</span>
+                                    No
+                                </div>
+</label>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter pt-xs">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs">Password</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]" data-icon="lock">lock</span>
+</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-sm pl-xl pr-sm font-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-outline" placeholder="••••••••" type="password"/>
+</div>
+</div>
+</div>
+<!-- Submit Button -->
+<div class="pt-sm">
+<!-- Gold highlighted Register button as requested -->
+<button class="w-full bg-secondary-container text-on-secondary-fixed-variant hover:bg-secondary-fixed transition-colors rounded-full py-sm px-lg font-label-lg text-label-lg flex items-center justify-center gap-sm shadow-sm" type="button">
+                            Register Request
+                            <span class="material-symbols-outlined text-[20px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</form>
+</div>
+<!-- Content Area: LOGIN (Hidden by default CSS) -->
+<div class="p-md md:p-lg hidden" id="content-login">
+<div class="mb-xl">
+<h2 class="font-h2 text-h2 text-on-surface">Welcome back</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">Enter your credentials to access your dashboard.</p>
+</div>
+<form class="space-y-md">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs">Email</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]" data-icon="mail">mail</span>
+</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-md pl-xl pr-sm font-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-outline" placeholder="Enter your email" type="email"/>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs">Password</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]" data-icon="lock">lock</span>
+</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-md pl-xl pr-sm font-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-outline" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<label class="flex items-center gap-xs cursor-pointer group">
+<input class="rounded border-outline-variant text-primary focus:ring-primary w-4 h-4 transition-colors" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Remember me</span>
+</label>
+<a class="font-label-md text-label-md text-primary hover:text-primary-container transition-colors underline-offset-4 hover:underline" href="#">Forgot password?</a>
+</div>
+<div class="pt-sm">
+<!-- Forest Green primary button for Login -->
+<button class="w-full bg-primary text-on-primary hover:bg-primary-container transition-colors rounded-full py-md px-lg font-label-lg text-label-lg flex items-center justify-center gap-sm shadow-sm" type="button">
+                            Login securely
+                            <span class="material-symbols-outlined text-[20px]" data-icon="login">login</span>
+</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</body></html>
