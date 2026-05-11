@@ -2,8 +2,9 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
+import { useState, useRef, useEffect } from 'react'
+import { clearToken } from '@/lib/auth'
 
 const centerLinks = [
   { label: 'Reports', href: '/portal/reports' },
@@ -11,9 +12,33 @@ const centerLinks = [
   { label: 'Library', href: '/portal/library/evidence' },
 ]
 
+const profileMenuItems = [
+  { label: 'My Profile', icon: 'person', href: '/portal/admin/configuration' },
+  { label: 'Settings', icon: 'settings', href: '/portal/admin/configuration' },
+  { label: 'Help & Support', icon: 'help', href: '#' },
+]
+
 export default function PortalTopBar() {
   const pathname = usePathname()
+  const router = useRouter()
   const [search, setSearch] = useState('')
+  const [profileOpen, setProfileOpen] = useState(false)
+  const profileRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (profileRef.current && !profileRef.current.contains(e.target as Node)) {
+        setProfileOpen(false)
+      }
+    }
+    if (profileOpen) document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [profileOpen])
+
+  function handleLogout() {
+    clearToken()
+    router.replace('/login')
+  }
 
   return (
     <header className="bg-surface shadow-sm flex items-center px-gutter h-14 w-full sticky top-0 z-50 border-b border-outline-variant gap-md">
@@ -54,18 +79,27 @@ export default function PortalTopBar() {
         </div>
 
         <div className="flex items-center gap-xs">
-          <button className="text-on-surface-variant hover:text-primary transition-colors p-xs">
+          <button
+            aria-label="Notifications"
+            className="text-on-surface-variant hover:text-primary transition-colors p-xs rounded-full hover:bg-surface-container"
+          >
             <span className="material-symbols-outlined text-[20px]">notifications</span>
           </button>
-          <button className="hidden sm:block text-on-surface-variant hover:text-primary transition-colors p-xs">
+          <button
+            aria-label="Calendar"
+            className="hidden sm:block text-on-surface-variant hover:text-primary transition-colors p-xs rounded-full hover:bg-surface-container"
+          >
             <span className="material-symbols-outlined text-[20px]">calendar_today</span>
           </button>
         </div>
 
         <div className="hidden sm:flex items-center gap-sm border-l border-outline-variant pl-sm">
-          <button className="text-xs font-semibold text-primary border border-primary rounded-full px-sm py-xs hover:bg-primary-fixed transition-colors whitespace-nowrap">
+          <Link
+            href="/portal/analysis/ai-insights"
+            className="text-xs font-semibold text-primary border border-primary rounded-full px-sm py-xs hover:bg-primary-fixed transition-colors whitespace-nowrap"
+          >
             AI Assistant
-          </button>
+          </Link>
           <Link
             href="/portal/data-capture"
             className="hidden lg:block text-xs font-semibold bg-secondary-container text-on-secondary-container rounded-full px-sm py-xs hover:opacity-90 transition-opacity whitespace-nowrap"
@@ -74,8 +108,47 @@ export default function PortalTopBar() {
           </Link>
         </div>
 
-        <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary text-xs font-bold shrink-0">
-          SR
+        {/* Profile avatar + dropdown */}
+        <div className="relative shrink-0" ref={profileRef}>
+          <button
+            onClick={() => setProfileOpen((v) => !v)}
+            aria-label="Profile menu"
+            aria-expanded={profileOpen}
+            className="w-8 h-8 rounded-full bg-[#00170d] flex items-center justify-center text-white text-xs font-bold hover:ring-2 hover:ring-[#fed65b] transition-all"
+          >
+            SR
+          </button>
+
+          {profileOpen && (
+            <div className="absolute right-0 top-10 w-52 bg-white rounded-xl shadow-lg border border-[#c1c8c2] z-50 overflow-hidden">
+              <div className="px-md py-sm border-b border-[#c1c8c2] bg-[#f5f3f3]">
+                <p className="text-xs font-bold text-[#00170d]">Ronald Windwaai</p>
+                <p className="text-xs text-[#414844] truncate">ronaldwindwaai@gmail.com</p>
+              </div>
+              <div className="py-xs">
+                {profileMenuItems.map((item) => (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    onClick={() => setProfileOpen(false)}
+                    className="flex items-center gap-sm px-md py-sm text-sm text-[#414844] hover:bg-[#f5f3f3] hover:text-[#00170d] transition-colors"
+                  >
+                    <span className="material-symbols-outlined text-[18px]">{item.icon}</span>
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+              <div className="border-t border-[#c1c8c2] py-xs">
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center gap-sm px-md py-sm text-sm text-[#93000a] hover:bg-[#ffdad6] transition-colors w-full text-left"
+                >
+                  <span className="material-symbols-outlined text-[18px]">logout</span>
+                  Sign Out
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </header>

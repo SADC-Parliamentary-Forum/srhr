@@ -24,7 +24,7 @@ export default function ReportBuilderPage() {
     setSelectedSources((prev) => prev.includes(src) ? prev.filter((s) => s !== src) : [...prev, src])
 
   return (
-    <div className="flex flex-col h-full -my-lg -mx-gutter md:-mx-lg">
+    <div className="flex flex-col -my-8 -mx-4 sm:-mx-6 lg:-mx-10" style={{ minHeight: 'calc(100vh - 57px)' }}>
       {/* Builder Toolbar */}
       <div className="flex items-center justify-between px-lg py-sm border-b border-outline-variant bg-surface-bright shrink-0">
         <div className="flex items-center gap-sm">
@@ -53,7 +53,7 @@ export default function ReportBuilderPage() {
       </div>
 
       {/* Builder Area */}
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 min-h-0 overflow-hidden">
         {/* Left Config Sidebar */}
         <aside className="w-72 bg-surface border-r border-outline-variant/30 flex flex-col overflow-y-auto shrink-0">
           {/* Data Sources */}
