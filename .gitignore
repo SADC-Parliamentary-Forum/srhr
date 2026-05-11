@@ -1,0 +1,30 @@
+# Dependencies
+frontend/node_modules/
+backend/vendor/
+
+# Build output
+frontend/.next/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+backend/.env
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker volumes / data
+postgres_data/
+redis_data/
+minio_data/
+
+# IDE
+.idea/
+.vscode/
+*.swp
