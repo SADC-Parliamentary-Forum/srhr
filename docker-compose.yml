@@ -25,6 +25,7 @@ services:
       - "3000:3000"
     networks:
       - srhr
+    mem_limit: 1536m
 
   backend:
     build:
@@ -56,12 +57,13 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+    mem_limit: 512m
 
   queue-worker:
     build:
       context: ./backend
       dockerfile: Dockerfile.dev
-    command: php artisan queue:work --sleep=3 --tries=3
+    command: php artisan queue:work --sleep=30 --tries=3
     volumes:
       - ./backend:/var/www/html
     environment:
@@ -85,12 +87,13 @@ services:
       - srhr
     depends_on:
       - backend
+    mem_limit: 256m
 
   scheduler:
     build:
       context: ./backend
       dockerfile: Dockerfile.dev
-    command: sh -c "while true; do php artisan schedule:run --no-interaction; sleep 60; done"
+    command: sh -c "while true; do php artisan schedule:run --no-interaction; sleep 300; done"
     volumes:
       - ./backend:/var/www/html
     environment:
@@ -114,6 +117,7 @@ services:
       - srhr
     depends_on:
       - backend
+    mem_limit: 256m
 
   postgres:
     image: postgres:16-alpine
