@@ -8,7 +8,7 @@ import { useState } from 'react'
 const centerLinks = [
   { label: 'Reports', href: '/portal/reports' },
   { label: 'Data', href: '/portal/data-capture' },
-  { label: 'Library', href: '/portal/library' },
+  { label: 'Library', href: '/portal/library/evidence' },
 ]
 
 export default function PortalTopBar() {
@@ -19,7 +19,7 @@ export default function PortalTopBar() {
     <header className="bg-surface shadow-sm flex items-center px-gutter h-14 w-full sticky top-0 z-50 border-b border-outline-variant gap-md">
       {/* Logo — visible on mobile when sidebar is hidden */}
       <Link href="/portal/dashboard" className="md:hidden flex items-center gap-sm shrink-0">
-        <Image src="/sadc-pf-logo.jpg" alt="SADC PF" width={32} height={32} className="object-contain" />
+        <Image src="/sadc-pf-logo.jpg" alt="SADC PF" width={32} height={32} className="object-contain" unoptimized />
       </Link>
 
       {/* Center nav links */}

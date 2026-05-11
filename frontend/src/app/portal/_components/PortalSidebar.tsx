@@ -9,13 +9,15 @@ const navItems = [
   { label: 'Reports Workspace', icon: 'work', href: '/portal/reports' },
   { label: 'Data Capture', icon: 'edit_note', href: '/portal/data-capture' },
   { label: 'Analysis', icon: 'analytics', href: '/portal/analysis' },
-  { label: 'Library', icon: 'library_books', href: '/portal/library' },
+  { label: 'Library', icon: 'library_books', href: '/portal/library/evidence' },
   { label: 'Budget Analysis', icon: 'account_balance', href: '/portal/budget' },
-  { label: 'Administration', icon: 'settings', href: '/portal/admin' },
+  { label: 'Administration', icon: 'settings', href: '/portal/admin/users' },
 ]
 
 function isActive(pathname: string, href: string): boolean {
   if (href === '/portal/dashboard') return pathname === href
+  if (href === '/portal/library/evidence') return pathname.startsWith('/portal/library')
+  if (href === '/portal/admin/users') return pathname.startsWith('/portal/admin')
   return pathname.startsWith(href)
 }
 
@@ -32,6 +34,7 @@ export default function PortalSidebar() {
           width={40}
           height={40}
           className="object-contain shrink-0"
+          unoptimized
         />
         <div className="min-w-0">
           <p className="text-[13px] font-extrabold text-primary tracking-wide leading-tight">SADC PF</p>

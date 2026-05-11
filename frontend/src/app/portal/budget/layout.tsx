@@ -31,7 +31,7 @@ function BudgetSidebar({ open, onClose }: { open: boolean; onClose: () => void }
     }`}>
       {/* Logo area */}
       <div className="px-md py-sm flex items-center gap-sm border-b border-outline-variant/40 shrink-0">
-        <Image src="/sadc-pf-logo.jpg" alt="SADC PF" width={40} height={40} className="object-contain shrink-0" />
+        <Image src="/sadc-pf-logo.jpg" alt="SADC PF" width={40} height={40} className="object-contain shrink-0" unoptimized />
         <div className="min-w-0">
           <p className="text-[13px] font-extrabold text-primary tracking-wide leading-tight">SADC PF</p>
           <p className="text-[10px] font-semibold text-on-surface-variant tracking-wide leading-tight">Budget Analysis</p>
