@@ -115,7 +115,6 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
             <PortalTopBar
               focusMode={focusMode}
               onToggleFocusMode={toggleFocusMode}
-              canViewNotifications={false}
             />
           </div>
         </div>
