@@ -17,7 +17,7 @@ export default function BudgetOverviewPage() {
   const pathname = usePathname()
 
   return (
-    <div className="p-lg flex flex-col gap-lg">
+    <div className="flex flex-col gap-lg">
       {/* Page header */}
       <div className="flex flex-col gap-xs">
         <h1 className="text-display-sm font-bold text-on-surface">Budget Analysis</h1>
@@ -27,7 +27,7 @@ export default function BudgetOverviewPage() {
       </div>
 
       {/* Sub-navigation tabs */}
-      <div className="border-b border-outline-variant flex gap-xs overflow-x-auto">
+      <div className="border-b border-outline-variant flex gap-xs flex-wrap">
         {subTabs.map((tab) => {
           const active = tab.href === '/portal/budget' ? pathname === tab.href : pathname.startsWith(tab.href)
           return (
@@ -119,35 +119,31 @@ export default function BudgetOverviewPage() {
           {/* Gauge card */}
           <div className="bg-surface-container-low rounded-xl p-lg border border-outline-variant flex flex-col items-center gap-md">
             <p className="text-label-md font-semibold text-on-surface self-start">Utilisation Gauge</p>
-            {/* Semi-circle gauge using CSS */}
-            <div className="relative flex items-center justify-center" style={{ width: 180, height: 96 }}>
-              {/* Background arc */}
-              <div
-                className="absolute border-[24px] border-secondary-container rounded-full"
-                style={{
-                  width: 180,
-                  height: 180,
-                  bottom: 0,
-                  clipPath: 'inset(0 0 50% 0)',
-                }}
+            {/* SVG semi-circle gauge — reliable across all browsers */}
+            <svg viewBox="0 0 200 114" width="200" height="114" aria-label="13.1% utilised">
+              {/* Background track */}
+              <path
+                d="M 14 100 A 86 86 0 0 1 186 100"
+                fill="none"
+                stroke="#fed65b"
+                strokeWidth="22"
+                strokeLinecap="round"
               />
-              {/* Foreground arc — 13.1% of 180° = ~23.6° */}
-              <div
-                className="absolute border-[24px] border-primary rounded-full"
-                style={{
-                  width: 180,
-                  height: 180,
-                  bottom: 0,
-                  clipPath: 'inset(0 50% 50% 0)',
-                  transform: 'rotate(23deg)',
-                  transformOrigin: 'center bottom',
-                }}
+              {/* Fill arc: circumference ≈ π×86 ≈ 270.2; 13.1% → dashoffset = 270.2×(1-0.131) ≈ 234.9 */}
+              <path
+                d="M 14 100 A 86 86 0 0 1 186 100"
+                fill="none"
+                stroke="#00170d"
+                strokeWidth="22"
+                strokeLinecap="round"
+                strokeDasharray="270.2"
+                strokeDashoffset="234.9"
               />
-              {/* Centre label */}
-              <div className="absolute bottom-2 flex flex-col items-center">
-                <span className="text-title-lg font-bold text-primary">13.1%</span>
-              </div>
-            </div>
+              {/* Value label */}
+              <text x="100" y="92" textAnchor="middle" fontSize="24" fontWeight="800" fill="#00170d" fontFamily="Manrope, sans-serif">13.1%</text>
+              {/* Sub-label */}
+              <text x="100" y="110" textAnchor="middle" fontSize="11" fill="#414844" fontFamily="Manrope, sans-serif">Utilised</text>
+            </svg>
             {/* Legend */}
             <div className="flex items-center gap-lg text-sm">
               <div className="flex items-center gap-xs">
