@@ -127,6 +127,9 @@ class PortalController extends Controller
                 'icon' => $log->icon ?? 'update',
                 'country' => $log->country?->name,
                 'description' => $log->metadata['description'] ?? $log->metadata['detail'] ?? null,
+                'activity_type' => $log->metadata['activity_type'] ?? null,
+                'event_date' => $log->metadata['event_date'] ?? null,
+                'location' => $log->metadata['location'] ?? null,
                 'created_at' => $log->created_at?->toIso8601String(),
             ]);
 
@@ -138,6 +141,9 @@ class PortalController extends Controller
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string', 'max:2000'],
+            'activity_type' => ['nullable', 'string', 'max:100'],
+            'event_date' => ['nullable', 'date'],
+            'location' => ['nullable', 'string', 'max:255'],
             'country_id' => ['nullable', 'exists:countries,id'],
         ]);
 
@@ -150,6 +156,9 @@ class PortalController extends Controller
             'icon' => 'event_note',
             'metadata' => [
                 'description' => $validated['description'] ?? null,
+                'activity_type' => $validated['activity_type'] ?? null,
+                'event_date' => $validated['event_date'] ?? null,
+                'location' => $validated['location'] ?? null,
                 'user' => $request->user()->name,
             ],
             'created_at' => now(),
@@ -164,6 +173,9 @@ class PortalController extends Controller
                 'icon' => $log->icon,
                 'country' => $log->country?->name,
                 'description' => $log->metadata['description'] ?? null,
+                'activity_type' => $log->metadata['activity_type'] ?? null,
+                'event_date' => $log->metadata['event_date'] ?? null,
+                'location' => $log->metadata['location'] ?? null,
                 'created_at' => $log->created_at?->toIso8601String(),
             ],
         ], 201);

@@ -34,6 +34,7 @@ interface ActivityRow {
   status: string
   submittedBy: string
   date: string
+  viewHref: string
 }
 
 function statusColor(status: string): string {
@@ -78,6 +79,7 @@ export default function DataCapturePage() {
             status: e.status ?? 'Pending',
             submittedBy: e.owner ?? '—',
             date: e.created_at,
+            viewHref: '/portal/library/evidence',
           })
         }
       }
@@ -94,6 +96,7 @@ export default function DataCapturePage() {
             status: r.status ?? 'draft',
             submittedBy: r.owner ?? '—',
             date: r.lastEdited ?? '',
+            viewHref: '/portal/reports',
           })
         }
       }
@@ -174,9 +177,9 @@ export default function DataCapturePage() {
             <h4 className="text-base font-semibold text-on-surface mb-xs">Add Activity</h4>
             <p className="text-sm text-on-surface-variant">Log new organizational activities or field events.</p>
           </div>
-          <button className="mt-lg w-full flex justify-center items-center gap-xs px-md py-sm bg-transparent text-[#00170d] rounded-full text-sm font-semibold hover:bg-surface-container transition-colors">
+          <Link href="/portal/data-capture/activity-log" className="mt-lg w-full flex justify-center items-center gap-xs px-md py-sm bg-transparent text-[#00170d] rounded-full text-sm font-semibold hover:bg-surface-container transition-colors">
             Log Activity
-          </button>
+          </Link>
         </div>
       </div>
 
@@ -184,7 +187,9 @@ export default function DataCapturePage() {
       <div className="bg-surface-container-lowest rounded-xl border border-outline-variant/20 shadow-sm overflow-hidden">
         <div className="flex items-center justify-between px-md py-sm border-b border-outline-variant/20">
           <h3 className="text-base font-semibold text-[#00170d]">Recent Submissions</h3>
-          <button className="text-sm text-[#00170d] font-semibold hover:underline">View All</button>
+          <Link href="/portal/data-capture/activity-log" className="text-sm text-[#00170d] font-semibold hover:underline">
+            View All
+          </Link>
         </div>
 
         {loading ? (
@@ -228,7 +233,9 @@ export default function DataCapturePage() {
                     <td className="px-md py-sm text-sm text-on-surface-variant">{row.submittedBy}</td>
                     <td className="px-md py-sm text-sm text-on-surface-variant whitespace-nowrap">{row.date ? formatDate(row.date) : '—'}</td>
                     <td className="px-md py-sm">
-                      <button className="text-[#00170d] text-sm font-semibold hover:underline">View</button>
+                      <Link href={row.viewHref} className="text-[#00170d] text-sm font-semibold hover:underline">
+                        View
+                      </Link>
                     </td>
                   </tr>
                 ))}

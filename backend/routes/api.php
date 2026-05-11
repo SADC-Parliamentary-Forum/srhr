@@ -30,6 +30,8 @@ Route::prefix('public')->group(function () {
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('portal')->group(function () {
         Route::get('dashboard', [PortalController::class, 'dashboard']);
+        Route::get('activity-logs', [PortalController::class, 'activityLogs']);
+        Route::post('activity-logs', [PortalController::class, 'storeActivityLog']);
         Route::get('reports/saved', [PortalController::class, 'savedReports']);
         Route::get('evidence/metadata', [PortalController::class, 'evidenceMetadata']);
         Route::post('evidence', [PortalController::class, 'storeEvidence']);

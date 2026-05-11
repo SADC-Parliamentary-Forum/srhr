@@ -11,6 +11,7 @@ const navLinks = [
   { label: 'Countries', href: '/countries' },
   { label: 'Reports', href: '/reports' },
   { label: 'Stories', href: '/stories' },
+  { label: 'Resources', href: '/resources' },
   { label: 'About', href: '/about' },
 ]
 
