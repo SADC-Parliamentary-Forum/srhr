@@ -287,15 +287,19 @@ function SuccessScreen({ onBack }: { onBack: () => void }) {
   )
 }
 
-// ─── Inner page (needs Suspense for useSearchParams) ─────────────────────────
-function LoginPageInner() {
+// Tiny component that reads searchParams and calls back — isolated inside Suspense
+function SearchParamTabReader({ onRegister }: { onRegister: () => void }) {
   const searchParams = useSearchParams()
+  useEffect(() => {
+    if (searchParams.get('tab') === 'register') onRegister()
+  }, [searchParams, onRegister])
+  return null
+}
+
+// ─── Main page ────────────────────────────────────────────────────────────────
+function LoginPageInner() {
   const [tab, setTab] = useState<'login' | 'register'>('login')
   const [registered, setRegistered] = useState(false)
-
-  useEffect(() => {
-    if (searchParams.get('tab') === 'register') setTab('register')
-  }, [searchParams])
 
   const leftCopy = tab === 'login'
     ? { heading: 'Welcome back', body: 'Secure access to regional SRHR governance data, reports, indicators, and parliamentary insights across the SADC region.' }
@@ -303,6 +307,9 @@ function LoginPageInner() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#fbf9f8]">
+      <Suspense fallback={null}>
+        <SearchParamTabReader onRegister={() => setTab('register')} />
+      </Suspense>
       <PublicHeader />
 
       <div className="flex flex-1">
@@ -446,9 +453,5 @@ function LoginPageInner() {
 
 // ─── Page export ──────────────────────────────────────────────────────────────
 export default function LoginPage() {
-  return (
-    <Suspense fallback={null}>
-      <LoginPageInner />
-    </Suspense>
-  )
+  return <LoginPageInner />
 }
