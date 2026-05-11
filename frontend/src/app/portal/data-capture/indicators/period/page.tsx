@@ -12,8 +12,8 @@ const OUTCOME_AREAS = [
   { id: 'O5', label: 'O5 — Gender Violence' },
 ]
 const SADC_COUNTRIES = [
-  'Angola', 'Botswana', 'Comoros', 'DRC', 'Eswatini', 'Lesotho', 'Madagascar',
-  'Malawi', 'Mauritius', 'Mozambique', 'Namibia', 'Seychelles', 'South Africa',
+  'Angola', 'Botswana', 'DRC', 'Eswatini', 'Lesotho', 'Madagascar',
+  'Malawi', 'Mauritius', 'Mozambique', 'Namibia', 'South Africa',
   'Tanzania', 'Zambia', 'Zimbabwe',
 ]
 

@@ -22,7 +22,6 @@ const countries = [
   { name: 'DRC', allocated: 31000, utilised: 0, rate: 0, status: 'No Spend' },
   { name: 'Angola', allocated: 45000, utilised: 0, rate: 0, status: 'No Spend' },
   { name: 'South Africa', allocated: 38000, utilised: 0, rate: 0, status: 'No Spend' },
-  { name: 'Rwanda', allocated: 22000, utilised: 0, rate: 0, status: 'No Spend' },
   { name: 'Namibia', allocated: 19000, utilised: 0, rate: 0, status: 'No Spend' },
   { name: 'Botswana', allocated: 21152, utilised: 0, rate: 0, status: 'No Spend' },
 ]

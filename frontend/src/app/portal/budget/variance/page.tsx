@@ -34,7 +34,7 @@ const variances = [
     explanation: '',
   },
   {
-    country: 'Rwanda',
+    country: 'Zambia',
     code: 'ACT-7712',
     approved: 80000,
     actual: 80000,
@@ -165,7 +165,7 @@ export default function VariancePage() {
               <option>All Countries</option>
               <option>Nigeria</option>
               <option>Kenya</option>
-              <option>Rwanda</option>
+              <option>Zambia</option>
             </select>
             <select
               value={varianceFilter}

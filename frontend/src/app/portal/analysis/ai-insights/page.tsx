@@ -40,7 +40,7 @@ const insights: Record<string, Insight[]> = {
     { title: 'Malawi maternal mortality trajectory', category: 'predictions', confidence: 78, explanation: 'Based on current trends, Malawi is projected to achieve its 2027 maternal mortality target ahead of schedule — by Q3 2026 at current pace.', indicators: ['O2.1 — Maternal Mortality Ratio'] },
   ],
   gaps: [
-    { title: 'Missing youth data — 4 countries', category: 'gaps', confidence: 95, explanation: 'Angola, Comoros, Eswatini, and Lesotho have not submitted O4 (Youth Access) indicators for Q1 2026. This creates gaps in the regional analysis.', indicators: ['O4.1', 'O4.2', 'O4.3'] },
+    { title: 'Missing youth data — 4 countries', category: 'gaps', confidence: 95, explanation: 'Angola, Mozambique, Eswatini, and Lesotho have not submitted O4 (Youth Access) indicators for Q1 2026. This creates gaps in the regional analysis.', indicators: ['O4.1', 'O4.2', 'O4.3'] },
   ],
   recommendations: [
     { title: 'Prioritize Zambia budget reporting', category: 'recommendations', confidence: 85, explanation: 'Zambia has submitted budget allocation figures below the SADC minimum threshold for 3 consecutive quarters. Immediate follow-up and technical support recommended.', indicators: ['O3.1 — Budget Allocation', 'O3.2 — Fund Disbursement'] },

@@ -7,9 +7,9 @@ import { useSearchParams } from 'next/navigation'
 import { PublicHeader } from '@/components/layout/PublicHeader'
 
 const SADC_COUNTRIES = [
-  'Angola', 'Botswana', 'Comoros', 'DRC', 'Eswatini', 'Lesotho',
+  'Angola', 'Botswana', 'DRC', 'Eswatini', 'Lesotho',
   'Madagascar', 'Malawi', 'Mauritius', 'Mozambique', 'Namibia',
-  'Seychelles', 'South Africa', 'Tanzania', 'Zambia', 'Zimbabwe',
+  'South Africa', 'Tanzania', 'Zambia', 'Zimbabwe',
 ]
 
 const ROLES = [
