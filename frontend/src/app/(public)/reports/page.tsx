@@ -1,15 +1,17 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { useEffect, useMemo, useState } from 'react'
 
 interface Report {
+  id: number
   title: string
   description: string
   type: string
   country: string
   date: string
   size: string
-  download_url?: string
+  download_url?: string | null
 }
 
 type ReportsResponse = {
@@ -37,9 +39,9 @@ export default function ReportsPage() {
     fetch('/api/public/reports', { headers: { Accept: 'application/json' } })
       .then((res) => res.json())
       .then((data: ReportsResponse) => {
-        setAllReports(data.reports)
-        setAvailableCountries(data.countries)
-        setAvailableYears(data.years)
+        setAllReports(Array.isArray(data.reports) ? data.reports : [])
+        setAvailableCountries(Array.isArray(data.countries) ? data.countries : [])
+        setAvailableYears(Array.isArray(data.years) ? data.years : [])
       })
       .catch(() => {
         setAllReports([])
@@ -52,15 +54,18 @@ export default function ReportsPage() {
     setTypes((prev) => prev.includes(type) ? prev.filter((item) => item !== type) : [...prev, type])
   }
 
-  const filtered = allReports.filter((report) => {
-    const matchesSearch = report.title.toLowerCase().includes(search.toLowerCase()) || report.description.toLowerCase().includes(search.toLowerCase())
-    const matchesCountry = country === '' || report.country === country
-    const matchesYear = year === '' || report.date.includes(year)
-    const matchesType = types.length === 0 || types.includes(report.type)
-    return matchesSearch && matchesCountry && matchesYear && matchesType
-  })
+  const filtered = useMemo(() => {
+    return allReports.filter((report) => {
+      const haystack = [report.title, report.description ?? '', report.country ?? ''].join(' ').toLowerCase()
+      const matchesSearch = haystack.includes(search.toLowerCase())
+      const matchesCountry = country === '' || report.country === country
+      const matchesYear = year === '' || report.date.includes(year)
+      const matchesType = types.length === 0 || types.includes(report.type)
+      return matchesSearch && matchesCountry && matchesYear && matchesType
+    })
+  }, [allReports, country, search, types, year])
 
-  const reportTypes = ['Annual Report', 'Monthly Update', 'Research Brief', 'Regional Synthesis', 'Quarterly Update']
+  const reportTypes = ['Annual Report', 'Monthly Update', 'Research Brief', 'Regional Synthesis', 'Quarterly Update', 'Annual', 'Quarterly', 'Brief', 'Research']
 
   return (
     <div className="bg-[#fbf9f8] min-h-screen">
@@ -89,7 +94,10 @@ export default function ReportsPage() {
             <div className="bg-[#efeded] rounded-lg p-6 shadow-sm border border-[#c1c8c2]/10 flex flex-col gap-6">
               <div className="flex justify-between items-center">
                 <h3 className="text-[20px] font-semibold text-[#00170d]">Filters</h3>
-                <button className="text-[12px] font-semibold text-[#00170d] underline hover:text-[#446555]" onClick={() => { setCountry(''); setYear(''); setTypes([]) }}>
+                <button
+                  className="text-[12px] font-semibold text-[#00170d] underline hover:text-[#446555]"
+                  onClick={() => { setCountry(''); setYear(''); setTypes([]) }}
+                >
                   Clear All
                 </button>
               </div>
@@ -104,7 +112,7 @@ export default function ReportsPage() {
 
               <div className="flex flex-col gap-2">
                 <label className="text-[14px] font-semibold text-[#414844]">Report Type</label>
-                <div className="flex flex-col gap-1">
+                <div className="flex flex-col gap-1 max-h-60 overflow-y-auto">
                   {reportTypes.map((type) => (
                     <label key={type} className="flex items-center gap-3 cursor-pointer hover:bg-[#eae8e7] p-1 rounded transition-colors">
                       <input className="rounded border-[#c1c8c2] text-[#00170d] focus:ring-[#00170d] h-4 w-4" type="checkbox" checked={types.includes(type)} onChange={() => toggleType(type)} />
@@ -133,7 +141,7 @@ export default function ReportsPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {filtered.map((report) => (
-                <article key={report.title} className="bg-white rounded-xl p-6 flex flex-col gap-6 border border-[#c1c8c2]/20 hover:shadow-[0_4px_20px_rgba(0,23,13,0.08)] transition-shadow relative group">
+                <article key={report.id} className="bg-white rounded-xl p-6 flex flex-col gap-6 border border-[#c1c8c2]/20 hover:shadow-[0_4px_20px_rgba(0,23,13,0.08)] transition-shadow relative group">
                   <div className="flex justify-between items-start">
                     <div className="flex gap-1 flex-wrap">
                       {typeBadge(report.type)}
@@ -145,16 +153,33 @@ export default function ReportsPage() {
                     <p className="text-[14px] text-[#414844] line-clamp-3">{report.description}</p>
                   </div>
                   <div className="flex flex-col gap-3 mt-auto pt-3 border-t border-[#c1c8c2]/20">
-                    <div className="flex items-center gap-3 text-[14px] text-[#414844]">
+                    <div className="flex items-center gap-3 text-[14px] text-[#414844] flex-wrap">
                       <span className="material-symbols-outlined text-[18px]">calendar_today</span>
                       <span>Published: {report.date}</span>
-                      <span className="mx-1">·</span>
+                      <span className="mx-1">-</span>
                       <span>{report.size}</span>
                     </div>
-                    <div className="flex gap-3">
-                      <a href={report.download_url ?? '#'} className="flex-1 bg-[#00170d] text-white text-[12px] font-semibold py-3 rounded flex items-center justify-center gap-1 hover:bg-[#446555] transition-colors">
-                        <span className="material-symbols-outlined text-[18px]">download</span> Download PDF
-                      </a>
+                    <div className="flex gap-3 flex-wrap">
+                      <Link href={`/reports/${report.id}`} className="flex-1 min-w-[160px] border border-[#00170d] text-[#00170d] text-[12px] font-semibold py-3 rounded flex items-center justify-center gap-1 hover:bg-[#f5f3f3] transition-colors">
+                        <span className="material-symbols-outlined text-[18px]">visibility</span>
+                        View Report
+                      </Link>
+                      {report.download_url ? (
+                        <a
+                          href={report.download_url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="flex-1 min-w-[160px] bg-[#00170d] text-white text-[12px] font-semibold py-3 rounded flex items-center justify-center gap-1 hover:bg-[#446555] transition-colors"
+                        >
+                          <span className="material-symbols-outlined text-[18px]">download</span>
+                          Download PDF
+                        </a>
+                      ) : (
+                        <Link href={`/reports/${report.id}`} className="flex-1 min-w-[160px] bg-[#00170d] text-white text-[12px] font-semibold py-3 rounded flex items-center justify-center gap-1 hover:bg-[#446555] transition-colors">
+                          <span className="material-symbols-outlined text-[18px]">description</span>
+                          Open Summary
+                        </Link>
+                      )}
                     </div>
                   </div>
                 </article>

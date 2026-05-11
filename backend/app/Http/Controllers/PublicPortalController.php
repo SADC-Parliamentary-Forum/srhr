@@ -207,8 +207,9 @@ class PublicPortalController extends Controller
             ->latest('published_at')
             ->get()
             ->map(fn (Report $report) => [
+                'id' => $report->id,
                 'title' => $report->title,
-                'description' => $report->summary,
+                'description' => $report->summary ?? 'No summary available for this report.',
                 'type' => $report->type,
                 'country' => $report->country?->name ?? 'Regional',
                 'date' => optional($report->published_at)->format('M Y'),
