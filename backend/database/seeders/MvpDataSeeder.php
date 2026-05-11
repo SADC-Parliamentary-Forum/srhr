@@ -86,6 +86,16 @@ class MvpDataSeeder extends Seeder
             DB::table('users')->updateOrInsert(['email' => $row['email']], $row);
         }
 
+        // Assign roles via Spatie (must use Eloquent so model_has_roles is populated)
+        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+        $roleMap = [1 => 'super_admin', 2 => 'me_officer', 3 => 'country_reviewer'];
+        foreach ($roleMap as $userId => $roleName) {
+            $user = \App\Models\User::find($userId);
+            if ($user) {
+                $user->syncRoles([$roleName]);
+            }
+        }
+
         // ── 3. Reports (20) ───────────────────────────────────────────────────
         DB::table('reports')->delete();
 
