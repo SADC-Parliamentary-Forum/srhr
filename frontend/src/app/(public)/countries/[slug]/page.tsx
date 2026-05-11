@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, use } from 'react'
 import Link from 'next/link'
 
 interface CountryData {
@@ -31,15 +31,16 @@ function indicatorStatusBadge(status: string) {
   return 'bg-[#fce8e6] text-[#c5221f]'
 }
 
-export default function CountryDetailPage({ params }: { params: { slug: string } }) {
+export default function CountryDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params)
   const [country, setCountry] = useState<CountryData | null>(null)
 
   useEffect(() => {
-    fetch(`/api/public/countries/${params.slug}`, { headers: { Accept: 'application/json' } })
+    fetch(`/api/public/countries/${slug}`, { headers: { Accept: 'application/json' } })
       .then((res) => res.json())
       .then(setCountry)
       .catch(() => setCountry(null))
-  }, [params.slug])
+  }, [slug])
 
   if (!country) {
     return <div className="min-h-screen bg-[#fbf9f8] flex items-center justify-center text-[#414844]">Loading country data...</div>
