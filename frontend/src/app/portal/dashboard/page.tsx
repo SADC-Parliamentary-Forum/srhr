@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { api } from '@/lib/api'
-import { getToken } from '@/lib/auth'
+import { useRouter } from 'next/navigation'
+import { api, ApiError } from '@/lib/api'
+import { clearToken, getToken } from '@/lib/auth'
 
 const quickActions = [
   { icon: 'play_arrow', label: 'Continue Monthly Report', href: '/portal/reports', bg: 'bg-primary/10' },
@@ -214,15 +215,27 @@ function TimelineChart({
 export default function DashboardPage() {
   const [data, setData] = useState<DashboardResponse | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const router = useRouter()
 
   useEffect(() => {
     const token = getToken()
-    if (!token) return
+    if (!token) {
+      router.replace('/login')
+      return
+    }
 
     api.get<DashboardResponse>('/portal/dashboard', token)
       .then(setData)
-      .catch(() => setError('Unable to load dashboard data.'))
-  }, [])
+      .catch((err) => {
+        if (err instanceof ApiError && err.status === 401) {
+          clearToken()
+          router.replace('/login')
+          return
+        }
+
+        setError('Unable to load dashboard data.')
+      })
+  }, [router])
 
   const kpiCards = data?.kpis ?? []
   const recentActivity = data?.recent_activity ?? []

@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
-import { isAuthenticated } from '@/lib/auth'
+import { api, ApiError } from '@/lib/api'
+import { clearToken, getToken } from '@/lib/auth'
 import PortalSidebar from './_components/PortalSidebar'
 import PortalTopBar from './_components/PortalTopBar'
 
@@ -13,10 +14,36 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
   const pathname = usePathname()
 
   useEffect(() => {
-    if (!isAuthenticated()) {
-      router.replace('/login')
-    } else {
-      setReady(true)
+    let cancelled = false
+
+    async function validateSession() {
+      const token = getToken()
+
+      if (!token) {
+        router.replace('/login')
+        return
+      }
+
+      try {
+        await api.get('/auth/me', token)
+        if (!cancelled) {
+          setReady(true)
+        }
+      } catch (error) {
+        if (error instanceof ApiError && error.status === 401) {
+          clearToken()
+        }
+
+        if (!cancelled) {
+          router.replace('/login')
+        }
+      }
+    }
+
+    validateSession()
+
+    return () => {
+      cancelled = true
     }
   }, [router])
 

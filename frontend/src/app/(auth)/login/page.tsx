@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { PublicHeader } from '@/components/layout/PublicHeader'
+import { setToken } from '@/lib/auth'
 
 const SADC_COUNTRIES = [
   'Angola', 'Botswana', 'DRC', 'Eswatini', 'Lesotho',
@@ -114,7 +115,7 @@ function LoginForm() {
       }
       const data = await res.json()
       if (data.token) {
-        localStorage.setItem('srhr_token', data.token)
+        setToken(data.token)
         window.location.href = '/portal/dashboard'
       }
     } catch {
